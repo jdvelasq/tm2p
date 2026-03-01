@@ -29,7 +29,7 @@ from pathlib import Path
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_main_data
+from tm2p._intern.data_access import load_main_csv_zip
 from tm2p.refine._intern.objs import ThesaurusCreationResult
 
 tqdm.pandas()
@@ -46,7 +46,7 @@ class CreateThesaurus(
     def run(self) -> ThesaurusCreationResult:
         """:meta private:"""
 
-        dataframe = load_main_data(
+        dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,
             usecols=[self.params.source_field.value],
         )

@@ -24,7 +24,7 @@ import re
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 
 class Zotero(
@@ -144,7 +144,7 @@ class Zotero(
     # -------------------------------------------------------------------------
     def internal__load_titles(self):
 
-        records = load_filtered_main_data(params=self.params)
+        records = load_filtered_main_csv_zip(params=self.params)
         records = records[records["record_no"].isin([int(ut[3:]) for ut in self.uts])]
         self.titles = records.raw_document_title.to_list()
 

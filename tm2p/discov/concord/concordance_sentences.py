@@ -42,7 +42,7 @@ from textblob import TextBlob  # type: ignore
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 __reviewed__ = "2026-01-29"
 
@@ -104,7 +104,7 @@ class ConcordanceSentences(
     def run(self) -> list[str]:
 
         search_for = self._get_search_pattern()
-        dataframe = load_filtered_main_data(params=self.params)
+        dataframe = load_filtered_main_csv_zip(params=self.params)
         dataframe = self._set_dataframe_index(dataframe)
         abstracts = self._extract_abstracts_matching_pattern(dataframe, search_for)
         sentences = self._transform_abstracts_to_sentences(abstracts)

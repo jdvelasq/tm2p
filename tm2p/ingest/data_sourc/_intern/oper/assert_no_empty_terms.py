@@ -1,7 +1,7 @@
 # CODE_REVIEW: 2025-01-27
 
 from tm2p import CorpusField
-from tm2p._intern.data_access import load_main_data
+from tm2p._intern.data_access import load_main_csv_zip
 
 
 def assert_no_empty_terms(
@@ -12,7 +12,7 @@ def assert_no_empty_terms(
     assert isinstance(source, CorpusField)
     assert isinstance(root_directory, str)
 
-    dataframe = load_main_data(
+    dataframe = load_main_csv_zip(
         root_directory=root_directory,
         usecols=[source.value],
     )

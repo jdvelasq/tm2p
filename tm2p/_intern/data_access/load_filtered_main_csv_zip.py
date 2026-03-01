@@ -57,7 +57,7 @@ import pandas as pd  # type: ignore
 
 from tm2p import CorpusField, RecordsOrderBy
 from tm2p._intern import Params
-from tm2p._intern.data_access.load_main_data import load_main_data
+from tm2p._intern.data_access.load_main_csv_zip import load_main_csv_zip
 
 
 def _filter_dataframe_by_year(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -125,7 +125,7 @@ def _filter_dataframe_by_match(params: Params, dataframe: pd.DataFrame) -> pd.Da
     if filters is None:
         return dataframe
 
-    filters = {k.value: v for k, v in filters.items()}
+    filters = {k.value: v for k, v in filters.items()}  # type: ignore
 
     for filter_name, filter_value in filters.items():
 
@@ -266,9 +266,9 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     return dataframe
 
 
-def load_filtered_main_data(params: Params) -> pd.DataFrame:
+def load_filtered_main_csv_zip(params: Params) -> pd.DataFrame:
 
-    dataframe = load_main_data(root_directory=params.root_directory, usecols=None)
+    dataframe = load_main_csv_zip(root_directory=params.root_directory, usecols=None)
     dataframe = _filter_dataframe_by_year(params, dataframe)
     dataframe = _filter_dataframe_by_citations(params, dataframe)
     dataframe = _filter_dataframe_by_match(params, dataframe)

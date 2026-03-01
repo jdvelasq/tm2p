@@ -2,7 +2,7 @@ import pandas as pd
 
 from tm2p import CorpusField
 from tm2p._intern import Params
-from tm2p._intern.data_access import load_main_data
+from tm2p._intern.data_access import load_main_csv_zip
 from tm2p.enums import ThesaurusField
 
 CHANGED = ThesaurusField.CHANGED.value
@@ -18,7 +18,7 @@ def mark_keywords(
     thesaurus_df: pd.DataFrame,
 ) -> pd.DataFrame:
 
-    data_df = load_main_data(
+    data_df = load_main_csv_zip(
         root_directory=params.root_directory,
         # usecols=[params.source_field.value],
     )

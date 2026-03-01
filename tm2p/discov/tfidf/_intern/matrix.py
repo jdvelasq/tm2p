@@ -49,7 +49,7 @@ from sklearn.feature_extraction.text import TfidfTransformer  # type: ignore
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin, SortAxesMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p._intern.get_zero_digits import get_zero_digits
 from tm2p.anal._intern.performance.performance_metrics import (
     PerformanceMetrics as TermsByYearMetricsDataFrame,
@@ -71,7 +71,7 @@ class Matrix(
     """:meta private:"""
 
     def _step_1_load_the_database(self):
-        return load_filtered_main_data(params=self.params)
+        return load_filtered_main_csv_zip(params=self.params)
 
     def step_2_explode_data_frame(self, data_frame):
 

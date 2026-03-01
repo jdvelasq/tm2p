@@ -113,7 +113,9 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access.load_filtered_main_data import load_filtered_main_data
+from tm2p._intern.data_access.load_filtered_main_csv_zip import (
+    load_filtered_main_csv_zip,
+)
 from tm2p._intern.rec_build import dicts_to_strings
 
 
@@ -122,6 +124,6 @@ class RecordViewer(ParamsMixin):
 
     def run(self):
 
-        dataframe = load_filtered_main_data(params=self.params)
+        dataframe = load_filtered_main_csv_zip(params=self.params)
         string_list = dicts_to_strings(dataframe)
         return string_list

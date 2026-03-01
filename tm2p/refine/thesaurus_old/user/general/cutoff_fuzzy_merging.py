@@ -118,7 +118,7 @@ from fuzzywuzzy import fuzz  # type: ignore
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p._intern.packag_data.word_lists import load_builtin_word_list
 from tm2p.anal._intern.performance import PerformanceMetrics
 from tm2p.refine.thesaurus_old._intern import ThesaurusMixin
@@ -164,7 +164,7 @@ class CutoffFuzzyMerging(
     # -------------------------------------------------------------------------
     def internal__get_raw_occurrences(self):
 
-        records = load_filtered_main_data(params=self.params)
+        records = load_filtered_main_csv_zip(params=self.params)
         records = records[[self.params.source_field]]
         records = records.dropna()
         records[self.params.source_field] = records[self.params.source_field].str.split(

@@ -61,7 +61,9 @@ from textblob import TextBlob  # type: ignore
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access.load_filtered_main_data import load_filtered_main_data
+from tm2p._intern.data_access.load_filtered_main_csv_zip import (
+    load_filtered_main_csv_zip,
+)
 from tm2p._intern.rec_build import records_to_dicts
 
 __reviewed__ = "2026-01-29"
@@ -111,7 +113,7 @@ class ConcordanceRecords(ParamsMixin):
     def run(self) -> list[dict]:
 
         search_for = r"\b" + self.params.pattern.lower().replace("_", " ") + r"\b"
-        dataframe = load_filtered_main_data(params=self.params)
+        dataframe = load_filtered_main_csv_zip(params=self.params)
         dataframe = self._filter_by_concordance(dataframe, search_for)
         dataframe = self._process_abstracts(dataframe, search_for)
         mapping = records_to_dicts(dataframe)

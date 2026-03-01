@@ -22,7 +22,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 
 class ZonesDataFrame(
@@ -32,7 +32,7 @@ class ZonesDataFrame(
 
     # -------------------------------------------------------------------------
     def internal__load_filtered_records(self):
-        self.records = load_filtered_main_data(params=self.params)
+        self.records = load_filtered_main_csv_zip(params=self.params)
 
     # -------------------------------------------------------------------------
     def internal__compute_citations_and_occurrences_by_source(self):

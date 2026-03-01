@@ -1,10 +1,10 @@
 from tm2p import CorpusField
-from tm2p._intern.data_access import load_main_data, save_main_data
+from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 
 
 def compute_citcount_local(root_directory: str) -> int:
 
-    dataframe = load_main_data(root_directory=root_directory, usecols=None)
+    dataframe = load_main_csv_zip(root_directory=root_directory, usecols=None)
 
     rec_id = dataframe[CorpusField.RID.value].tolist()
 
@@ -20,6 +20,6 @@ def compute_citcount_local(root_directory: str) -> int:
     dataframe[CorpusField.LCS.value] = dataframe[CorpusField.LCS.value].apply(
         len,
     )
-    save_main_data(df=dataframe, root_directory=root_directory)
+    save_main_csv_zip(df=dataframe, root_directory=root_directory)
 
     return len(dataframe)

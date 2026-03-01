@@ -56,7 +56,9 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access.load_filtered_main_data import load_filtered_main_data
+from tm2p._intern.data_access.load_filtered_main_csv_zip import (
+    load_filtered_main_csv_zip,
+)
 from tm2p._intern.rec_build import dicts_to_strings, records_to_dicts
 
 
@@ -65,7 +67,7 @@ class FindRecords(ParamsMixin):
 
     # -------------------------------------------------------------------------
     def _step_01_load_the_database(self):
-        return load_filtered_main_data(params=self.params)
+        return load_filtered_main_csv_zip(params=self.params)
 
     # -------------------------------------------------------------------------
     def _step_02_filter_the_records(self, records):

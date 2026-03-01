@@ -61,7 +61,7 @@ from tqdm import tqdm
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import (  # type: ignore
     load_all_records_from_database,
-    load_filtered_main_data,
+    load_filtered_main_csv_zip,
 )
 from tm2p.refine.thesaurus_old._intern import ThesaurusMixin
 
@@ -125,7 +125,7 @@ class InitializeThesaurus(
             sys.stderr.flush()
 
         # loads the dataframe
-        main_documents = load_filtered_main_data(self.params)
+        main_documents = load_filtered_main_csv_zip(self.params)
         main_documents = main_documents[main_documents.global_citations > 0]
         main_documents = main_documents[
             ["record_id", "document_title", "authors", "year"]

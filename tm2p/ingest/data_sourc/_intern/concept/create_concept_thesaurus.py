@@ -1,12 +1,12 @@
 from pathlib import Path
 
 from tm2p import CorpusField
-from tm2p._intern.data_access import load_main_data
+from tm2p._intern.data_access import load_main_csv_zip
 
 
 def create_concept_thesaurus(root_directory: str) -> int:
 
-    dataframe = load_main_data(
+    dataframe = load_main_csv_zip(
         root_directory=root_directory, usecols=[CorpusField.CONCEPT_RAW.value]
     )
     dataframe = dataframe.dropna()

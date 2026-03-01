@@ -39,7 +39,7 @@ from openai import OpenAI
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p._intern.packag_data.templates.load_builtin_template import (
     load_builtin_template,
 )
@@ -52,7 +52,7 @@ class FirstParagraph(
 
     # -------------------------------------------------------------------------
     def internal__load_the_database(self):
-        self.records = load_filtered_main_data(params=self.params)
+        self.records = load_filtered_main_csv_zip(params=self.params)
 
     # -------------------------------------------------------------------------
     def internal__set_record_index(self):

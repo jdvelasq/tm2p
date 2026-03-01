@@ -43,7 +43,7 @@ import pandas as pd  # type: ignore
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 __reviewed__ = "2026-01-29"
 
@@ -142,7 +142,7 @@ class ConcordanceUser(
     # -------------------------------------------------------------------------
     def run(self) -> list[str]:
 
-        dataframe = load_filtered_main_data(params=self.params)
+        dataframe = load_filtered_main_csv_zip(params=self.params)
         context_phrases = self._extract_context_phrases(dataframe=dataframe)
         contexts_dataframe = self._create_contexts_dataframe(context_phrases)
         texts = self._transform_context_dataframe_to_texts(contexts_dataframe)

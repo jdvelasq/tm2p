@@ -32,7 +32,7 @@ Smoke test:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p.enums import CorpusField
 
 __reviewed__ = "2026-01-29"
@@ -47,7 +47,7 @@ class OpenAccess(
 
         open_access = CorpusField.OA.value
 
-        df = load_filtered_main_data(params=self.params)
+        df = load_filtered_main_csv_zip(params=self.params)
         return (
             df[open_access]
             .dropna()

@@ -99,7 +99,7 @@ import pandas as pd  # type: ignore
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 __reviewed__ = "2026-02-03"
 
@@ -146,7 +146,7 @@ class MainInformation(
 
     def run(self):
 
-        dataframe = load_filtered_main_data(params=self.params)
+        dataframe = load_filtered_main_csv_zip(params=self.params)
 
         stats = Stats()
 

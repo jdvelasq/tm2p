@@ -8,14 +8,12 @@ Smoke test:
 
 import pandas as pd
 
-from tm2p._intern.data_access.get_main_data_path import get_main_data_path
-
-from .get_main_data_path import get_main_data_path
+from tm2p._intern.data_access.get_main_csv_zip_path import get_main_csv_zip_path
 
 
-def save_main_data(df: pd.DataFrame, root_directory: str) -> None:
+def save_main_csv_zip(df: pd.DataFrame, root_directory: str) -> None:
 
-    main_data_path = get_main_data_path(root_directory)
+    main_data_path = get_main_csv_zip_path(root_directory)
 
     temp_file = main_data_path.with_suffix(".tmp")
     df.to_csv(

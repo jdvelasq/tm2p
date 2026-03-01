@@ -37,7 +37,7 @@ import sys
 import pandas as pd
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_all_records_from_database, save_main_data
+from tm2p._intern.data_access import load_all_records_from_database, save_main_csv_zip
 from tm2p.refine.thesaurus_old._intern import (
     ThesaurusMixin,
     internal__load_reversed_thesaurus_as_mapping,
@@ -109,7 +109,7 @@ class ApplyThesaurus(
 
     # -------------------------------------------------------------------------
     def internal__write_records_to_file(self):
-        save_main_data(params=self.params, records=self.records)
+        save_main_csv_zip(params=self.params, records=self.records)
 
     # -------------------------------------------------------------------------
     def run(self):

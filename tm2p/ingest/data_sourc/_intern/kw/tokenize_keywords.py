@@ -1,5 +1,5 @@
 from tm2p import CorpusField
-from tm2p._intern.data_access import load_main_data, save_main_data
+from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 
 from ..oper import copy_column
 from .helpers import (
@@ -34,7 +34,7 @@ def tokenize_keywords(root_directory: str) -> int:
         root_directory=root_directory,
     )
 
-    dataframe = load_main_data(root_directory)
+    dataframe = load_main_csv_zip(root_directory)
     dataframe = normalize_empty_strings(dataframe)
     dataframe = add_padding(dataframe)
     dataframe = remove_accents(dataframe)
@@ -50,7 +50,7 @@ def tokenize_keywords(root_directory: str) -> int:
     dataframe = remove_empty_terms(dataframe)
     dataframe = remove_padding(dataframe)
 
-    save_main_data(dataframe, root_directory)
+    save_main_csv_zip(dataframe, root_directory)
 
     return max(
         int(dataframe[CorpusField.AUTHKW_TOK.value].notna().sum()),

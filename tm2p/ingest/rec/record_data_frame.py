@@ -35,7 +35,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 
 class RecordDataFrame(
@@ -45,7 +45,7 @@ class RecordDataFrame(
 
     def run(self):
 
-        data_frame = load_filtered_main_data(params=self.params)
+        data_frame = load_filtered_main_csv_zip(params=self.params)
         data_frame = data_frame.assign(_order_=range(1, len(data_frame) + 1))
         data_frame = data_frame.reset_index(drop=True)
 

@@ -7,7 +7,7 @@ from openai import APIError, OpenAI
 from tqdm import tqdm  # type: ignore
 
 from tm2p import CorpusField
-from tm2p._intern.data_access import load_main_data, save_main_data
+from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import (
     add_new_words_to_builtin_word_list,
     load_builtin_word_list,
@@ -52,7 +52,7 @@ WORDS:
 
 def correct_hyphenated_words(root_directory: str) -> int:
 
-    dataframe = load_main_data(root_directory)
+    dataframe = load_main_csv_zip(root_directory)
 
     words = _extract_hyphenated_words(dataframe)
     unknown_words = _extract_unknown_words(words, root_directory)
@@ -72,7 +72,7 @@ def correct_hyphenated_words(root_directory: str) -> int:
         new_invalid_words | known_invalid_words,
     )
 
-    save_main_data(dataframe, root_directory)
+    save_main_csv_zip(dataframe, root_directory)
 
     return max(
         int(dataframe[CorpusField.AUTHKW_TOK.value].notna().sum()),

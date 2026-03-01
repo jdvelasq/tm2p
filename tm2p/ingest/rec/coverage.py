@@ -20,7 +20,9 @@ Smoke tests:
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access.load_filtered_main_data import load_filtered_main_data
+from tm2p._intern.data_access.load_filtered_main_csv_zip import (
+    load_filtered_main_csv_zip,
+)
 
 
 class Coverage(
@@ -33,7 +35,7 @@ class Coverage(
         source_field = self.params.source_field.value
         record_id = CorpusField.RID.value
 
-        documents = load_filtered_main_data(params=self.params)
+        documents = load_filtered_main_csv_zip(params=self.params)
         documents = documents.reset_index()
         documents = documents[[source_field, record_id]]
 

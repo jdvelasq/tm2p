@@ -13,7 +13,7 @@ import pandas as pd
 from colorama import Fore
 from tqdm import tqdm  # type: ignore
 
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p.refine.thesaurus_old._intern import (
     internal__create_fingerprint,
     internal__get_system_thesaurus_file_path,
@@ -117,7 +117,7 @@ class ThesaurusMixin:
     # -------------------------------------------------------------------------
     def internal__load_filtered_records(self) -> None:
 
-        self.filtered_records = load_filtered_main_data(params=self.params)
+        self.filtered_records = load_filtered_main_csv_zip(params=self.params)
 
     # -------------------------------------------------------------------------
     def internal__load_reversed_thesaurus_as_mapping(self) -> None:

@@ -6,10 +6,10 @@ from tqdm import tqdm
 
 from tm2p import CorpusField
 from tm2p._intern.data_access import (
-    get_references_data_path,
-    load_main_data,
-    load_references_data,
-    save_main_data,
+    get_references_csv_zip_path,
+    load_main_csv_zip,
+    load_references_csv_zip,
+    save_main_csv_zip,
 )
 
 _SELECTED_FIELDS = [
@@ -39,7 +39,7 @@ def _clean_text(text):
 
 def _prepare_cited_references(root_directory: str) -> pd.DataFrame:
 
-    references = load_main_data(root_directory=root_directory)
+    references = load_main_csv_zip(root_directory=root_directory)
     references = references[[CorpusField.REF_RAW.value]].copy()
     references = references.dropna()
     references = references.rename(columns={CorpusField.REF_RAW.value: "text"})
@@ -55,13 +55,13 @@ def _prepare_cited_references(root_directory: str) -> pd.DataFrame:
 
 def _prepare_main_documents(root_directory: str) -> pd.DataFrame:
 
-    main_df = load_main_data(root_directory=root_directory)
+    main_df = load_main_csv_zip(root_directory=root_directory)
 
     main_df = main_df[_SELECTED_FIELDS]
     main_df = main_df.dropna()
-    references_path = get_references_data_path(root_directory)
+    references_path = get_references_csv_zip_path(root_directory)
     if references_path.exists():
-        references_df = load_references_data(root_directory=root_directory)
+        references_df = load_references_csv_zip(root_directory=root_directory)
         references_df = references_df[_SELECTED_FIELDS].dropna()
         dataframe = pd.concat([main_df, references_df], axis=0)
         dataframe = dataframe.drop_duplicates()
@@ -90,7 +90,7 @@ def _prepare_main_documents(root_directory: str) -> pd.DataFrame:
 
 def _create_references_thesaurus_file(root_directory: str) -> None:
 
-    dataframe = load_main_data(root_directory=root_directory)
+    dataframe = load_main_csv_zip(root_directory=root_directory)
     dataframe = dataframe[[CorpusField.REF_RID.value]].copy().dropna()
     dataframe[CorpusField.REF_RID.value] = dataframe[
         CorpusField.REF_RID.value
@@ -183,7 +183,7 @@ def _process_references(
     root_directory: str,
 ) -> int:
 
-    dataframe = load_main_data(root_directory=root_directory)
+    dataframe = load_main_csv_zip(root_directory=root_directory)
     dataframe[CorpusField.REF_NORM.value] = dataframe[CorpusField.REF_RAW.value].copy()
     dataframe[CorpusField.REF_NORM.value] = dataframe[
         CorpusField.REF_NORM.value
@@ -221,7 +221,7 @@ def _process_references(
         CorpusField.REF_NORM.value
     ].str.join("; ")
 
-    save_main_data(df=dataframe, root_directory=root_directory)
+    save_main_csv_zip(df=dataframe, root_directory=root_directory)
 
     non_null_count = int(dataframe[CorpusField.REF_NORM.value].notna().sum())
 

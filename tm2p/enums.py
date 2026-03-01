@@ -230,6 +230,9 @@ class ItemsOrderBy(Enum):
     GCS = "GCS"
     LCS = "LCS"
     GCS_PER_YEAR_AVG = "GCS_PER_YEAR_AVG"
+    H_INDEX = "H_INDEX"
+    G_INDEX = "G_INDEX"
+    M_INDEX = "M_INDEX"
 
 
 class RecordsOrderBy(Enum):

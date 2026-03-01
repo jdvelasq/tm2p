@@ -32,7 +32,7 @@ Smoke test:
 import duckdb
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 
 class Query(
@@ -41,7 +41,7 @@ class Query(
     """:meta private:"""
 
     def run(self):
-        database = load_filtered_main_data(params=self.params)
+        database = load_filtered_main_csv_zip(params=self.params)
         duckdb.register("database", database)
         if self.params.query_expression is None:
             raise ValueError(

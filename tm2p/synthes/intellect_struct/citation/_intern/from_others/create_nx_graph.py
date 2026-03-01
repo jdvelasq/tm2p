@@ -1,7 +1,7 @@
 import networkx as nx  # type: ignore
 import numpy as np
 
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p.anal._intern.performance.performance_metrics import (
     PerformanceMetrics as TermsByYearMetricsDataFrame,
 )
@@ -26,7 +26,7 @@ def __add_weighted_edges_from(
 ):
     unit_of_analysis = params.unit_of_analysis
 
-    records = load_filtered_main_data(params)
+    records = load_filtered_main_csv_zip(params)
 
     #
     # data_frame contains the citing and cited articles.

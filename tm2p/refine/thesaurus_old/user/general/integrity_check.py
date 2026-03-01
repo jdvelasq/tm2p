@@ -34,7 +34,7 @@ import sys
 from colorama import Fore, init
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p.refine.thesaurus_old._intern import (
     ThesaurusMixin,
     ThesaurusResult,
@@ -57,7 +57,7 @@ class IntegrityCheck(
 
     # -------------------------------------------------------------------------
     def internal__load_terms_in_database(self):
-        records = load_filtered_main_data(params=self.params)
+        records = load_filtered_main_csv_zip(params=self.params)
         field = self.params.source_field
         terms = records[field].dropna()
         terms = terms.str.split("; ").explode().str.strip().drop_duplicates().tolist()

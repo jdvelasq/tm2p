@@ -9,7 +9,7 @@ import sys
 
 import numpy as np
 
-from tm2p._intern.data_access import load_filtered_main_data
+from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 
 # ------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ def step_01_create_citations_table(params):
 
     #
     # Extracts the records using the specified parameters
-    records = load_filtered_main_data(params=params)
+    records = load_filtered_main_csv_zip(params=params)
 
     records = records.sort_values(
         ["global_citations", "local_citations", "year", "record_id"],

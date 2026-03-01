@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd  # type: ignore
 
 from tm2p import CorpusField
-from tm2p._intern.data_access import load_main_data, save_main_data
+from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
 from tm2p.ingest.data_sourc._intern.oper.ltwa_column import ltwa_column
 
@@ -22,11 +22,11 @@ ORG = CorpusField.ORG.value
 
 def extract_organizations_and_countries(root_directory: str) -> int:
 
-    dataframe = load_main_data(root_directory=root_directory)
+    dataframe = load_main_csv_zip(root_directory=root_directory)
     countries, organizations = _build_mappings(dataframe)
     dataframe = _create_country_columns(dataframe, countries)
     dataframe = _create_organization_column(dataframe, organizations)
-    save_main_data(df=dataframe, root_directory=root_directory)
+    save_main_csv_zip(df=dataframe, root_directory=root_directory)
 
     _create_thesaurus_files(root_directory, countries, organizations)
 

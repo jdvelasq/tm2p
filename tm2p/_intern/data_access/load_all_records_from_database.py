@@ -22,13 +22,13 @@ Smoke tests:
 
 import pandas as pd  # type: ignore
 
-from tm2p._intern.data_access.get_main_data_path import get_main_data_path
+from tm2p._intern.data_access.get_main_csv_zip_path import get_main_csv_zip_path
 
 
 def load_all_records_from_database(params):
     """:meta private:"""
 
-    file_path = get_main_data_path(params)
+    file_path = get_main_csv_zip_path(params)
     records = pd.read_csv(
         file_path,
         encoding="utf-8",

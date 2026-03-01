@@ -27,7 +27,7 @@ from textblob import TextBlob  # type: ignore
 
 from tm2p import CorpusField
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_main_data
+from tm2p._intern.data_access import load_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
 
 _EXCLUDED_COMMON_WORDS = [
@@ -62,7 +62,7 @@ class ExtractAcronyms(
     # -------------------------------------------------------------------------
     def extract_acronyms_from_keywords_with_parentheses(self):
 
-        dataframe = load_main_data(
+        dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,
             usecols=[
                 CorpusField.AUTHKW_TOK.value,
@@ -116,7 +116,7 @@ class ExtractAcronyms(
     # -------------------------------------------------------------------------
     def extract_acronyms_in_keywords(self):
 
-        dataframe = load_main_data(root_directory=self.params.root_directory)
+        dataframe = load_main_csv_zip(root_directory=self.params.root_directory)
 
         for col in [
             CorpusField.AUTHKW_TOK.value,
@@ -153,7 +153,7 @@ class ExtractAcronyms(
 
         abs_col = CorpusField.ABSTR_TOK.value
 
-        dataframe = load_main_data(
+        dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,
             usecols=[abs_col],
         ).dropna()
