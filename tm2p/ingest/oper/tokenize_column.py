@@ -3,64 +3,52 @@ TokenizeColumn
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.operationsimport TokenizeOperator
-    >>> # Creates, configure, and run the tokenize_
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.oper import TokenizeColumn
     >>> (
-    ...     TokenizeOperator()
+    ...     TokenizeColumn()
     ...     #
     ...     # FIELDS:
-    ...     .with_field("raw_abstract")
-    ...     .with_other_field("tokenized_raw_abstract")
+    ...     .with_source_field(Field.ABSTR_RAW)
+    ...     .with_target_field(Field.USR0)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
     ...     #
     ...     .run()
     ... )
+    180
 
-    >>> # Query the database to test the TokenizeOperator
-    >>> from tm2p.io import Query
+    >>> from tm2p.ingest.oper import Query
     >>> df = (
     ...     Query()
-    ...     .with_query_expression("SELECT tokenized_raw_abstract FROM database LIMIT 10;")
+    ...     .with_query_expression("SELECT USR0 FROM database LIMIT 10;")
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()
     ... )
-
     >>> import textwrap
     >>> print(textwrap.fill(df.values[1][0], width=90))
-    the rapid development of information and communications technology is transforming the
-    entire industry landscape , heralding a new era of convergence services . as one of the
-    developing countries in the financial sector , china is experiencing an unprecedented
-    level of convergence between finance and technology . this study applies the lens of actor
-    network theory ( ant ) to conduct a multi level analysis of the historical development of
-    china ' s financial technology ( fintech ) industry . it attempts to elucidate the process
-    of building and disrupting a variety of networks comprising heterogeneous actors involved
-    in the newly emerging convergence industry . this research represents a stepping stone in
-    exploring the interaction between fintech and its yet unfolding social and political
-    context . it also discusses policy implications for china ' s fintech industry , focusing
-    on the changing role of the state in fostering the growth of national industry within and
-    outside of china . 2015 elsevier ltd .
-
-
-    >>> # Deletes the field
-    >>> from tm2p.ingest.operationsimport DeleteOperator
-    >>> field_deleter = (
-    ...     DeleteOperator()
-    ...     .with_field("tokenized_raw_abstract")
-    ...     .where_root_directory("tests/fintech/")
-    ... )
-    >>> field_deleter.run()
+    fintech applications are examined as catalysts for revolutionizing green finance ,
+    showcasing their capacity to streamline processes , facilitate transparent transactions ,
+    and provide personalized investment options . the functionalities of these applications
+    are dissected , emphasizing their role in mitigating barriers such as information
+    asymmetry and inefficiencies in fund distribution . blockchain ' s decentralized ledger
+    system is analyzed for its ability to enhance trust and transparency in sustainable
+    investment . it highlights successful implementations of blockchain in sustainable finance
+    , illuminating its practical benefits in overcoming limitations like fraud risk and
+    reducing administrative costs . this research delves into the transformative potential of
+    integrating financial technology ( fintech ) and blockchain in green finance . by
+    transcending traditional barriers , these technologies not only enrich the functionalities
+    of applications but also open new horizons for sustainable investment , paving the way for
+    a more resilient and environmentally conscious financial future . 2024 , igi global .
 
 
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.tokenize_column import tokenize_column
+from tm2p.ingest.data_sourc._intern.oper.token_col import tokenize_column
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 

@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-SOURCE_FIELD = CorpusField.AUTHKW_TOK
+SOURCE_FIELD = Field.AUTHKW_TOK

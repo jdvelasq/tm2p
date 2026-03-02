@@ -2,7 +2,7 @@ from typing import Optional
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 
 
 def invert_acronym_definition_in_list(keywords: Optional[str]) -> Optional[str]:
@@ -43,8 +43,8 @@ def invert_acronym_definition(dataframe: pd.DataFrame) -> pd.DataFrame:
     dataframe = dataframe.copy()
 
     for col in [
-        CorpusField.AUTHKW_TOK.value,
-        CorpusField.IDXKW_TOK.value,
+        Field.AUTHKW_TOK.value,
+        Field.IDXKW_TOK.value,
     ]:
         dataframe[col] = dataframe[col].apply(invert_acronym_definition_in_list)
 

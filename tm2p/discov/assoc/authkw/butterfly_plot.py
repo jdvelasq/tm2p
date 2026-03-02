@@ -3,13 +3,13 @@ ButterflyPlot
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field
     >>> from tm2p.packages.associations import ButterflyPlot
     >>> plot = (
     ...     ButterflyPlot()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
+    ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .having_items_in_top(10)
     ...     .having_items_ordered_by("OCC")
     ...     .having_item_occurrences_between(None, None)

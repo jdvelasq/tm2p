@@ -4,13 +4,13 @@ Word Cloud
 
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.report.visualization import WordCloud
     >>> plot = (
     ...     WordCloud()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # TERMS:
     ...     .having_items_in_top(80)

@@ -4,13 +4,13 @@ World Map
 
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.report.visualization import WorldMap
     >>> plot = (
     ...     WorldMap()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.COUNTRY)
+    ...     .with_source_field(Field.COUNTRY)
     ...     #
     ...     # TERMS:
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)

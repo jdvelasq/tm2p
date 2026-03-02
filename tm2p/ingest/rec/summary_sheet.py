@@ -3,12 +3,11 @@ SummarySheet
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p.explore import SummarySheet
+    >>> from tm2p.ingest.rec import SummarySheet
     >>> df = (
     ...     SummarySheet()
     ...     #
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     #

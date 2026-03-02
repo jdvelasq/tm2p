@@ -3,7 +3,7 @@ ReprocessNounPhrases
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p.ingest.review import ReprocessNounPhrases
+    >>> from tm2p.ingest.rev import ReprocessNounPhrases
     >>> (
     ...     ReprocessNounPhrases()
     ...     .where_root_directory("tests/fintech/")

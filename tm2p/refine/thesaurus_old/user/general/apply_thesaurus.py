@@ -71,7 +71,7 @@ Smoke tests:
 
 
 
-    >>> from tm2p.ingest.operationsimport DeleteOperator
+    >>> from tm2p.ingest.oper import DeleteOperator
     >>> (
     ...     DeleteOperator()
     ...     .with_field("descriptors_cleaned")

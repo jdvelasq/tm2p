@@ -41,7 +41,7 @@ import numpy as np
 
 from tm2p._intern import ParamsMixin
 from tm2p.discov.overview import MainInformation as GeneralMetricsDataFrame
-from tm2p.discov.overview.average_citations_per_year.dataframe import (
+from tm2p.discov.overview.aver_cit_per_year.dataframe import (
     DataFrame as TrendMetricsDataFrame,
 )
 

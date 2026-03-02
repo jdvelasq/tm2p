@@ -2,22 +2,22 @@ from pathlib import Path
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
-from tm2p.ingest.data_sourc._intern.oper.ltwa_column import ltwa_column
+from tm2p.ingest.data_sourc._intern.oper.ltwa_col import ltwa_column
 
 from ._internals import extract_country_name_from_string, extract_org_name_from_string
 
-AFFIL_RAW = CorpusField.AFFIL_RAW.value
-CTRY_AFFIL = CorpusField.CTRY_AFFIL.value
-CTRY = CorpusField.CTRY.value
-CTRY_FIRST = CorpusField.CTRY_FIRST.value
-CTRY_ISO3 = CorpusField.CTRY_ISO3.value
-CTRY_ISO3_FIRST = CorpusField.CTRY_ISO3_FIRST.value
-ORG_FIRST = CorpusField.ORG_FIRST.value
-ORG_AFFIL = CorpusField.ORG_AFFIL.value
-ORG = CorpusField.ORG.value
+AFFIL_RAW = Field.AFFIL_RAW.value
+CTRY_AFFIL = Field.CTRY_AFFIL.value
+CTRY = Field.CTRY.value
+CTRY_FIRST = Field.CTRY_FIRST.value
+CTRY_ISO3 = Field.CTRY_ISO3.value
+CTRY_ISO3_FIRST = Field.CTRY_ISO3_FIRST.value
+ORG_FIRST = Field.ORG_FIRST.value
+ORG_AFFIL = Field.ORG_AFFIL.value
+ORG = Field.ORG.value
 
 
 def extract_organizations_and_countries(root_directory: str) -> int:
@@ -31,18 +31,18 @@ def extract_organizations_and_countries(root_directory: str) -> int:
     _create_thesaurus_files(root_directory, countries, organizations)
 
     ltwa_column(
-        source=CorpusField.ORG,
-        target=CorpusField.ORG,
+        source=Field.ORG,
+        target=Field.ORG,
         root_directory=root_directory,
     )
 
     ltwa_column(
-        source=CorpusField.ORG_FIRST,
-        target=CorpusField.ORG_FIRST,
+        source=Field.ORG_FIRST,
+        target=Field.ORG_FIRST,
         root_directory=root_directory,
     )
 
-    return int(dataframe[CorpusField.AFFIL_RAW.value].notna().sum())
+    return int(dataframe[Field.AFFIL_RAW.value].notna().sum())
 
 
 def _build_mappings(dataframe: pd.DataFrame) -> tuple[dict[str, str], dict[str, str]]:

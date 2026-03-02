@@ -50,7 +50,8 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 from tm2p.discov.co_occur_matrix._intern import Matrix as CoOccurrenceMatrixDataFrame
-from tm2p.discov.correl._intern.comput_correl_matrix import comput_correl_matrix
+
+# from tm2p.discov.correl.cross._intern.comput_correl_matrix import comput_correl_matrix
 
 
 class MatrixDataFrame(

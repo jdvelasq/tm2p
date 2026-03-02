@@ -1,6 +1,6 @@
 # CODE_REVIEW: 2026-01-26
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import Params
 
 from ..step import Step
@@ -16,19 +16,19 @@ def build_source_title_steps(params: Params) -> list[Step]:
 
     return [
         Step(
-            name=f"Normalizing {CorpusField.SUBJAREA.value}",
+            name=f"Normalizing {Field.ASJC.value}",
             function=assign_subjarea,
             kwargs=common_kwargs,
             count_message="{count} records processed",
         ),
         Step(
-            name=f"Normalizing {CorpusField.SRC_RAW.value}",
+            name=f"Normalizing {Field.SRC_RAW.value}",
             function=normalize_srctitle_raw,
             kwargs=common_kwargs,
             count_message="{count} records processed",
         ),
         Step(
-            name=f"Normalizing {CorpusField.SRC_ISO4_RAW.value}",
+            name=f"Normalizing {Field.SRC_ISO4_RAW.value}",
             function=normalize_srctitle_abbr_raw,
             kwargs=common_kwargs,
             count_message="{count} records processed",

@@ -3,13 +3,13 @@ CountryExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import CountryExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import CountryExtractor
     >>> terms = (
     ...     CountryExtractor()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # SEARCH:
     ...     .having_text_matching("FINTECH")
@@ -26,7 +26,7 @@ Smoke tests:
     ... )
     >>> from pprint import pprint
     >>> pprint(terms[:10])
-    ['China', 'Taiwan']
+    ['China', 'Hong Kong', 'Jordan', 'Russia', 'Saudi Arabia', 'Taiwan', 'Ukraine']
 
 
 """

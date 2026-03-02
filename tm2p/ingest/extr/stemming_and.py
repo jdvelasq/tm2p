@@ -3,13 +3,13 @@ StemmingAndExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import StemmingAndExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import StemmingAndExtractor
     >>> terms = (
     ...     StemmingAndExtractor()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # SEARCH:
     ...     .having_text_matching(
@@ -27,10 +27,15 @@ Smoke tests:
     ...     .run()
     ... )
 
-
-    >>> # Print the first 10 extracted terms
     >>> from pprint import pprint
     >>> pprint(terms[:10])
+    ['artificial intelligence',
+     'artificial intelligence ( ai )',
+     'artificial intelligence in agriculture',
+     'financial technologies',
+     'financial technology',
+     'financial technology ( fintech )',
+     'the role of artificial intelligence in addressing poverty']
 
 
 """

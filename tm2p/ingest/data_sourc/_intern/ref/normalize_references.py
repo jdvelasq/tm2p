@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd  # type: ignore
 from tqdm import tqdm
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.data_access import (
     get_references_csv_zip_path,
     load_main_csv_zip,
@@ -13,10 +13,10 @@ from tm2p._intern.data_access import (
 )
 
 _SELECTED_FIELDS = [
-    CorpusField.RID.value,
-    CorpusField.TITLE_RAW.value,
-    CorpusField.AUTH_RAW.value,
-    CorpusField.YEAR.value,
+    Field.RID.value,
+    Field.TITLE_RAW.value,
+    Field.AUTH_RAW.value,
+    Field.YEAR.value,
 ]
 
 
@@ -40,9 +40,9 @@ def _clean_text(text):
 def _prepare_cited_references(root_directory: str) -> pd.DataFrame:
 
     references = load_main_csv_zip(root_directory=root_directory)
-    references = references[[CorpusField.REF_RAW.value]].copy()
+    references = references[[Field.REF_RAW.value]].copy()
     references = references.dropna()
-    references = references.rename(columns={CorpusField.REF_RAW.value: "text"})
+    references = references.rename(columns={Field.REF_RAW.value: "text"})
     references["text"] = references["text"].str.split(";")
     references = references.explode("text")
     references["text"] = references["text"].str.strip()
@@ -68,22 +68,16 @@ def _prepare_main_documents(root_directory: str) -> pd.DataFrame:
     else:
         dataframe = main_df
 
-    dataframe[CorpusField.AUTH_FIRST.value] = (
-        dataframe[CorpusField.AUTH_RAW.value]
+    dataframe[Field.AUTH_FIRST.value] = (
+        dataframe[Field.AUTH_RAW.value]
         .str.split(" ")
         .map(lambda x: x[0].lower().replace(",", ""))
     )
-    dataframe[CorpusField.TITLE_RAW.value] = dataframe[
-        CorpusField.TITLE_RAW.value
-    ].str.lower()
-    dataframe[CorpusField.TITLE_RAW.value] = _clean_text(
-        dataframe[CorpusField.TITLE_RAW.value]
-    )
-    dataframe[CorpusField.AUTH_RAW.value] = _clean_text(
-        dataframe[CorpusField.AUTH_RAW.value]
-    )
-    dataframe[CorpusField.YEAR.value] = dataframe[CorpusField.YEAR.value].astype(str)
-    dataframe = dataframe.sort_values(by=[CorpusField.RID.value])
+    dataframe[Field.TITLE_RAW.value] = dataframe[Field.TITLE_RAW.value].str.lower()
+    dataframe[Field.TITLE_RAW.value] = _clean_text(dataframe[Field.TITLE_RAW.value])
+    dataframe[Field.AUTH_RAW.value] = _clean_text(dataframe[Field.AUTH_RAW.value])
+    dataframe[Field.YEAR.value] = dataframe[Field.YEAR.value].astype(str)
+    dataframe = dataframe.sort_values(by=[Field.RID.value])
 
     return dataframe
 
@@ -91,18 +85,14 @@ def _prepare_main_documents(root_directory: str) -> pd.DataFrame:
 def _create_references_thesaurus_file(root_directory: str) -> None:
 
     dataframe = load_main_csv_zip(root_directory=root_directory)
-    dataframe = dataframe[[CorpusField.REF_RID.value]].copy().dropna()
-    dataframe[CorpusField.REF_RID.value] = dataframe[
-        CorpusField.REF_RID.value
-    ].str.split("; ")
-    dataframe = dataframe.explode(CorpusField.REF_RID.value)
-    dataframe[CorpusField.REF_RID.value] = dataframe[
-        CorpusField.REF_RID.value
-    ].str.strip()
-    dataframe["rec_id"] = dataframe[CorpusField.REF_RID.value].apply(
+    dataframe = dataframe[[Field.REF_RID.value]].copy().dropna()
+    dataframe[Field.REF_RID.value] = dataframe[Field.REF_RID.value].str.split("; ")
+    dataframe = dataframe.explode(Field.REF_RID.value)
+    dataframe[Field.REF_RID.value] = dataframe[Field.REF_RID.value].str.strip()
+    dataframe["rec_id"] = dataframe[Field.REF_RID.value].apply(
         lambda x: x.split(" @ ")[0].strip() if " @ " in x else "[n/a]"
     )
-    dataframe["ref"] = dataframe[CorpusField.REF_RID.value].apply(
+    dataframe["ref"] = dataframe[Field.REF_RID.value].apply(
         lambda x: x.split(" @ ")[1].strip() if " @ " in x else "[n/a]"
     )
 
@@ -147,24 +137,20 @@ def _create_mapping(
         refs = remaining_references.copy()
 
         refs = refs.loc[
-            refs.key.str.lower().str.contains(
-                row[CorpusField.AUTH_FIRST.value].lower()
-            ),
+            refs.key.str.lower().str.contains(row[Field.AUTH_FIRST.value].lower()),
             :,
         ]
-        refs = refs.loc[
-            refs.key.str.lower().str.contains(row[CorpusField.YEAR.value]), :
-        ]
+        refs = refs.loc[refs.key.str.lower().str.contains(row[Field.YEAR.value]), :]
 
         refs = refs.loc[
             refs.key.str.lower().str.contains(
-                re.escape(row[CorpusField.TITLE_RAW.value][:50].lower())
+                re.escape(row[Field.TITLE_RAW.value][:50].lower())
             ),
             :,
         ]
 
         if len(refs) > 0:
-            mapping[row[CorpusField.RID.value]] = sorted(refs.text.tolist())
+            mapping[row[Field.RID.value]] = sorted(refs.text.tolist())
             remaining_references = remaining_references.drop(refs.index)
 
     return mapping
@@ -184,11 +170,9 @@ def _process_references(
 ) -> int:
 
     dataframe = load_main_csv_zip(root_directory=root_directory)
-    dataframe[CorpusField.REF_NORM.value] = dataframe[CorpusField.REF_RAW.value].copy()
-    dataframe[CorpusField.REF_NORM.value] = dataframe[
-        CorpusField.REF_NORM.value
-    ].str.split(";")
-    dataframe[CorpusField.REF_NORM.value] = dataframe[CorpusField.REF_NORM.value].apply(
+    dataframe[Field.REF_NORM.value] = dataframe[Field.REF_RAW.value].copy()
+    dataframe[Field.REF_NORM.value] = dataframe[Field.REF_NORM.value].str.split(";")
+    dataframe[Field.REF_NORM.value] = dataframe[Field.REF_NORM.value].apply(
         lambda refs: (
             [y.strip() for y in refs]
             if isinstance(refs, list)
@@ -197,33 +181,31 @@ def _process_references(
     )
 
     #
-    dataframe[CorpusField.REF_RID.value] = dataframe.apply(
+    dataframe[Field.REF_RID.value] = dataframe.apply(
         lambda row: (
             "; ".join(
                 f"{mapping.get(ref, '[N/A]')} @ {ref}"
-                for ref in row[CorpusField.REF_NORM.value]
+                for ref in row[Field.REF_NORM.value]
             )
-            if isinstance(row[CorpusField.REF_NORM.value], list)
+            if isinstance(row[Field.REF_NORM.value], list)
             else pd.NA
         ),
         axis=1,
     )
     #
 
-    dataframe[CorpusField.REF_NORM.value] = dataframe[CorpusField.REF_NORM.value].apply(
+    dataframe[Field.REF_NORM.value] = dataframe[Field.REF_NORM.value].apply(
         lambda refs: (
             [mapping[ref] for ref in refs if ref in mapping]
             if isinstance(refs, list)
             else refs
         ),
     )
-    dataframe[CorpusField.REF_NORM.value] = dataframe[
-        CorpusField.REF_NORM.value
-    ].str.join("; ")
+    dataframe[Field.REF_NORM.value] = dataframe[Field.REF_NORM.value].str.join("; ")
 
     save_main_csv_zip(df=dataframe, root_directory=root_directory)
 
-    non_null_count = int(dataframe[CorpusField.REF_NORM.value].notna().sum())
+    non_null_count = int(dataframe[Field.REF_NORM.value].notna().sum())
 
     return non_null_count
 

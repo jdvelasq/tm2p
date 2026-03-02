@@ -3,39 +3,39 @@ CopyColumn
 ===============================================================================
 
 Smoke Test:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.operations import CopyColumn
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.oper import CopyColumn
     >>> (
     ...     CopyColumn()
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
-    ...     .with_target_field(CorpusField.USER_0)
+    ...     .with_source_field(Field.AUTHKW_RAW)
+    ...     .with_target_field(Field.USR0)
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
-    22
+    154
 
-    >>> from tm2p.ingest.operations import Query
+    >>> from tm2p.ingest.oper import Query
     >>> (
     ...     Query()
-    ...     .with_query_expression("SELECT USER_0 FROM database LIMIT 5;")
+    ...     .with_query_expression("SELECT USR0 FROM database LIMIT 5;")
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     #
     ...     .run()
     ... )
-                                                  USER_0
-    0  Banking; Financial institution; Financial serv...
-    1  Bank; Blockchain; Cryptocurrency; Payment; Tec...
-    2  Actor network theory; Chinese telecom; Fintech...
-    3  Content analysis; Digitalization; FinTech; Inn...
-    4  Elaboration likelihood model; Fintech; K pay; ...
+                                                    USR0
+    0  Digital transformation; Financial sector; FinT...
+    1                                               None
+    2  Artificial intelligence; Banking industry sect...
+    3  China; Fintech; G38; Intention to use; L16; M1...
+    4  Fintech; Green environmental index; Green fina...
 
 
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.copy_column import copy_column
+from tm2p.ingest.data_sourc._intern.oper.copy_col import copy_column
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 

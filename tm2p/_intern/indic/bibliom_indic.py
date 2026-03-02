@@ -1,13 +1,13 @@
 """
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
-    >>> from tm2p import CorpusField
-    >>> from tm2p._intern.bibliom_indic import BibliometricIndicators
+    >>> from tm2p import Field, ItemsOrderBy
+    >>> from tm2p import Field
+    >>> from tm2p._intern.indic.bibliom_indic import BibliometricIndicators
     >>> df = (
     ...     BibliometricIndicators()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTHKW_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(10)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
@@ -67,7 +67,7 @@ Smoke tests:
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField, ItemsOrderBy
+from tm2p import Field, ItemsOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
@@ -75,9 +75,9 @@ G_INDEX = "G_INDEX"
 H_INDEX = "H_INDEX"
 M_INDEX = "M_INDEX"
 
-GCS = CorpusField.GCS.value
-LCS = CorpusField.LCS.value
-YEAR = CorpusField.YEAR.value
+GCS = Field.GCS.value
+LCS = Field.LCS.value
+YEAR = Field.YEAR.value
 
 GCS_PER_YEAR = GCS + "_PER_YEAR"
 LCS_PER_YEAR = LCS + "_PER_YEAR"
@@ -86,8 +86,8 @@ LCS_PER_DOC = LCS + "_PER_DOC"
 
 OCC = ItemsOrderBy.OCC.value
 
-YEAR_FIRST = CorpusField.YEAR.value + "_FIRST"
-YEAR_LAST = CorpusField.YEAR.value + "_LAST"
+YEAR_FIRST = Field.YEAR.value + "_FIRST"
+YEAR_LAST = Field.YEAR.value + "_LAST"
 AGE = "AGE"
 
 RANK_OCC = "RANK_OCC"
@@ -132,18 +132,14 @@ class BibliometricIndicators(
     def _load_filtered_main_csv_zip(self) -> pd.DataFrame:
 
         df = load_filtered_main_csv_zip(params=self.params)
-        df = (
-            df[
-                [
-                    self.params.source_field.value,
-                    GCS,
-                    LCS,
-                    YEAR,
-                ]
+        df = df[
+            [
+                self.params.source_field.value,
+                GCS,
+                LCS,
+                YEAR,
             ]
-            .dropna()
-            .copy()
-        )
+        ].dropna()
 
         return df
 

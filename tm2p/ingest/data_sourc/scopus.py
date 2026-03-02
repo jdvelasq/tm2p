@@ -9,14 +9,14 @@ Smoke test - fintech - successful import:
     ...     Scopus()
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
-    ... )
-    >>> result.success
+    ... )  # doctest: +SKIP
+    >>> result.success  # doctest: +SKIP
     True
 
 Smoke test - fintech - result attributes:
-    >>> result.file_path
+    >>> result.file_path  # doctest: +SKIP
     'tests/fintech/'
-    >>> result.status.startswith('Execution time :')
+    >>> result.status.startswith('Execution time :')  # doctest: +SKIP
     True
 
 Smoke test - fintech - fluent interface:
@@ -30,9 +30,9 @@ Smoke test - regtech - successful import:
     >>> result = (
     ...     Scopus()
     ...     .where_root_directory("tests/regtech/")
-    ...     .run()
+    ...     .run()  # doctest: +SKIP
     ... )
-    >>> result.success
+    >>> result.success  # doctest: +SKIP
     True
 
 

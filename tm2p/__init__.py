@@ -1,7 +1,7 @@
-from .enums import CorpusField, ItemsOrderBy, RecordsOrderBy, ThesaurusField
+from .enum import Field, ItemsOrderBy, RecordsOrderBy, ThesaurusField
 
 __all__ = [
-    "CorpusField",
+    "Field",
     "ItemsOrderBy",
     "RecordsOrderBy",
     "ThesaurusField",

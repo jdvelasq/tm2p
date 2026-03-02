@@ -1,4 +1,4 @@
-from tm2p import CorpusField
+from tm2p import Field
 
 
 def _get_existent_columns(records, candiate_columns):
@@ -26,16 +26,16 @@ def _build_dicts(records):
 def records_to_dicts(dataframe):
 
     names_mapping = {
-        CorpusField.RNO.value: "UT",
-        CorpusField.RID.value: "AR",
-        CorpusField.TITLE_RAW.value: "TI",
-        CorpusField.AUTH_NORM.value: "AU",
-        CorpusField.GCS.value: "TC",
-        CorpusField.SRC_ISO4_NORM.value: "SO",
-        CorpusField.YEAR.value: "PY",
-        CorpusField.ABSTR_UPPER.value: "AB",
-        CorpusField.AUTHKW_RAW.value: "DE",
-        CorpusField.IDXKW_RAW.value: "ID",
+        Field.RNO.value: "UT",
+        Field.RID.value: "AR",
+        Field.TITLE_RAW.value: "TI",
+        Field.AUTH_NORM.value: "AU",
+        Field.GCS.value: "TC",
+        Field.SRC_ISO4_NORM.value: "SO",
+        Field.YEAR.value: "PY",
+        Field.ABSTR_UPPER.value: "AB",
+        Field.AUTHKW_RAW.value: "DE",
+        Field.IDXKW_RAW.value: "ID",
     }
 
     candiate_columns = names_mapping.keys()

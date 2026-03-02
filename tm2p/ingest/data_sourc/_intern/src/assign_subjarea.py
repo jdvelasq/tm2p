@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.packag_data import load_builtin_csv
 
 
@@ -27,8 +27,8 @@ def assign_subjarea(root_directory: str) -> int:
     )
 
     if (
-        CorpusField.ISSN.value not in dataframe.columns
-        and CorpusField.ISSNE.value not in dataframe.columns
+        Field.ISSN.value not in dataframe.columns
+        and Field.ISSNE.value not in dataframe.columns
     ):
         return 0
 
@@ -36,30 +36,28 @@ def assign_subjarea(root_directory: str) -> int:
 
     issn_mapping = dict(
         zip(
-            subject_areas_df[CorpusField.ISSN.value].dropna(),
-            subject_areas_df[CorpusField.SUBJAREA.value].dropna(),
+            subject_areas_df[Field.ISSN.value].dropna(),
+            subject_areas_df[Field.ASJC.value].dropna(),
         )
     )
     eissn_mapping = dict(
         zip(
-            subject_areas_df[CorpusField.ISSNE.value].dropna(),
-            subject_areas_df[CorpusField.SUBJAREA.value].dropna(),
+            subject_areas_df[Field.ISSNE.value].dropna(),
+            subject_areas_df[Field.ASJC.value].dropna(),
         )
     )
 
-    dataframe[CorpusField.SUBJAREA.value] = None
+    dataframe[Field.ASJC.value] = None
 
-    if CorpusField.ISSN.value in dataframe.columns:
-        dataframe[CorpusField.SUBJAREA.value] = dataframe[CorpusField.ISSN.value].map(
-            issn_mapping
+    if Field.ISSN.value in dataframe.columns:
+        dataframe[Field.ASJC.value] = dataframe[Field.ISSN.value].map(issn_mapping)
+
+    if Field.ISSNE.value in dataframe.columns:
+        dataframe[Field.ASJC.value] = dataframe[Field.ASJC.value].fillna(
+            dataframe[Field.ISSNE.value].map(eissn_mapping)
         )
 
-    if CorpusField.ISSNE.value in dataframe.columns:
-        dataframe[CorpusField.SUBJAREA.value] = dataframe[
-            CorpusField.SUBJAREA.value
-        ].fillna(dataframe[CorpusField.ISSNE.value].map(eissn_mapping))
-
-    non_null_count = int(dataframe[CorpusField.SUBJAREA.value].notna().sum())
+    non_null_count = int(dataframe[Field.ASJC.value].notna().sum())
 
     temp_file = database_file.with_suffix(".tmp")
     dataframe.to_csv(

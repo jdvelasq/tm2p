@@ -59,7 +59,7 @@ import re
 import pandas as pd  # type: ignore
 from textblob import TextBlob  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access.load_filtered_main_csv_zip import (
     load_filtered_main_csv_zip,
@@ -77,7 +77,7 @@ class ConcordanceRecords(ParamsMixin):
     ) -> pd.DataFrame:
 
         found = (
-            dataframe[CorpusField.ABSTR_TOK.value]
+            dataframe[Field.ABSTR_TOK.value]
             .astype(str)
             .str.contains(search_for, regex=True)
         )
@@ -90,23 +90,21 @@ class ConcordanceRecords(ParamsMixin):
 
         dataframe = dataframe.copy()
 
-        dataframe[CorpusField.ABSTR_TOK.value] = dataframe[
-            CorpusField.ABSTR_TOK.value
-        ].apply(
+        dataframe[Field.ABSTR_TOK.value] = dataframe[Field.ABSTR_TOK.value].apply(
             lambda x: list(TextBlob(x).sentences)  # type: ignore
         )
-        dataframe[CorpusField.ABSTR_TOK.value] = dataframe[
-            CorpusField.ABSTR_TOK.value
-        ].apply(lambda x: [str(y) for y in x])
-        dataframe[CorpusField.ABSTR_TOK.value] = dataframe[
-            CorpusField.ABSTR_TOK.value
-        ].apply(lambda x: [y[:-2] if y[-2:] == " ." else y for y in x])
-        dataframe[CorpusField.ABSTR_TOK.value] = dataframe[
-            CorpusField.ABSTR_TOK.value
-        ].apply(lambda x: [y for y in x if re.search(search_for, y)])
-        dataframe[CorpusField.ABSTR_TOK.value] = dataframe[
-            CorpusField.ABSTR_TOK.value
-        ].map(" . ".join)
+        dataframe[Field.ABSTR_TOK.value] = dataframe[Field.ABSTR_TOK.value].apply(
+            lambda x: [str(y) for y in x]
+        )
+        dataframe[Field.ABSTR_TOK.value] = dataframe[Field.ABSTR_TOK.value].apply(
+            lambda x: [y[:-2] if y[-2:] == " ." else y for y in x]
+        )
+        dataframe[Field.ABSTR_TOK.value] = dataframe[Field.ABSTR_TOK.value].apply(
+            lambda x: [y for y in x if re.search(search_for, y)]
+        )
+        dataframe[Field.ABSTR_TOK.value] = dataframe[Field.ABSTR_TOK.value].map(
+            " . ".join
+        )
 
         return dataframe
 

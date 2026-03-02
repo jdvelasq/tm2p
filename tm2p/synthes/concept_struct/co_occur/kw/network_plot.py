@@ -4,7 +4,7 @@ Network Plot
 
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.co_occurrence_network.keywords import NetworkPlot
     >>> plot = (
     ...     NetworkPlot()
@@ -58,7 +58,7 @@ Smoke tests:
 
 """
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p.synthes.concept_struct.co_occur.usr.network_plot import (
     NetworkPlot as UserNetworkPlot,
@@ -76,6 +76,6 @@ class NetworkPlot(
         return (
             UserNetworkPlot()
             .update(**self.params.__dict__)
-            .with_source_field(CorpusField.KW_NORM)
+            .with_source_field(Field.KW_NORM)
             .run()
         )

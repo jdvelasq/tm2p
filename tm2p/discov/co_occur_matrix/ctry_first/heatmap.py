@@ -8,13 +8,13 @@ Heatmap
     height="800px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.co_occur_matrix.ctry_first import Heatmap
     >>> fig = (
     ...     Heatmap()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTHKW_TOK)
+    ...     .with_source_field(Field.AUTHKW_TOK)
     ...     .having_items_in_top(10)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)

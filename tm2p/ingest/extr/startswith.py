@@ -3,13 +3,13 @@ StartsWithExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import StartsWithExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import StartsWithExtractor
     >>> terms = (
     ...     StartsWithExtractor()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # SEARCH:
     ...     .having_text_matching("finan")
@@ -26,16 +26,16 @@ Smoke tests:
     >>> # Print the first 10 extracted terms
     >>> from pprint import pprint
     >>> pprint(terms[:10])
-    ['financial globalization',
-     'financial inclusion',
-     'financial information market',
-     'financial innovation',
-     'financial institution',
-     'financial institution strategy',
-     'financial instruments',
-     'financial regulation',
-     'financial scenarization',
-     'financial services']
+    ['finance',
+     'finance technology',
+     'financial capability',
+     'financial computing',
+     'financial constraints',
+     'financial crisis',
+     'financial development',
+     'financial disintermediation',
+     'financial exclusion',
+     'financial globalization']
 
 
 """

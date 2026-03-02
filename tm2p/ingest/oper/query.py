@@ -3,11 +3,11 @@ Query
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p.ingest.operations import Query
+    >>> from tm2p.ingest.oper import Query
     >>> df = (
     ...     Query()
     ...     #
-    ...     .with_query_expression("SELECT SRC_TITLE_NORM FROM database LIMIT 5;")
+    ...     .with_query_expression("SELECT SRC_NORM FROM database LIMIT 5;")
     ...     #
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
@@ -16,16 +16,12 @@ Smoke test:
     ...     .run()
     ... )
     >>> df
-                                          SRC_TITLE_NORM
-    0                   Journal of Innovation Management
-    1  Proceedings - 3rd International Conference on ...
-    2                          Telecommunications Policy
-    3                               Financial Innovation
-    4  International Journal of Applied Engineering R...
-
-
-
-
+                                                SRC_NORM
+    0      Journal of Financial Reporting and Accounting
+    1  Harnessing Blockchain-Digital Twin Fusion for ...
+    2      Journal of Financial Reporting and Accounting
+    3                       Electronic Commerce Research
+    4      International Review of Economics and Finance
 
 """
 

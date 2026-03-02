@@ -3,50 +3,51 @@ MergeColumns
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.operations import MergeColumns
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.oper import MergeColumns
     >>> (
     ...     MergeColumns()
     ...     .with_source_fields(
     ...         (
-    ...             CorpusField.AUTH_KEY_RAW,
-    ...             CorpusField.IDX_KEY_RAW,
+    ...             Field.AUTHKW_RAW,
+    ...             Field.IDXKW_RAW,
     ...         )
     ...     )
-    ...     .with_target_field(CorpusField.USER_0)
+    ...     .with_target_field(Field.USR0)
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
-    26
+    162
 
-    >>> from tm2p.ingest.operations import Query
+    >>> from tm2p.ingest.oper import Query
     >>> (
     ...     Query()
-    ...     .with_query_expression("SELECT USER_0 FROM database LIMIT 10;")
+    ...     .with_query_expression("SELECT USR0 FROM database LIMIT 10;")
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()
     ... )
-                                                  USER_0
-    0  Banking; Financial institution; Financial serv...
-    1  Bank; Block-chain; Blockchain; Cryptocurrency;...
-    2  Actor network theory; Chinese telecom; Converg...
-    3  Content analysis; Digitalization; FinTech; Inn...
-    4  Elaboration likelihood model; Fintech; K pay; ...
-    5                Banking innovations; FinTech; Risks
-    6  Fintech; financial inclusion; financial scenar...
-    7  Conceptual frameworks; Content analysis; Digit...
-    8  Bank 3.0; Co-opetition Theory; FinTech; Invest...
-    9  Asset managers; Commerce; Cutting edges; Explo...
+                                                    USR0
+    0  Digital transformation; FinTech; FinTech gover...
+    1                                               None
+    2  Artificial intelligence; Banking industry sect...
+    3  China; Fintech; G38; Intention to use; L16; M1...
+    4  Fintech; Green environmental index; Green fina...
+    5  Banking; Dark side; FinTech; FinTech developer...
+    6  CO2 emissions; Carbon; Carbon taxes; China; De...
+    7  Fintech; carbon emission; corporate carbon emi...
+    8  'current; A comparative study; Comparative ana...
+    9  COVID-19; Carbon; Carbon emission: green finan...
 
+/Volumes/GitHub/tm2p
 
 
 
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.merge_columns import merge_columns
+from tm2p.ingest.data_sourc._intern.oper.merge_col import merge_columns
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 

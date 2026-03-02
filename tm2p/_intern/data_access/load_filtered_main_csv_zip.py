@@ -55,7 +55,7 @@ Smoke test:
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField, RecordsOrderBy
+from tm2p import Field, RecordsOrderBy
 from tm2p._intern import Params
 from tm2p._intern.data_access.load_main_csv_zip import load_main_csv_zip
 
@@ -129,14 +129,14 @@ def _filter_dataframe_by_match(params: Params, dataframe: pd.DataFrame) -> pd.Da
 
     for filter_name, filter_value in filters.items():
 
-        if filter_name == CorpusField.RID.value:
+        if filter_name == Field.RID.value:
 
-            dataframe = dataframe[dataframe[CorpusField.RID.value].isin(filter_value)]
+            dataframe = dataframe[dataframe[Field.RID.value].isin(filter_value)]
 
         else:
 
             # Split the filter value into a list of strings
-            database = dataframe[[CorpusField.RID.value, filter_name]].copy()
+            database = dataframe[[Field.RID.value, filter_name]].copy()
             database.loc[:, filter_name] = database[filter_name].str.split(";")
 
             # Explode the list of strings into multiple rows
@@ -149,7 +149,7 @@ def _filter_dataframe_by_match(params: Params, dataframe: pd.DataFrame) -> pd.Da
             database = database[database[filter_name].isin(filter_value)]
 
             dataframe = dataframe[
-                dataframe[CorpusField.RID.value].isin(database[CorpusField.RID.value])
+                dataframe[Field.RID.value].isin(database[Field.RID.value])
             ]
 
     return dataframe
@@ -162,39 +162,39 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     if sort_by is None:
         return dataframe
 
-    if sort_by == RecordsOrderBy.PUBYEAR_NEWEST:
+    if sort_by == RecordsOrderBy.YEAR_NEWEST:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.YEAR.value,
-                CorpusField.GCS.value,
-                CorpusField.LCS.value,
+                Field.YEAR.value,
+                Field.GCS.value,
+                Field.LCS.value,
             ],
             ascending=[False, False, False],
         )
-    elif sort_by == RecordsOrderBy.PUBYEAR_OLDEST:
+    elif sort_by == RecordsOrderBy.YEAR_OLDEST:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.YEAR.value,
-                CorpusField.GCS.value,
-                CorpusField.LCS.value,
+                Field.YEAR.value,
+                Field.GCS.value,
+                Field.LCS.value,
             ],
             ascending=[True, False, False],
         )
     elif sort_by == RecordsOrderBy.GCS_BY_HIGHEST:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.GCS.value,
-                CorpusField.YEAR.value,
-                CorpusField.LCS.value,
+                Field.GCS.value,
+                Field.YEAR.value,
+                Field.LCS.value,
             ],
             ascending=[False, False, False],
         )
     elif sort_by == RecordsOrderBy.GCS_BY_LOWEST:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.GCS.value,
-                CorpusField.YEAR.value,
-                CorpusField.LCS.value,
+                Field.GCS.value,
+                Field.YEAR.value,
+                Field.LCS.value,
             ],
             ascending=[True, False, False],
         )
@@ -202,9 +202,9 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     elif sort_by == RecordsOrderBy.LCS_BY_HIGHEST:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.LCS.value,
-                CorpusField.YEAR.value,
-                CorpusField.GCS.value,
+                Field.LCS.value,
+                Field.YEAR.value,
+                Field.GCS.value,
             ],
             ascending=[False, False, False],
         )
@@ -212,9 +212,9 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     elif sort_by == RecordsOrderBy.LCS_BY_LOWEST:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.LCS.value,
-                CorpusField.YEAR.value,
-                CorpusField.GCS.value,
+                Field.LCS.value,
+                Field.YEAR.value,
+                Field.GCS.value,
             ],
             ascending=[True, False, False],
         )
@@ -222,9 +222,9 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     elif sort_by == RecordsOrderBy.AUTH_A_TO_Z:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.AUTH_NORM.value,
-                CorpusField.GCS.value,
-                CorpusField.LCS.value,
+                Field.AUTH_NORM.value,
+                Field.GCS.value,
+                Field.LCS.value,
             ],
             ascending=[True, False, False],
         )
@@ -232,28 +232,28 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     elif sort_by == RecordsOrderBy.AUTH_Z_TO_A:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.AUTH_NORM.value,
-                CorpusField.GCS.value,
-                CorpusField.LCS.value,
+                Field.AUTH_NORM.value,
+                Field.GCS.value,
+                Field.LCS.value,
             ],
             ascending=[False, False, False],
         )
-    elif sort_by == RecordsOrderBy.SOURCE_A_TO_Z:
+    elif sort_by == RecordsOrderBy.SRC_A_TO_Z:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.SRC_NORM.value,
-                CorpusField.GCS.value,
-                CorpusField.LCS.value,
+                Field.SRC_NORM.value,
+                Field.GCS.value,
+                Field.LCS.value,
             ],
             ascending=[True, False, False],
         )
 
-    elif sort_by == RecordsOrderBy.SOURCE_Z_TO_A:
+    elif sort_by == RecordsOrderBy.SRC_Z_TO_A:
         dataframe = dataframe.sort_values(
             [
-                CorpusField.SRC_NORM.value,
-                CorpusField.GCS.value,
-                CorpusField.LCS.value,
+                Field.SRC_NORM.value,
+                Field.GCS.value,
+                Field.LCS.value,
             ],
             ascending=[False, False, False],
         )

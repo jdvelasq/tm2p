@@ -3,14 +3,14 @@ IntersectionExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import IntersectionExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import IntersectionExtractor
     >>> terms = (
     ...     IntersectionExtractor()
     ...     #
     ...     # FIELDS:
     ...     .with_source_fields(
-    ...         (CorpusField.AUTH_KEY_NORM, CorpusField.IDX_KEY_NORM)
+    ...         (Field.AUTHKW_NORM, Field.IDXKW_NORM)
     ...     )
     ...     #
     ...     # DATABASE:
@@ -23,16 +23,16 @@ Smoke tests:
     >>> # Print the first 10 extracted terms
     >>> from pprint import pprint
     >>> pprint(terms[:10])
-    ['actor network theory',
+    ['a comparative study',
+     'actor network theory',
+     'actualization',
+     'agriculture',
+     'agropay',
      'alipay',
-     'bank',
-     'biometric authentication',
-     'blockchain',
-     'computer science',
-     'computing curricula',
-     'content analysis',
-     'digitalization',
-     'entrepreneurship']
+     'and systemic risk',
+     'apicist 2016',
+     'artificial intelligence',
+     'bank']
 
 """
 

@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-SOURCE_FIELD = CorpusField.CONCEPT_NORM
+SOURCE_FIELD = Field.CONCEPT_NORM

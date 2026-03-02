@@ -3,8 +3,8 @@ Concordance User
 =========================================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField, RecordsOrderBy
-    >>> from tm2p.analyze.concordances import ConcordanceUser
+    >>> from tm2p import Field, RecordsOrderBy
+    >>> from tm2p.discover.concord import ConcordanceUser
     >>> contexts = (
     ...     ConcordanceUser()
     ...     #
@@ -41,7 +41,7 @@ import re
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
@@ -55,13 +55,15 @@ class ConcordanceUser(
 
     def _extract_context_phrases(self, dataframe: pd.DataFrame) -> pd.Series:
 
-        search_for = self.params.pattern.lower().replace("_", " ")
+        pattern = self.params.pattern
+        if isinstance(pattern, tuple):
+            pattern = pattern[0]
+
+        search_for = pattern.lower().replace("_", " ")
 
         dataframe = dataframe.set_index(
             pd.Index(
-                dataframe[CorpusField.RID.value]
-                + " / "
-                + dataframe[CorpusField.TITLE_RAW.value]
+                dataframe[Field.RID.value] + " / " + dataframe[Field.TITLE_RAW.value]
             )
         )
 
@@ -85,7 +87,11 @@ class ConcordanceUser(
     # -------------------------------------------------------------------------
     def _create_contexts_dataframe(self, context_phrases: pd.Series) -> pd.DataFrame:
 
-        search_for = self.params.pattern.lower().replace("_", " ")
+        pattern = self.params.pattern
+        if isinstance(pattern, tuple):
+            pattern = pattern[0]
+
+        search_for = pattern.lower().replace("_", " ")
 
         regex = r"\b" + search_for + r"\b"
         contexts = context_phrases.str.extract(
@@ -112,6 +118,9 @@ class ConcordanceUser(
     ) -> list[str]:
 
         search_for = self.params.pattern
+        if isinstance(search_for, tuple):
+            search_for = search_for[0]
+
         contexts = contexts.copy()
         contexts["left_r"] = contexts["left_context"].str[::-1]
 

@@ -3,7 +3,7 @@ Matrix
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.co_occur_matrix.idxkw import Matrix
     >>> df = (
     ...     Matrix()

@@ -3,11 +3,11 @@ Statistics
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.records import Statistics
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.rec import Statistics
     >>> df = (
     ...     Statistics()
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
+    ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)

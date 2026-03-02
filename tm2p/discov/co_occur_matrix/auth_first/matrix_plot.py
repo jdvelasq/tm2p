@@ -9,13 +9,13 @@ MatrixPlot
 
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.co_occur_matrix.auth_first import MatrixPlot
     >>> fig = (
     ...     MatrixPlot()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTHKW_TOK)
+    ...     .with_source_field(Field.AUTHKW_TOK)
     ...     .having_items_in_top(10)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)

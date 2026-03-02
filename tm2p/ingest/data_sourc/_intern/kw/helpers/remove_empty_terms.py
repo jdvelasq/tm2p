@@ -1,6 +1,6 @@
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 
 
 def remove_empty_terms(
@@ -10,8 +10,8 @@ def remove_empty_terms(
     dataframe = dataframe.copy()
 
     for col in [
-        CorpusField.AUTHKW_TOK.value,
-        CorpusField.IDXKW_TOK.value,
+        Field.AUTHKW_TOK.value,
+        Field.IDXKW_TOK.value,
     ]:
         dataframe[col] = dataframe[col].str.split("; ")
         dataframe[col] = dataframe[col].apply(

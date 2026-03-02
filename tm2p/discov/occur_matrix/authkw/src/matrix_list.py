@@ -3,7 +3,7 @@ MatrixList
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.occur_matrix.authkw.src import MatrixList
     >>> df = (
     ...     MatrixList()

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.packag_data.word_lists import (
     load_builtin_word_list,
     save_text_processing_terms,
@@ -28,9 +28,9 @@ def _extract_raw_noun_phrases(dataframe: pd.DataFrame) -> set:
 
     noun_phrases = set()
 
-    if CorpusField.NP_RAW.value in dataframe.columns:
+    if Field.NP_RAW.value in dataframe.columns:
         series = (
-            dataframe[CorpusField.NP_RAW.value]
+            dataframe[Field.NP_RAW.value]
             .dropna()
             .str.split("; ")
             .explode()
@@ -47,8 +47,8 @@ def _extract_frequent_raw_keywords(dataframe: pd.DataFrame) -> set:
     keywords = set()
 
     for col in [
-        CorpusField.AUTHKW_RAW.value,
-        CorpusField.IDXKW_RAW.value,
+        Field.AUTHKW_RAW.value,
+        Field.IDXKW_RAW.value,
     ]:
 
         if col in dataframe.columns:

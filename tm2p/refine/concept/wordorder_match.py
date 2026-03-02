@@ -3,7 +3,7 @@ WordOrderMatch
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field
     >>> from tm2p.refine.descriptors import CreateThesaurus
     >>> (
     ...     CreateThesaurus()
@@ -51,7 +51,7 @@ Smoke test:
 
 import sys
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p.refine._intern.objs.thesaurus_match_result import ThesaurusMatchResult
 from tm2p.refine._intern.rule import apply_wordorder_rule
@@ -78,7 +78,7 @@ class WordOrderMatch(
     def run(self) -> ThesaurusMatchResult:
 
         self.with_thesaurus_file("concepts.the.txt")
-        self.with_source_field(CorpusField.CONCEPT_RAW)
+        self.with_source_field(Field.CONCEPT_RAW)
 
         thesaurus_df = load_thesaurus_as_dataframe(params=self.params)
 

@@ -7,7 +7,7 @@ import pandas as pd  # type: ignore
 from pandarallel import pandarallel  # type: ignore
 from textblob import TextBlob  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import stdout_to_stderr
 
 
@@ -15,22 +15,22 @@ def _process_row(row: pd.Series) -> Optional[str]:
 
     phrases: list[str] = []
 
-    if not pd.isna(row[CorpusField.ABSTR_TOK.value]):
+    if not pd.isna(row[Field.ABSTR_TOK.value]):
         phrases.extend(
             [
                 str(phrase)
                 for phrase in list(
-                    TextBlob(row[CorpusField.ABSTR_TOK.value]).noun_phrases  # type: ignore
+                    TextBlob(row[Field.ABSTR_TOK.value]).noun_phrases  # type: ignore
                 )
             ]
         )
 
-    if not pd.isna(row[CorpusField.TITLE_TOK.value]):
+    if not pd.isna(row[Field.TITLE_TOK.value]):
         phrases.extend(
             [
                 str(phrase)
                 for phrase in list(
-                    TextBlob(row[CorpusField.TITLE_TOK.value]).noun_phrases  # type: ignore
+                    TextBlob(row[Field.TITLE_TOK.value]).noun_phrases  # type: ignore
                 )
             ]
         )
@@ -65,7 +65,7 @@ def extract_textblob_phrases(root_directory: str) -> int:
     with stdout_to_stderr():
         progress_bar = True
         pandarallel.initialize(progress_bar=progress_bar, verbose=0)
-        dataframe[CorpusField.NP_TEXTBLOB.value] = dataframe.parallel_apply(  # type: ignore
+        dataframe[Field.NP_TEXTBLOB.value] = dataframe.parallel_apply(  # type: ignore
             _process_row,
             axis=1,
         )
@@ -79,7 +79,7 @@ def extract_textblob_phrases(root_directory: str) -> int:
         compression="zip",
     )
 
-    phrases = dataframe[CorpusField.NP_TEXTBLOB.value].dropna()
+    phrases = dataframe[Field.NP_TEXTBLOB.value].dropna()
     phrases = phrases.str.split("; ").explode()
     phrases = phrases.drop_duplicates()
     n_phrases = len(phrases)

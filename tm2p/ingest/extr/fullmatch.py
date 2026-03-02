@@ -3,13 +3,13 @@ FullMatchExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import FullMatchExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import FullMatchExtractor
     >>> terms = (
     ...     FullMatchExtractor()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # SEARCH:
     ...     .having_text_matching("b.+")
@@ -27,13 +27,15 @@ Smoke tests:
     >>> pprint(terms[:10])
     ['bank',
      'bank 30',
+     'bank competition',
+     'bank credit',
+     'bank fintech',
+     'bank fintech partnership',
+     'bank performance',
+     'bank risk-taking',
      'banking',
-     'banking innovations',
-     'banking regulation',
-     'bayesian estimation',
-     'biometric',
-     'biometric authentication',
-     'blockchain']
+     'banking competition']
+
 
 """
 

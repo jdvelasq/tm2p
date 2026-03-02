@@ -1,12 +1,12 @@
 """
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p._intern.indic.occur_by_year import OccurrencesByYear
     >>> df = (
     ...     OccurrencesByYear()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTHKW_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
@@ -54,7 +54,7 @@ Smoke tests:
     ...     OccurrencesByYear()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTHKW_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
@@ -100,7 +100,7 @@ Smoke tests:
     ...     OccurrencesByYear()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTHKW_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
@@ -147,16 +147,16 @@ Smoke tests:
 
 """
 
-from tm2p import CorpusField, ItemsOrderBy
+from tm2p import Field, ItemsOrderBy
 from tm2p._intern import ParamsMixin, SortAxesMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 from ..get_zero_digits import get_zero_digits
 from .bibliom_indic import BibliometricIndicators
 
-GCS = CorpusField.GCS.value
+GCS = Field.GCS.value
 OCC = ItemsOrderBy.OCC.value
-YEAR = CorpusField.YEAR.value
+YEAR = Field.YEAR.value
 
 COUNTERS = "COUNTERS"
 

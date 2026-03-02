@@ -2,38 +2,38 @@ from pathlib import Path
 
 import pandas as pd  # type: ignore
 
-from tm2p.enums import CorpusField
+from tm2p.enum.corpus import Field
 
 MAIN_COLUMNS = frozenset(
     [
-        CorpusField.ABSTR_RAW.value,
-        CorpusField.AUTHID_RAW.value,
-        CorpusField.AUTH_RAW.value,
-        CorpusField.AUTHKW_RAW.value,
-        CorpusField.GCS.value,
-        CorpusField.PUBTYPE_RAW.value,
-        CorpusField.DOI.value,
-        CorpusField.IDXKW_RAW.value,
-        CorpusField.PG_FIRST.value,
-        CorpusField.YEAR.value,
-        CorpusField.REF_RAW.value,
-        CorpusField.SRC_ISO4_RAW.value,
-        CorpusField.SRC_RAW.value,
-        CorpusField.TITLE_RAW.value,
-        CorpusField.VOL.value,
+        Field.ABSTR_RAW.value,
+        Field.AUTHID_RAW.value,
+        Field.AUTH_RAW.value,
+        Field.AUTHKW_RAW.value,
+        Field.GCS.value,
+        Field.PUBTYPE_RAW.value,
+        Field.DOI.value,
+        Field.IDXKW_RAW.value,
+        Field.PG_FIRST.value,
+        Field.YEAR.value,
+        Field.REF_RAW.value,
+        Field.SRC_ISO4_RAW.value,
+        Field.SRC_RAW.value,
+        Field.TITLE_RAW.value,
+        Field.VOL.value,
     ]
 )
 
 REF_COLUMNS = frozenset(
     [
-        CorpusField.AUTHID_RAW.value,
-        CorpusField.AUTH_RAW.value,
-        CorpusField.PG_FIRST.value,
-        CorpusField.YEAR.value,
-        CorpusField.SRC_ISO4_RAW.value,
-        CorpusField.SRC_RAW.value,
-        CorpusField.TITLE_RAW.value,
-        CorpusField.VOL.value,
+        Field.AUTHID_RAW.value,
+        Field.AUTH_RAW.value,
+        Field.PG_FIRST.value,
+        Field.YEAR.value,
+        Field.SRC_ISO4_RAW.value,
+        Field.SRC_RAW.value,
+        Field.TITLE_RAW.value,
+        Field.VOL.value,
     ]
 )
 

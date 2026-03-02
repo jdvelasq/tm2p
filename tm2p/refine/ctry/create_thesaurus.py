@@ -3,7 +3,7 @@ CreateThesaurus
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field
     >>> from tm2p.refine.countries import CreateThesaurus
     >>> (
     ...     CreateThesaurus()
@@ -27,7 +27,7 @@ from pathlib import Path
 
 from tqdm import tqdm  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_main_csv_zip
 from tm2p.refine._intern.objs import ThesaurusCreationResult
@@ -48,10 +48,10 @@ class CreateThesaurus(
 
         dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,
-            usecols=[CorpusField.CTRY_AFFIL.value],
+            usecols=[Field.CTRY_AFFIL.value],
         )
         dataframe = dataframe.dropna()
-        series = dataframe[CorpusField.CTRY_AFFIL.value]
+        series = dataframe[Field.CTRY_AFFIL.value]
         series = series.str.split("; ")
         series = series.explode()
         series = series.str.strip()
@@ -85,7 +85,7 @@ class CreateThesaurus(
         return ThesaurusCreationResult(
             colored_output=self.params.colored_output,
             file_path=str(filepath),
-            source_field=CorpusField.CTRY_AFFIL.value,
+            source_field=Field.CTRY_AFFIL.value,
             msg="Thesaurus initialized successfully.",
             success=True,
             status=f"{len(mapping.keys())} countries added to the thesaurus.",

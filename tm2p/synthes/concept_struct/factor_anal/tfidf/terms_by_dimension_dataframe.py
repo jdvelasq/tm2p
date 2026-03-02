@@ -52,7 +52,7 @@ Terms by Dimension Frane
 
 import pandas as pd  # type: ignore
 
-from tm2p.discov.tfidf.dataframe import Matrix as TfIdfDataFrame
+from tm2p.discov.tfidf._intern.matrix import Matrix as TfIdfDataFrame
 
 
 def terms_by_dimension_frame(

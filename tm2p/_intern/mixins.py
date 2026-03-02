@@ -30,10 +30,11 @@ from tm2p._intern.valid import (
     check_required_positive_int,
     check_required_positive_number_range,
     check_required_str,
+    check_required_str_or_str_tuple,
     check_required_str_tuple,
     check_tuple_of_ordered_four_floats,
 )
-from tm2p.enums import CorpusField, ItemsOrderBy, RecordsOrderBy
+from tm2p.enum import Field, ItemsOrderBy, RecordsOrderBy
 
 from .params import Params
 
@@ -301,8 +302,8 @@ class ParamsMixin:
         self.params.replacement = replacement
         return self
 
-    def having_text_matching(self, pattern: str) -> Self:
-        pattern = check_required_str(
+    def having_text_matching(self, pattern: Union[str, tuple[str, ...]]) -> Self:
+        pattern = check_required_str_or_str_tuple(
             value=pattern,
             param_name="pattern",
         )
@@ -933,7 +934,7 @@ class ParamsMixin:
         self.params.column = column
         return self
 
-    def with_column_field(self, column_field: CorpusField) -> Self:
+    def with_column_field(self, column_field: Field) -> Self:
         column_field = check_required_corpus_field_enum(
             value=column_field,
             param_name="column_field",
@@ -957,7 +958,7 @@ class ParamsMixin:
         self.params.correlation_method = correlation_method
         return self
 
-    def with_index_and_column_field(self, index_and_column_field: CorpusField) -> Self:
+    def with_index_and_column_field(self, index_and_column_field: Field) -> Self:
         index_and_column_field = check_required_corpus_field_enum(
             value=index_and_column_field,
             param_name="index_and_column_field",
@@ -965,7 +966,7 @@ class ParamsMixin:
         self.params.index_and_column_field = index_and_column_field
         return self
 
-    def with_index_field(self, index_field: CorpusField) -> Self:
+    def with_index_field(self, index_field: Field) -> Self:
         index_field = check_required_corpus_field_enum(
             value=index_field,
             param_name="index_field",
@@ -981,7 +982,7 @@ class ParamsMixin:
     #     self.params.field = field
     #     return self
 
-    def with_cross_field(self, field: CorpusField) -> Self:
+    def with_cross_field(self, field: Field) -> Self:
         field = check_required_corpus_field_enum(
             value=field,
             param_name="cross_field",
@@ -1001,7 +1002,7 @@ class ParamsMixin:
         self.params.query_expression = query_expression
         return self
 
-    def with_source_field(self, field: CorpusField) -> Self:
+    def with_source_field(self, field: Field) -> Self:
         field = check_required_corpus_field_enum(
             value=field,
             param_name="source_field",
@@ -1009,7 +1010,7 @@ class ParamsMixin:
         self.params.source_field = field
         return self
 
-    def with_source_fields(self, fields: tuple[CorpusField, ...]) -> Self:
+    def with_source_fields(self, fields: tuple[Field, ...]) -> Self:
         for field in fields:
             check_required_corpus_field_enum(
                 value=field,
@@ -1018,7 +1019,7 @@ class ParamsMixin:
         self.params.source_fields = fields
         return self
 
-    def with_target_field(self, field: CorpusField) -> Self:
+    def with_target_field(self, field: Field) -> Self:
         field = check_required_corpus_field_enum(
             value=field,
             param_name="target_field",

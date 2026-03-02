@@ -1,13 +1,13 @@
 """
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field, ItemsOrderBy
+    >>> from tm2p import Field
     >>> from tm2p.analyze._intern.performance import PerformanceMetrics
     >>> df = (
     ...     PerformanceMetrics()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(10)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
@@ -25,7 +25,7 @@ Smoke tests:
     'DataFrame'
     >>> df # doctest: +SKIP
                              rank_occ  ...                           counters
-    AUTH_KEY_NORM                      ...
+    AUTHKW_NORM                      ...
     fintech                         1  ...                  fintech 117:25478
     financial inclusion             2  ...      financial inclusion 017:03823
     financial technology            3  ...     financial technology 014:02508
@@ -44,28 +44,28 @@ Smoke tests:
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField, ItemsOrderBy
+from tm2p import Field, ItemsOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 SELECTED_COLUMNS = {
     ItemsOrderBy.OCC.value: [
         ItemsOrderBy.OCC.value,
-        CorpusField.GCS.value,
-        CorpusField.LCS.value,
+        Field.GCS.value,
+        Field.LCS.value,
         "_name_",
     ],
     #
-    CorpusField.GCS.value: [
-        CorpusField.GCS.value,
-        CorpusField.LCS.value,
+    Field.GCS.value: [
+        Field.GCS.value,
+        Field.LCS.value,
         ItemsOrderBy.OCC.value,
         "_name_",
     ],
     # -------------------------------------------
-    CorpusField.LCS.value: [
-        CorpusField.LCS.value,
-        CorpusField.GCS.value,
+    Field.LCS.value: [
+        Field.LCS.value,
+        Field.GCS.value,
         ItemsOrderBy.OCC.value,
         "_name_",
     ],
@@ -85,9 +85,9 @@ class PerformanceMetrics(
             df[
                 [
                     self.params.source_field.value,
-                    CorpusField.GCS.value,
-                    CorpusField.LCS.value,
-                    CorpusField.YEAR.value,
+                    Field.GCS.value,
+                    Field.LCS.value,
+                    Field.YEAR.value,
                 ]
             ]
             .dropna()
@@ -110,9 +110,9 @@ class PerformanceMetrics(
     def step_03_compute_primary_performance_metrics(self, df):
 
         source_field = self.params.source_field.value
-        gcs = CorpusField.GCS.value
-        lcs = CorpusField.LCS.value
-        pubyear = CorpusField.YEAR.value
+        gcs = Field.GCS.value
+        lcs = Field.LCS.value
+        pubyear = Field.YEAR.value
 
         df = df.sort_values(
             [
@@ -148,8 +148,8 @@ class PerformanceMetrics(
     # -------------------------------------------------------------------------
     def step_04_compute_derived_performance_metrics(self, grouped_df):
 
-        gcs = CorpusField.GCS.value
-        lcs = CorpusField.LCS.value
+        gcs = Field.GCS.value
+        lcs = Field.LCS.value
         occ = ItemsOrderBy.OCC.value
 
         grouped_df = grouped_df.copy()
@@ -167,7 +167,7 @@ class PerformanceMetrics(
     def step_05_compute_impact_metrics(self, df, grouped_df):
 
         source_field = self.params.source_field.value
-        gcs = CorpusField.GCS.value
+        gcs = Field.GCS.value
         # cit_count_local = CorpusField.CIT_COUNT_LOCAL.value
 
         df = df.copy()
@@ -214,8 +214,8 @@ class PerformanceMetrics(
     # -------------------------------------------------------------------------
     def step_06_add_rank_columns(self, grouped_df):
 
-        cit_count_global = CorpusField.GCS.value
-        cit_count_local = CorpusField.LCS.value
+        cit_count_global = Field.GCS.value
+        cit_count_local = Field.LCS.value
         occ = ItemsOrderBy.OCC.value
 
         grouped_df = grouped_df.copy()
@@ -253,7 +253,7 @@ class PerformanceMetrics(
     # -------------------------------------------------------------------------
     def step_08_filter_by_term_citations_range(self, grouped_df):
 
-        cit_count_global = CorpusField.GCS.value
+        cit_count_global = Field.GCS.value
         # cit_count_local = CorpusField.CIT_COUNT_LOCAL.value
 
         grouped_df = grouped_df.copy()
@@ -307,15 +307,11 @@ class PerformanceMetrics(
         if "OCC" in grouped_df.columns:
             grouped_df["OCC"] = grouped_df["OCC"].astype(int)
 
-        if CorpusField.GCS.value in grouped_df.columns:
-            grouped_df[CorpusField.GCS.value] = grouped_df[
-                CorpusField.GCS.value
-            ].astype(int)
+        if Field.GCS.value in grouped_df.columns:
+            grouped_df[Field.GCS.value] = grouped_df[Field.GCS.value].astype(int)
 
-        if CorpusField.LCS.value in grouped_df.columns:
-            grouped_df[CorpusField.LCS.value] = grouped_df[
-                CorpusField.LCS.value
-            ].astype(int)
+        if Field.LCS.value in grouped_df.columns:
+            grouped_df[Field.LCS.value] = grouped_df[Field.LCS.value].astype(int)
 
         if "h_index" in grouped_df.columns:
             grouped_df["h_index"] = grouped_df["h_index"].astype(int)
@@ -330,7 +326,7 @@ class PerformanceMetrics(
 
         from tm2p._intern.get_zero_digits import get_zero_digits
 
-        gcs = CorpusField.GCS.value
+        gcs = Field.GCS.value
         occ = ItemsOrderBy.OCC.value
 
         occ_zeros, gcs_zeros = get_zero_digits(

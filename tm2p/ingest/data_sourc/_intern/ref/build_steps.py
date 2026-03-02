@@ -1,6 +1,6 @@
 # CODE_REVIEW: 2026-01-26
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import Params
 
 from ..step import Step
@@ -19,37 +19,37 @@ def build_reference_steps(params: Params) -> list[Step]:
 
     return [
         Step(
-            name=f"Assigning '{CorpusField.RNO.value}'",
+            name=f"Assigning '{Field.RNO.value}'",
             function=assign_recno,
             kwargs=common_kwargs,
             count_message="{count} record numbers assigned",
         ),
         Step(
-            name=f"Assigning '{CorpusField.RID.value}'",
+            name=f"Assigning '{Field.RID.value}'",
             function=assign_recid,
             kwargs=common_kwargs,
             count_message="{count} record IDs assigned",
         ),
         Step(
-            name=f"Calculating '{CorpusField.N_AUTH.value}'",
+            name=f"Calculating '{Field.N_AUTH.value}'",
             function=calculate_numauth,
             kwargs=common_kwargs,
             count_message="{count} records calculated",
         ),
         Step(
-            name=f"Calculating '{CorpusField.N_REF_GBL.value}'",
+            name=f"Calculating '{Field.N_REF_GBL.value}'",
             function=calculate_numref_global,
             kwargs=common_kwargs,
             count_message="{count} reference counts calculated",
         ),
         Step(
-            name=f"Normalizing '{CorpusField.REF_RAW.value}'",
+            name=f"Normalizing '{Field.REF_RAW.value}'",
             function=normalize_references,
             kwargs=common_kwargs,
             count_message="{count} references normalized",
         ),
         Step(
-            name=f"Compute '{CorpusField.LCS.value}'",
+            name=f"Compute '{Field.LCS.value}'",
             function=compute_citcount_local,
             kwargs=common_kwargs,
             count_message="{count} records processed",

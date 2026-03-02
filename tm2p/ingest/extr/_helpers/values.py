@@ -9,7 +9,7 @@ def extract_values(params: Params) -> pd.DataFrame:
     df = load_filtered_main_csv_zip(params)[[field]].dropna().copy()
     df[field] = df[field].str.split("; ")
     return (
-        df.explode(field)
+        df.explode(column=field)
         .assign(**{field: lambda d: d[field].str.strip()})
         .drop_duplicates()
         .reset_index(drop=True)

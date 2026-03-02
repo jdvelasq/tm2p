@@ -1,7 +1,7 @@
 import pandas as pd
 
 from tm2p._intern import Params
-from tm2p.enums import ThesaurusField
+from tm2p.enum import ThesaurusField
 
 from .thesaurus_match_result import ThesaurusMatchResult
 

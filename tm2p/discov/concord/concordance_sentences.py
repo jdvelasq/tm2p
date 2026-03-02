@@ -40,7 +40,7 @@ import re
 import pandas as pd  # type: ignore
 from textblob import TextBlob  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
@@ -58,9 +58,7 @@ class ConcordanceSentences(
     def _set_dataframe_index(self, dataframe: pd.DataFrame) -> pd.DataFrame:
         return dataframe.set_index(
             pd.Index(
-                dataframe[CorpusField.RID.value]
-                + " / "
-                + dataframe[CorpusField.TITLE_RAW.value]
+                dataframe[Field.RID.value] + " / " + dataframe[Field.TITLE_RAW.value]
             )
         )
 
@@ -69,12 +67,12 @@ class ConcordanceSentences(
     ) -> pd.Series:
 
         found = (
-            dataframe[CorpusField.ABSTR_UPPER.value]
+            dataframe[Field.ABSTR_UPPER.value]
             .astype(str)
             .str.contains(search_for, regex=True, flags=re.IGNORECASE)
         )
         dataframe = dataframe[found]
-        abstracts = dataframe[CorpusField.ABSTR_UPPER.value]
+        abstracts = dataframe[Field.ABSTR_UPPER.value]
         return abstracts
 
     def _transform_abstracts_to_sentences(

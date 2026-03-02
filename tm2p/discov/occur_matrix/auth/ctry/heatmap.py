@@ -8,7 +8,7 @@ Heatmap
     height="800px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.occur_matrix.auth.ctry import Heatmap
     >>> fig = (
     ...     Heatmap()

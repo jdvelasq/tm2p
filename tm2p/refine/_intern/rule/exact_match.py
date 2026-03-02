@@ -1,7 +1,7 @@
 import pandas as pd
 
 from tm2p._intern import Params
-from tm2p.enums import ThesaurusField
+from tm2p.enum import ThesaurusField
 
 from ._post_process import _post_process
 from ._pre_process import _pre_process

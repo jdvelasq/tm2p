@@ -3,11 +3,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 
 
 def _get_author(dataframe):
-    return dataframe[CorpusField.AUTH_NORM.value].map(
+    return dataframe[Field.AUTH_NORM.value].map(
         lambda x: (
             x.split("; ")[0].strip().split()[0] if not pd.isna(x) else "[Anonymous]"
         )
@@ -16,12 +16,12 @@ def _get_author(dataframe):
 
 def _get_source_title(dataframe):
 
-    source_title = dataframe[CorpusField.SRC_ISO4_NORM.value].copy()
+    source_title = dataframe[Field.SRC_ISO4_NORM.value].copy()
     source_title_isna = source_title.map(pd.isna)
     source_title = pd.Series(
         np.where(
             source_title_isna,
-            dataframe[CorpusField.SRC_NORM.value].str[:29],
+            dataframe[Field.SRC_NORM.value].str[:29],
             source_title,
         )
     )
@@ -40,17 +40,17 @@ def _get_source_title(dataframe):
 
 
 def _get_year(dataframe):
-    return dataframe[CorpusField.YEAR.value].map(str)
+    return dataframe[Field.YEAR.value].map(str)
 
 
 def _get_volume(dataframe):
-    return dataframe[CorpusField.VOL.value].map(
+    return dataframe[Field.VOL.value].map(
         lambda x: ", V" + str(x).replace(".0", "") if not pd.isna(x) else ""
     )
 
 
 def _get_page_start(dataframe):
-    return dataframe[CorpusField.PG_FIRST.value].map(
+    return dataframe[Field.PG_FIRST.value].map(
         lambda x: ", P" + str(x).replace(".0", "") if not pd.isna(x) else ""
     )
 
@@ -92,7 +92,7 @@ def assign_recid(root_directory: str) -> int:
 
         index = wos_ref[wos_ref.duplicated()].index
         if len(index) > 0:
-            wos_ref.loc[index] += ", " + dataframe[CorpusField.TITLE_RAW.value].loc[
+            wos_ref.loc[index] += ", " + dataframe[Field.TITLE_RAW.value].loc[
                 index
             ].str[:29].str.upper().str.replace(".", "").str.replace(
                 " - ", " "
@@ -106,10 +106,10 @@ def assign_recid(root_directory: str) -> int:
                 "'", ""
             )
 
-        dataframe[CorpusField.RID.value] = wos_ref.copy()
-        dataframe = dataframe.drop_duplicates(subset=[CorpusField.RID.value])
+        dataframe[Field.RID.value] = wos_ref.copy()
+        dataframe = dataframe.drop_duplicates(subset=[Field.RID.value])
 
-        non_null_count = int(dataframe[CorpusField.RID.value].notna().sum())
+        non_null_count = int(dataframe[Field.RID.value].notna().sum())
 
         dataframe.to_csv(
             database_file,

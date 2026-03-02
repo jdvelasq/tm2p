@@ -3,22 +3,37 @@ Coverage
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.records import Coverage
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.rec import Coverage
     >>> (
     ...     Coverage()
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
+    ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()
     ... )
+        min_occ  cum_sum_documents coverage  cum num items
+    0        59                 59  32.78 %              1
+    1        50                109  60.56 %              2
+    2        13                115  63.89 %              3
+    3        11                118  65.56 %              4
+    4        10                120  66.67 %              5
+    5         9                127  70.56 %              9
+    6         8                134  74.44 %             10
+    7         7                136  75.56 %             12
+    8         6                137  76.11 %             15
+    9         5                138  76.67 %             19
+    10        4                138  76.67 %             22
+    11        3                142  78.89 %             39
+    12        2                146  81.11 %             81
+    13        1                154  85.56 %            582
 
 
 
 """
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access.load_filtered_main_csv_zip import (
     load_filtered_main_csv_zip,
@@ -33,7 +48,7 @@ class Coverage(
     def run(self):
 
         source_field = self.params.source_field.value
-        record_id = CorpusField.RID.value
+        record_id = Field.RID.value
 
         documents = load_filtered_main_csv_zip(params=self.params)
         documents = documents.reset_index()

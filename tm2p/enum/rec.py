@@ -1,0 +1,15 @@
+from enum import Enum
+
+
+class RecordsOrderBy(Enum):
+
+    GCS_BY_HIGHEST = "GCS_BY_HIGHEST"
+    GCS_BY_LOWEST = "GCS_BY_LOWEST"
+    LCS_BY_HIGHEST = "LCS_BY_HIGHEST"
+    LCS_BY_LOWEST = "LCS_BY_LOWEST"
+    AUTH_A_TO_Z = "AUTH_A_TO_Z"
+    AUTH_Z_TO_A = "AUTH_Z_TO_A"
+    YEAR_NEWEST = "YEAR_NEWEST"
+    YEAR_OLDEST = "YEAR_OLDEST"
+    SRC_A_TO_Z = "SRC_A_TO_Z"
+    SRC_Z_TO_A = "SRC_Z_TO_A"

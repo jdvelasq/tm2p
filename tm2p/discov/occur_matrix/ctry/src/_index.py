@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-INDEX_FIELD = CorpusField.SRC_ISO4_NORM
+INDEX_FIELD = Field.SRC_ISO4_NORM

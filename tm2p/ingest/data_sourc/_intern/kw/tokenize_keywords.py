@@ -1,4 +1,4 @@
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 
 from ..oper import copy_column
@@ -23,14 +23,14 @@ from .helpers import (
 def tokenize_keywords(root_directory: str) -> int:
 
     copy_column(
-        source=CorpusField.IDXKW_RAW,
-        target=CorpusField.IDXKW_TOK,
+        source=Field.IDXKW_RAW,
+        target=Field.IDXKW_TOK,
         root_directory=root_directory,
     )
 
     copy_column(
-        source=CorpusField.AUTHKW_RAW,
-        target=CorpusField.AUTHKW_TOK,
+        source=Field.AUTHKW_RAW,
+        target=Field.AUTHKW_TOK,
         root_directory=root_directory,
     )
 
@@ -53,6 +53,6 @@ def tokenize_keywords(root_directory: str) -> int:
     save_main_csv_zip(dataframe, root_directory)
 
     return max(
-        int(dataframe[CorpusField.AUTHKW_TOK.value].notna().sum()),
-        int(dataframe[CorpusField.IDXKW_TOK.value].notna().sum()),
+        int(dataframe[Field.AUTHKW_TOK.value].notna().sum()),
+        int(dataframe[Field.IDXKW_TOK.value].notna().sum()),
     )

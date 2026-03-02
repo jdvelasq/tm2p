@@ -25,7 +25,14 @@ GING_AREA of FINTECH . ( jel g00 , g21 , g23 , g28 , l51 , o31 ) . the author ( 
 uch of THE_NEGATIVE_VALUE_EFFECT . ( jel g14 , g20 , g29 , g39 ) . the author ( s ) 2019 .
 we_provide OBJECTIVE_UNDERSTANDING of FINTECH , how it is reflected in THE_POPULAR_MEDIA .
 ANKING , CASH , CREDIT , and DEBIT_CARDS in DIFFERENT_COUNTRIES and REGIONS of THE_WORLD .
+influencing CONSUMER_ADOPTION . 2020 by the author . licensee mdpi , BASEL , SWITZERLAND .
+NCEPTS and THEIR_DEVELOPMENT . 2020 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+OSE_SOLUTIONS are still rare . 2020 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+VICES to UNBANKED_POPULATION . 2021 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+ctive_of CONSUMER_PROTECTION . 2021 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+NCE in THEIR_BUSINESS_MODELS . 2021 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
 integrating TRUST and AUTOMATION in FINANCE .
+ict THEIR_FUTURE_BEHAVIOR . copyright 2020 bussmann , GIUDICI , MARINELLI and PAPENBROCK .
 , under exclusive license to springer nature switzerland ag 2023 and 2020 UNITED_NATIONS .
 ASSOCIATION of START_UP_ENTERPRISES and RISK_CAPITAL_FUNDS as well as STATE_INSTITUTIONS .
 ntime . cambridge university press and KOGUAN_LAW_SCHOOL , SHANGHAI_JIAO_TONG_UNIVERSITY .
@@ -76,19 +83,13 @@ LABORATION . 2017 , university of finance and management in warsaw . all rights 
 or TODAY_SAVVY_INVESTOR . 2017 by irene aldridge and steve krawciw . all rights reserved .
 E_ANALYSIS and RESEARCH . 2020 , srac romanian society for quality . all rights reserved .
  ) , under exclusive license to springer nature switzerland ag 2019 . all right reserved .
-influencing CONSUMER_ADOPTION . 2020 by the author . licensee mdpi , basel , switzerland .
-NCEPTS and THEIR_DEVELOPMENT . 2020 by the_authors . licensee mdpi , basel , switzerland .
-OSE_SOLUTIONS are still rare . 2020 by the_authors . licensee mdpi , basel , switzerland .
-VICES to UNBANKED_POPULATION . 2021 by the_authors . licensee mdpi , basel , switzerland .
-ctive_of CONSUMER_PROTECTION . 2021 by the_authors . licensee mdpi , basel , switzerland .
-NCE in THEIR_BUSINESS_MODELS . 2021 by the_authors . licensee mdpi , basel , switzerland .
 h CHALLENGERS , or be forced into FLIGHT by THE_BIGTECH . 2018 john wiley and sons , ltd .
 INDUSTRY , CONCLUSIONS , REFERENCES . 2017 by world scientific publishing co . pte . ltd .
 ostering THE_GROWTH of NATIONAL_INDUSTRY within_and_outside_of CHINA . 2015 elsevier ltd .
 SS , and PUBLIC_ENGAGEMENT in AGRICULTURE . 2019 the_authors . published by elsevier ltd .
 OF_LABOR between AI and HUMANS for THE_FORESEEABLE_FUTURE . 2021 john wiley and sons ltd .
 CS , REGULATION_TECHNOLOGY and THE_SMART_DATA_UTILIZATION . 2022 john wiley and sons ltd .
-SS_STRATEGY and THE_ENVIRONMENT published by erp environment and john wiley and sons ltd .
+ss strategy and the environment published by erp environment and john wiley and sons ltd .
 TY . 2021 the_authors . information systems journal published by john wiley and sons ltd .
 to CONSUMERS , to CURRENT_BANKING_SYSTEM and to THE_WHOLE_SOCIETY in general . 2016 ieee .
 EALITY in_order_to survive . 2018 , macmillan publishers ltd . , part of springer nature .
@@ -98,7 +99,6 @@ es for THE_REVELATION of THE_GAPS in RESEARCH . 2017 , springer verlag berlin he
 ced THEIR_ATTITUDE toward using MOBILE p2p LENDING apps and INTENTION_TO_USE . 2017 ksii .
 BILE_PAYMENTS_ENSURE_PEOPLE_HEALTH and help slow down THE_SPREAD of THE_VIRUS . 2021 imi .
 URETECH . SANDBOXES . AND_FINTECH_REGULATIONS . 2021 f . allen , x . gu and j . jagtiani .
-ict THEIR_FUTURE_BEHAVIOR . copyright 2020 bussmann , giudici , marinelli and papenbrock .
  for A_MORE_RESILIENT_AND_ENVIRONMENTALLY_CONSCIOUS_FINANCIAL_FUTURE . 2024 , igi global .
 le to FINTECH_COMPANIES in strategizing and promoting USAGE of THEIR_SERVICES . 2016 acm .
 ME from THE_NEW_ENTRY in THE_RETAIL_PAYMENTS_MARKET . 2016 korean securities association .

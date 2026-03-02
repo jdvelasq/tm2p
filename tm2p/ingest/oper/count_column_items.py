@@ -3,32 +3,32 @@ CountColumnItems
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.operations import CountColumnItems
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.oper import CountColumnItems
     >>> (
     ...     CountColumnItems()
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
-    ...     .with_target_field(CorpusField.USER_0)
+    ...     .with_source_field(Field.AUTHKW_RAW)
+    ...     .with_target_field(Field.USR0)
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
-    37
+    180
 
-    >>> from tm2p.ingest.operations import Query
+    >>> from tm2p.ingest.oper import Query
     >>> (
     ...     Query()
-    ...     .with_query_expression("SELECT AUTH_KEY_RAW, USER_0 FROM database LIMIT 5;")
+    ...     .with_query_expression("SELECT AUTHKW_RAW, USR0 FROM database LIMIT 5;")
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()
     ... )
-                                            AUTH_KEY_RAW  USER_0
-    0  Banking; Financial institution; Financial serv...       7
-    1  Bank; Blockchain; Cryptocurrency; Payment; Tec...       6
-    2  Actor network theory; Chinese telecom; Fintech...       4
-    3  Content analysis; Digitalization; FinTech; Inn...       5
-    4  Elaboration likelihood model; Fintech; K pay; ...       4
+                                              AUTHKW_RAW  USR0
+    0  Digital transformation; Financial sector; FinT...     8
+    1                                               None     0
+    2  Artificial intelligence; Banking industry sect...     8
+    3  China; Fintech; G38; Intention to use; L16; M1...    11
+    4  Fintech; Green environmental index; Green fina...     5
 
 
 
@@ -36,7 +36,7 @@ Smoke test:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.count_column_items import count_column_items
+from tm2p.ingest.data_sourc._intern.oper.count_col_item import count_column_items
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 

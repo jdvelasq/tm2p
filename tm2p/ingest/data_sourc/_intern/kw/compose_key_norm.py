@@ -1,4 +1,4 @@
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p.ingest.data_sourc._intern.oper import merge_columns
 
 
@@ -6,9 +6,9 @@ def compose_key_norm(root_directory: str) -> int:
 
     return merge_columns(
         sources=(
-            CorpusField.AUTHKW_NORM,
-            CorpusField.IDXKW_NORM,
+            Field.AUTHKW_NORM,
+            Field.IDXKW_NORM,
         ),
-        target=CorpusField.KW_NORM,
+        target=Field.KW_NORM,
         root_directory=root_directory,
     )

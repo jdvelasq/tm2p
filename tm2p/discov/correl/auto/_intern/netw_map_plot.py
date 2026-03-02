@@ -66,8 +66,8 @@ import pandas as pd  # type: ignore
 from sklearn.metrics.pairwise import cosine_similarity  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.correl._intern.matrix_data_frame import MatrixDataFrame
-from tm2p.discov.correl._intern.plot_correl_map import plot_correl_map
+from tm2p.discov.correl.auto._intern.matrix import MatrixDataFrame
+from tm2p.discov.correl.auto._intern.plot_correl_map import plot_correl_map
 
 
 class NetworkMapPlot(

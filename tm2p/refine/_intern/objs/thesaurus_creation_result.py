@@ -15,7 +15,7 @@ Smoke tests:
     >>> from tm2p.refine.user._internals import ThesaurusCreationResult
     >>> ThesaurusCreationResult(
     ...     colored_output=False,
-    ...     source_field="AUTH_KEY_NORM",
+    ...     source_field="AUTHKW_NORM",
     ...     file_path="examples/fintech/thesauri/organizations.the.txt",
     ...     msg="Thesaurus 'organizations.the.txt' loaded successfully.",
     ...     success=True,
@@ -24,13 +24,13 @@ Smoke tests:
     INFO: Thesaurus 'organizations.the.txt' loaded successfully.
       Success      : True
       File         : examples/fintech/thesauri/organizations.the.txt
-      Source field : AUTH_KEY_NORM
+      Source field : AUTHKW_NORM
     <BLANKLINE>
 
 
     >>> ThesaurusCreationResult(
     ...     colored_output=False,
-    ...     source_field="AUTH_KEY_NORM",
+    ...     source_field="AUTHKW_NORM",
     ...     file_path="examples/fintech/thesauri/organizations.the.txt",
     ...     msg="Thesaurus 'organizations.the.txt' loaded successfully.",
     ...     success=True,
@@ -39,7 +39,7 @@ Smoke tests:
     INFO: Thesaurus 'organizations.the.txt' loaded successfully.
       Success      : True
       File         : examples/fintech/thesauri/organizations.the.txt
-      Source field : AUTH_KEY_NORM
+      Source field : AUTHKW_NORM
       Status       : 10 keys created
     <BLANKLINE>
 

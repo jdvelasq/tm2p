@@ -40,7 +40,7 @@ from tm2p._intern import ParamsMixin
 from tm2p._intern.packag_data.templates.load_builtin_template import (
     load_builtin_template,
 )
-from tm2p.ingest.rec import RecordDataFrame  # type: ignore
+from tm2p.ingest.rec import FilteredRecords  # type: ignore
 from tm2p.ingest.rec import RecordViewer  # type: ignore
 
 
@@ -52,7 +52,7 @@ class LiteratureReview(
     # -------------------------------------------------------------------------
     def internal_load_records(self):
 
-        frame = (RecordDataFrame().update(**self.params.__dict__)).run()
+        frame = (FilteredRecords().update(**self.params.__dict__)).run()
 
         frame = frame[
             (frame.document_type == "Review")

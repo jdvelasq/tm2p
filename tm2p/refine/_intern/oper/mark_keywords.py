@@ -1,9 +1,9 @@
 import pandas as pd
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import Params
 from tm2p._intern.data_access import load_main_csv_zip
-from tm2p.enums import ThesaurusField
+from tm2p.enum import ThesaurusField
 
 CHANGED = ThesaurusField.CHANGED.value
 IS_KEYWORD = ThesaurusField.IS_KEYWORD.value
@@ -35,8 +35,8 @@ def _extract_keywords_from_data(data_df):
 
     keywords = set()
     for col in [
-        CorpusField.AUTHKW_RAW.value,
-        CorpusField.IDXKW_RAW.value,
+        Field.AUTHKW_RAW.value,
+        Field.IDXKW_RAW.value,
     ]:
         series = data_df[col].dropna().str.split("; ").explode().str.strip()
         keywords.update(series.drop_duplicates().to_list())

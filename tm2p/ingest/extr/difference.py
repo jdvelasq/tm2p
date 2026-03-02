@@ -3,14 +3,14 @@ DifferenceExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import DifferenceExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import DifferenceExtractor
     >>> terms = (
     ...     DifferenceExtractor()
     ...     #
     ...     # FIELDS:
     ...     .with_source_fields(
-    ...         (CorpusField.AUTH_KEY_NORM, CorpusField.IDX_KEY_NORM)
+    ...         (Field.AUTHKW_NORM, Field.IDXKW_NORM)
     ...     )
     ...     #
     ...     # DATABASE:
@@ -22,16 +22,16 @@ Smoke tests:
     ... )
     >>> from pprint import pprint
     >>> pprint(terms[:10])
-    ['alternative finance',
-     'alternative lending',
-     'bank 30',
-     'banking',
-     'banking innovations',
-     'banking regulation',
-     'bayesian estimation',
-     'biometric',
-     'china',
-     'chinese telecom']
+    ['5g',
+     '6g',
+     'access to finance',
+     'adoption',
+     'adoption drivers',
+     'aggregating operators',
+     'ai',
+     'algorithmic underwriting',
+     'alternative data',
+     'alternative finance']
 
 """
 

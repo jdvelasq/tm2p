@@ -4,14 +4,14 @@ ExtractAcronyms
 
 
 Smoke test:
-    >>> from tm2p.ingest.review import ExtractAcronyms
+    >>> from tm2p.ingest.rev import ExtractAcronyms
     >>> acronyms = (
     ...     ExtractAcronyms()
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
     >>> len(acronyms)
-    12
+    96
     >>> "crm" in acronyms
     True
     >>> acronyms["crm"]
@@ -25,7 +25,7 @@ from pathlib import Path
 import pandas as pd  # type: ignore
 from textblob import TextBlob  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
@@ -65,14 +65,14 @@ class ExtractAcronyms(
         dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,
             usecols=[
-                CorpusField.AUTHKW_TOK.value,
-                CorpusField.IDXKW_TOK.value,
+                Field.AUTHKW_TOK.value,
+                Field.IDXKW_TOK.value,
             ],
         )
 
         for col in [
-            CorpusField.AUTHKW_TOK.value,
-            CorpusField.IDXKW_TOK.value,
+            Field.AUTHKW_TOK.value,
+            Field.IDXKW_TOK.value,
         ]:
             keywords = dataframe[col].dropna().str.split("; ")
             keywords = keywords.explode().str.strip()
@@ -119,8 +119,8 @@ class ExtractAcronyms(
         dataframe = load_main_csv_zip(root_directory=self.params.root_directory)
 
         for col in [
-            CorpusField.AUTHKW_TOK.value,
-            CorpusField.IDXKW_TOK.value,
+            Field.AUTHKW_TOK.value,
+            Field.IDXKW_TOK.value,
         ]:
             keywords = dataframe[col].dropna().str.split("; ")
             keywords = keywords.explode().str.strip()
@@ -151,7 +151,7 @@ class ExtractAcronyms(
     # -------------------------------------------------------------------------
     def extract_acronyms_from_abstracts(self):
 
-        abs_col = CorpusField.ABSTR_TOK.value
+        abs_col = Field.ABSTR_TOK.value
 
         dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,

@@ -6,7 +6,7 @@ import pandas as pd  # type: ignore
 from openai import APIError, OpenAI
 from tqdm import tqdm  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import (
     add_new_words_to_builtin_word_list,
@@ -75,8 +75,8 @@ def correct_hyphenated_words(root_directory: str) -> int:
     save_main_csv_zip(dataframe, root_directory)
 
     return max(
-        int(dataframe[CorpusField.AUTHKW_TOK.value].notna().sum()),
-        int(dataframe[CorpusField.IDXKW_TOK.value].notna().sum()),
+        int(dataframe[Field.AUTHKW_TOK.value].notna().sum()),
+        int(dataframe[Field.IDXKW_TOK.value].notna().sum()),
     )
 
 
@@ -114,8 +114,8 @@ def _extract_hyphenated_words(dataframe: pd.DataFrame) -> set:
 
     hypenated_words: set[str] = set()
     for col in [
-        CorpusField.AUTHKW_TOK.value,
-        CorpusField.IDXKW_TOK.value,
+        Field.AUTHKW_TOK.value,
+        Field.IDXKW_TOK.value,
     ]:
 
         series = dataframe[col].dropna()
@@ -267,8 +267,8 @@ def _replace(
     valid_hyphenated_words = load_builtin_word_list("valid_hyphenated_words.txt")
 
     for col in [
-        CorpusField.AUTHKW_TOK.value,
-        CorpusField.IDXKW_TOK.value,
+        Field.AUTHKW_TOK.value,
+        Field.IDXKW_TOK.value,
     ]:
         dataframe[col] = dataframe[col].str.lower()
 

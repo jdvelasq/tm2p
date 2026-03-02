@@ -1,7 +1,7 @@
 # CODE_REVIEW: 2026-01-26
 
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import Params
 
 from ..step import Step
@@ -20,37 +20,37 @@ def build_keyword_steps(params: Params) -> list[Step]:
 
     return [
         Step(
-            name=f"Tokenizing {CorpusField.AUTHKW_RAW.value} and {CorpusField.IDXKW_RAW.value}",
+            name=f"Tokenizing {Field.AUTHKW_RAW.value} and {Field.IDXKW_RAW.value}",
             function=tokenize_keywords,
             kwargs=common_kwargs,
             count_message="{count} records tokenized",
         ),
         Step(
-            name=f"Correcting hyphenated words in {CorpusField.AUTHKW_TOK.value} and {CorpusField.IDXKW_TOK.value}",
+            name=f"Correcting hyphenated words in {Field.AUTHKW_TOK.value} and {Field.IDXKW_TOK.value}",
             function=correct_hyphenated_words,
             kwargs=common_kwargs,
             count_message="{count} records corrected",
         ),
         Step(
-            name=f"Normalizing {CorpusField.AUTHKW_TOK.value}",
+            name=f"Normalizing {Field.AUTHKW_TOK.value}",
             function=normalize_auth_key_raw,
             kwargs=common_kwargs,
             count_message="{count} records normalized",
         ),
         Step(
-            name=f"Normalizing {CorpusField.IDXKW_TOK.value}",
+            name=f"Normalizing {Field.IDXKW_TOK.value}",
             function=normalize_idx_key_raw,
             kwargs=common_kwargs,
             count_message="{count} records normalized",
         ),
         Step(
-            name=f"Composing {CorpusField.KW_TOK.value}",
+            name=f"Composing {Field.KW_TOK.value}",
             function=compose_key_tok,
             kwargs=common_kwargs,
             count_message="{count} records composed",
         ),
         Step(
-            name=f"Composing {CorpusField.KW_NORM.value}",
+            name=f"Composing {Field.KW_NORM.value}",
             function=compose_key_norm,
             kwargs=common_kwargs,
             count_message="{count} records composed",

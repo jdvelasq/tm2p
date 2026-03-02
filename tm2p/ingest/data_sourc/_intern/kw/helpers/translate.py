@@ -1,6 +1,6 @@
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.packag_data import load_builtin_mapping
 
 
@@ -11,8 +11,8 @@ def translate(dataframe: pd.DataFrame) -> pd.DataFrame:
     british_to_american = load_builtin_mapping("british_to_american.json")
 
     for col in [
-        CorpusField.AUTHKW_TOK.value,
-        CorpusField.IDXKW_TOK.value,
+        Field.AUTHKW_TOK.value,
+        Field.IDXKW_TOK.value,
     ]:
         dataframe[col] = dataframe[col].str.replace("; ", " ; ", regex=False)
 

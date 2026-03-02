@@ -6,7 +6,7 @@ import pandas as pd  # type: ignore
 from pandarallel import pandarallel  # type: ignore
 
 from tm2p._intern import stdout_to_stderr
-from tm2p.enums import CorpusField
+from tm2p.enum.corpus import Field
 
 ACRONYMS_PATTERN = re.compile(r"\((.*?)\)")
 
@@ -38,7 +38,7 @@ def extract_abstract_acronyms(root_directory: str) -> int:
     with stdout_to_stderr():
         progress_bar = True
         pandarallel.initialize(progress_bar=progress_bar, verbose=0)
-        dataframe[CorpusField.ABSTR_ACRONYM.value] = dataframe[CorpusField.ABSTR_TOK.value].parallel_apply(_extract_acronyms_from_text)  # type: ignore[call-arg]
+        dataframe[Field.ABSTR_ACRONYM.value] = dataframe[Field.ABSTR_TOK.value].parallel_apply(_extract_acronyms_from_text)  # type: ignore[call-arg]
         sys.stderr.write("\n")
 
     dataframe.to_csv(
@@ -49,4 +49,4 @@ def extract_abstract_acronyms(root_directory: str) -> int:
         compression="zip",
     )
 
-    return len(dataframe[CorpusField.ABSTR_ACRONYM.value].dropna())
+    return len(dataframe[Field.ABSTR_ACRONYM.value].dropna())

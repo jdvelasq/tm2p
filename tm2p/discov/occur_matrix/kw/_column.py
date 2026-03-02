@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-COLUMN_FIELD = CorpusField.KW_NORM
+COLUMN_FIELD = Field.KW_NORM

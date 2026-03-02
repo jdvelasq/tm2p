@@ -3,13 +3,13 @@ ContainsExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import ContainsExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import ContainsExtractor
     >>> terms = (
     ...     ContainsExtractor()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # SEARCH:
     ...     .having_text_matching("FINTECH")
@@ -24,14 +24,18 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-
-
     >>> from pprint import pprint
     >>> pprint(terms[:10])
-    ['fintech',
-     'fintech industry',
-     'investment in fintech',
-     'taiwan fintech industry']
+    ['bank fintech',
+     'bank fintech partnership',
+     'financial technology ( fintech )',
+     'fintech',
+     'fintech adoption',
+     'fintech developers',
+     'fintech development',
+     'fintech disruption',
+     'fintech for development',
+     'fintech governance']
 
 
 """

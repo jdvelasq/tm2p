@@ -4,7 +4,7 @@ Step
 ===============================================================================
 
 Smoke test - basic instantiation:
-    >>> from tm2p.scopus._internals import Step
+    >>> from tm2p.ingest.data_sourc._intern import Step
     >>> def sample_function(x, y):
     ...     return x + y
     >>> step = Step(

@@ -1,12 +1,12 @@
 """
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.analyze._intern.items_by_year import ItemsByYear
     >>> df = (
     ...     ItemsByYear()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
+    ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .having_items_in_top(20)
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)

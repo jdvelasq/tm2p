@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 
 
 def assign_recno(root_directory):
@@ -20,7 +20,7 @@ def assign_recno(root_directory):
     )
 
     num_zeros = len(str(len(dataframe)))
-    dataframe[CorpusField.RNO.value] = [
+    dataframe[Field.RNO.value] = [
         f"{i:0{num_zeros}d}" for i in range(1, len(dataframe) + 1)
     ]
 

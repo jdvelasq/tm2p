@@ -1,6 +1,6 @@
 # CODE_REVIEW: 2026-01-26
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import Params
 
 from ..step import Step
@@ -16,19 +16,19 @@ def build_document_steps(params: Params) -> list[Step]:
 
     return [
         Step(
-            name=f"Repairing '{CorpusField.GCS.value}'",
+            name=f"Repairing '{Field.GCS.value}'",
             function=repair_citcount_global,
             kwargs=common_kwargs,
             count_message="{count} records repaired",
         ),
         Step(
-            name=f"Normalizing '{CorpusField.PUBTYPE_RAW.value}'",
+            name=f"Normalizing '{Field.PUBTYPE_RAW.value}'",
             function=normalize_doctype_raw,
             kwargs=common_kwargs,
             count_message="{count} records normalized",
         ),
         Step(
-            name=f"Repairing '{CorpusField.DOI.value}'",
+            name=f"Repairing '{Field.DOI.value}'",
             function=repair_doi,
             kwargs=common_kwargs,
             count_message="{count} records repaired",

@@ -1,7 +1,7 @@
 import pandas as pd
 
 from tm2p._intern import Params
-from tm2p.enums import ThesaurusField
+from tm2p.enum import ThesaurusField
 
 from ._pre_process import _pre_process
 from .fuzzy_cutoff_0_word import _compute_matches, _prepare_thesaurus, _report_mergings

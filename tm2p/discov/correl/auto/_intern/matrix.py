@@ -49,7 +49,7 @@ Smoke Test:
 
 from tm2p._intern import ParamsMixin
 from tm2p.discov.correl.auto._intern.comput_correl_matrix import comput_correl_matrix
-from tm2p.discov.tfidf import Matrix as TfIdfDataFrame
+from tm2p.discov.tfidf._intern.matrix import Matrix as TfIdfDataFrame
 
 
 class MatrixDataFrame(

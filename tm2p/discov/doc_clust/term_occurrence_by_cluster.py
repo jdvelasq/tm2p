@@ -83,7 +83,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.tfidf import Matrix as TfIdfDataFrame
+from tm2p.discov.tfidf._intern.matrix import Matrix as TfIdfDataFrame
 
 
 class TermOccurrenceByCluster(

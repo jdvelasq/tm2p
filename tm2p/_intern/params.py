@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import pandas as pd
 from sklearn.base import BaseEstimator  # type: ignore
 
-from tm2p.enums import CorpusField, ItemsOrderBy, RecordsOrderBy
+from tm2p.enum import Field, ItemsOrderBy, RecordsOrderBy
 
 
 @dataclass
@@ -15,22 +15,21 @@ class Params:
     #
     # Ingestion and basic operations:
     #
-    source_field: CorpusField
-    source_fields: tuple[CorpusField, ...]
-    target_field: CorpusField
+    source_field: Field
+    source_fields: tuple[Field, ...]
+    target_field: Field
     stemming_fn: Callable
 
     #
     # Occurrence matrix:
     #
-    column_field: CorpusField
-    index_field: CorpusField
+    column_field: Field
+    index_field: Field
 
     #
     # Cross-correlation operations:
     #
-    index_and_column_field: CorpusField
-    cross_field: CorpusField
+    cross_field: Field
 
     #
     # Ingestion and basic operations:
@@ -77,7 +76,7 @@ class Params:
     citation_threshold: int = 0
     cluster_coverages: Optional[list[str]] = None
     cluster_names: Optional[list[str]] = None
-    clustering_algorithm_or_dict: [Union[str, dict]] = None
+    clustering_algorithm_or_dict: Optional[Union[str, dict]] = None
     color: Optional[str] = None
     colored_output: bool = True
     colored_stderr: bool = True
@@ -154,7 +153,7 @@ class Params:
     #
     # P
     #
-    pattern: str = ""
+    pattern: Union[str, tuple[str, ...]] = ""
     periods_with_at_least_one_record: int = 3
     pie_hole: float = 0.4
     plot_dimensions: Tuple[int, int] = (0, 1)
@@ -176,7 +175,7 @@ class Params:
     record_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)
     record_years_range: Tuple[Optional[int], Optional[int]] = (None, None)
     records_match: Optional[Dict[str, List[str]]] = None
-    records_order_by: RecordsOrderBy = RecordsOrderBy.PUBYEAR_NEWEST
+    records_order_by: RecordsOrderBy = RecordsOrderBy.YEAR_NEWEST
     regex_flags: int = 0
     regex_search: bool = False
     replacement: Optional[str] = None

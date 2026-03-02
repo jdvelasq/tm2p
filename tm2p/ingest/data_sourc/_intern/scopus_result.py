@@ -4,7 +4,7 @@ Scopus Result
 
 
 Smoke tests:
-    >>> from tm2p.io._intern.scopus_result import ScopusResult
+    >>> from tm2p.ingest.data_sourc._intern.scopus_result import ScopusResult
     >>> ScopusResult(
     ...     colored_output=False,
     ...     file_path="examples/fintech/thesauri/organizations.the.txt",

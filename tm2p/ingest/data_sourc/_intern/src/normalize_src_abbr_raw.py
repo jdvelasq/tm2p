@@ -1,9 +1,9 @@
 from pathlib import Path
 
-from tm2p import CorpusField
-from tm2p.ingest.data_sourc._intern.oper.coalesc_column import coalesce_column
-from tm2p.ingest.data_sourc._intern.oper.ltwa_column import ltwa_column
-from tm2p.ingest.data_sourc._intern.oper.transform_column import transform_column
+from tm2p import Field
+from tm2p.ingest.data_sourc._intern.oper.coalesc_col import coalesce_column
+from tm2p.ingest.data_sourc._intern.oper.ltwa_col import ltwa_column
+from tm2p.ingest.data_sourc._intern.oper.transform_col import transform_column
 
 from ..oper.data_file import DataFile
 
@@ -21,38 +21,38 @@ def normalize_srctitle_abbr_raw(root_directory: str) -> int:
 
     if ref_file.exists():
         coalesce_column(
-            source=CorpusField.SRC_NORM,
-            target=CorpusField.SRC_ISO4_NORM,
+            source=Field.SRC_NORM,
+            target=Field.SRC_ISO4_NORM,
             root_directory=root_directory,
             file=DataFile.REFERENCES,
         )
 
         transform_column(
-            source=CorpusField.SRC_ISO4_NORM,
-            target=CorpusField.SRC_ISO4_NORM,
+            source=Field.SRC_ISO4_NORM,
+            target=Field.SRC_ISO4_NORM,
             function=_transform,
             root_directory=root_directory,
             file=DataFile.REFERENCES,
         )
 
     coalesce_column(
-        source=CorpusField.SRC_NORM,
-        target=CorpusField.SRC_ISO4_NORM,
+        source=Field.SRC_NORM,
+        target=Field.SRC_ISO4_NORM,
         root_directory=root_directory,
         file=DataFile.MAIN,
     )
 
     transform_column(
-        source=CorpusField.SRC_ISO4_NORM,
-        target=CorpusField.SRC_ISO4_NORM,
+        source=Field.SRC_ISO4_NORM,
+        target=Field.SRC_ISO4_NORM,
         function=_transform,
         root_directory=root_directory,
         file=DataFile.MAIN,
     )
 
     return ltwa_column(
-        source=CorpusField.SRC_ISO4_NORM,
-        target=CorpusField.SRC_ISO4_NORM,
+        source=Field.SRC_ISO4_NORM,
+        target=Field.SRC_ISO4_NORM,
         root_directory=root_directory,
         file=DataFile.MAIN,
     )

@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-SOURCE_FIELD = CorpusField.AUTH_FIRST
+SOURCE_FIELD = Field.AUTH_FIRST

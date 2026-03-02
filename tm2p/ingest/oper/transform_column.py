@@ -3,45 +3,44 @@ TransformColumn
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.operations import TransformColumn
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.oper import TransformColumn
     >>> (
     ...     TransformColumn()
-    ...     .with_source_field(CorpusField.AUTH_KEY_RAW)
-    ...     .with_target_field(CorpusField.USER_0)
-    ...     .with_transformation_function(lambda x: x.str.lower())
+    ...     .with_source_field(Field.AUTHKW_RAW)
+    ...     .with_target_field(Field.USR0)
+    ...     .with_transformation_function(lambda x: x.str.upper())
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
-    22
+    154
 
-    >>> from tm2p.ingest.operations import Query
+    >>> from tm2p.ingest.oper import Query
     >>> (
     ...     Query()
-    ...     .with_query_expression("SELECT USER_0 FROM database LIMIT 10;")
+    ...     .with_query_expression("SELECT USR0 FROM database LIMIT 10;")
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()
     ... )
-                                                  USER_0
-    0  banking; financial institution; financial serv...
-    1  bank; blockchain; cryptocurrency; payment; tec...
-    2  actor network theory; chinese telecom; fintech...
-    3  content analysis; digitalization; fintech; inn...
-    4  elaboration likelihood model; fintech; k pay; ...
-    5                banking innovations; fintech; risks
-    6  financial inclusion; financial scenarization; ...
-    7  content analysis; digitalization; fintech; inn...
-    8  bank 3.0; co-opetition theory; fintech; invest...
-    9                                               None
-
+                                                    USR0
+    0  DIGITAL TRANSFORMATION; FINANCIAL SECTOR; FINT...
+    1                                               None
+    2  ARTIFICIAL INTELLIGENCE; BANKING INDUSTRY SECT...
+    3  CHINA; FINTECH; G38; INTENTION TO USE; L16; M1...
+    4  FINTECH; GREEN ENVIRONMENTAL INDEX; GREEN FINA...
+    5  BANKING; DARK SIDE; FINANCIAL SERVICES; FINTEC...
+    6  ENVIRONMENTAL SUSTAINABILITY; FINTECH; NATURAL...
+    7  CORPORATE CARBON EMISSIONS; CORPORATE GREEN IN...
+    8  A COMPARATIVE STUDY; FINTECH; G11; G14; G15; G...
+    9  CARBON EMISSIONS: GREEN FINANCE; ENVIRONMENTAL...
 
 
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.transform_column import transform_column
+from tm2p.ingest.data_sourc._intern.oper.transform_col import transform_column
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 
@@ -57,8 +56,8 @@ class TransformColumn(
                 f"Source and target fields must differ (got `{self.params.source_field}`)"
             )
 
-        if self.params.index_field in PROTECTED_FIELDS:
-            raise ValueError(f"Field `{self.params.index_field}` is protected")
+        if self.params.source_field in PROTECTED_FIELDS:
+            raise ValueError(f"Field `{self.params.source_field}` is protected")
 
         if self.params.transformation_function is None:
             raise ValueError("Transformation function must be provided")

@@ -37,7 +37,7 @@ Smoke test:
 
 """
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 
 __reviewed__ = "2026-01-29"
@@ -55,6 +55,6 @@ class ConcordanceUppercase(
         return (
             ConcordanceUser()
             .update(**self.params.__dict__)
-            .with_source_field(CorpusField.ABSTR_UPPER)
+            .with_source_field(Field.ABSTR_UPPER)
             .run()
         )

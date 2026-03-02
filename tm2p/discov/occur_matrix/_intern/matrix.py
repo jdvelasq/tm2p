@@ -3,7 +3,7 @@ Matrix
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.occur_matrix._intern import Matrix
     >>> df = (
     ...     Matrix()
@@ -58,7 +58,7 @@ Smoke tests:
     [10 rows x 10 columns]
 
 
-    >>> from tm2p import CorpusField, ItemsOrderBy
+    >>> from tm2p import Field, ItemsOrderBy
     >>> from tm2p.discov.occur_matrix._intern import Matrix
     >>> df = (
     ...     Matrix()
@@ -119,7 +119,7 @@ Smoke tests:
 
 """
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p.anal._intern.performance import PerformanceMetrics
@@ -218,7 +218,7 @@ class Matrix(
 
         from tm2p._intern.get_zero_digits import get_zero_digits
 
-        GCS = CorpusField.GCS.value
+        GCS = Field.GCS.value
 
         dataframe["counters"] = dataframe.index.astype(str)
 

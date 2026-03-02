@@ -1,4 +1,4 @@
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.packag_data import load_builtin_mapping
 from tm2p.ingest.oper.transform_column import transform_column
 
@@ -32,8 +32,8 @@ def _process(series):
 def assign_subregion(root_directory: str) -> int:
 
     return transform_column(
-        source=CorpusField.CTRY,
-        target=CorpusField.SUBREGION,
+        source=Field.CTRY,
+        target=Field.SUBREGION,
         function=_process,
         root_directory=root_directory,
     )

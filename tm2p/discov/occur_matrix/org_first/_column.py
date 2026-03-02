@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-COLUMN_FIELD = CorpusField.ORG_FIRST
+COLUMN_FIELD = Field.ORG_FIRST

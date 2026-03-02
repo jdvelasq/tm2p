@@ -2,9 +2,10 @@
 
 Smoke test:
     >>> import pandas as pd
+    >>> from tm2p.enum import Field
     >>> df = pd.DataFrame({
-    ...     "authors_norm": ["Doe, J.; Doe, J.", "Smith, A."],
-    ...     "author_ids_norm": ["id1; id2", "id3"]
+    ...     Field.AUTH_NORM.value: ["Doe, J.; Doe, J.", "Smith, A."],
+    ...     Field.AUTHID_NORM.value: ["id1; id2", "id3"]
     ... })
     >>> mapping = _build_author_mapping(df)
     >>> mapping["id1"]
@@ -18,7 +19,7 @@ from pathlib import Path
 
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 
 from ..oper import DataFile, transform_column
 
@@ -34,8 +35,8 @@ def _load_authors_data(root_directory: Path) -> pd.DataFrame:
     df = pd.read_csv(
         main_file,
         usecols=[
-            CorpusField.AUTH_NORM.value,
-            CorpusField.AUTHID_NORM.value,
+            Field.AUTH_NORM.value,
+            Field.AUTHID_NORM.value,
         ],
         compression="zip",
         encoding="utf-8",
@@ -47,8 +48,8 @@ def _load_authors_data(root_directory: Path) -> pd.DataFrame:
         ref_df = pd.read_csv(
             ref_file,
             usecols=[
-                CorpusField.AUTH_NORM.value,
-                CorpusField.AUTHID_NORM.value,
+                Field.AUTH_NORM.value,
+                Field.AUTHID_NORM.value,
             ],
             compression="zip",
             encoding="utf-8",
@@ -61,35 +62,33 @@ def _load_authors_data(root_directory: Path) -> pd.DataFrame:
 
 def _build_author_mapping(df: pd.DataFrame) -> dict[str, str]:
 
-    df[CorpusField.AUTH_NORM.value] = df[CorpusField.AUTH_NORM.value].str.split("; ")
-    df[CorpusField.AUTHID_NORM.value] = df[CorpusField.AUTHID_NORM.value].str.split(
-        "; "
-    )
+    df[Field.AUTH_NORM.value] = df[Field.AUTH_NORM.value].str.split("; ")
+    df[Field.AUTHID_NORM.value] = df[Field.AUTHID_NORM.value].str.split("; ")
 
     df = df.explode(
         [
-            CorpusField.AUTH_NORM.value,
-            CorpusField.AUTHID_NORM.value,
+            Field.AUTH_NORM.value,
+            Field.AUTHID_NORM.value,
         ]
     )
 
-    df[CorpusField.AUTH_NORM.value] = df[CorpusField.AUTH_NORM.value].str.strip()
-    df[CorpusField.AUTHID_NORM.value] = df[CorpusField.AUTHID_NORM.value].str.strip()
+    df[Field.AUTH_NORM.value] = df[Field.AUTH_NORM.value].str.strip()
+    df[Field.AUTHID_NORM.value] = df[Field.AUTHID_NORM.value].str.strip()
 
-    df = df.drop_duplicates(subset=[CorpusField.AUTHID_NORM.value])
+    df = df.drop_duplicates(subset=[Field.AUTHID_NORM.value])
 
-    df = df.sort_values(CorpusField.AUTH_NORM.value)
-    df["counter"] = df.groupby(CorpusField.AUTH_NORM.value).cumcount()
+    df = df.sort_values(Field.AUTH_NORM.value)
+    df["counter"] = df.groupby(Field.AUTH_NORM.value).cumcount()
 
     mask_collision = df["counter"] > 0
-    df.loc[mask_collision, CorpusField.AUTH_NORM.value] += "/" + df.loc[
+    df.loc[mask_collision, Field.AUTH_NORM.value] += "/" + df.loc[
         mask_collision, "counter"
     ].astype(str)
 
     return dict(
         zip(
-            df[CorpusField.AUTHID_NORM.value],
-            df[CorpusField.AUTH_NORM.value],
+            df[Field.AUTHID_NORM.value],
+            df[Field.AUTH_NORM.value],
         )
     )
 
@@ -111,16 +110,16 @@ def disambiguate_auth_norm(root_directory: str) -> int:
         )
 
     count = transform_column(
-        source=CorpusField.AUTHID_NORM,
-        target=CorpusField.AUTH_DISAMB,
+        source=Field.AUTHID_NORM,
+        target=Field.AUTH_DISAMB,
         function=_apply_normalization,
         root_directory=root_directory,
         file=DataFile.MAIN,
     )
 
     count += transform_column(
-        source=CorpusField.AUTHID_NORM,
-        target=CorpusField.AUTH_DISAMB,
+        source=Field.AUTHID_NORM,
+        target=Field.AUTH_DISAMB,
         function=_apply_normalization,
         root_directory=root_directory,
         file=DataFile.REFERENCES,

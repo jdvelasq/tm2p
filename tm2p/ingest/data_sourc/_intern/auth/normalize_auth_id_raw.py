@@ -1,6 +1,6 @@
 import pandas as pd  # type: ignore
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p.ingest.data_sourc._intern.oper import DataFile, transform_column
 
 
@@ -24,8 +24,8 @@ def _normalize(series: pd.Series) -> pd.Series:
 def normalize_auth_id_raw(root_directory: str, file: DataFile) -> int:
 
     return transform_column(
-        source=CorpusField.AUTHID_RAW,
-        target=CorpusField.AUTHID_NORM,
+        source=Field.AUTHID_RAW,
+        target=Field.AUTHID_NORM,
         function=_normalize,
         root_directory=root_directory,
         file=file,

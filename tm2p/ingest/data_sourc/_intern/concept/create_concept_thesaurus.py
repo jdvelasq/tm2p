@@ -1,16 +1,16 @@
 from pathlib import Path
 
-from tm2p import CorpusField
+from tm2p import Field
 from tm2p._intern.data_access import load_main_csv_zip
 
 
 def create_concept_thesaurus(root_directory: str) -> int:
 
     dataframe = load_main_csv_zip(
-        root_directory=root_directory, usecols=[CorpusField.CONCEPT_RAW.value]
+        root_directory=root_directory, usecols=[Field.CONCEPT_RAW.value]
     )
     dataframe = dataframe.dropna()
-    dataframe = dataframe.rename(columns={CorpusField.CONCEPT_RAW.value: "item"})
+    dataframe = dataframe.rename(columns={Field.CONCEPT_RAW.value: "item"})
     series = dataframe["item"]
     series = series.str.split("; ")
     series = series.explode()

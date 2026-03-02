@@ -4625,6 +4625,7 @@ business process simulation
 business process simulations
 business risk prediction
 business risk predictions
+business strategy
 business support system
 business support systems
 business to business

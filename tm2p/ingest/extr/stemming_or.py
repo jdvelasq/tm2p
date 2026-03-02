@@ -3,20 +3,20 @@ StemmingOrExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.extract import StemmingOrExtractor
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.extr import StemmingOrExtractor
     >>> terms = (
     ...     StemmingOrExtractor()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(CorpusField.AUTH_KEY_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     #
     ...     # SEARCH:
     ...     .having_text_matching(
-    ...         [
+    ...         (
     ...             "financial technology",
     ...             "artificial intelligence",
-    ...         ],
+    ...         ),
     ...     )
     ...     #
     ...     # DATABASE:
@@ -26,8 +26,6 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-
-
     >>> from pprint import pprint
     >>> pprint(terms[:10]) # doctest: +SKIP
 

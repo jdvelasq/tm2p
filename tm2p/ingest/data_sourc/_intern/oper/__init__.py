@@ -1,23 +1,21 @@
-from .coalesc_column import coalesce_column
-from .copy_column import copy_column
-from .count_column_items import count_column_items
+from .coalesc_col import coalesce_column
+from .copy_col import copy_column
+from .count_col_item import count_column_items
 from .data_file import DataFile
-from .delete_column import delete_column
-from .extract_uppercase import extract_uppercase
-from .ltwa_column import ltwa_column
-from .merge_columns import merge_columns
-from .rename_column import rename_column
-from .tokenize_column import tokenize_column
-from .transform_column import transform_column
-from .uppercase_keyterms import uppercase_keyterms
-from .uppercase_words import uppercase_words
+from .extr_upperc import extract_uppercase
+from .ltwa_col import ltwa_column
+from .merge_col import merge_columns
+from .renam_col import rename_column
+from .token_col import tokenize_column
+from .transform_col import transform_column
+from .upperc_keyterm import uppercase_keyterms
+from .upperc_word import uppercase_words
 
 __all__ = [
     "coalesce_column",
     "copy_column",
     "count_column_items",
     "DataFile",
-    "delete_column",
     "extract_uppercase",
     "ltwa_column",
     "merge_columns",

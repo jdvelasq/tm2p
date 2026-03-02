@@ -3,12 +3,12 @@ Merge Keys
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field
     >>> from tm2p.refine.user import CreateThesaurus
     >>> (
     ...     CreateThesaurus()
     ...     .using_colored_output(False)
-    ...     .with_source_field(CorpusField.DESCRIPTOR_TOK)
+    ...     .with_source_field(Field.DESCRIPTOR_TOK)
     ...     .with_thesaurus_file("demo.the.txt")
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
@@ -62,7 +62,7 @@ class MergeKeys(
         """:meta private:"""
 
         # self.with_thesaurus_file("concepts.the.txt")
-        # self.with_source_field(CorpusField.DESCRIPTOR_TOK)
+        # self.with_source_field(Field.DESCRIPTOR_TOK)
 
         preferred = self.params.preferred_key
         variants = self.params.variant_keys

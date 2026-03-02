@@ -3,7 +3,7 @@ MergeKeys
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field
     >>> from tm2p.refine.descriptors import CreateThesaurus
     >>> (
     ...     CreateThesaurus()
@@ -34,7 +34,7 @@ Smoke tests:
 
 """
 
-from tm2p import CorpusField, ThesaurusField
+from tm2p import Field, ThesaurusField
 from tm2p._intern import ParamsMixin
 
 from ..usr.merge_keys import MergeKeys as UserMergeKeys
@@ -60,6 +60,6 @@ class MergeKeys(
             UserMergeKeys()
             .update(**self.params.__dict__)
             .with_thesaurus_file("concepts.the.txt")
-            .with_source_field(CorpusField.CONCEPT_RAW)
+            .with_source_field(Field.CONCEPT_RAW)
             .run()
         )

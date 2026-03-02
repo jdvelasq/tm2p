@@ -5,7 +5,7 @@ from fuzzywuzzy import fuzz  # type: ignore
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import Params
-from tm2p.enums import ThesaurusField
+from tm2p.enum import ThesaurusField
 
 from ._pre_process import _pre_process
 

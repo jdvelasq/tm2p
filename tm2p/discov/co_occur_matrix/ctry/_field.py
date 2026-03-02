@@ -1,3 +1,3 @@
-from tm2p import CorpusField
+from tm2p import Field
 
-SOURCE_FIELD = CorpusField.CTRY_ISO3
+SOURCE_FIELD = Field.CTRY_ISO3

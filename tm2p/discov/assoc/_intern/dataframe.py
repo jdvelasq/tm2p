@@ -1,6 +1,6 @@
 """
 Smoke tests:
-    >>> from tm2p import CorpusField
+    >>> from tm2p import Field
     >>> from tm2p.discov.associations._internals import DataFrame
     >>> (
     ...     DataFrame()

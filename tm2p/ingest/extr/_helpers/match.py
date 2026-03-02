@@ -6,15 +6,21 @@ def extract_match(params: Params) -> list[str]:
 
     df = extract_values(params)
 
-    return (
-        df[
-            df.term.str.match(
-                pat=params.pattern,
-                case=params.case_sensitive,
-                flags=params.regex_flags,
-            )
-        ]
-        .dropna()
-        .sort_values("term", ascending=True)
-        .term.tolist()
-    )
+    if isinstance(params.pattern, str):
+        params.pattern = (params.pattern,)
+
+    items = set()
+    for pattern in params.pattern:
+        items.update(
+            df[
+                df.term.str.match(
+                    pat=pattern,
+                    case=params.case_sensitive,
+                    flags=params.regex_flags,
+                )
+            ]
+            .dropna()
+            .term.tolist()
+        )
+
+    return sorted(items)

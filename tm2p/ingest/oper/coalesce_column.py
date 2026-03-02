@@ -3,58 +3,59 @@ CoalesceColumn
 ===============================================================================
 
 Smoke test:
-    >>> from tm2p import CorpusField
-    >>> from tm2p.ingest.operations import CopyColumn
+    >>> from tm2p import Field
+    >>> from tm2p.ingest.oper import CopyColumn
     >>> (
     ...     CopyColumn()
-    ...     .with_source_field(CorpusField.SRC_TITLE_ABBR_RAW)
-    ...     .with_target_field(CorpusField.USER_0)
+    ...     .with_source_field(Field.SRC_ISO4_RAW)
+    ...     .with_target_field(Field.USR0)
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
-    37
+    180
 
-    >>> from tm2p.ingest.operations import TransformColumn
+    >>> from tm2p.ingest.oper import TransformColumn
     >>> (
     ...     TransformColumn()
-    ...     .with_source_field(CorpusField.USER_0)
-    ...     .with_target_field(CorpusField.USER_1)
+    ...     .with_source_field(Field.USR0)
+    ...     .with_target_field(Field.USR1)
     ...     .with_transformation_function(lambda x: None)
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
+    0
 
-    >>> from tm2p.ingest.operations import CoalesceColumn
+    >>> from tm2p.ingest.oper import CoalesceColumn
     >>> (
     ...     CoalesceColumn()
-    ...     .with_source_field(CorpusField.SRC_TITLE_ABBR_RAW)
-    ...     .with_target_field(CorpusField.USER_1)
+    ...     .with_source_field(Field.SRC_ISO4_NORM)
+    ...     .with_target_field(Field.USR1)
     ...     .where_root_directory("tests/fintech/")
     ...     .with_transformation_function(lambda x: pd.NA)
     ...     .run()
     ... )
 
-    >>> from tm2p.ingest.operations import Query
+    >>> from tm2p.ingest.oper import Query
     >>> (
     ...     Query()
-    ...     .with_query_expression("SELECT USER_1 FROM database LIMIT 5;")
+    ...     .with_query_expression("SELECT USR1 FROM database LIMIT 5;")
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...    .run()
     ... )
-                                                  USER_1
-    0                                   J. Innov. Manag.
-    1  Proc. - Int. Conf. Green Technol. Sustain. Dev...
-    2                                  Telecommun Policy
-    3                                   Financial Innov.
-    4                            Int. J. Appl. Eng. Res.
+                                                    USR1
+    0                            J FINANC REPORT ACCOUNT
+    1  HARNESSING BLOCKCHAIN-DIGITAL TWIN FUSION SUST...
+    2                            J FINANC REPORT ACCOUNT
+    3                                ELECTRON COMMER RES
+    4                                INT REV ECON FINANC
 
 
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.coalesc_column import coalesce_column
+from tm2p.ingest.data_sourc._intern.oper.coalesc_col import coalesce_column
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 
