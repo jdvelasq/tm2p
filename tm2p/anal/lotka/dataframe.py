@@ -3,29 +3,31 @@ Dataframe
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p.analyze.metrics.lotka_law import DataFrame
+    >>> from tm2p.anal.lotka import DataFrame
 
-    >>> generator = (
+    >>> df = (
     ...     DataFrame()
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
+    ...     #
+    ...     .run()
     ... )
-    >>> df = generator.run()
     >>> df
        Documents Written  ...  Prop Theoretical Authors
-    0                  1  ...                     0.735
-    1                  2  ...                     0.184
-    2                  3  ...                     0.082
+    0                  1  ...                     0.714
+    1                  2  ...                     0.178
+    2                  3  ...                     0.079
+    3                  5  ...                     0.029
     <BLANKLINE>
-    [3 rows x 5 columns]
+    [4 rows x 5 columns]
 
 """
 
+from tm2p import Field, ItemsOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.indic import BibliometricIndicators
 
@@ -52,8 +54,8 @@ class DataFrame(
         indicators = (
             BibliometricIndicators()
             .update(**self.params.__dict__)
-            .update(field="authors")
-            .update(terms_order_by="OCC")
+            .with_source_field(Field.AUTH_NORM)
+            .having_items_ordered_by(ItemsOrderBy.OCC)
             .run()
         )
 

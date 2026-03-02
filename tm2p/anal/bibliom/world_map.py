@@ -2,15 +2,20 @@
 World Map
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.bibliom.world_map.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
     >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.report.visualization import WorldMap
+    >>> from tm2p.anal.bibliom import WorldMap
     >>> plot = (
     ...     WorldMap()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(Field.COUNTRY)
+    ...     .with_source_field(Field.CTRY)
     ...     #
     ...     # TERMS:
     ...     .having_items_ordered_by(ItemsOrderBy.OCC)
@@ -31,7 +36,7 @@ Smoke tests:
     ... )
     >>> type(plot).__name__
     'Figure'
-    >>> plot.write_html("tmp/px.database.metrics.performance.world_map.html")
+    >>> plot.write_html("docsrc/_generated/px.anal.bibliom.world_map.html")
 
 
 

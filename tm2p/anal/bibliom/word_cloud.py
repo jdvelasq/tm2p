@@ -2,10 +2,15 @@
 Word Cloud
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.bibliom.bar_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
     >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.report.visualization import WordCloud
+    >>> from tm2p.anal.bibliom import WordCloud
     >>> plot = (
     ...     WordCloud()
     ...     #
@@ -33,7 +38,7 @@ Smoke tests:
     ... )
     >>> type(plot).__name__
     'Image'
-    >>> plot.save("tmp/database.metrics.performance.word_cloud.png")
+    >>> plot.save("docsrc/_generated/px.anal.bibliom.word_cloud.png")
 
 
 """

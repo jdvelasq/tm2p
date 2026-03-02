@@ -2,26 +2,30 @@
 Line Plot
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.lotka.line_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
-    >>> from tm2p.analyze.metrics.lotka_law import LinePlot
+    >>> from tm2p.anal.lotka import LinePlot
 
-    >>> plotter = (
+    >>> fig = (
     ...     LinePlot()
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
+    ...      #
+    ...      .run()
     ... )
-    >>> plot = plotter.run()
-    >>> plot.write_html("docsrc/_generated/px.database.metrics.lotka_law.line_plot.html")
+    >>> type(fig).__name__
+    'Figure'
+    >>> fig.write_html("docsrc/_generated/px.anal.lotka.line_plot.html")
 
-.. raw:: html
 
-    <iframe src="../_generated/px.database.metrics.lotka_law.line_plot.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
 
 
 """

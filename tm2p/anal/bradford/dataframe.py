@@ -3,7 +3,7 @@ Dataframe
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p.analyze.sources.bradford import DataFrame
+    >>> from tm2p.anal.bradford import DataFrame
     >>> (
     ...     DataFrame()
     ...     #
@@ -16,11 +16,15 @@ Smoke tests:
     ...     .run()
     ... )
        Num Sources        %  ...  Tot Documents Bradford's Group
-    0            1   2.44 %  ...          6.0 %                1
-    1            7  17.07 %  ...         34.0 %                2
-    2           33  80.49 %  ...        100.0 %                3
+    0            1   0.83 %  ...         3.89 %                1
+    1            1   0.83 %  ...         7.22 %                1
+    2            2   1.65 %  ...        12.78 %                1
+    3            3   2.48 %  ...        19.44 %                1
+    4            3   2.48 %  ...        24.44 %                1
+    5           25  20.66 %  ...        52.22 %                2
+    6           86  71.07 %  ...        100.0 %                3
     <BLANKLINE>
-    [3 rows x 9 columns]
+    [7 rows x 9 columns]
 
 """
 
@@ -28,6 +32,9 @@ import pandas as pd  # type: ignore
 
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
+from tm2p.enum import Field
+
+SRC_ISO4_NORM = Field.SRC_ISO4_NORM.value
 
 
 class DataFrame(
@@ -44,7 +51,7 @@ class DataFrame(
 
         self.records["num_documents"] = 1
 
-        sources = self.records.groupby("source_title", as_index=True).agg(
+        sources = self.records.groupby(SRC_ISO4_NORM, as_index=True).agg(
             {
                 "num_documents": "sum",
             }

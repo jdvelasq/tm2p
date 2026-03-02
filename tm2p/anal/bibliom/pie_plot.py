@@ -2,10 +2,15 @@
 Pie Plot
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.bibliom.pie_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
     >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.report.visualization import PiePlot
+    >>> from tm2p.anal.bibliom import PiePlot
     >>> plot = (
     ...     PiePlot()
     ...     #
@@ -32,7 +37,7 @@ Smoke tests:
     ... )
     >>> type(plot).__name__
     'Figure'
-    >>> plot.write_html("tmp/px.database.metrics.performance.pie_plot.html")
+    >>> plot.write_html("docsrc/_generated/px.anal.bibliom.pie_plot.html")
 
 
 

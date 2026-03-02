@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 
-import pandas as pd
+import pandas as pd  # type: ignore
 from sklearn.base import BaseEstimator  # type: ignore
 
 from tm2p.enum import Field, ItemsOrderBy, RecordsOrderBy

@@ -2,12 +2,17 @@
 Ranking Chart
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.bibliom.ranking_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
     >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.report.visualization import RankingChart
+    >>> from tm2p.anal.bibliom import RankingPlot
     >>> plot = (
-    ...     RankingChart()
+    ...     RankingPlot()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_NORM)
@@ -38,7 +43,7 @@ Smoke tests:
     ... )
     >>> type(plot).__name__
     'Figure'
-    >>> plot.write_html("tmp/px.database.metrics.performance.ranking_plot.html")
+    >>> plot.write_html("docsrc/_generated/px.anal.bibliom.ranking_plot.html")
 
 
 
@@ -49,7 +54,7 @@ from tm2p._intern.indic import BibliometricIndicators
 from tm2p._intern.plot.ranking_chart import ranking_chart
 
 
-class RankingChart(
+class RankingPlot(
     ParamsMixin,
 ):
     """:meta private:"""

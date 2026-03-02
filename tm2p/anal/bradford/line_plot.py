@@ -2,24 +2,25 @@
 Line Plot
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.bradford.line_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
+
 Smoke tests:
-    >>> from tm2p.analyze.metrics.bradford_law import LinePlot
+    >>> from tm2p.anal.bradford import LinePlot
     >>> (
     ...     LinePlot()
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     #
     ...     .run()
-    ... ).write_html("docsrc/_generated/px.database.metrics.bradford_law.line_plot.html")
+    ... ).write_html("docsrc/_generated/px.anal.bradford.line_plot.html")
 
-.. raw:: html
-
-    <iframe src="../_generated/px.database.metrics.bradford_law.line_plot.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
 
 
 """
@@ -43,7 +44,7 @@ class LinePlot(
 
         fig = px.line(
             zones,
-            x="no",
+            x="NO",
             y="OCC",
             title="Source Clustering through Bradford's Law",
             markers=True,
@@ -75,7 +76,7 @@ class LinePlot(
             tickangle=270,
         )
 
-        core = len(zones.loc[zones.zone == 1])
+        core = len(zones.loc[zones.ZONE == 1])
 
         fig.add_shape(
             type="rect",

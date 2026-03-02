@@ -2,9 +2,14 @@
 Cleveland Dot Plot
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.bibliom.cleveland_dot_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 Smoke tests:
     >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.report.visualization import ClevelandDotPlot
+    >>> from tm2p.anal.bibliom import ClevelandDotPlot
     >>> plot = (
     ...     ClevelandDotPlot()
     ...     #
@@ -32,7 +37,7 @@ Smoke tests:
     ... )
     >>> type(plot).__name__
     'Figure'
-    >>> plot.write_html("tmp/px.database.metrics.performance.cleveland_dot_plot.html")
+    >>> plot.write_html("docsrc/_generated/px.anal.bibliom.cleveland_dot_plot.html")
 
 """
 
