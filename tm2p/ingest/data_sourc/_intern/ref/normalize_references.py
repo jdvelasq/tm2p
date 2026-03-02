@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 import pandas as pd  # type: ignore
-from tqdm import tqdm
+from tqdm import tqdm  # type: ignore
 
 from tm2p import Field
 from tm2p._intern.data_access import (
@@ -42,7 +42,7 @@ def _prepare_cited_references(root_directory: str) -> pd.DataFrame:
     references = load_main_csv_zip(root_directory=root_directory)
     references = references[[Field.REF_RAW.value]].copy()
     references = references.dropna()
-    references = references.rename(columns={Field.REF_RAW.value: "text"})
+    references = references.rename(columns={Field.REF_RAW.value: "text"})  # type: ignore
     references["text"] = references["text"].str.split(";")
     references = references.explode("text")
     references["text"] = references["text"].str.strip()
@@ -77,7 +77,7 @@ def _prepare_main_documents(root_directory: str) -> pd.DataFrame:
     dataframe[Field.TITLE_RAW.value] = _clean_text(dataframe[Field.TITLE_RAW.value])
     dataframe[Field.AUTH_RAW.value] = _clean_text(dataframe[Field.AUTH_RAW.value])
     dataframe[Field.YEAR.value] = dataframe[Field.YEAR.value].astype(str)
-    dataframe = dataframe.sort_values(by=[Field.RID.value])
+    dataframe = dataframe.sort_values(by=[Field.RID.value])  # type: ignore
 
     return dataframe
 
@@ -87,7 +87,7 @@ def _create_references_thesaurus_file(root_directory: str) -> None:
     dataframe = load_main_csv_zip(root_directory=root_directory)
     dataframe = dataframe[[Field.REF_RID.value]].copy().dropna()
     dataframe[Field.REF_RID.value] = dataframe[Field.REF_RID.value].str.split("; ")
-    dataframe = dataframe.explode(Field.REF_RID.value)
+    dataframe = dataframe.explode(Field.REF_RID.value)  # type: ignore
     dataframe[Field.REF_RID.value] = dataframe[Field.REF_RID.value].str.strip()
     dataframe["rec_id"] = dataframe[Field.REF_RID.value].apply(
         lambda x: x.split(" @ ")[0].strip() if " @ " in x else "[n/a]"

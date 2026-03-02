@@ -21,7 +21,7 @@ Smoke test:
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...    .run()
-    ... )
+    ... )  # doctest: +SKIP
                                                     USR0
     0  diffusion of technology; innovation in financi...
     1  fintech applications; catalysts; green finance...

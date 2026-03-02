@@ -80,11 +80,11 @@ class ExtractAcronyms(
                 keywords.str.contains("(", regex=False)
                 & keywords.str.contains(")", regex=False)
             ]
-            keywords = keywords[~keywords.str.startswith("(")]
+            keywords = keywords[~keywords.str.startswith("(")]  # type: ignore
 
             if not keywords.empty:
 
-                for _, text in keywords.items():
+                for _, text in keywords.items():  # type: ignore
 
                     text = text[:-1]
                     splited_text = text.split(" ( ")
@@ -127,10 +127,10 @@ class ExtractAcronyms(
             keywords = keywords.str.replace(r"\([^)]*\)", "", regex=True).str.strip()
 
             single_words = keywords[keywords.str.split().map(len) == 1]
-            single_words = single_words.str.strip().str.lower().drop_duplicates()
+            single_words = single_words.str.strip().str.lower().drop_duplicates()  # type: ignore
 
             multi_words = keywords[keywords.str.split().map(len) > 1]
-            multi_words = multi_words.str.strip().str.lower().drop_duplicates()
+            multi_words = multi_words.str.strip().str.lower().drop_duplicates()  # type: ignore
 
             if not multi_words.empty and not single_words.empty:
 

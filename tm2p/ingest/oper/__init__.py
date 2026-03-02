@@ -9,7 +9,7 @@ from tm2p.ingest.oper.merge_columns import MergeColumns
 from tm2p.ingest.oper.query import Query
 from tm2p.ingest.oper.tokenize_column import TokenizeColumn
 from tm2p.ingest.oper.transform_column import TransformColumn
-from tm2p.ingest.oper.upperc_col import UppercaseColumn
+from tm2p.ingest.oper.uppercace_column import UppercaseColumn
 
 __all__ = [
     "CoalesceColumn",

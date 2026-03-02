@@ -6,7 +6,7 @@ def extract_startswith(params: Params) -> list[str]:
 
     df = extract_values(params)
     return (
-        df[df.term.str.startswith(params.pattern)]
+        df[df.term.str.startswith(params.pattern)]  # type: ignore
         .dropna()
         .sort_values("term", ascending=True)
         .term.tolist()

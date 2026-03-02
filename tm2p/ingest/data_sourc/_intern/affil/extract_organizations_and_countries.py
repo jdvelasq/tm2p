@@ -63,19 +63,19 @@ def _get_raw_affiliations(dataframe: pd.DataFrame) -> pd.DataFrame:
     affiliations = dataframe[[AFFIL_RAW]].copy()
     affiliations = affiliations.dropna()
     affiliations[AFFIL_RAW] = affiliations[AFFIL_RAW].str.split("; ")
-    raw_affiliation = affiliations.explode(AFFIL_RAW)
+    raw_affiliation = affiliations.explode(AFFIL_RAW)  # type: ignore
 
     raw_affiliation[AFFIL_RAW] = raw_affiliation[AFFIL_RAW].str.strip()
     raw_affiliation = raw_affiliation.drop_duplicates()
 
-    return raw_affiliation
+    return raw_affiliation  # type: ignore
 
 
 def _get_country_mapping(affiliations: pd.DataFrame) -> dict[str, str]:
 
-    affiliations = affiliations[[AFFIL_RAW, CTRY]].dropna()
+    affiliations = affiliations[[AFFIL_RAW, CTRY]].dropna()  # type: ignore
     affiliations = affiliations.drop_duplicates()
-    mapping: dict[str, str] = pd.Series(
+    mapping: dict[str, str] = pd.Series(  # type: ignore
         affiliations[CTRY].values, index=affiliations[AFFIL_RAW]
     ).to_dict()
 
@@ -84,9 +84,9 @@ def _get_country_mapping(affiliations: pd.DataFrame) -> dict[str, str]:
 
 def _get_organization_mapping(affiliations: pd.DataFrame) -> dict[str, str]:
 
-    affiliations = affiliations[[AFFIL_RAW, ORG]].dropna()
+    affiliations = affiliations[[AFFIL_RAW, ORG]].dropna()  # type: ignore
     affiliations = affiliations.drop_duplicates()
-    mapping: dict[str, str] = pd.Series(
+    mapping: dict[str, str] = pd.Series(  # type: ignore
         affiliations[ORG].values, index=affiliations[AFFIL_RAW]
     ).to_dict()
     return mapping
@@ -168,7 +168,7 @@ def _create_thesaurus_files(
             }
         )
 
-        grouped_df = df.groupby("key", as_index=False)["value"].apply(list)
+        grouped_df = df.groupby("key", as_index=False)["value"].apply(list)  # type: ignore
 
         for folder in [
             "ingest/processed/",

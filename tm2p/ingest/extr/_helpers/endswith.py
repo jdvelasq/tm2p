@@ -6,8 +6,8 @@ def extract_endswith(params: Params) -> list[str]:
 
     df = extract_values(params)
     return (
-        df[df.term.str.endswith(params.pattern)]
+        df[df.term.str.endswith(params.pattern)]  # type: ignore
         .dropna()
-        .sort_values("term", ascending=True)
+        .sort_values(by="term", ascending=True)
         .term.tolist()
     )

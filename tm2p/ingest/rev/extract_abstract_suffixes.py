@@ -58,7 +58,7 @@ class ExtractAbstractSuffixes(
             suffixes_grouped_by_ending = [
                 text
                 for text in suffixes_grouped_by_ending
-                if self.params.pattern in text
+                if self.params.pattern in text  # type: ignore
             ]
 
         return suffixes_grouped_by_ending
