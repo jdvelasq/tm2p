@@ -32,7 +32,7 @@ import plotly.express as px  # type: ignore
 
 from tm2p import Field, ItemsOrderBy
 from tm2p._intern import ParamsMixin
-from tm2p.discov.co_occur_matrix._intern.matrix import Matrix as CoOccurrenceDataFrame
+from tm2p.discov.co_occur_matrix.matrix import Matrix as CoOccurrenceDataFrame
 
 
 class WorldMap(

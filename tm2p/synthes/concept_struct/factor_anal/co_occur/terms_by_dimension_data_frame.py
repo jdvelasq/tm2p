@@ -47,7 +47,7 @@ Terms by Dimension Frame
 
 import pandas as pd  # type: ignore
 
-from tm2p.discov.occur_matrix._intern.normalize_matrix import _normalize_matrix
+from tm2p.discov.occur_matrix._normalize_matrix import _normalize_matrix
 
 
 def terms_by_dimension_frame(

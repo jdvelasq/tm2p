@@ -82,9 +82,7 @@ Smoke tests:
 # If ``Y_end = 2018`` and ``time_window = 2``, then ``Y_start = 2017``.
 #
 from tm2p._intern import ParamsMixin
-from tm2p.anal._intern.performance import (
-    PerformanceMetrics as PerformanceMetricsDataFrame,
-)
+from tm2p._intern.indic import BibliometricIndicators
 
 from ..items_by_year import ItemsByYear as TermsByYearDataFrame
 
@@ -96,7 +94,7 @@ class DataFrame(
 
     # ----------------------------------------------------------------------------------------------------
     def _step_1_compute_performance_metrics(self):
-        return PerformanceMetricsDataFrame().update(**self.params.__dict__).run()
+        return BibliometricIndicators().update(**self.params.__dict__).run()
 
     # ----------------------------------------------------------------------------------------------------
     def _step_2_compute_terms_by_year(self):

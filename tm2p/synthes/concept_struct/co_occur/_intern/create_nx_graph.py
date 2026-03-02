@@ -6,8 +6,8 @@ Creates a co-occurrence networkx graph from a co-occurrence matrix.
 
 import networkx as nx  # type: ignore
 
-from tm2p.discov.co_occur_matrix._intern import Matrix as CoOccurrenceMatrix
-from tm2p.discov.occur_matrix._intern.normalize_matrix import _normalize_matrix
+from tm2p.discov.co_occur_matrix import Matrix as CoOccurrenceMatrix
+from tm2p.discov.occur_matrix._normalize_matrix import _normalize_matrix
 
 
 # -------------------------------------------------------------------------

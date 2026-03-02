@@ -1,6 +1,6 @@
 import sys
 
-from tm2p.anal._intern.performance import PerformanceMetrics  # type: ignore
+from tm2p._intern.indic import BibliometricIndicators  # type: ignore
 from tm2p.synthes.concept_struct.co_occur.concept import ClustersToTermsMapping
 
 
@@ -9,7 +9,7 @@ class RecursiveClusteringMixin:
     def internal__computer_recursive_clusters(self):
 
         metrics = (
-            PerformanceMetrics()
+            BibliometricIndicators()
             .update(**self.params.__dict__)
             .with_source_field("descriptors")
             .run()

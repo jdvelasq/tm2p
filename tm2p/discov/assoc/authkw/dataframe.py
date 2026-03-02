@@ -49,7 +49,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.co_occur_matrix._intern import Matrix
+from tm2p.discov.co_occur_matrix import Matrix
 
 
 class DataFrame(

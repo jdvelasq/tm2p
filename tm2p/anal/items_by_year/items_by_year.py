@@ -133,9 +133,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin, SortAxesMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-from tm2p.anal._intern.performance.performance_metrics import (
-    PerformanceMetrics as PerformanceDataFrame,
-)
+from tm2p._intern.indic import BibliometricIndicators
 
 
 class ItemsByYear(
@@ -226,7 +224,7 @@ class ItemsByYear(
 
     # ----------------------------------------------------------------------------------------------------
     def _step_6_filter_terms(self, terms_by_year):
-        terms_in = PerformanceDataFrame().update(**self.params.__dict__).run().index
+        terms_in = BibliometricIndicators().update(**self.params.__dict__).run().index
         terms_by_year = terms_by_year[terms_by_year.index.isin(terms_in)]
         return terms_by_year
 

@@ -37,8 +37,8 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
+from tm2p._intern.indic import BibliometricIndicators
 from tm2p._intern.plot.bar_plot import bar_plot
-from tm2p.anal._intern.performance.performance_metrics import PerformanceMetrics
 
 
 class BarPlot(
@@ -48,7 +48,7 @@ class BarPlot(
 
     def run(self):
 
-        df = PerformanceMetrics().update(**self.params.__dict__).run()
+        df = BibliometricIndicators().update(**self.params.__dict__).run()
         fig = bar_plot(params=self.params, df=df)
 
         return fig
