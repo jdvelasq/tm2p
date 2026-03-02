@@ -141,7 +141,7 @@ class BibliometricIndicators(
             ]
         ].dropna()
 
-        return df
+        return df  # type: ignore
 
     # -------------------------------------------------------------------------
     def _explode_source_field(self, df: pd.DataFrame) -> pd.DataFrame:

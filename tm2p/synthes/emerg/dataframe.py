@@ -54,7 +54,7 @@ class DataFrame(
     # ----------------------------------------------------------------------------------------------------
     def _step_1_compute_term_occurrences_by_year(self):
 
-        from tm2p.anal._intern.items_by_year import ItemsByYear as TermsByYearDataFrame
+        from tm2p.anal.items_by_year import ItemsByYear as TermsByYearDataFrame
 
         return (
             TermsByYearDataFrame()
