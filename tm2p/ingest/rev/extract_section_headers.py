@@ -21,8 +21,9 @@ Smoke test:
 
 """
 
+from tm2p import Field
 from tm2p._intern import ParamsMixin
-from tm2p.discov.concord import ConcordanceUppercase
+from tm2p.discov.concord import KWICConcordance
 
 __reviewed__ = "2026-01-28"
 
@@ -35,8 +36,9 @@ class ExtractSectionHeaders(
     def run(self) -> list[str]:
 
         return (
-            ConcordanceUppercase()
+            KWICConcordance()
             .update(**self.params.__dict__)
+            .with_source_field(Field.ABSTR_UPPER)
             .having_text_matching(" : ")
             .run()
         )

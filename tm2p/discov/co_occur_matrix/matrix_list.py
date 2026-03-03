@@ -52,7 +52,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 
-from ..occur_matrix.matrix_list import MatrixList as BaseMatrixList
+from ..cross_occur_matrix.matrix_list import MatrixList as BaseMatrixList
 
 
 class MatrixList(

@@ -54,7 +54,7 @@ Smoke tests:
 import sys
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.concord import ConcordanceSentences
+from tm2p.discov.concord import SentenceConcordance
 
 
 class GetContexts(
@@ -77,7 +77,7 @@ class GetContexts(
         for term in terms:
 
             contexts = (
-                ConcordanceSentences()
+                SentenceConcordance()
                 .update(**self.params.__dict__)
                 .having_text_matching(term)
                 .run()

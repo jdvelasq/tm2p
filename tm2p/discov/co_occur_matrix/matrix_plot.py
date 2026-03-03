@@ -58,7 +58,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 
-from ..occur_matrix.matrix_plot import MatrixPlot as BaseMatrixPlot
+from ..cross_occur_matrix.matrix_plot import MatrixPlot as BaseMatrixPlot
 
 
 class MatrixPlot(

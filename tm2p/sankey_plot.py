@@ -55,7 +55,7 @@ Smoke tests:
 import plotly.graph_objects as go  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.occur_matrix.matrix import Matrix
+from tm2p.discov.cross_occur_matrix.matrix import Matrix
 
 
 class SankeyPlot(

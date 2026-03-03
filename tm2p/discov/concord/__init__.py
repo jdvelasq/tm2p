@@ -1,17 +1,11 @@
-from tm2p.discov.concord.concordance_documents import ConcordanceDocuments
-from tm2p.discov.concord.concordance_raw import ConcordanceRaw
-from tm2p.discov.concord.concordance_records import ConcordanceRecords
-from tm2p.discov.concord.concordance_sentences import ConcordanceSentences
-from tm2p.discov.concord.concordance_tokenized import ConcordanceTokenized
-from tm2p.discov.concord.concordance_uppercase import ConcordanceUppercase
-from tm2p.discov.concord.concordance_user import ConcordanceUser
+from tm2p.discov.concord.kwic_concordance import KWICConcordance
+from tm2p.discov.concord.record_term_report import RecordTermReport
+from tm2p.discov.concord.record_term_search import RecordTermSearch
+from tm2p.discov.concord.sentence_concordance import SentenceConcordance
 
 __all__ = [
-    "ConcordanceDocuments",
-    "ConcordanceRecords",
-    "ConcordanceUppercase",
-    "ConcordanceRaw",
-    "ConcordanceSentences",
-    "ConcordanceTokenized",
-    "ConcordanceUser",
+    "RecordTermReport",
+    "RecordTermSearch",
+    "SentenceConcordance",
+    "KWICConcordance",
 ]

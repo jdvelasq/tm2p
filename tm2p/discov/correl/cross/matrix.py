@@ -127,7 +127,7 @@ Smoke tests:
 
 from tm2p import ItemOrderBy
 from tm2p._intern import ParamsMixin
-from tm2p.discov.occur_matrix import Matrix as OCCMatrix
+from tm2p.discov.cross_occur_matrix import Matrix as OCCMatrix
 
 from .._intern import comput_correl_matrix
 
