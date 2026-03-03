@@ -53,10 +53,10 @@ from textblob import Word
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.indic.bibliom_indic import BibliometricIndicators as DominantDataFrame
 from tm2p._intern.packag_data.templates.load_builtin_template import (
     load_builtin_template,
 )
+from tm2p.anal.metrics.metrics import Metrics as DominantDataFrame
 
 # -----------------------------------------------------------------------------
 
@@ -200,7 +200,7 @@ class AreSynonymous(
 
         def internal__get_row_contexts(pattern):
 
-            contexts = self.get_contexts.having_text_matchings_matching([pattern]).run()
+            contexts = self.get_contexts.having_text_matching([pattern]).run()
             contexts = [c for c in contexts if len(c) > 80]
             contexts = [c.lower().replace("_", " ") for c in contexts]
             contexts = [c for c in contexts if pattern.lower().replace("_", " ") in c]

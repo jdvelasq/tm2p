@@ -55,7 +55,7 @@ Smoke test:
 
 import pandas as pd  # type: ignore
 
-from tm2p import Field, RecordsOrderBy
+from tm2p import Field, RecordOrderBy
 from tm2p._intern import Params
 from tm2p._intern.data_access.load_main_csv_zip import load_main_csv_zip
 
@@ -162,7 +162,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     if sort_by is None:
         return dataframe
 
-    if sort_by == RecordsOrderBy.YEAR_NEWEST:
+    if sort_by == RecordOrderBy.YEAR_NEWEST:
         dataframe = dataframe.sort_values(
             [
                 Field.YEAR.value,
@@ -171,7 +171,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ],
             ascending=[False, False, False],
         )
-    elif sort_by == RecordsOrderBy.YEAR_OLDEST:
+    elif sort_by == RecordOrderBy.YEAR_OLDEST:
         dataframe = dataframe.sort_values(
             [
                 Field.YEAR.value,
@@ -180,7 +180,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ],
             ascending=[True, False, False],
         )
-    elif sort_by == RecordsOrderBy.GCS_BY_HIGHEST:
+    elif sort_by == RecordOrderBy.GCS_BY_HIGHEST:
         dataframe = dataframe.sort_values(
             [
                 Field.GCS.value,
@@ -189,7 +189,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ],
             ascending=[False, False, False],
         )
-    elif sort_by == RecordsOrderBy.GCS_BY_LOWEST:
+    elif sort_by == RecordOrderBy.GCS_BY_LOWEST:
         dataframe = dataframe.sort_values(
             [
                 Field.GCS.value,
@@ -199,7 +199,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[True, False, False],
         )
 
-    elif sort_by == RecordsOrderBy.LCS_BY_HIGHEST:
+    elif sort_by == RecordOrderBy.LCS_BY_HIGHEST:
         dataframe = dataframe.sort_values(
             [
                 Field.LCS.value,
@@ -209,7 +209,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[False, False, False],
         )
 
-    elif sort_by == RecordsOrderBy.LCS_BY_LOWEST:
+    elif sort_by == RecordOrderBy.LCS_BY_LOWEST:
         dataframe = dataframe.sort_values(
             [
                 Field.LCS.value,
@@ -219,7 +219,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[True, False, False],
         )
 
-    elif sort_by == RecordsOrderBy.AUTH_A_TO_Z:
+    elif sort_by == RecordOrderBy.AUTH_A_TO_Z:
         dataframe = dataframe.sort_values(
             [
                 Field.AUTH_NORM.value,
@@ -229,7 +229,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[True, False, False],
         )
 
-    elif sort_by == RecordsOrderBy.AUTH_Z_TO_A:
+    elif sort_by == RecordOrderBy.AUTH_Z_TO_A:
         dataframe = dataframe.sort_values(
             [
                 Field.AUTH_NORM.value,
@@ -238,7 +238,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ],
             ascending=[False, False, False],
         )
-    elif sort_by == RecordsOrderBy.SRC_A_TO_Z:
+    elif sort_by == RecordOrderBy.SRC_A_TO_Z:
         dataframe = dataframe.sort_values(
             [
                 Field.SRC_NORM.value,
@@ -248,7 +248,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[True, False, False],
         )
 
-    elif sort_by == RecordsOrderBy.SRC_Z_TO_A:
+    elif sort_by == RecordOrderBy.SRC_Z_TO_A:
         dataframe = dataframe.sort_values(
             [
                 Field.SRC_NORM.value,

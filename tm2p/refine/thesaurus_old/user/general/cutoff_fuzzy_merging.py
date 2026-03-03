@@ -119,8 +119,8 @@ from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-from tm2p._intern.indic.bibliom_indic import BibliometricIndicators
 from tm2p._intern.packag_data.word_lists import load_builtin_word_list
+from tm2p.anal.metrics.metrics import Metrics
 from tm2p.refine.thesaurus_old._intern import ThesaurusMixin
 
 tqdm.pandas()
@@ -138,11 +138,10 @@ class CutoffFuzzyMerging(
     def internal__get_keywords(self):
 
         self.keywords = (
-            BibliometricIndicators()
+            Metrics()
             .with_source_field("raw_keywords")
             .having_items_ordered_by("OCC")
             .where_root_directory(self.params.root_directory)
-            .where_database("main")
         ).run()
 
         known_keywords = load_builtin_word_list("noun_phrases.txt")

@@ -6,7 +6,7 @@ import pandas as pd  # type: ignore
 from pandarallel import pandarallel  # type: ignore
 
 from tm2p._intern import stdout_to_stderr
-from tm2p.enum.corpus import Field
+from tm2p.enum.field import Field
 
 ACRONYMS_PATTERN = re.compile(r"\((.*?)\)")
 

@@ -3,7 +3,7 @@ Find records
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import Field, RecordsOrderBy
+    >>> from tm2p import Field, RecordOrderBy
     >>> from tm2p.ingest.rec import FindRecords
     >>> docs = (
     ...     FindRecords()
@@ -21,7 +21,7 @@ Smoke tests:
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
-    ...     .where_records_ordered_by(RecordsOrderBy.YEAR_NEWEST)
+    ...     .where_records_ordered_by(RecordOrderBy.YEAR_NEWEST)
     ...      #
     ...      .run()
     ... )

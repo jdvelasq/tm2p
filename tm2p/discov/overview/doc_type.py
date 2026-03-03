@@ -33,7 +33,7 @@ Smoke test:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.enum.corpus import Field
+from tm2p.enum.field import Field
 
 __reviewed__ = "2026-01-29"
 

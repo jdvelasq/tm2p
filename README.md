@@ -184,3 +184,11 @@ CaseVariationMatch: Present strings that differ only in letter casing
 PunctuationVariationMatch: Present strings that differ only in punctuation
 NumericVariationMatch: Present strings that differ only in numeric characters
 
+
+Naming Conventions
+------------------------------------------------------------------------------
+
+tm2p follows a strict, ontology-driven naming convention to ensure clarity and long-term stability. Raw bibliographic fields are defined under `Corpus`, while computed analytical outputs use controlled, uppercase `Indicators` (e.g., `OCC`, `H_INDEX`, `AGR`). Structural representations are named by their mathematical form (`Matrix`, `Metrics`, `Trends`), and visualization classes append `Plot` to the corresponding structure (e.g., `MatrixPlot`, `TopicDynamicsPlot`). Folder organization reflects analytical workflow stages (e.g., `discov`, `anal`, `synthes`), prioritizing conceptual cohesion over artifact type.
+
+
+

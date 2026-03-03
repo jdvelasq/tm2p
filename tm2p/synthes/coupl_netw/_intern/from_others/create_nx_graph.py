@@ -2,7 +2,7 @@ import networkx as nx  # type: ignore
 import numpy as np
 
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-from tm2p._intern.indic.bibliom_indic import BibliometricIndicators
+from tm2p.anal.metrics.metrics import Metrics
 
 
 # ------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ def step_02_create_data_frame(params, records):
 def step_03_filter_the_data_frame(params, data_frame):
 
     metrics = (
-        BibliometricIndicators()
+        Metrics()
         .update(**params.__dict__)
         .with_source_field(params.unit_of_analysis)
         .run()

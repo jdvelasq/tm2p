@@ -3,7 +3,7 @@ TopItemsExtractor
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
+    >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p.ingest.extr import TopItemsExtractor
     >>> items = (
     ...     TopItemsExtractor()
@@ -13,7 +13,7 @@ Smoke tests:
     ...     #
     ...     # SEARCH:
     ...     .having_items_in_top(10)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
@@ -42,7 +42,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.indic.bibliom_indic import BibliometricIndicators
+from tm2p.anal.metrics.metrics import Metrics
 
 
 class TopItemsExtractor(
@@ -52,7 +52,7 @@ class TopItemsExtractor(
 
     def run(self):
 
-        data_frame = BibliometricIndicators().update(**self.params.__dict__).run()
+        data_frame = Metrics().update(**self.params.__dict__).run()
         terms = data_frame.index.tolist()
         terms = sorted(terms)
 

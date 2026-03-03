@@ -34,14 +34,14 @@ Smoke tests:
 
 """
 
-from tm2p import Field, ItemsOrderBy
+from tm2p import Field, ItemOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
 PUBYEAR = Field.YEAR.value
-CIT_COUNT_GLOBAL = ItemsOrderBy.GCS.value
-CIT_COUNT_LOCAL = ItemsOrderBy.LCS.value
-CIT_COUNT_GLOBAL_PER_YEAR_AVG = ItemsOrderBy.GCS_PER_YEAR_AVG.value
+CIT_COUNT_GLOBAL = ItemOrderBy.GCS.value
+CIT_COUNT_LOCAL = ItemOrderBy.LCS.value
+CIT_COUNT_GLOBAL_PER_YEAR_AVG = ItemOrderBy.GCS_PER_YEAR_AVG.value
 
 
 class DataFrame(

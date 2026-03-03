@@ -51,7 +51,7 @@ from tm2p import Field
 from tm2p._intern import ParamsMixin, SortAxesMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p._intern.get_zero_digits import get_zero_digits
-from tm2p._intern.indic import BibliometricIndicators
+from tm2p.anal.metrics import Metrics
 
 from ._field import SOURCE_FIELD
 
@@ -124,7 +124,7 @@ class Matrix(
     def _filter_items_in_matrix(self, matrix):
 
         selected_items = (
-            BibliometricIndicators()
+            Metrics()
             .update(**self.params.__dict__)
             .with_source_field(SOURCE_FIELD)
             .run()

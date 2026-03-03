@@ -35,7 +35,7 @@ Smoke tests:
 
 """
 
-from tm2p import ItemsOrderBy
+from tm2p import ItemOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.plot.ranking_chart import ranking_chart
 from tm2p.discov.overview.aver_cit_per_year.dataframe import DataFrame
@@ -50,7 +50,7 @@ class RankingChart(
 
         dataframe = DataFrame().update(**self.params.__dict__).run()
         dataframe["Rank"] = range(1, len(dataframe) + 1)
-        self.having_items_ordered_by(ItemsOrderBy.OCC)
+        self.having_items_ordered_by(ItemOrderBy.OCC)
         fig = ranking_chart(params=self.params, dataframe=dataframe)
 
         return fig

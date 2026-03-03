@@ -1,11 +1,13 @@
-from .corpus import Field
-from .item import ItemsOrderBy
-from .rec import RecordsOrderBy
+from .field import Field
+from .indic import Indicator
+from .item import ItemOrderBy
+from .rec import RecordOrderBy
 from .thesaur import ThesaurusField
 
 __all__ = [
     "Field",
-    "ItemsOrderBy",
-    "RecordsOrderBy",
+    "Indicator",
+    "ItemOrderBy",
+    "RecordOrderBy",
     "ThesaurusField",
 ]

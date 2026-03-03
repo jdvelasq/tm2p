@@ -3,7 +3,7 @@ Concordance User
 =========================================================================================
 
 Smoke test:
-    >>> from tm2p import Field, RecordsOrderBy
+    >>> from tm2p import Field, RecordOrderBy
     >>> from tm2p.discover.concord import ConcordanceUser
     >>> contexts = (
     ...     ConcordanceUser()

@@ -30,7 +30,7 @@ Smoke tests:
 
 import plotly.express as px  # type: ignore
 
-from tm2p import Field, ItemsOrderBy
+from tm2p import Field, ItemOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p.discov.co_occur_matrix.matrix import Matrix as CoOccurrenceDataFrame
 
@@ -48,7 +48,7 @@ class WorldMap(
             CoOccurrenceDataFrame()
             .update(**self.params.__dict__)
             .with_source_field(Field.CTRY)
-            .update(terms_order_by=ItemsOrderBy.OCC)
+            .update(terms_order_by=ItemOrderBy.OCC)
             .run()
         )
 

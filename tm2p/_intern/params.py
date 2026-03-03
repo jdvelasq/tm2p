@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import pandas as pd  # type: ignore
 from sklearn.base import BaseEstimator  # type: ignore
 
-from tm2p.enum import Field, ItemsOrderBy, RecordsOrderBy
+from tm2p.enum import Field, ItemOrderBy, RecordOrderBy
 
 
 @dataclass
@@ -37,7 +37,7 @@ class Params:
     item_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)
     item_occurrences_range: Tuple[Optional[int], Optional[int]] = (None, None)
     items_in: Optional[list[str]] = None
-    items_order_by: ItemsOrderBy = ItemsOrderBy.OCC
+    items_order_by: ItemOrderBy = ItemOrderBy.OCC
     top_n: Optional[int] = None
 
     #
@@ -46,13 +46,13 @@ class Params:
     column_item_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)
     column_item_occurrences_range: Tuple[Optional[int], Optional[int]] = (None, None)
     column_items_in: Optional[list[str]] = None
-    column_items_order_by: ItemsOrderBy = ItemsOrderBy.OCC
+    column_items_order_by: ItemOrderBy = ItemOrderBy.OCC
     column_top_n: Optional[int] = None
 
     index_item_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)
     index_item_occurrences_range: Tuple[Optional[int], Optional[int]] = (None, None)
     index_items_in: Optional[list[str]] = None
-    index_items_order_by: ItemsOrderBy = ItemsOrderBy.OCC
+    index_items_order_by: ItemOrderBy = ItemOrderBy.OCC
     index_top_n: Optional[int] = None
 
     #
@@ -175,7 +175,7 @@ class Params:
     record_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)
     record_years_range: Tuple[Optional[int], Optional[int]] = (None, None)
     records_match: Optional[Dict[str, List[str]]] = None
-    records_order_by: RecordsOrderBy = RecordsOrderBy.YEAR_NEWEST
+    records_order_by: RecordOrderBy = RecordOrderBy.YEAR_NEWEST
     regex_flags: int = 0
     regex_search: bool = False
     replacement: Optional[str] = None

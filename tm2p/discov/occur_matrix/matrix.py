@@ -9,7 +9,7 @@ Smoke tests:
     ...     Matrix()
     ...     #
     ...     # COLUMNS:
-    ...     .with_column_field(CorpusField.AUTHKW_TOK)
+    ...     .with_column_field(Corpus.AUTHKW_TOK)
     ...     .having_column_items_in_top(10)
     ...     .having_column_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_column_item_occurrences_between(None, None)
@@ -17,7 +17,7 @@ Smoke tests:
     ...     .having_column_items_in(None)
     ...     #
     ...     # ROWS:
-    ...     .with_index_field(CorpusField.AUTH_NORM)
+    ...     .with_index_field(Corpus.AUTH_NORM)
     ...     .having_index_items_in_top(None)
     ...     .having_index_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_index_item_occurrences_between(2, None)
@@ -64,7 +64,7 @@ Smoke tests:
     ...     Matrix()
     ...     #
     ...     # COLUMNS:
-    ...     .with_column_field(CorpusField.AUTHKW_TOK)
+    ...     .with_column_field(Corpus.AUTHKW_TOK)
     ...     .having_column_items_in_top(10)
     ...     .having_column_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_column_item_occurrences_between(None, None)
@@ -72,7 +72,7 @@ Smoke tests:
     ...     .having_column_items_in(None)
     ...     #
     ...     # ROWS:
-    ...     .with_index_field(CorpusField.AUTH_NORM)
+    ...     .with_index_field(Corpus.AUTH_NORM)
     ...     .having_index_items_in_top(10)
     ...     .having_index_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_index_item_occurrences_between(None, None)
@@ -122,7 +122,7 @@ Smoke tests:
 from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-from tm2p._intern.indic import BibliometricIndicators
+from tm2p.anal.metrics import Metrics
 
 
 class Matrix(
@@ -133,7 +133,7 @@ class Matrix(
     # -------------------------------------------------------------------------
     def _step_01_compute_column_peformance_metrics(self):
         metrics = (
-            BibliometricIndicators()
+            Metrics()
             .update(**self.params.__dict__)
             .with_source_field(self.params.column_field)
             .having_items_in_top(self.params.column_top_n)
@@ -154,7 +154,7 @@ class Matrix(
     # -------------------------------------------------------------------------
     def _step_02_compute_row_peformance_metrics(self):
         metrics = (
-            BibliometricIndicators()
+            Metrics()
             .update(**self.params.__dict__)
             .with_source_field(self.params.index_field)
             .having_items_in_top(self.params.index_top_n)

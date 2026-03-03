@@ -1,11 +1,11 @@
-from tm2p import ItemsOrderBy
+from tm2p import ItemOrderBy
 
 
 def check_required_items_order_by_enum(
-    value: ItemsOrderBy, param_name: str
-) -> ItemsOrderBy:
+    value: ItemOrderBy, param_name: str
+) -> ItemOrderBy:
 
-    if not isinstance(value, ItemsOrderBy):
+    if not isinstance(value, ItemOrderBy):
         raise TypeError(
             f"{param_name} must be an ItemsOrderBy, got {type(value).__name__}"
         )

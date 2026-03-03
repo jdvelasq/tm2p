@@ -1,6 +1,6 @@
 from typing import Callable
 
-from pandas import Series
+from pandas import Series  # type: ignore
 
 from tm2p import Field
 

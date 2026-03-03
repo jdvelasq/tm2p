@@ -34,7 +34,7 @@ from tm2p._intern.valid import (
     check_required_str_tuple,
     check_tuple_of_ordered_four_floats,
 )
-from tm2p.enum import Field, ItemsOrderBy, RecordsOrderBy
+from tm2p.enum import Field, ItemOrderBy, RecordOrderBy
 
 from .params import Params
 
@@ -137,7 +137,7 @@ class ParamsMixin:
         return self
 
     def having_column_items_ordered_by(
-        self, column_items_order_by: ItemsOrderBy
+        self, column_items_order_by: ItemOrderBy
     ) -> Self:
         column_items_order_by = check_required_items_order_by_enum(
             value=column_items_order_by,
@@ -180,7 +180,7 @@ class ParamsMixin:
         self.params.index_top_n = index_top_n
         return self
 
-    def having_index_items_ordered_by(self, index_items_order_by: ItemsOrderBy) -> Self:
+    def having_index_items_ordered_by(self, index_items_order_by: ItemOrderBy) -> Self:
         index_items_order_by = check_required_items_order_by_enum(
             value=index_items_order_by,
             param_name="index_items_order_by",
@@ -222,7 +222,7 @@ class ParamsMixin:
         self.params.top_n = top_n
         return self
 
-    def having_items_ordered_by(self, items_order_by: ItemsOrderBy) -> Self:
+    def having_items_ordered_by(self, items_order_by: ItemOrderBy) -> Self:
         items_order_by = check_required_items_order_by_enum(
             value=items_order_by,
             param_name="items_order_by",
@@ -1084,8 +1084,8 @@ class ParamsMixin:
         self.params.records_match = records_match
         return self
 
-    def where_records_ordered_by(self, records_order_by: RecordsOrderBy) -> Self:
-        if not isinstance(records_order_by, RecordsOrderBy):
+    def where_records_ordered_by(self, records_order_by: RecordOrderBy) -> Self:
+        if not isinstance(records_order_by, RecordOrderBy):
             raise TypeError(
                 "records_order_by must be an instance of RecordsOrderBy enum"
             )

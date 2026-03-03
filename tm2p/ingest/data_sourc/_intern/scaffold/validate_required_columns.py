@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd  # type: ignore
 
-from tm2p.enum.corpus import Field
+from tm2p.enum.field import Field
 
 MAIN_COLUMNS = frozenset(
     [

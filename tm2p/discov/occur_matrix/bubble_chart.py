@@ -14,7 +14,7 @@ Smoke tests:
     ...     BubbleChart()
     ...     #
     ...     # COLUMNS:
-    ...     .with_column_field(CorpusField.AUTHKW_TOK)
+    ...     .with_column_field(Corpus.AUTHKW_TOK)
     ...     .having_column_items_in_top(10)
     ...     .having_column_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_column_item_occurrences_between(None, None)
@@ -22,7 +22,7 @@ Smoke tests:
     ...     .having_column_items_in(None)
     ...     #
     ...     # ROWS:
-    ...     .with_index_field(CorpusField.AUTH_NORM)
+    ...     .with_index_field(Corpus.AUTH_NORM)
     ...     .having_index_items_in_top(15)
     ...     .having_index_items_ordered_by(ItemsOrderBy.OCC)
     ...     .having_index_item_occurrences_between(0, None)

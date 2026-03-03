@@ -44,7 +44,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-from tm2p._intern.indic.bibliom_indic import BibliometricIndicators
+from tm2p.anal.metrics.metrics import Metrics
 
 
 class DataFrame(
@@ -126,7 +126,7 @@ class DataFrame(
 
     # -------------------------------------------------------------------------
     def _step_3_filter_terms(self, data_frame):
-        terms_in = BibliometricIndicators()
+        terms_in = Metrics()
         terms_in = terms_in.update(**self.params.__dict__)
         terms_in = terms_in.run()
         terms_in = terms_in.index

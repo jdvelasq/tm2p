@@ -3,7 +3,7 @@ RecordsDataFrame
 =======================================================================================
 
 Smoke tests:
-    >>> from tm2p import RecordsOrderBy
+    >>> from tm2p import RecordOrderBy
     >>> from tm2p.ingest.rec import FilteredRecords
 
     >>> df = (
@@ -13,7 +13,7 @@ Smoke tests:
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
-    ...     .where_records_ordered_by(RecordsOrderBy.YEAR_NEWEST)
+    ...     .where_records_ordered_by(RecordOrderBy.YEAR_NEWEST)
     ...
     ...     .run()
     ... )
@@ -30,7 +30,7 @@ Smoke tests:
 
 """
 
-from tm2p import Field, ItemsOrderBy
+from tm2p import Field, ItemOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 
@@ -42,8 +42,8 @@ RID = Field.RID.value
 TITLE_RAW = Field.TITLE_RAW.value
 YEAR = Field.YEAR.value
 
-GCS_PER_YEAR = ItemsOrderBy.GCS_PER_YEAR.value
-LCS_PER_YEAR = ItemsOrderBy.LCS_PER_YEAR.value
+GCS_PER_YEAR = ItemOrderBy.GCS_PER_YEAR.value
+LCS_PER_YEAR = ItemOrderBy.LCS_PER_YEAR.value
 RANK_GCS = "RANK_GCS"
 RANK_LCS = "RANK_LCS"
 

@@ -4,7 +4,7 @@ RecordMapping
 
 Smoke Test:
     >>> from pprint import pprint
-    >>> from tm2p import RecordsOrderBy
+    >>> from tm2p import RecordOrderBy
     >>> from tm2p.ingest.rec import RecordMapping
     >>> mapping = (
     ...     RecordMapping()
@@ -13,7 +13,7 @@ Smoke Test:
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
-    ...     .where_records_ordered_by(RecordsOrderBy.GCS_BY_HIGHEST)
+    ...     .where_records_ordered_by(RecordOrderBy.GCS_BY_HIGHEST)
     ...     .run()
     ... )
 
