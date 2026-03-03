@@ -3,23 +3,23 @@ Matrix
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
+    >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p.discov.occur_matrix import Matrix
     >>> df = (
     ...     Matrix()
     ...     #
     ...     # COLUMNS:
-    ...     .with_column_field(Corpus.AUTHKW_TOK)
+    ...     .with_column_field(Field.AUTHKW_TOK)
     ...     .having_column_items_in_top(10)
-    ...     .having_column_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_column_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_column_item_occurrences_between(None, None)
     ...     .having_column_item_citations_between(None, None)
     ...     .having_column_items_in(None)
     ...     #
     ...     # ROWS:
-    ...     .with_index_field(Corpus.AUTH_NORM)
+    ...     .with_index_field(Field.AUTH_NORM)
     ...     .having_index_items_in_top(None)
-    ...     .having_index_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_index_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_index_item_occurrences_between(2, None)
     ...     .having_index_item_citations_between(None, None)
     ...     .having_index_items_in(None)
@@ -58,23 +58,23 @@ Smoke tests:
     [10 rows x 10 columns]
 
 
-    >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.discov.occur_matrix._intern import Matrix
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.discov.occur_matrix import Matrix
     >>> df = (
     ...     Matrix()
     ...     #
     ...     # COLUMNS:
-    ...     .with_column_field(Corpus.AUTHKW_TOK)
+    ...     .with_column_field(Field.AUTHKW_TOK)
     ...     .having_column_items_in_top(10)
-    ...     .having_column_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_column_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_column_item_occurrences_between(None, None)
     ...     .having_column_item_citations_between(None, None)
     ...     .having_column_items_in(None)
     ...     #
     ...     # ROWS:
-    ...     .with_index_field(Corpus.AUTH_NORM)
+    ...     .with_index_field(Field.AUTH_NORM)
     ...     .having_index_items_in_top(10)
-    ...     .having_index_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_index_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_index_item_occurrences_between(None, None)
     ...     .having_index_item_citations_between(None, None)
     ...     .having_index_items_in(None)
@@ -88,7 +88,7 @@ Smoke tests:
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(
     ...         {
-    ...             CorpusField.AUTHKW_RAW: ["fintech", "innovation", "financial services"],
+    ...             Field.AUTHKW_RAW: ["fintech", "innovation", "financial services"],
     ...         },
     ...     )
     ...     #

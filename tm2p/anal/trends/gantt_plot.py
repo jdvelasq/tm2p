@@ -8,15 +8,15 @@ Gantt Plot
     height="600px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.anal.items_by_year import GanttPlot
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.anal.trends import GanttPlot
     >>> plotter = (
     ...     GanttPlot()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .having_items_in_top(20)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
@@ -48,9 +48,9 @@ class GanttPlot(
     # -------------------------------------------------------------------------
     def internal__compute_data_frame(self):
 
-        from ..items_by_year.items_by_year import ItemsByYear as ItemsByYearDataFrame
+        from .trends import Trends
 
-        data_frame = ItemsByYearDataFrame().update(**self.params.__dict__).run()
+        data_frame = Trends().update(**self.params.__dict__).run()
 
         data_frame["RANKING"] = range(1, len(data_frame) + 1)
         data_frame = data_frame.melt(

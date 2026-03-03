@@ -3,15 +3,15 @@ Trends
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p._intern.indic.occur_by_year import OccurrencesByYear
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.anal.trends import Trends
     >>> df = (
-    ...     OccurrencesByYear()
+    ...     Trends()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
@@ -54,12 +54,12 @@ Smoke tests:
 
 
     >>> df = (
-    ...     OccurrencesByYear()
+    ...     Trends()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
@@ -100,12 +100,12 @@ Smoke tests:
 
 
     >>> df = (
-    ...     OccurrencesByYear()
+    ...     Trends()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)

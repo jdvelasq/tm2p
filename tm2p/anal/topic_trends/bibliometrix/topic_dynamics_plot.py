@@ -9,19 +9,18 @@ TopicDynamicsPlot
 
 
 Smoke tests:
-    >>> from tmp2 import Corpus
+    >>> from tm2p import Field
     >>> from tm2p.anal.topic_trends.bibliometrix.topic_dynamics_plot import TopicDynamicsPlot
     >>> fig = (
     ...     TopicDynamicsPlot()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_RAW)
-    ...     .having_terms_per_year(5)
+    ...     .having_items_per_year(5)
     ...     .having_items_in(None)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)

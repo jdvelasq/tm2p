@@ -8,9 +8,8 @@ TopicDynamicsPlot
     height="600px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
-    >>> from tmp2 import Corpus, ItemOrderBy
+    >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p.anal.topic_trends.scientopy.topic_dynamics_plot import TopicDynamicsPlot
-    >>> # Create, configure, and run the plotter
     >>> fig = (
     ...     TopicDynamicsPlot()
     ...     #
@@ -31,7 +30,6 @@ Smoke tests:
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)

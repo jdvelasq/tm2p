@@ -4,7 +4,7 @@ RPYS (Reference Publication Year Spectroscopy) Plot
 
 
 Smoke tests:
-    >>> from tm2p.packages.rpys import RPYSPlot
+    >>> from tm2p.anal.rpys import RPYSPlot
     >>> plot = (
     ...     RPYSPlot()
     ...     #

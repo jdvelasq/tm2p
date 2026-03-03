@@ -201,22 +201,27 @@ def __create_network_fig(
 
 def __add_node_labels_to_fig(fig, nx_graph):
 
-    node_x = [data["x"] for _, data in nx_graph.nodes(data=True)]
-    node_y = [data["y"] for _, data in nx_graph.nodes(data=True)]
-    node_labels = [data["text"] for _, data in nx_graph.nodes(data=True)]
-    node_labeled = [data["labeled"] for _, data in nx_graph.nodes(data=True)]
+    node_x = [data["x"] for _, data in sorted(nx_graph.nodes(data=True))]
+    node_y = [data["y"] for _, data in sorted(nx_graph.nodes(data=True))]
+    node_labels = [data["text"] for _, data in sorted(nx_graph.nodes(data=True))]
+    node_labeled = [data["labeled"] for _, data in sorted(nx_graph.nodes(data=True))]
 
-    textfont_sizes = [data["textfont_size"] for _, data in nx_graph.nodes(data=True)]
+    textfont_sizes = [
+        data["textfont_size"] for _, data in sorted(nx_graph.nodes(data=True))
+    ]
     textfont_opacities = [
-        data["textfont_opacity"] for _, data in nx_graph.nodes(data=True)
+        data["textfont_opacity"] for _, data in sorted(nx_graph.nodes(data=True))
     ]
 
-    textpositions = [data["textposition"] for _, data in nx_graph.nodes(data=True)]
+    textpositions = [
+        data["textposition"] for _, data in sorted(nx_graph.nodes(data=True))
+    ]
 
     #
     node_x.reverse()
     node_y.reverse()
     node_labels.reverse()
+    node_labeled.reverse()
     textfont_sizes.reverse()
     textpositions.reverse()
     textfont_opacities.reverse()

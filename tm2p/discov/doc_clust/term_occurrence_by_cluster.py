@@ -83,7 +83,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.tfidf._intern.matrix import Matrix as TfIdfDataFrame
+from tm2p.discov.tfidf.matrix import Matrix as TfIdf
 
 
 class TermOccurrenceByCluster(
@@ -93,7 +93,7 @@ class TermOccurrenceByCluster(
 
     def run(self):
 
-        tf_matrix = TfIdfDataFrame().update(**self.params.__dict__).run()
+        tf_matrix = TfIdf().update(**self.params.__dict__).run()
         self.params.clustering_algorithm_or_dict.fit(tf_matrix)
         tf_matrix["cluster"] = list(self.params.clustering_algorithm_or_dict.labels_)
         data_frame = tf_matrix.groupby("cluster").sum()

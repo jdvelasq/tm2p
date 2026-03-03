@@ -1,6 +1,14 @@
-from .enum import Field, Indicator, ItemOrderBy, RecordOrderBy, ThesaurusField
+from .enum import (
+    Correlation,
+    Field,
+    Indicator,
+    ItemOrderBy,
+    RecordOrderBy,
+    ThesaurusField,
+)
 
 __all__ = [
+    "Correlation",
     "Field",
     "Indicator",
     "ItemOrderBy",

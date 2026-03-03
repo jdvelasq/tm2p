@@ -3,7 +3,7 @@ Bar Plot
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
+    >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p.analyze.metrics.collaboration import BarPlot
     >>> fig = (
     ...     BarPlot()
@@ -13,7 +13,7 @@ Smoke tests:
     ...     .having_items_in_top(10)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_items_in(None)
     ...     #
     ...     # PLOT:

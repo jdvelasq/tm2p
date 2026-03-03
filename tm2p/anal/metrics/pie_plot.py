@@ -9,8 +9,8 @@ Pie Plot
 
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.anal.bibliom import PiePlot
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.anal.metrics import PiePlot
     >>> plot = (
     ...     PiePlot()
     ...     #
@@ -19,7 +19,7 @@ Smoke tests:
     ...     #
     ...     # TERMS:
     ...     .having_items_in_top(15)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)

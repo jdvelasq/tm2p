@@ -4,19 +4,18 @@ Dataframe
 
 
 Smoke tests:
-    >>> from tmp2 import Corpus
+    >>> from tm2p import Field
     >>> from tm2p.anal.topic_trends.bibliometrix.topic_dynamics import TopicDynamics
     >>> df = (
     ...     TopicDynamics()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_RAW)
-    ...     .having_terms_per_year(5)
+    ...     .having_items_per_year(5)
     ...     .having_items_in(None)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
@@ -24,13 +23,13 @@ Smoke tests:
     ...     .run()
     ... )
     >>> df.head()
-    year                      OCC  global_citations  year_q1  ...  rn    height  width
-    author_keywords_raw                                       ...
-    CONTENT_ANALYSIS 02:0181    2               181     2016  ...   2  0.177333      1
-    DIGITALIZATION 02:0181      2               181     2016  ...   3  0.177333      1
-    POPULAR_PRESS 02:0181       2               181     2016  ...   4  0.177333      1
-    TECHNOLOGY 02:0310          2               310     2016  ...   0  0.177333      2
-    BANKING 02:0291             2               291     2016  ...   1  0.177333      2
+    YEAR                            OCC  global_citations  ...  height  width
+    AUTHKW_RAW                                             ...
+    Biometric 001:00001               1                 1  ...    0.15      1
+    FIDO 001:00001                    1                 1  ...    0.15      1
+    Fast Identity Online 001:00001    1                 1  ...    0.15      1
+    PKI 001:00001                     1                 1  ...    0.15      1
+    Password 001:00001                1                 1  ...    0.15      1
     <BLANKLINE>
     [5 rows x 8 columns]
 
@@ -40,29 +39,28 @@ Smoke tests:
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_RAW)
-    ...     .having_terms_per_year(5)
+    ...     .having_items_per_year(5)
     ...     .having_items_in(
     ...         [
-    ...             "FINTECH",
-    ...             "BLOCKCHAIN",
-    ...             "ARTIFICIAL_INTELLIGENCE",
+    ...             "fintech",
+    ...             "blockchain",
+    ...             "artificial intelligence",
     ...         ]
     ...     )
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
     ...     #
     ...     .run()
     ... ).head()
-    year                             OCC  global_citations  ...  height  width
-    author_keywords_raw                                     ...
-    FINTECH 31:5168                   31              5168  ...    0.97      2
-    BLOCKCHAIN 02:0305                 2               305  ...    0.15      2
-    ARTIFICIAL_INTELLIGENCE 02:0327    2               327  ...    0.15      1
+    YEAR                               OCC  global_citations  ...    height  width
+    AUTHKW_RAW                                                ...
+    fintech 008:01795                    8              1795  ...  0.970000      5
+    blockchain 001:00218                 1               218  ...  0.150000      1
+    artificial intelligence 002:00400    2               400  ...  0.267143      1
     <BLANKLINE>
     [3 rows x 8 columns]
 

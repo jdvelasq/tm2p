@@ -70,7 +70,7 @@ Smoke tests:
 import pandas as pd  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p.discov.tfidf._intern.matrix import Matrix as TfIdfDataFrame
+from tm2p.discov.tfidf.matrix import Matrix as TfIdf
 
 
 class ComponentsByTermDataFrame(
@@ -81,7 +81,7 @@ class ComponentsByTermDataFrame(
     def run(self):
         """:meta private:"""
 
-        tf_matrix = TfIdfDataFrame().update(**self.params.__dict__).run()
+        tf_matrix = TfIdf().update(**self.params.__dict__).run()
 
         self.params.decomposition_algorithm.fit(tf_matrix)
 

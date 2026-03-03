@@ -3,7 +3,7 @@ Data Frame
 ===============================================================================
 
 Smoke tests:
-    >>> from tmp2 import Corpus, ItemOrderBy
+    >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p.anal.topic_trends.scientopy.topic_dynamics import TopicDynamics
     >>> df = (
     ...     TopicDynamics()
@@ -21,7 +21,6 @@ Smoke tests:
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
@@ -29,13 +28,13 @@ Smoke tests:
     ...     .run()
     ... )
     >>> df.head()
-                          rank_occ  ...  average_docs_per_year
-    author_keywords_raw             ...
-    FINTECH                      1  ...                    9.0
-    INNOVATION                   2  ...                    0.5
-    FINANCIAL_SERVICES           3  ...                    1.5
-    FINANCIAL_INCLUSION          4  ...                    0.0
-    FINANCIAL_TECHNOLOGY         5  ...                    1.0
+                          RANK_OCC  ...  average_docs_per_year
+    AUTHKW_RAW                      ...
+    Fintech                      1  ...                    8.5
+    FinTech                      2  ...                    7.0
+    Financial technology         3  ...                    NaN
+    Green finance                4  ...                    NaN
+    Blockchain                   5  ...                    1.5
     <BLANKLINE>
     [5 rows x 22 columns]
 

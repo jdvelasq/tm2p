@@ -27,3 +27,5 @@ class Indicator(Enum):
     CUM_SUM_ITEMS = "CUM_SUM_ITEMS"
     COLUMN = "COLUMN"
     NUM_REC = "NUM_REC"
+
+    COUNTERS = "COUNTERS"

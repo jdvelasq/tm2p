@@ -1,20 +1,29 @@
-from typing import Tuple
+from typing import Tuple, Union, cast
 
 
 def check_tuple_of_ordered_four_floats(
-    value: Tuple[float, float, float, float], param_name: str
+    value: Tuple[
+        Union[float, int],
+        Union[float, int],
+        Union[float, int],
+        Union[float, int],
+    ],
+    param_name: str,
 ) -> Tuple[float, float, float, float]:
-    if not isinstance(value, tuple) or len(value) != 4:
+
+    cast_value = tuple(float(v) for v in value)
+    cast_value = cast(Tuple[float, float, float, float], cast_value)
+    if not isinstance(cast_value, tuple) or len(cast_value) != 4:
         raise TypeError(
-            f"{param_name} must be a tuple of four floats, got {type(value).__name__} with length {len(value) if isinstance(value, tuple) else 'N/A'}"
+            f"{param_name} must be a tuple of four floats, got {type(cast_value).__name__} with length {len(cast_value) if isinstance(cast_value, tuple) else 'N/A'}"
         )
-    for i, v in enumerate(value):
+    for i, v in enumerate(cast_value):
         if not isinstance(v, float):
             raise TypeError(
                 f"{param_name}[{i}] must be a float, got {type(v).__name__}"
             )
-    if not value[0] <= value[1] <= value[2] <= value[3]:
+    if not cast_value[0] <= cast_value[1] <= cast_value[2] <= cast_value[3]:
         raise ValueError(
-            f"{param_name} values must be ordered: {value[0]} ≤ {value[1]} ≤ {value[2]} ≤ {value[3]}"
+            f"{param_name} values must be ordered: {cast_value[0]} ≤ {cast_value[1]} ≤ {cast_value[2]} ≤ {cast_value[3]}"
         )
     return value

@@ -8,15 +8,15 @@ Heatmap
     height="600px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
-    >>> from tm2p import Field, ItemsOrderBy
-    >>> from tm2p.discov.co_occur_matrix._intern import Heatmap
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.discov.co_occur_matrix import Heatmap
     >>> fig = (
     ...     Heatmap()
     ...     #
     ...     # FIELD:
-    ...     .having_source_field(Field.AUTHKW_NORM)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(10)
-    ...     .having_items_ordered_by(ItemsOrderBy.OCC)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)

@@ -3,7 +3,7 @@ RPYS (Reference Publication Year Spectroscopy) Frame
 ===============================================================================
 
 Smoke tests:
-    >>> from tm2p.packages.rpys import RPYSDataFrame
+    >>> from tm2p.anal.rpys import RPYSDataFrame
     >>> (
     ...     RPYSDataFrame()
     ...     #

@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import pandas as pd  # type: ignore
 from sklearn.base import BaseEstimator  # type: ignore
 
-from tm2p.enum import Field, ItemOrderBy, RecordOrderBy
+from tm2p.enum import Correlation, Field, ItemOrderBy, RecordOrderBy
 
 
 @dataclass
@@ -84,7 +84,7 @@ class Params:
     column: Optional[str] = None
     contour_opacity: float = 0.6
     core_area: Optional[str] = None
-    correlation_method: str = "pearson"
+    correlation_method: Correlation = Correlation.PEARSON
     cumulative_sum: bool = False
     similarity_cutoff: float = 85.0
 
@@ -102,7 +102,12 @@ class Params:
     edge_similarity_threshold: float = 0.0
     edge_top_n: Optional[int] = None
     edge_width_range: Tuple[float, float] = (0.5, 0.8)
-    edge_widths: Tuple[float, float, float, float] = (0.5, 0.8, 1.0, 1.2)
+    edge_widths: Tuple[
+        Union[float, int],
+        Union[float, int],
+        Union[float, int],
+        Union[float, int],
+    ] = (0.5, 0.8, 1.0, 1.2)
 
     #
     # I

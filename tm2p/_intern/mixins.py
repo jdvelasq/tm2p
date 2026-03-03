@@ -34,7 +34,7 @@ from tm2p._intern.valid import (
     check_required_str_tuple,
     check_tuple_of_ordered_four_floats,
 )
-from tm2p.enum import Field, ItemOrderBy, RecordOrderBy
+from tm2p.enum import Correlation, Field, ItemOrderBy, RecordOrderBy
 
 from .params import Params
 
@@ -534,12 +534,21 @@ class ParamsMixin:
         self.params.edge_width_range = (min_width, max_width)
         return self
 
-    def using_edge_widths(self, edge_widths: Tuple[float, float, float, float]) -> Self:
-        edge_widths = check_tuple_of_ordered_four_floats(
-            value=edge_widths,
+    def using_edge_widths(
+        self,
+        edge_widths: Tuple[
+            Union[float, int],
+            Union[float, int],
+            Union[float, int],
+            Union[float, int],
+        ],
+    ) -> Self:
+        values = cast(Tuple[float, float, float, float], edge_widths)
+        values = check_tuple_of_ordered_four_floats(
+            value=values,
             param_name="edge_widths",
         )
-        self.params.edge_widths = edge_widths
+        self.params.edge_widths = values
         return self
 
     def using_initial_newline(self, initial_newline) -> Self:
@@ -950,21 +959,21 @@ class ParamsMixin:
         self.params.core_area = core_area
         return self
 
-    def with_correlation_method(self, correlation_method: str) -> Self:
-        correlation_method = check_required_str(
-            value=correlation_method,
-            param_name="correlation_method",
-        )
+    def with_correlation_method(self, correlation_method: Correlation) -> Self:
+        if not isinstance(correlation_method, Correlation):
+            raise TypeError(
+                "correlation_method must be an instance of Correlation enum"
+            )
         self.params.correlation_method = correlation_method
         return self
 
-    def with_index_and_column_field(self, index_and_column_field: Field) -> Self:
-        index_and_column_field = check_required_corpus_field_enum(
-            value=index_and_column_field,
-            param_name="index_and_column_field",
-        )
-        self.params.index_and_column_field = index_and_column_field
-        return self
+    # def with_index_and_column_field(self, index_and_column_field: Field) -> Self:
+    #     index_and_column_field = check_required_corpus_field_enum(
+    #         value=index_and_column_field,
+    #         param_name="index_and_column_field",
+    #     )
+    #     self.params.index_and_column_field = index_and_column_field
+    #     return self
 
     def with_index_field(self, index_field: Field) -> Self:
         index_field = check_required_corpus_field_enum(
