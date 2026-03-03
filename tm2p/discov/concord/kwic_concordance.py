@@ -80,9 +80,9 @@ class KWICConcordance(
             phrases.str.contains(
                 r"\b" + search_for + r"\b", regex=True, flags=re.IGNORECASE
             )
-        ].reset_index(
+        ].reset_index(  # type: ignore[attr-defined]
             drop=True
-        )  # type: ignore[attr-defined]
+        )
 
         return context_phrases
 
