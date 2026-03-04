@@ -13,7 +13,7 @@ COLOR_PALETTE = (
 )
 
 
-def internal__assign_edge_colors_based_on_weight(
+def assign_edge_colors_based_on_weight(
     nx_graph,
     color_palette=COLOR_PALETTE,
 ):

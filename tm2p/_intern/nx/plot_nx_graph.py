@@ -1,7 +1,7 @@
 import plotly.graph_objects as go  # type: ignore
 
 
-def internal__plot_nx_graph(
+def plot_nx_graph(
     params,
     nx_graph,
 ):

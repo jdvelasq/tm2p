@@ -41,9 +41,9 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 from tm2p._intern.nx import (
-    internal__assign_node_colors_based_on_group_attribute,
-    internal__cluster_nx_graph,
-    internal__plot_node_treemap,
+    assign_node_colors_based_on_group_attribute,
+    cluster_nx_graph,
+    plot_node_treemap,
 )
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
@@ -57,6 +57,6 @@ class Treemap(
         """:meta private:"""
 
         nx_graph = create_nx_graph(self.params)
-        nx_graph = internal__cluster_nx_graph(self.params, nx_graph)
-        nx_graph = internal__assign_node_colors_based_on_group_attribute(nx_graph)
-        return internal__plot_node_treemap(self.params, nx_graph)
+        nx_graph = cluster_nx_graph(self.params, nx_graph)
+        nx_graph = assign_node_colors_based_on_group_attribute(nx_graph)
+        return plot_node_treemap(self.params, nx_graph)

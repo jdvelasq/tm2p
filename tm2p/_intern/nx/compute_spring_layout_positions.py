@@ -1,7 +1,7 @@
 import networkx as nx  # type: ignore
 
 
-def internal__compute_spring_layout_positions(
+def compute_spring_layout_positions(
     params,
     nx_graph,
 ):

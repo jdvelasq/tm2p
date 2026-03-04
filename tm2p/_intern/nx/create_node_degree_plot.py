@@ -8,7 +8,7 @@ import pandas as pd  # type: ignore
 import plotly.express as px  # type: ignore
 
 
-def internal__create_node_degree_plot(params, data_frame):
+def create_node_degree_plot(params, data_frame):
 
     fig = px.line(
         data_frame,

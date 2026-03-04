@@ -26,7 +26,7 @@ CLUSTER_COLORS = (
 ) * 10
 
 
-def internal__assign_node_colors_based_on_group_attribute(
+def assign_node_colors_based_on_group_attribute(
     nx_graph,
 ):
     for node in nx_graph.nodes():

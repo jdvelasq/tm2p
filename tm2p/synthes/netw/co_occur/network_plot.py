@@ -61,17 +61,17 @@ Smoke tests:
 from tm2p._intern import ParamsMixin
 from tm2p._intern.nx import (
     assign_constant_to_edge_colors,
-    internal__assign_edge_color_opacity,
-    internal__assign_edge_colors_based_on_weight,
-    internal__assign_edge_widths_based_on_weight,
-    internal__assign_node_colors_based_on_group_attribute,
-    internal__assign_node_sizes_based_on_occurrences,
-    internal__assign_text_positions_based_on_quadrants,
-    internal__assign_textfont_opacity_based_on_occurrences,
-    internal__assign_textfont_sizes_based_on_occurrences,
-    internal__cluster_nx_graph,
-    internal__compute_spring_layout_positions,
-    internal__plot_nx_graph,
+    assign_edge_color_opacity,
+    assign_edge_colors_based_on_weight,
+    assign_edge_widths_based_on_weight,
+    assign_node_colors_based_on_group_attribute,
+    assign_node_sizes_based_on_occurrences,
+    assign_text_positions_based_on_quadrants,
+    assign_textfont_opacity_based_on_occurrences,
+    assign_textfont_sizes_based_on_occurrences,
+    cluster_nx_graph,
+    compute_spring_layout_positions,
+    plot_nx_graph,
 )
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
@@ -85,25 +85,19 @@ class NetworkPlot(
         """:meta private:"""
 
         nx_graph = create_nx_graph(self.params)
-        nx_graph = internal__cluster_nx_graph(self.params, nx_graph)
-        nx_graph = internal__compute_spring_layout_positions(self.params, nx_graph)
-        nx_graph = internal__assign_node_colors_based_on_group_attribute(nx_graph)
-        nx_graph = internal__assign_node_sizes_based_on_occurrences(
-            self.params, nx_graph
-        )
-        nx_graph = internal__assign_textfont_sizes_based_on_occurrences(
-            self.params, nx_graph
-        )
-        nx_graph = internal__assign_textfont_opacity_based_on_occurrences(
-            self.params, nx_graph
-        )
-        nx_graph = internal__assign_edge_widths_based_on_weight(self.params, nx_graph)
-        nx_graph = internal__assign_text_positions_based_on_quadrants(nx_graph)
+        nx_graph = cluster_nx_graph(self.params, nx_graph)
+        nx_graph = compute_spring_layout_positions(self.params, nx_graph)
+        nx_graph = assign_node_colors_based_on_group_attribute(nx_graph)
+        nx_graph = assign_node_sizes_based_on_occurrences(self.params, nx_graph)
+        nx_graph = assign_textfont_sizes_based_on_occurrences(self.params, nx_graph)
+        nx_graph = assign_textfont_opacity_based_on_occurrences(self.params, nx_graph)
+        nx_graph = assign_edge_widths_based_on_weight(self.params, nx_graph)
+        nx_graph = assign_text_positions_based_on_quadrants(nx_graph)
         ## nx_graph = internal__assign_constant_to_edge_colors(self.params, nx_graph)
         ## nx_graph = internal__assign_edge_colors_based_on_weight(nx_graph)
-        nx_graph = internal__assign_edge_color_opacity(self.params, nx_graph)
+        nx_graph = assign_edge_color_opacity(self.params, nx_graph)
 
-        return internal__plot_nx_graph(self.params, nx_graph)
+        return plot_nx_graph(self.params, nx_graph)
 
 
 #

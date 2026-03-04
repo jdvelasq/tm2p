@@ -21,11 +21,11 @@ Treemap
 import plotly.graph_objs as go  # type: ignore
 
 from tm2p._intern.nx.create_clusters_to_terms_mapping import (
-    internal__create_clusters_to_terms_mapping,
+    create_clusters_to_terms_mapping,
 )
 
 
-def internal__plot_node_treemap(
+def plot_node_treemap(
     params,
     nx_graph,
 ):
@@ -41,9 +41,7 @@ def internal__plot_node_treemap(
     node_text = []
     parents = []
 
-    clusters = internal__create_clusters_to_terms_mapping(
-        params=params, nx_graph=nx_graph
-    )
+    clusters = create_clusters_to_terms_mapping(params=params, nx_graph=nx_graph)
     cluster_occ = {key: 0 for key in clusters}
     for key, names in clusters.items():
         for name in names:

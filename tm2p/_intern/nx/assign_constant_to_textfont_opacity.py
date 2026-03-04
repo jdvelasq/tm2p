@@ -1,4 +1,4 @@
-def internal__assign_constant_to_textfont_opacity(
+def assign_constant_to_textfont_opacity(
     params,
     nx_graph,
 ):

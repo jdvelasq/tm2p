@@ -52,14 +52,14 @@ import networkx as nx  # type: ignore
 from tm2p._intern import ParamsMixin
 from tm2p._intern.nx import (
     assign_constant_to_edge_colors,
-    internal__assign_constant_to_node_colors,
-    internal__assign_edge_widths_based_on_weight,
-    internal__assign_node_sizes_based_on_citations,
-    internal__assign_text_positions_based_on_quadrants,
-    internal__assign_textfont_opacity_based_on_citations,
-    internal__assign_textfont_sizes_based_on_citations,
-    internal__compute_spring_layout_positions,
-    internal__plot_nx_graph,
+    assign_constant_to_node_colors,
+    assign_edge_widths_based_on_weight,
+    assign_node_sizes_based_on_citations,
+    assign_text_positions_based_on_quadrants,
+    assign_textfont_opacity_based_on_citations,
+    assign_textfont_sizes_based_on_citations,
+    compute_spring_layout_positions,
+    plot_nx_graph,
 )
 from tm2p.synthes.main_path.network_edges_data_frame import NetworkEdgesDataFrame
 
@@ -90,31 +90,29 @@ class NetworkPlot(
 
         #
         # Network
-        nx_graph = internal__assign_constant_to_node_colors(
+        nx_graph = assign_constant_to_node_colors(params=self.params, nx_graph=nx_graph)
+
+        nx_graph = compute_spring_layout_positions(
             params=self.params, nx_graph=nx_graph
         )
 
-        nx_graph = internal__compute_spring_layout_positions(
+        nx_graph = assign_node_sizes_based_on_citations(
+            params=self.params, nx_graph=nx_graph
+        )
+        nx_graph = assign_textfont_sizes_based_on_citations(
+            params=self.params, nx_graph=nx_graph
+        )
+        nx_graph = assign_textfont_opacity_based_on_citations(
             params=self.params, nx_graph=nx_graph
         )
 
-        nx_graph = internal__assign_node_sizes_based_on_citations(
+        nx_graph = assign_edge_widths_based_on_weight(
             params=self.params, nx_graph=nx_graph
         )
-        nx_graph = internal__assign_textfont_sizes_based_on_citations(
-            params=self.params, nx_graph=nx_graph
-        )
-        nx_graph = internal__assign_textfont_opacity_based_on_citations(
-            params=self.params, nx_graph=nx_graph
-        )
-
-        nx_graph = internal__assign_edge_widths_based_on_weight(
-            params=self.params, nx_graph=nx_graph
-        )
-        nx_graph = internal__assign_text_positions_based_on_quadrants(nx_graph=nx_graph)
+        nx_graph = assign_text_positions_based_on_quadrants(nx_graph=nx_graph)
         nx_graph = assign_constant_to_edge_colors(params=self.params, nx_graph=nx_graph)
 
         for node in nx_graph.nodes():
             nx_graph.nodes[node]["text"] = node
 
-        return internal__plot_nx_graph(self.params, nx_graph)
+        return plot_nx_graph(self.params, nx_graph)

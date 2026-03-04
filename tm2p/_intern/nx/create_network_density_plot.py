@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 from sklearn.neighbors import KernelDensity
 
 
-def internal__create_network_density_plot(
+def create_network_density_plot(
     params,
     nx_graph,
 ):

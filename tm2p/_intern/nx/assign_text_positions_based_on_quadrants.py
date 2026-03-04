@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def internal__assign_text_positions_based_on_quadrants(
+def assign_text_positions_based_on_quadrants(
     nx_graph,
 ):
     """Computes the text position for a node in a networkx graph."""

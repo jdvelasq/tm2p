@@ -1,4 +1,4 @@
-def internal__assign_constant_textfont_size_to_nodes(
+def assign_constant_textfont_size_to_nodes(
     params,
     nx_graph,
 ):

@@ -1,7 +1,7 @@
 import pandas as pd  # type: ignore
 
 from tm2p._intern.nx.create_clusters_to_terms_mapping import (
-    internal__create_clusters_to_terms_mapping,
+    create_clusters_to_terms_mapping,
 )
 from tm2p.enum import Indicator
 
@@ -12,7 +12,7 @@ def summarize_communities(
 ):
     """Gets communities from a networkx graph as a data frame."""
 
-    communities_dict = internal__create_clusters_to_terms_mapping(
+    communities_dict = create_clusters_to_terms_mapping(
         params=params, nx_graph=nx_graph
     )
     communities_len = {}

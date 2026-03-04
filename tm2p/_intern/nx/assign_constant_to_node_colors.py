@@ -1,4 +1,4 @@
-def internal__assign_constant_to_node_colors(
+def assign_constant_to_node_colors(
     params,
     nx_graph,
 ):

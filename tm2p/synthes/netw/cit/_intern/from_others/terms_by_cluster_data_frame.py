@@ -1,8 +1,5 @@
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import (
-    internal__cluster_nx_graph,
-    internal__extract_communities_to_frame,
-)
+from tm2p._intern.nx import cluster_nx_graph, extract_communities_to_frame
 from tm2p.synthes.netw.cit._intern.from_others.create_nx_graph import (
     internal__create_nx_graph,
 )
@@ -17,5 +14,5 @@ class TermsByClusterDataFrame(
         """:meta private:"""
 
         nx_graph = internal__create_nx_graph(self.params)
-        nx_graph = internal__cluster_nx_graph(self.params, nx_graph)
-        return internal__extract_communities_to_frame(self.params, nx_graph)
+        nx_graph = cluster_nx_graph(self.params, nx_graph)
+        return extract_communities_to_frame(self.params, nx_graph)

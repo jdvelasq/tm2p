@@ -1,12 +1,10 @@
 import graphviz
 
-from tm2p._intern.nx.extract_communities_to_frame import (
-    internal__extract_communities_to_frame,
-)
+from tm2p._intern.nx.extract_communities_to_frame import extract_communities_to_frame
 from tm2p._intern.nx.summarize_communities import summarize_communities
 
 
-def internal__concept_grid_plot(
+def concept_grid_plot(
     nx_graph,
     conserve_counters,
     n_head,
@@ -19,7 +17,7 @@ def internal__concept_grid_plot(
         conserve_counters=True,
     )
 
-    data_frame = internal__extract_communities_to_frame(
+    data_frame = extract_communities_to_frame(
         #
         # FUNCTION PARAMS:
         nx_graph=nx_graph,

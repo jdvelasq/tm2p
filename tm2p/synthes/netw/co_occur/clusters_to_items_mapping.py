@@ -59,10 +59,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import (
-    internal__cluster_nx_graph,
-    internal__create_clusters_to_terms_mapping,
-)
+from tm2p._intern.nx import cluster_nx_graph, create_clusters_to_terms_mapping
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
 
@@ -75,8 +72,8 @@ class ClustersToItemsMapping(
         """:meta private:"""
 
         nx_graph = create_nx_graph(params=self.params)
-        nx_graph = internal__cluster_nx_graph(params=self.params, nx_graph=nx_graph)
-        mapping = internal__create_clusters_to_terms_mapping(
+        nx_graph = cluster_nx_graph(params=self.params, nx_graph=nx_graph)
+        mapping = create_clusters_to_terms_mapping(
             params=self.params, nx_graph=nx_graph
         )
 

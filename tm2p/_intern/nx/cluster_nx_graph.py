@@ -9,7 +9,7 @@ import sys
 from cdlib import algorithms  # type: ignore
 
 
-def internal__cluster_nx_graph(
+def cluster_nx_graph(
     params,
     nx_graph,
 ):

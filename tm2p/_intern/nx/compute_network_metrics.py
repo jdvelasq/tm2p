@@ -4,7 +4,7 @@ import pandas as pd  # type: ignore
 from tm2p.enum import Indicator
 
 
-def internal__compute_network_metrics(
+def compute_network_metrics(
     params,
     nx_graph,
 ):

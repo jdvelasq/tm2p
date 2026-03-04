@@ -34,7 +34,7 @@ MANAGE SCI 1:30                     25     0.016051   0.878788  0.041488
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx.compute_network_metrics import internal__compute_network_metrics
+from tm2p._intern.nx.compute_network_metrics import compute_network_metrics
 from tm2p.synthes.netw.co_cit._intern.create_nx_graph import internal__create_nx_graph
 
 
@@ -45,8 +45,8 @@ class NetworkMetrics(
 
     def run(self):
         nx_graph = internal__create_nx_graph(self.params)
-        return internal__compute_network_metrics(params=self.params, nx_graph=nx_graph)
+        return compute_network_metrics(params=self.params, nx_graph=nx_graph)
 
     def run(self):
         nx_graph = internal__create_nx_graph(self.params)
-        return internal__compute_network_metrics(params=self.params, nx_graph=nx_graph)
+        return compute_network_metrics(params=self.params, nx_graph=nx_graph)

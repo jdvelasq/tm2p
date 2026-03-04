@@ -35,7 +35,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import internal__compute_network_metrics
+from tm2p._intern.nx import compute_network_metrics
 from tm2p.synthes.netw.coupl._intern.from_documents.create_nx_graph import (
     internal__create_nx_graph,
 )
@@ -49,6 +49,6 @@ class NetworkMetrics(
     def run(self):
 
         nx_graph = internal__create_nx_graph(params=self.params)
-        return internal__compute_network_metrics(params=self.params, nx_graph=nx_graph)
+        return compute_network_metrics(params=self.params, nx_graph=nx_graph)
         nx_graph = internal__create_nx_graph(params=self.params)
-        return internal__compute_network_metrics(params=self.params, nx_graph=nx_graph)
+        return compute_network_metrics(params=self.params, nx_graph=nx_graph)

@@ -70,13 +70,13 @@ import networkx as nx  # type: ignore
 from tm2p._intern import ParamsMixin
 from tm2p._intern.nx import (
     assign_constant_to_edge_colors,
-    internal__assign_edge_widths_based_on_weight,
-    internal__assign_node_sizes_based_on_occurrences,
-    internal__assign_text_positions_based_on_quadrants,
-    internal__assign_textfont_opacity_based_on_occurrences,
-    internal__assign_textfont_sizes_based_on_occurrences,
-    internal__compute_spring_layout_positions,
-    internal__plot_nx_graph,
+    assign_edge_widths_based_on_weight,
+    assign_node_sizes_based_on_occurrences,
+    assign_text_positions_based_on_quadrants,
+    assign_textfont_opacity_based_on_occurrences,
+    assign_textfont_sizes_based_on_occurrences,
+    compute_spring_layout_positions,
+    plot_nx_graph,
 )
 from tm2p.discov.cross_occur_matrix.matrix import Matrix
 
@@ -161,27 +161,25 @@ class MatrixPlot(
         return nx_graph
 
     def _step_05_compute_spring_layout_positions(self, nx_graph):
-        return internal__compute_spring_layout_positions(
+        return compute_spring_layout_positions(
             self.params,
             nx_graph,
         )
 
     def _step_06_assign_node_sizes_based_on_occurrences(self, nx_graph):
-        return internal__assign_node_sizes_based_on_occurrences(
+        return assign_node_sizes_based_on_occurrences(
             self.params,
             nx_graph,
         )
 
     def _step_07_assign_textfont_sizes_based_on_occurrences(self, nx_graph):
-        return internal__assign_textfont_sizes_based_on_occurrences(
+        return assign_textfont_sizes_based_on_occurrences(
             self.params,
             nx_graph,
         )
 
     def _step_08_assign_text_opacity_based_on_occurrences(self, nx_graph):
-        return internal__assign_textfont_opacity_based_on_occurrences(
-            self.params, nx_graph
-        )
+        return assign_textfont_opacity_based_on_occurrences(self.params, nx_graph)
 
     def _step_09_assign_edge_colors_based_on_weight(self, nx_graph):
         return assign_constant_to_edge_colors(
@@ -190,13 +188,13 @@ class MatrixPlot(
         )
 
     def _step_10_assign_edge_widths_based_on_weight(self, nx_graph):
-        return internal__assign_edge_widths_based_on_weight(
+        return assign_edge_widths_based_on_weight(
             self.params,
             nx_graph,
         )
 
     def _step_11_assign_text_positions_based_on_quadrants(self, nx_graph):
-        return internal__assign_text_positions_based_on_quadrants(nx_graph)
+        return assign_text_positions_based_on_quadrants(nx_graph)
 
     def run(self):
 
@@ -214,7 +212,7 @@ class MatrixPlot(
         nx_graph = self._step_10_assign_edge_widths_based_on_weight(nx_graph)
         nx_graph = self._step_11_assign_text_positions_based_on_quadrants(nx_graph)
 
-        return internal__plot_nx_graph(
+        return plot_nx_graph(
             params=self.params,
             nx_graph=nx_graph,
         )

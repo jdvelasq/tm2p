@@ -1,7 +1,7 @@
 import networkx as nx  # type: ignore
 
 
-def internal__compute_circular_layout_positions(
+def compute_circular_layout_positions(
     nx_graph,
 ):
     """Computes a circular layout with the last node as center"""

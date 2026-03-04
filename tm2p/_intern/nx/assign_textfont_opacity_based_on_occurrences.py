@@ -4,7 +4,7 @@
 import numpy as np
 
 
-def internal__assign_textfont_opacity_based_on_occurrences(
+def assign_textfont_opacity_based_on_occurrences(
     params,
     nx_graph,
 ):

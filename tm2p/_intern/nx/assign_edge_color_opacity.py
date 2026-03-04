@@ -3,7 +3,7 @@ import colorsys
 import numpy as np
 
 
-def internal__assign_edge_color_opacity(
+def assign_edge_color_opacity(
     params,
     nx_graph,
 ):

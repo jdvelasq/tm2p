@@ -3,7 +3,7 @@ import pandas as pd  # type: ignore
 from tm2p.enum import Indicator
 
 
-def internal__create_node_degrees_data_frame(node_degrees):
+def create_node_degrees_data_frame(node_degrees):
     """Converts a list of degrees to a dataframe."""
 
     dataframe = pd.DataFrame(

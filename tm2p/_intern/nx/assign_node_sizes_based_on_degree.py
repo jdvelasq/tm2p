@@ -4,7 +4,7 @@
 import numpy as np
 
 
-def internal__assign_node_sizes_based_on_degree(
+def assign_node_sizes_based_on_degree(
     params,
     nx_graph,
 ):

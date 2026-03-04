@@ -1,4 +1,4 @@
-def internal__create_clusters_to_terms_mapping(
+def create_clusters_to_terms_mapping(
     params,
     nx_graph,
 ):

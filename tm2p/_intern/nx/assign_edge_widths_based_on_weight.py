@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def internal__assign_edge_widths_based_on_weight(
+def assign_edge_widths_based_on_weight(
     params,
     nx_graph,
 ):

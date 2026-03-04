@@ -1,4 +1,4 @@
-def internal__assign_constant_to_node_sizes(
+def assign_constant_to_node_sizes(
     params,
     nx_graph,
 ):

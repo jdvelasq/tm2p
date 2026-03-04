@@ -4,7 +4,7 @@
 import numpy as np
 
 
-def internal__assign_textfont_opacity_based_on_citations(
+def assign_textfont_opacity_based_on_citations(
     params,
     nx_graph,
 ):

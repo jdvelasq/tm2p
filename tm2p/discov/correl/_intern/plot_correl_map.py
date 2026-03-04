@@ -1,12 +1,12 @@
 import networkx as nx  # type: ignore
 
 from tm2p._intern.nx import (
-    internal__assign_node_sizes_based_on_occurrences,
-    internal__assign_text_positions_based_on_quadrants,
-    internal__assign_textfont_opacity_based_on_occurrences,
-    internal__assign_textfont_sizes_based_on_occurrences,
-    internal__compute_spring_layout_positions,
-    internal__plot_nx_graph,
+    assign_node_sizes_based_on_occurrences,
+    assign_text_positions_based_on_quadrants,
+    assign_textfont_opacity_based_on_occurrences,
+    assign_textfont_sizes_based_on_occurrences,
+    compute_spring_layout_positions,
+    plot_nx_graph,
 )
 
 
@@ -123,12 +123,12 @@ def plot_correl_map(
     nx_graph = assign_node_texts(nx_graph)
     nx_graph = add_weighted_edges_from(params, nx_graph, df)
 
-    nx_graph = internal__compute_spring_layout_positions(params, nx_graph)
-    nx_graph = internal__assign_node_sizes_based_on_occurrences(params, nx_graph)
-    nx_graph = internal__assign_textfont_sizes_based_on_occurrences(params, nx_graph)
-    nx_graph = internal__assign_textfont_opacity_based_on_occurrences(params, nx_graph)
-    nx_graph = internal__assign_text_positions_based_on_quadrants(nx_graph)
+    nx_graph = compute_spring_layout_positions(params, nx_graph)
+    nx_graph = assign_node_sizes_based_on_occurrences(params, nx_graph)
+    nx_graph = assign_textfont_sizes_based_on_occurrences(params, nx_graph)
+    nx_graph = assign_textfont_opacity_based_on_occurrences(params, nx_graph)
+    nx_graph = assign_text_positions_based_on_quadrants(nx_graph)
 
     nx_graph = set_edge_properties(params, nx_graph)
 
-    return internal__plot_nx_graph(params=params, nx_graph=nx_graph)
+    return plot_nx_graph(params=params, nx_graph=nx_graph)
