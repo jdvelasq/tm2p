@@ -40,8 +40,9 @@ ConceptGridPlot
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import cluster_nx_graph, concept_grid_plot
-from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
+
+# from tm2p._intern.nx import cluster_nx_graph, concept_grid_plot
+# from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
 
 class ConceptGridPlot(
@@ -52,6 +53,6 @@ class ConceptGridPlot(
     def run(self):
         """:meta private:"""
 
-        nx_graph = create_nx_graph(self.params)
-        nx_graph = cluster_nx_graph(self.params, nx_graph)
-        return concept_grid_plot(self.params, nx_graph)
+        # nx_graph = create_nx_graph(self.params)
+        # nx_graph = cluster_nx_graph(self.params, nx_graph)
+        # return concept_grid_plot(self.params, nx_graph)
