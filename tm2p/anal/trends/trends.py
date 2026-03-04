@@ -250,7 +250,7 @@ class Trends(
         return self.sort_index(df)
 
     def _remove_counter_from_axis(self, df):
-        if self.params.item_counters is False:
+        if self.params.counters is False:
             df.index = df.index.str.split().str[0]
         return df
 

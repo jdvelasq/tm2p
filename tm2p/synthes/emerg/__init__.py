@@ -1,7 +1,5 @@
-"""Emergence analysis."""
-
-from .dataframe import DataFrame
+from .metrics import Metrics
 
 __all__ = [
-    "DataFrame",
+    "Metrics",
 ]

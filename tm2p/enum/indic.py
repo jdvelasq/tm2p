@@ -47,3 +47,5 @@ class Indicator(Enum):
     MP_RATIO = "MP_RATIO"
     SP = "SP"
     MP = "MP"
+
+    # Emergence:
