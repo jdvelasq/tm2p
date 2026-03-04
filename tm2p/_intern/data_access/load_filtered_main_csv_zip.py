@@ -180,7 +180,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ],
             ascending=[True, False, False],
         )
-    elif sort_by == RecordOrderBy.GCS_BY_HIGHEST:
+    elif sort_by == RecordOrderBy.GCS_HIGHEST:
         dataframe = dataframe.sort_values(
             [
                 Field.GCS.value,
@@ -189,7 +189,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ],
             ascending=[False, False, False],
         )
-    elif sort_by == RecordOrderBy.GCS_BY_LOWEST:
+    elif sort_by == RecordOrderBy.GCS_LOWEST:
         dataframe = dataframe.sort_values(
             [
                 Field.GCS.value,
@@ -199,7 +199,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[True, False, False],
         )
 
-    elif sort_by == RecordOrderBy.LCS_BY_HIGHEST:
+    elif sort_by == RecordOrderBy.LCS_HIGHEST:
         dataframe = dataframe.sort_values(
             [
                 Field.LCS.value,
@@ -209,7 +209,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[False, False, False],
         )
 
-    elif sort_by == RecordOrderBy.LCS_BY_LOWEST:
+    elif sort_by == RecordOrderBy.LCS_LOWEST:
         dataframe = dataframe.sort_values(
             [
                 Field.LCS.value,

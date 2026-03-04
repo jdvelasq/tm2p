@@ -64,7 +64,7 @@ from .create_terms_to_clusters_mapping import internal__create_terms_to_clusters
 from .extract_communities_to_frame import internal__extract_communities_to_frame
 from .plot_node_treemap import internal__plot_node_treemap
 from .plot_nx_graph import internal__plot_nx_graph
-from .summarize_communities import internal__summarize_communities
+from .summarize_communities import summarize_communities
 
 __all__ = [
     "internal__assign_constant_textfont_size_to_nodes",
@@ -101,5 +101,5 @@ __all__ = [
     "internal__extract_communities_to_frame",
     "internal__plot_node_treemap",
     "internal__plot_nx_graph",
-    "internal__summarize_communities",
+    "summarize_communities",
 ]

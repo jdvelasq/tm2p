@@ -61,9 +61,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 from tm2p.innov.emerg.mixins import RecursiveClusteringMixin
-from tm2p.synthes.concept_struct.co_occur.concept import (
-    NetworkPlot as ClassicalNetworkPlot,
-)
+from tm2p.synthes.netw.co_occur import NetworkPlot as ClassicalNetworkPlot
 
 
 class NetworkPlot(

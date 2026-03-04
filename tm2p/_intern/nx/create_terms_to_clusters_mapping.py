@@ -7,7 +7,7 @@ def internal__create_terms_to_clusters_mapping(
     mapping = {}
     for node, data in nx_graph.nodes(data=True):
         cluster = data["group"]
-        if params.term_counters is False:
+        if params.item_counters is False:
             node = " ".join(node.split(" ")[:-1])
         mapping[node] = cluster
 

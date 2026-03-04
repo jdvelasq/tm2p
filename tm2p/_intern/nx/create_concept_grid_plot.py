@@ -3,7 +3,7 @@ import graphviz
 from tm2p._intern.nx.extract_communities_to_frame import (
     internal__extract_communities_to_frame,
 )
-from tm2p._intern.nx.summarize_communities import internal__summarize_communities
+from tm2p._intern.nx.summarize_communities import summarize_communities
 
 
 def internal__concept_grid_plot(
@@ -12,7 +12,7 @@ def internal__concept_grid_plot(
     n_head,
     fontsize,
 ):
-    summary = internal__summarize_communities(
+    summary = summarize_communities(
         #
         # FUNCTION PARAMS:
         nx_graph=nx_graph,

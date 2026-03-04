@@ -1,0 +1,91 @@
+"""
+Terms by Cluster Summary
+===============================================================================
+
+
+Smoke tests:
+    >>> from tm2p import Field, AssociationIndex, ItemOrderBy
+    >>> from tm2p.synthes.netw.co_occur import ItemsByClusterSummary
+    >>> df = (
+    ...     ItemsByClusterSummary()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .having_items_in_top(20)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_item_counters(True)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_association_index(AssociationIndex.NONE)
+    ...     .using_clustering_algorithm_or_dict("louvain")
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> df.head(10)
+       CLUSTER  ...                                              ITEMS
+    0        0  ...  fintech 117:25478; financial inclusion 017:038...
+    1        1  ...  financial technology 014:02508; financial lite...
+    2        2  ...  banking 010:02599; innovation 009:01703; finan...
+    <BLANKLINE>
+    [3 rows x 4 columns]
+
+
+    >>> df = (
+    ...     ItemsByClusterSummary()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .having_items_in_top(20)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_item_counters(False)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_clustering_algorithm_or_dict("louvain")
+    ...     .using_association_index(AssociationIndex.NONE)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> df.head(10)
+
+
+"""
+
+from tm2p._intern import ParamsMixin
+from tm2p._intern.nx import internal__cluster_nx_graph, summarize_communities
+from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
+
+
+class ItemsByClusterSummary(
+    ParamsMixin,
+):
+    """:meta private:"""
+
+    def run(self):
+        """:meta private:"""
+
+        self.params.node_n_labels = self.params.top_n or 1000
+        nx_graph = create_nx_graph(self.params)
+        nx_graph = internal__cluster_nx_graph(self.params, nx_graph)
+        return summarize_communities(self.params, nx_graph)

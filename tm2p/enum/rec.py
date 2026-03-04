@@ -3,11 +3,11 @@ from enum import Enum
 
 class RecordOrderBy(Enum):
 
-    GCS_BY_HIGHEST = "GCS_BY_HIGHEST"
-    GCS_BY_LOWEST = "GCS_BY_LOWEST"
+    GCS_HIGHEST = "GCS_HIGHEST"
+    GCS_LOWEST = "GCS_LOWEST"
 
-    LCS_BY_HIGHEST = "LCS_BY_HIGHEST"
-    LCS_BY_LOWEST = "LCS_BY_LOWEST"
+    LCS_HIGHEST = "LCS_HIGHEST"
+    LCS_LOWEST = "LCS_LOWEST"
 
     AUTH_A_TO_Z = "AUTH_A_TO_Z"
     AUTH_Z_TO_A = "AUTH_Z_TO_A"

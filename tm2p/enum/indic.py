@@ -29,3 +29,16 @@ class Indicator(Enum):
     NUM_REC = "NUM_REC"
 
     COUNTERS = "COUNTERS"
+
+    # Network:
+    CLUSTER = "CLUSTER"
+    NUM_ITEMS = "NUM_ITEMS"
+    PERCENTAGE = "PERCENTAGE"
+    ITEMS = "ITEMS"
+    NODE = "NODE"
+    DEGREE = "DEGREE"
+    NAME = "NAME"
+
+    BETWEENNESS = "BETWEENNESS"
+    CLOSENESS = "CLOSENESS"
+    PAGERANK = "PAGERANK"

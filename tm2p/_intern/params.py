@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import pandas as pd  # type: ignore
 from sklearn.base import BaseEstimator  # type: ignore
 
-from tm2p.enum import Correlation, Field, ItemOrderBy, RecordOrderBy
+from tm2p.enum import AssociationIndex, Correlation, Field, ItemOrderBy, RecordOrderBy
 
 
 @dataclass
@@ -60,7 +60,7 @@ class Params:
     #
     # A
     #
-    association_index: Optional[str] = None
+    association_index: AssociationIndex = AssociationIndex.NONE
     axes_visible: bool = False
 
     #

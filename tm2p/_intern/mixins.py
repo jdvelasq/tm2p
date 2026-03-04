@@ -34,7 +34,7 @@ from tm2p._intern.valid import (
     check_required_str_tuple,
     check_tuple_of_ordered_four_floats,
 )
-from tm2p.enum import Correlation, Field, ItemOrderBy, RecordOrderBy
+from tm2p.enum import AssociationIndex, Correlation, Field, ItemOrderBy, RecordOrderBy
 
 from .params import Params
 
@@ -344,12 +344,8 @@ class ParamsMixin:
     # USING_* → Parameters (HOW to analyze/display?)
     # ==========================================================================
 
-    def using_association_index(self, association_index: Optional[str]) -> Self:
-        association_index = check_optional_str(
-            value=association_index,
-            param_name="association_index",
-        )
-        self.params.association_index = association_index
+    def using_association_index(self, normalization: AssociationIndex) -> Self:
+        self.params.association_index = normalization
         return self
 
     def using_clustering_algorithm_or_dict(

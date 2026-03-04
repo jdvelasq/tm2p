@@ -23,10 +23,10 @@ def internal__extract_communities_to_frame(
         x = [v for k in sorted(mapping.keys(), reverse=True) for v in mapping[k]]
         return x
 
-    local_params = Params(**params.__dict__).update(term_counters=True)
+    local_params = Params(**params.__dict__).update(item_counters=True)
     communities = internal__create_clusters_to_terms_mapping(local_params, nx_graph)
     communities = {key: f(value) for key, value in communities.items()}
-    if params.term_counters is False:
+    if params.item_counters is False:
         communities = {
             key: [" ".join(v.split(" ")[:-1]) for v in value]
             for key, value in communities.items()

@@ -1,6 +1,8 @@
 import networkx as nx  # type: ignore
 import pandas as pd  # type: ignore
 
+from tm2p.enum import Indicator
+
 
 def internal__compute_network_metrics(
     params,
@@ -13,6 +15,7 @@ def internal__compute_network_metrics(
 
         for node, adjacencies in nx_graph.adjacency():
             nx_graph.nodes[node]["degree"] = len(adjacencies)
+            nx_graph.nodes[node]["labeled"] = True
 
         return nx_graph
 
@@ -38,10 +41,10 @@ def internal__compute_network_metrics(
 
     data_frame = pd.DataFrame(
         {
-            "Degree": degree,
-            "Betweenness": betweenness,
-            "Closeness": closeness,
-            "PageRank": pagerank,
+            Indicator.DEGREE.value: degree,
+            Indicator.BETWEENNESS.value: betweenness,
+            Indicator.CLOSENESS.value: closeness,
+            Indicator.PAGERANK.value: pagerank,
             # "Centrality": callon_centrality,
             # "Density": callon_density,
             # "_occ_": occ,
@@ -59,12 +62,12 @@ def internal__compute_network_metrics(
     ## data_frame = data_frame.drop(columns=["_occ_", "_gc_", "_name_"])
 
     data_frame = data_frame.sort_values(
-        by=["Degree", "_occ_gc_", "_name_"],
+        by=[Indicator.DEGREE.value, "_occ_gc_", "_name_"],
         ascending=[False, False, True],
     )
     data_frame = data_frame.drop(columns=["_name_", "_occ_gc_"])
 
-    if params.term_counters is False:
+    if params.item_counters is False:
         data_frame.index = [" ".join(t.split(" ")[:-1]) for t in data_frame.index]
 
     return data_frame

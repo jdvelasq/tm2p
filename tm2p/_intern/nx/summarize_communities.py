@@ -3,9 +3,10 @@ import pandas as pd  # type: ignore
 from tm2p._intern.nx.create_clusters_to_terms_mapping import (
     internal__create_clusters_to_terms_mapping,
 )
+from tm2p.enum import Indicator
 
 
-def internal__summarize_communities(
+def summarize_communities(
     params,
     nx_graph,
 ):
@@ -26,16 +27,14 @@ def internal__summarize_communities(
 
     summary = pd.DataFrame(
         {
-            "Cluster": list(communities_dict.keys()),
-            "Num Terms": communities_len.values(),
-            "Percentage": communities_perc.values(),
-            "Terms": communities_dict.values(),
+            Indicator.CLUSTER.value: list(communities_dict.keys()),
+            Indicator.NUM_ITEMS.value: communities_len.values(),
+            Indicator.PERCENTAGE.value: communities_perc.values(),
+            Indicator.ITEMS.value: communities_dict.values(),
         }
     )
 
-    summary = summary.sort_values("Cluster", ascending=True)
+    summary = summary.sort_values(Indicator.CLUSTER.value, ascending=True)
     summary = summary.reset_index(drop=True)
-
-    return summary
 
     return summary

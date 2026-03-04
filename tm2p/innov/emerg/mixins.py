@@ -1,7 +1,7 @@
 import sys
 
-from tm2p.synthes.concept_struct.co_occur.concept import ClustersToTermsMapping
 from tm2p.synthes.emerg import DataFrame
+from tm2p.synthes.netw.co_occur import ClustersToItemsMapping
 
 
 class RecursiveClusteringMixin:
@@ -47,7 +47,7 @@ class RecursiveClusteringMixin:
                 else:
 
                     mapping = (
-                        ClustersToTermsMapping()
+                        ClustersToItemsMapping()
                         .update(**self.params.__dict__)
                         #
                         # rewrite the parameters used by the recursive clustering:
