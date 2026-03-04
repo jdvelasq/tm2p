@@ -731,12 +731,12 @@ class ParamsMixin:
         self.params.spring_layout_seed = spring_layout_seed
         return self
 
-    def using_item_counters(self, item_counters: bool) -> Self:
-        item_counters = check_required_bool(
-            value=item_counters,
-            param_name="item_counters",
+    def using_counters(self, counters: bool) -> Self:
+        counters = check_required_bool(
+            value=counters,
+            param_name="counters",
         )
-        self.params.item_counters = item_counters
+        self.params.counters = counters
         return self
 
     def using_textfont_color(
@@ -1084,7 +1084,7 @@ class ParamsMixin:
         return self
 
     def where_records_match(
-        self, records_match: Optional[Dict[str, List[str]]]
+        self, records_match: Optional[Dict[Field, List[str]]]
     ) -> Self:
         self.params.records_match = records_match
         return self

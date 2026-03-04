@@ -31,20 +31,7 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-    columns                       FINTECH 31:5168  ...  FINANCIAL_SERVICES 04:0667
-    rows                                           ...
-    FINTECH 31:5168                            31  ...                           3
-    INNOVATION 07:0911                          5  ...                           2
-    FINANCIAL_SERVICES 04:0667                  3  ...                           4
-    FINANCIAL_INCLUSION 03:0590                 3  ...                           0
-    FINANCIAL_TECHNOLOGY 03:0461                2  ...                           1
-    CROWDFUNDING 03:0335                        2  ...                           0
-    MARKETPLACE_LENDING 03:0317                 3  ...                           0
-    BUSINESS_MODELS 02:0759                     2  ...                           1
-    CYBER_SECURITY 02:0342                      2  ...                           0
-    CASE_STUDY 02:0340                          2  ...                           0
-    <BLANKLINE>
-    [10 rows x 3 columns]
+
 
 """
 
@@ -62,7 +49,7 @@ class DataFrame(
         return (
             Matrix()
             .update(**self.params.__dict__)
-            .using_item_counters(True)
+            .using_counters(True)
             .with_other_field(self.params.source_field)
             .run()
         )

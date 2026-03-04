@@ -30,8 +30,8 @@ Smoke test - regtech - successful import:
     >>> result = (
     ...     Scopus()
     ...     .where_root_directory("tests/regtech/")
-    ...     .run()  # doctest: +SKIP
-    ... )
+    ...     .run()
+    ... )  # doctest: +SKIP
     >>> result.success  # doctest: +SKIP
     True
 

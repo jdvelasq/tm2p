@@ -2989,6 +2989,7 @@ banking as a service
 banking as a services
 banking business model
 banking business models
+banking industry
 banking industry competition
 banking industry competitions
 banking sectors
@@ -22485,6 +22486,7 @@ investment strategies
 investment strategy
 investment under uncertainties
 investment under uncertainty
+investments
 investments and securities
 investments portfolios
 investor preference derivation
@@ -31450,6 +31452,7 @@ pancreatic ductal adenocarcinoma
 pancreatic ductal carcinoma
 pandemic lifestyle care
 pandemic lifestyle cares
+pandemics
 panel autoregressive distributed lag
 panel co integrations
 panel corrected standard error
@@ -37761,6 +37764,7 @@ security risk analysis
 security risk assessment
 security risk assessments
 security risk managements
+security risks
 security token offering
 security token offerings
 sediment microbial fuel cell
@@ -39061,6 +39065,7 @@ smart connected healthcares
 smart construction site
 smart construction sites
 smart contact lens
+smart contract
 smart contract based parametric insurance
 smart contract securities
 smart contract security
@@ -41939,6 +41944,7 @@ systemic immune inflammation indexes
 systemic immune inflammation indices
 systemic inflammatory response syndrome
 systemic inflammatory response syndromes
+systemic risk
 systemic vascular resistance
 systemic vascular resistances
 systems analyses

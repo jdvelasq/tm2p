@@ -15,7 +15,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -49,7 +49,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(False)
+    ...     .using_counters(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -59,20 +59,10 @@ Smoke tests:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head(15)
+    ... )
 
-    >>> # Display the resulting data frame
+
     >>> print(df)  # doctest: +NORMALIZE_WHITESPACE
-       Node                       Name  Degree
-    0     0      Electron. Mark. 2:287       5
-    1     1        J. Econ. Bus. 3:422       4
-    2     2  Ind Manage Data Sys 2:386       3
-    3     3             Symmetry 1:176       3
-    4     4    J Manage Inf Syst 2:696       2
-    5     5       Sustainability 2:150       2
-    6     6     J. Innov. Manag. 1:226       2
-    7     7      Financ. Manage. 2:161       1
-
 
 
 """

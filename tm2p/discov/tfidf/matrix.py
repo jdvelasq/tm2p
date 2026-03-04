@@ -16,7 +16,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # TFIDF:
     ...     .using_binary_item_frequencies(False)
@@ -50,6 +50,35 @@ Smoke tests:
     <BLANKLINE>
     [5 rows x 10 columns]
 
+    >>> df = (
+    ...     Matrix()
+    ...     #
+    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .having_items_in_top(10)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(False)
+    ...     #
+    ...     # TFIDF:
+    ...     .using_binary_item_frequencies(False)
+    ...     .using_tfidf_norm(None)
+    ...     .using_tfidf_smooth_idf(False)
+    ...     .using_tfidf_sublinear_tf(False)
+    ...     .using_tfidf_use_idf(False)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> df.head()
 
 
 """

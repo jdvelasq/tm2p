@@ -23,7 +23,7 @@ Smoke tests:
     ...     .having_other_terms_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_spring_layout_k(None)
@@ -178,9 +178,10 @@ class MatrixPlot(
     # -------------------------------------------------------------------------
     def run(self):
 
+        nx_graph = nx.Graph()
+
         cooc_matrix = self._step_01_create_data_frame()
 
-        nx_graph = self._step_02_create_a_empty_networkx_graph()
         nx_graph = self._step_03_add_nodes_from_matrix(nx_graph, cooc_matrix)
         nx_graph = self._step_04_add_weighted_edges_from_matrix(nx_graph, cooc_matrix)
         nx_graph = self._step_05_compute_spring_layout_positions(nx_graph)

@@ -110,7 +110,7 @@ class CombineKeys(
             ## .having_other_terms_in(None)
             #
             # COUNTERS:
-            .using_item_counters(True)
+            .using_counters(True)
             #
             .run()
         )

@@ -17,7 +17,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
@@ -38,14 +38,50 @@ Smoke tests:
     3     3               banking 010:02599      10
     4     4         green finance 011:02844       9
 
+
+    >>> df = (
+    ...     NodeDegreeDataFrame()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .having_items_in_top(20)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(False)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_association_index(AssociationIndex.NONE)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> df.head()
+       NODE                  NAME  DEGREE
+    0     0               fintech      19
+    1     1   financial inclusion      13
+    2     2  financial technology      11
+    3     3               banking      10
+    4     4         green finance       9
+
+
 """
 
 from tm2p._intern import ParamsMixin
 from tm2p._intern.nx import (
     assign_degree_to_nodes,
     collect_node_degrees,
-    create_node_degrees_data_frame,
+    create_node_degree_dataframe,
 )
+from tm2p.enum import Indicator
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
 
@@ -57,9 +93,16 @@ class NodeDegreeDataFrame(
     def run(self):
         """:meta private:"""
 
+        use_counters = self.params.counters
+        self.params.counters = True
         nx_graph = create_nx_graph(self.params)
         nx_graph = assign_degree_to_nodes(nx_graph)
-        node_degrees = collect_node_degrees(nx_graph)
-        data_frame = create_node_degrees_data_frame(node_degrees)
+        degrees = collect_node_degrees(nx_graph)
+        df = create_node_degree_dataframe(degrees)
+        if use_counters is False:
+            self.params.counters = False
+            df[Indicator.NAME.value] = (
+                df[Indicator.NAME.value].str.split(" ").str[:-1].str.join(" ")
+            )
 
-        return data_frame
+        return df

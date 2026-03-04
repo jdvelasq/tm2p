@@ -4,7 +4,10 @@ Treemap
 
 .. raw:: html
 
-    <iframe src="../_generated/px.synthes.netw.co_occur.treemap.html"
+    <iframe src="../_generated/px.synthes.netw.co_occur.treemap_1.html"
+    height="800px" width="100%" frameBorder="0"></iframe>
+
+    <iframe src="../_generated/px.synthes.netw.co_occur.treemap_2.html"
     height="800px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
@@ -21,6 +24,9 @@ Smoke tests:
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
     ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(True)
+    ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
     ...     #
@@ -35,7 +41,37 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-    >>> fig.write_html("docsrc/_generated/px.synthes.netw.co_occur.treemap.html")
+    >>> fig.write_html("docsrc/_generated/px.synthes.netw.co_occur.treemap_1.html")
+
+    >>> fig = (
+    ...     Treemap()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .having_items_in_top(20)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(False)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_association_index(AssociationIndex.NONE)
+    ...     #
+    ...     # PLOT:
+    ...     .using_title_text(None)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> fig.write_html("docsrc/_generated/px.synthes.netw.co_occur.treemap_2.html")
 
 """
 

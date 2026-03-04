@@ -1,7 +1,6 @@
 """
-Terms by Cluster Summary
+TermsByClusterSummary
 ===============================================================================
-
 
 Smoke tests:
     >>> from tm2p.analyze.experimental.co_occurrence import TermsByClusterSummary
@@ -16,7 +15,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_clustering_algorithm_or_dict("louvain")
@@ -33,15 +32,39 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-    >>> df # doctest: +SKIP
-       Cluster  ...                                              Terms
-    0        0  ...  FINTECH 38:6131; THE_FINANCIAL_INDUSTRY 09:200...
-    1        1  ...  TECHNOLOGIES 15:1633; FINANCIAL_TECHNOLOGIES 1...
-    2        2  ...  THE_DEVELOPMENT 09:1293; INNOVATION 08:1816; T...
-    3        3  ...  BANKS 08:1049; DATA 07:1086; CONSUMERS 07:0925...
-    <BLANKLINE>
-    [4 rows x 4 columns]
+    >>> df
 
+
+
+    >>> df = (
+    ...     TermsByClusterSummary()
+    ...     #
+    ...     # FIELD:
+    ...     .having_items_in_top(20)
+    ...     .having_items_ordered_by("OCC")
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(False)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_clustering_algorithm_or_dict("louvain")
+    ...     .using_association_index("association")
+    ...     .using_minimum_terms_in_cluster(5)
+    ...     .using_minimum_number_of_clusters(10)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_database("main")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> df
 
 """
 

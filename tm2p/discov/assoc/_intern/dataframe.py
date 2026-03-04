@@ -59,7 +59,7 @@ class DataFrame(
         return (
             Matrix()
             .update(**self.params.__dict__)
-            .using_item_counters(True)
+            .using_counters(True)
             .with_other_field(self.params.source_field)
             .run()
         )

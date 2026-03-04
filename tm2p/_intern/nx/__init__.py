@@ -42,10 +42,10 @@ from .compute_spring_layout_positions import compute_spring_layout_positions
 from .create_clusters_to_terms_mapping import create_clusters_to_terms_mapping
 from .create_concept_grid_plot import concept_grid_plot
 from .create_network_density_plot import create_network_density_plot
-from .create_node_degree_data_frame import create_node_degrees_data_frame
+from .create_node_degree_dataframe import create_node_degree_dataframe
 from .create_node_degree_plot import create_node_degree_plot
 from .create_terms_to_clusters_mapping import create_terms_to_clusters_mapping
-from .extract_communities_to_frame import extract_communities_to_frame
+from .extract_communities import extract_communities
 from .plot_node_treemap import plot_node_treemap
 from .plot_nx_graph import plot_nx_graph
 from .summarize_communities import summarize_communities
@@ -80,9 +80,9 @@ __all__ = [
     "create_clusters_to_terms_mapping",
     "create_network_density_plot",
     "create_node_degree_plot",
-    "create_node_degrees_data_frame",
+    "create_node_degree_dataframe",
     "create_terms_to_clusters_mapping",
-    "extract_communities_to_frame",
+    "extract_communities",
     "plot_node_treemap",
     "plot_nx_graph",
     "summarize_communities",

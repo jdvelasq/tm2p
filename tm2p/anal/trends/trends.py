@@ -20,7 +20,7 @@ Smoke tests:
     ...     .using_cumulative_sum(False)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -68,7 +68,7 @@ Smoke tests:
     ...     .using_cumulative_sum(False)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(False)
+    ...     .using_counters(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -114,7 +114,7 @@ Smoke tests:
     ...     .using_cumulative_sum(True)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")

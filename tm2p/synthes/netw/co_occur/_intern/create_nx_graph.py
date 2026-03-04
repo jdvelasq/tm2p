@@ -6,9 +6,7 @@ from tm2p.synthes.netw.co_occur._intern.comput_assoc_index import comput_assoc_i
 
 # -------------------------------------------------------------------------
 def _create_co_occur_matrix(params):
-    return (
-        CoOccurrenceMatrix().update(**params.__dict__).update(term_counters=True).run()
-    )
+    return CoOccurrenceMatrix().update(**params.__dict__).update(counters=True).run()
 
 
 # -------------------------------------------------------------------------
@@ -26,10 +24,8 @@ def _add_nodes_to_nx_graph_from(
     nx_graph.add_nodes_from(nodes, group=0)
 
     for node in nx_graph.nodes():
-        #
-        # Remove metrics from the text property of the node name
-        nx_graph.nodes[node]["text"] = " ".join(node.split(" ")[:-1])
         nx_graph.nodes[node]["labeled"] = True
+        nx_graph.nodes[node]["text"] = node
 
     return nx_graph
 

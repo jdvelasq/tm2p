@@ -25,7 +25,7 @@ Smoke tests:
     ...     .having_index_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -80,7 +80,7 @@ Smoke tests:
     ...     .having_index_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(False)
+    ...     .using_counters(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -280,7 +280,7 @@ class Matrix(
 
     # -------------------------------------------------------------------------
     def _step_12_remove_counters(self, matrix):
-        if self.params.item_counters is False:
+        if self.params.counters is False:
             matrix_cols = [" ".join(col.split()[:-1]) for col in matrix.columns]
             matrix_rows = [" ".join(row.split()[:-1]) for row in matrix.index]
             matrix.columns = matrix_cols

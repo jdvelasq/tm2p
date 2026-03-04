@@ -39,8 +39,8 @@ from tm2p._intern import ParamsMixin
 from tm2p._intern.nx import (
     assign_degree_to_nodes,
     collect_node_degrees,
+    create_node_degree_dataframe,
     create_node_degree_plot,
-    create_node_degrees_data_frame,
 )
 from tm2p.synthes.netw.coupl._intern.from_others.create_nx_graph import (
     internal__create_nx_graph,
@@ -57,11 +57,11 @@ class InternalNodeDegreePlot(
         nx_graph = internal__create_nx_graph(self.params)
         nx_graph = assign_degree_to_nodes(nx_graph)
         node_degrees = collect_node_degrees(nx_graph)
-        data_frame = create_node_degrees_data_frame(node_degrees)
+        data_frame = create_node_degree_dataframe(node_degrees)
         plot = create_node_degree_plot(self.params, data_frame)
 
         return plot
-        data_frame = create_node_degrees_data_frame(node_degrees)
+        data_frame = create_node_degree_dataframe(node_degrees)
         plot = create_node_degree_plot(self.params, data_frame)
 
         return plot

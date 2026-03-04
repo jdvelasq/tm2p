@@ -30,7 +30,7 @@ Smoke tests:
     ...     .using_title_text("Sankey Plot")
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")

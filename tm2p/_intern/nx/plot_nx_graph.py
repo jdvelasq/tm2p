@@ -11,10 +11,10 @@ def plot_nx_graph(
     axes_visible = params.axes_visible
     draw_arrows = params.draw_arrows
 
-    node_trace = __create_node_trace(nx_graph)
-    edge_traces = __create_edge_traces(nx_graph)
+    node_trace = _create_node_trace(nx_graph)
+    edge_traces = _create_edge_traces(nx_graph)
 
-    fig = __create_network_fig(
+    fig = _create_network_fig(
         edge_traces,
         node_trace,
         xaxes_range,
@@ -22,7 +22,7 @@ def plot_nx_graph(
         axes_visible,
     )
 
-    fig = __add_node_labels_to_fig(fig, nx_graph)
+    fig = _add_node_labels_to_fig(fig, nx_graph)
 
     fig = __draw_arrows(fig, nx_graph, draw_arrows)
 
@@ -34,6 +34,7 @@ def __draw_arrows(fig, nx_graph, draw_arrows):
         return fig
 
     for edge in nx_graph.edges():
+
         node_citing_article = edge[0]
         node_cited_article = edge[1]
 
@@ -65,7 +66,7 @@ def __draw_arrows(fig, nx_graph, draw_arrows):
     return fig
 
 
-def __create_node_trace(nx_graph):
+def _create_node_trace(nx_graph):
     """Creates a node trace for a networkx graph."""
 
     node_x = [data["x"] for _, data in nx_graph.nodes(data=True)]
@@ -91,7 +92,7 @@ def __create_node_trace(nx_graph):
     return node_trace
 
 
-def __create_edge_traces(graph):
+def _create_edge_traces(graph):
     """Creates edge traces for a networkx graph."""
 
     edge_traces = []
@@ -122,7 +123,6 @@ def __create_edge_traces(graph):
             mode="lines",
         )
 
-        # edge_traces.append(edge_trace)
         data.append((edge_trace, width))
 
     #
@@ -133,7 +133,7 @@ def __create_edge_traces(graph):
     return edge_traces
 
 
-def __create_network_fig(
+def _create_network_fig(
     edge_traces,
     node_trace,
     xaxes_range,
@@ -199,7 +199,7 @@ def __create_network_fig(
     return fig
 
 
-def __add_node_labels_to_fig(fig, nx_graph):
+def _add_node_labels_to_fig(fig, nx_graph):
 
     node_x = [data["x"] for _, data in sorted(nx_graph.nodes(data=True))]
     node_y = [data["y"] for _, data in sorted(nx_graph.nodes(data=True))]

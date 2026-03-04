@@ -38,7 +38,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import cluster_nx_graph, extract_communities_to_frame
+from tm2p._intern.nx import cluster_nx_graph, extract_communities
 from tm2p.synthes.netw.coupl._intern.from_documents.create_nx_graph import (
     internal__create_nx_graph,
 )
@@ -53,4 +53,4 @@ class TermsByClusterDataFrame(
 
         nx_graph = internal__create_nx_graph(self.params)
         nx_graph = cluster_nx_graph(params=self.params, nx_graph=nx_graph)
-        return extract_communities_to_frame(params=self.params, nx_graph=nx_graph)
+        return extract_communities(params=self.params, nx_graph=nx_graph)

@@ -1,20 +1,15 @@
-"""Node degree plot"""
-
-from dataclasses import dataclass
-from typing import Optional
-
-import networkx as nx  # type: ignore
-import pandas as pd  # type: ignore
 import plotly.express as px  # type: ignore
 
+from tm2p.enum import Indicator
 
-def create_node_degree_plot(params, data_frame):
+
+def create_node_degree_plot(params, df):
 
     fig = px.line(
-        data_frame,
-        x="Node",
-        y="Degree",
-        hover_data="Name",
+        df,
+        x=Indicator.NODE.value,
+        y=Indicator.DEGREE.value,
+        hover_data=Indicator.NAME.value,
         markers=True,
     )
     fig.update_traces(
@@ -47,11 +42,11 @@ def create_node_degree_plot(params, data_frame):
         title="Node",
     )
 
-    for _, row in data_frame.iterrows():
+    for _, row in df.iterrows():
         fig.add_annotation(
-            x=row["Node"],
-            y=row["Degree"],
-            text=row["Name"],
+            x=row[Indicator.NODE.value],
+            y=row[Indicator.DEGREE.value],
+            text=row[Indicator.NAME.value],
             showarrow=False,
             textangle=-90,
             yanchor="bottom",

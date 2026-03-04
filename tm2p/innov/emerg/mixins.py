@@ -57,7 +57,7 @@ class RecursiveClusteringMixin:
                         .having_item_citations_between(None, None)
                         .having_items_in(terms)
                         #
-                        .using_item_counters(False)
+                        .using_counters(False)
                         #
                         .run()
                     )

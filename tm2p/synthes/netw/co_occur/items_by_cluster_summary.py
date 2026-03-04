@@ -18,7 +18,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
@@ -53,7 +53,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(False)
+    ...     .using_counters(False)
     ...     #
     ...     # NETWORK:
     ...     .using_clustering_algorithm_or_dict("louvain")
@@ -68,12 +68,19 @@ Smoke tests:
     ...     .run()
     ... )
     >>> df.head(10)
+       CLUSTER  ...                                              ITEMS
+    0        0  ...  fintech; financial inclusion; green finance; b...
+    1        1  ...  financial technology; financial literacy; econ...
+    2        2  ...  banking; innovation; financial services; techn...
+    <BLANKLINE>
+    [3 rows x 4 columns]
 
 
 """
 
-from tm2p._intern import ParamsMixin
+from tm2p._intern import ParamsMixin, remove_counters
 from tm2p._intern.nx import cluster_nx_graph, summarize_communities
+from tm2p.enum import Indicator
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
 
@@ -85,7 +92,16 @@ class ItemsByClusterSummary(
     def run(self):
         """:meta private:"""
 
-        self.params.node_n_labels = self.params.top_n or 1000
+        use_counters = self.params.counters
+        self.params.counters = True
         nx_graph = create_nx_graph(self.params)
         nx_graph = cluster_nx_graph(self.params, nx_graph)
-        return summarize_communities(self.params, nx_graph)
+        df = summarize_communities(self.params, nx_graph)
+        if use_counters is False:
+            self.params.counters = False
+            df[Indicator.ITEMS.value] = df[Indicator.ITEMS.value].apply(
+                lambda x: "; ".join([remove_counters(item) for item in x.split("; ")])
+            )
+        self.params.counters = use_counters
+
+        return df

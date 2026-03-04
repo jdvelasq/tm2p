@@ -97,10 +97,10 @@ class TopicDynamics(
 
     # ----------------------------------------------------------------------------------------------------
     def _step_2_compute_terms_by_year(self):
-        df = Trends()
-        df = df.update(**self.params.__dict__)
-        df = df.using_item_counters(False)
-        df = df.run()
+        trends = Trends()
+        trends = trends.update(**self.params.__dict__)
+        trends = trends.using_counters(False)
+        df = trends.run()
         return df
 
     # ----------------------------------------------------------------------------------------------------

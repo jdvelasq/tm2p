@@ -1,5 +1,5 @@
 """
-Terms to Cluster Mapping
+ItemsToClustersMapping
 ===============================================================================
 
 
@@ -18,7 +18,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
@@ -55,7 +55,6 @@ Smoke tests:
      'sustainable development 005:00604': 1,
      'technology 007:01409': 2}
 
-
     >>> mapping = (
     ...     ItemsToClustersMapping()
     ...     #
@@ -68,7 +67,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(False)
+    ...     .using_counters(False)
     ...     #
     ...     # NETWORK:
     ...     .using_clustering_algorithm_or_dict("louvain")
@@ -84,12 +83,30 @@ Smoke tests:
     ... )
     >>> from pprint import pprint
     >>> pprint(mapping)
-
-
+    {'artificial intelligence': 0,
+     'banking': 2,
+     'banks': 0,
+     'blockchain': 0,
+     'china': 0,
+     'covid-19': 0,
+     'crowdfunding': 0,
+     'digital finance': 0,
+     'economic growth': 1,
+     'financial inclusion': 0,
+     'financial literacy': 1,
+     'financial services': 2,
+     'financial technology': 1,
+     'fintech': 0,
+     'green finance': 0,
+     'innovation': 2,
+     'regtech': 0,
+     'sustainability': 0,
+     'sustainable development': 1,
+     'technology': 2}
 
 """
 
-from tm2p._intern import ParamsMixin
+from tm2p._intern import ParamsMixin, remove_counters
 from tm2p._intern.nx import cluster_nx_graph, create_terms_to_clusters_mapping
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
@@ -102,6 +119,17 @@ class ItemsToClustersMapping(
     def run(self):
         """:meta private:"""
 
+        use_counters = self.params.counters
+        self.params.counters = True
         nx_graph = create_nx_graph(self.params)
         nx_graph = cluster_nx_graph(self.params, nx_graph)
-        return create_terms_to_clusters_mapping(self.params, nx_graph)
+        mapping = create_terms_to_clusters_mapping(nx_graph)
+
+        if use_counters is False:
+            self.params.counters = False
+            result = {}
+            for key, value in mapping.items():
+                result[remove_counters(key)] = value
+            return result
+
+        return mapping

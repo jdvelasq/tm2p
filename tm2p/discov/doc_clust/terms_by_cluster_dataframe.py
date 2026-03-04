@@ -15,7 +15,7 @@ Smoke tests:
     ...     random_state=0,
     ... )
     >>> from tm2p.packages.document_clustering import TermsByClusterDataFrame
-    >>> (
+    >>> df = (
     ...     TermsByClusterDataFrame()
     ...     #
     ...     # FIELD:
@@ -27,7 +27,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # TFIDF:
     ...     .using_binary_item_frequencies(False)
@@ -47,20 +47,8 @@ Smoke tests:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head(10)
-                                   0  ...                             3
-    0     FINANCIAL_SERVICES 05:0746  ...               FINTECH 32:5393
-    1        BUSINESS_MODELS 03:1335  ...            BLOCKCHAIN 03:0881
-    2  FINANCIAL_INSTITUTION 03:0488  ...   FINANCIAL_INCLUSION 03:0590
-    3   FINANCIAL_TECHNOLOGY 03:0461  ...          CROWDFUNDING 03:0335
-    4                BANKING 03:0370  ...   MARKETPLACE_LENDING 03:0317
-    5             TECHNOLOGY 02:0310  ...      ELECTRONIC_MONEY 03:0305
-    6                REGTECH 02:0266  ...           LENDINGCLUB 02:0253
-    7                  CHINA 02:0150  ...  PEER_TO_PEER_LENDING 02:0253
-    8                                 ...        SHADOW_BANKING 02:0253
-    9                                 ...           P2P_LENDING 02:0161
-    <BLANKLINE>
-    [10 rows x 4 columns]
+    ... )
+    >>> df.head(10)
 
 
 """

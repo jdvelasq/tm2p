@@ -11,7 +11,7 @@ Smoke tests:
     ...     # UNIT OF ANALYSIS:
     ...     .having_items_in_top(30)
     ...     .using_citation_threshold(0)
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # CLUSTERING:
     ...     .using_clustering_algorithm_or_dict("louvain")
@@ -39,7 +39,7 @@ Smoke tests:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import cluster_nx_graph, extract_communities_to_frame
+from tm2p._intern.nx import cluster_nx_graph, extract_communities
 from tm2p.synthes.netw.cit._intern.from_documents.create_nx_graph import (
     internal__create_nx_graph,
 )
@@ -55,4 +55,4 @@ class TermsByClusterDataFrame(
 
         nx_graph = internal__create_nx_graph(self.params)
         nx_graph = cluster_nx_graph(self.params, nx_graph)
-        return extract_communities_to_frame(self.params, nx_graph)
+        return extract_communities(self.params, nx_graph)

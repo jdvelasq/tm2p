@@ -12,9 +12,7 @@ def summarize_communities(
 ):
     """Gets communities from a networkx graph as a data frame."""
 
-    communities_dict = create_clusters_to_terms_mapping(
-        params=params, nx_graph=nx_graph
-    )
+    communities_dict = create_clusters_to_terms_mapping(nx_graph=nx_graph)
     communities_len = {}
     communities_perc = {}
 

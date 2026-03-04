@@ -113,7 +113,7 @@ class Params:
     # I
     #
     initial_newline: bool = False
-    item_counters: bool = True
+    counters: bool = True
     items_per_year: int = 5
 
     #
@@ -147,7 +147,7 @@ class Params:
     node_colors: tuple[Union[str, float, Sequence[float]], ...] = ("#7793a5", "#465c6b")
     node_size_range: Tuple[int, int] = (5, 20)
     node_size: int = 10
-    node_n_labels: int = 8
+    node_n_labels: int = 1000
     novelty_threshold: float = 0.15
 
     #
@@ -179,7 +179,7 @@ class Params:
     recent_periods: int = 3
     record_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)
     record_years_range: Tuple[Optional[int], Optional[int]] = (None, None)
-    records_match: Optional[Dict[str, List[str]]] = None
+    records_match: Optional[Dict[Field, List[str]]] = None
     records_order_by: RecordOrderBy = RecordOrderBy.YEAR_NEWEST
     regex_flags: int = 0
     regex_search: bool = False

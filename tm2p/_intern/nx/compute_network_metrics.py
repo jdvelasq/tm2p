@@ -5,7 +5,6 @@ from tm2p.enum import Indicator
 
 
 def compute_network_metrics(
-    params,
     nx_graph,
 ):
     """Compute network statistics."""
@@ -25,8 +24,7 @@ def compute_network_metrics(
     degree = [nx_graph.nodes[node]["degree"] for node in nodes]
 
     occ_gc = [node.split(" ")[-1] for node in nodes]
-    # occ = [int(text.split(":")[0]) for text in occ_gc]
-    # gc = [int(text.split(":")[-1]) for text in occ_gc]
+
     betweenness = nx.betweenness_centrality(nx_graph)
     closeness = nx.closeness_centrality(nx_graph)
     pagerank = nx.pagerank(nx_graph)
@@ -55,19 +53,10 @@ def compute_network_metrics(
         index=nodes,
     )
 
-    ## data_frame = data_frame.sort_values(
-    ##     by=["Degree", "_occ_", "_gc_", "_name_"],
-    ##     ascending=[False, False, False, True],
-    ## )
-    ## data_frame = data_frame.drop(columns=["_occ_", "_gc_", "_name_"])
-
     data_frame = data_frame.sort_values(
         by=[Indicator.DEGREE.value, "_occ_gc_", "_name_"],
         ascending=[False, False, True],
     )
     data_frame = data_frame.drop(columns=["_name_", "_occ_gc_"])
-
-    if params.item_counters is False:
-        data_frame.index = [" ".join(t.split(" ")[:-1]) for t in data_frame.index]
 
     return data_frame

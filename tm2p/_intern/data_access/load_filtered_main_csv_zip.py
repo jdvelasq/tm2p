@@ -1,54 +1,49 @@
 """
-
 Smoke test:
-    >>> #
-    >>> # TEST PREPARATION
-    >>> #
-    >>> # Countries:
-    >>> from tm2p.refine.thesaurus_old.countries import InitializeThesaurus, ApplyThesaurus
-    >>> InitializeThesaurus(root_directory="examples/fintech/", quiet=True).run()
-    >>> ApplyThesaurus(root_directory="examples/fintech/", quiet=True).run()
-
-    >>> # Organizations:
-    >>> from tm2p.refine.thesaurus_old.organizations import InitializeThesaurus, ApplyThesaurus
-    >>> InitializeThesaurus(root_directory="examples/fintech/", quiet=True).run()
-    >>> ApplyThesaurus(root_directory="examples/fintech/", quiet=True).run()
-
-    >>> # Descriptors:
-    >>> from tm2p.refine.thesaurus_old.descriptors import InitializeThesaurus, ApplyThesaurus
-    >>> InitializeThesaurus(root_directory="examples/fintech/", quiet=True).run()
-    >>> ApplyThesaurus(root_directory="examples/fintech/", quiet=True).run()
-
-    >>> #
-    >>> # CODE TESTED
-    >>> #
-    >>> from tm2p._internals import Params
-    >>> from tm2p.database._intern.io import load_filtered_main_data
+    >>> from tm2p._intern import Params
+    >>> from tm2p._intern.data_access import load_filtered_main_csv_zip
     >>> df = (
-    ...     load_filtered_main_data(
+    ...     load_filtered_main_csv_zip(
     ...         Params(
-    ...             database="main",
     ...             record_years_range=(None, None),
     ...             record_citations_range=(None, None),
     ...             records_order_by=None,
     ...             records_match=None,
-    ...             root_directory="examples/fintech/",
+    ...             root_directory="tests/fintech/",
     ...         )
     ...     ).head()
     ... )
-    >>> assert isinstance(df, pd.DataFrame)
+    >>> type(df).__name__
+    'DataFrame'
     >>> assert len(df) > 0
-    >>> assert "year" in df.columns
-    >>> df # doctest: +SKIP
-                        source_title_abbr  ...  year
-    0             Int. J. Appl. Eng. Res.  ...  2016
-    1                   Telecommun Policy  ...  2016
-    3                      China Econ. J.  ...  2016
-    4  Contemp. Stud. Econ. Financ. Anal.  ...  2016
-    5                    New Polit. Econ.  ...  2017
+    >>> assert "YEAR" in df.columns
+    >>> df
+                                                AUTH_RAW  ...                 USR1
+    0  Wang, C.; Wang, L.; Zhao, S.; Yang, C.; Albita...  ...      BUS STRATEG ENV
+    1  Hasan, F.; Al-Okaily, M.; Choudhury, T.; Kayan...  ...  ELECTRON COMMER RES
+    2          Roh, T.; Yang, Y.S.; Xiao, S.; Park, B.I.  ...  ELECTRON COMMER RES
+    3  Ratna, S.; Saide, S.; Putri, A.M.; Indrajit, R...  ...        EUROMED J BUS
+    4                         Gao, D.; Tan, L.; Duan, K.  ...         EUR J FINANC
     <BLANKLINE>
-    [5 rows x 80 columns]
+    [5 rows x 83 columns]
 
+
+    >>> df = (
+    ...     load_filtered_main_csv_zip(
+    ...         Params(
+    ...             record_years_range=(None, None),
+    ...             record_citations_range=(None, None),
+    ...             records_order_by=None,
+    ...             records_match=None,
+    ...             root_directory="tests/fintech/",
+    ...         )
+    ...     ).head()
+    ... )
+    >>> type(df).__name__
+    'DataFrame'
+    >>> assert len(df) > 0
+    >>> assert "YEAR" in df.columns
+    >>> df
 
 
 """
@@ -60,12 +55,12 @@ from tm2p._intern import Params
 from tm2p._intern.data_access.load_main_csv_zip import load_main_csv_zip
 
 
-def _filter_dataframe_by_year(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
+def _filter_dataframe_by_year(params: Params, df: pd.DataFrame) -> pd.DataFrame:
 
     years_range = params.record_years_range
 
     if years_range is None:
-        return dataframe
+        return df
 
     if not isinstance(years_range, tuple):
         raise TypeError(
@@ -80,22 +75,20 @@ def _filter_dataframe_by_year(params: Params, dataframe: pd.DataFrame) -> pd.Dat
     start_year, end_year = years_range
 
     if start_year is not None:
-        dataframe = dataframe[dataframe.year >= start_year]
+        df = df.loc[df[Field.YEAR.value] >= start_year, :]
 
     if end_year is not None:
-        dataframe = dataframe[dataframe.year <= end_year]
+        df = df.loc[df[Field.YEAR.value] <= end_year, :]
 
-    return dataframe
+    return df
 
 
-def _filter_dataframe_by_citations(
-    params: Params, dataframe: pd.DataFrame
-) -> pd.DataFrame:
+def _filter_dataframe_by_citations(params: Params, df: pd.DataFrame) -> pd.DataFrame:
 
     citations_range = params.record_citations_range
 
     if citations_range is None:
-        return dataframe
+        return df
 
     if not isinstance(citations_range, tuple):
         raise TypeError(
@@ -110,60 +103,69 @@ def _filter_dataframe_by_citations(
     cited_by_min, cited_by_max = citations_range
 
     if cited_by_min is not None:
-        dataframe = dataframe[dataframe.global_citations >= cited_by_min]
+        df = df.loc[df[Field.GCS.value] >= cited_by_min, :]
 
     if cited_by_max is not None:
-        dataframe = dataframe[dataframe.global_citations <= cited_by_max]
+        df = df.loc[df[Field.GCS.value] <= cited_by_max, :]
 
-    return dataframe
+    return df
 
 
-def _filter_dataframe_by_match(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
+def _filter_dataframe_by_match(params: Params, df: pd.DataFrame) -> pd.DataFrame:
 
     filters = params.records_match
 
     if filters is None:
-        return dataframe
+        return df
 
-    filters = {k.value: v for k, v in filters.items()}  # type: ignore
+    filtered_df = df.copy()
 
     for filter_name, filter_value in filters.items():
 
-        if filter_name == Field.RID.value:
+        if filter_name.value == Field.RID.value:
 
-            dataframe = dataframe[dataframe[Field.RID.value].isin(filter_value)]
+            filtered_df = filtered_df.loc[
+                filtered_df[Field.RID.value].isin(filter_value), :
+            ]
 
         else:
 
             # Split the filter value into a list of strings
-            database = dataframe[[Field.RID.value, filter_name]].copy()
-            database.loc[:, filter_name] = database[filter_name].str.split(";")
+            filtered_df = filtered_df.loc[
+                :, [Field.RID.value, filter_name.value]
+            ].copy()
+            filtered_df.loc[:, filter_name.value] = filtered_df[
+                filter_name.value
+            ].str.split(";")
 
             # Explode the list of strings into multiple rows
-            database = database.explode(filter_name)
+            filtered_df = filtered_df.explode(filter_name.value)
 
             # Remove leading and trailing whitespace from the strings
-            database[filter_name] = database[filter_name].str.strip()
+            filtered_df[filter_name.value] = filtered_df[filter_name.value].str.strip()
 
             # Keep only records that match the filter value
-            database = database[database[filter_name].isin(filter_value)]
-
-            dataframe = dataframe[
-                dataframe[Field.RID.value].isin(database[Field.RID.value])
+            filtered_df = filtered_df.loc[
+                filtered_df[filter_name.value].isin(filter_value), :
+            ]
+            filtered_df = filtered_df.loc[
+                filtered_df[Field.RID.value].isin(filtered_df[Field.RID.value]), :
             ]
 
-    return dataframe
+    final_df = df.loc[df[Field.RID.value].isin(filtered_df[Field.RID.value]), :]
+
+    return final_df
 
 
-def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
+def _sort_dataframe_by(params: Params, df: pd.DataFrame) -> pd.DataFrame:
 
     sort_by = params.records_order_by
 
     if sort_by is None:
-        return dataframe
+        return df
 
     if sort_by == RecordOrderBy.YEAR_NEWEST:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.YEAR.value,
                 Field.GCS.value,
@@ -172,7 +174,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[False, False, False],
         )
     elif sort_by == RecordOrderBy.YEAR_OLDEST:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.YEAR.value,
                 Field.GCS.value,
@@ -181,7 +183,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[True, False, False],
         )
     elif sort_by == RecordOrderBy.GCS_HIGHEST:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.GCS.value,
                 Field.YEAR.value,
@@ -190,7 +192,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[False, False, False],
         )
     elif sort_by == RecordOrderBy.GCS_LOWEST:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.GCS.value,
                 Field.YEAR.value,
@@ -200,7 +202,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
         )
 
     elif sort_by == RecordOrderBy.LCS_HIGHEST:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.LCS.value,
                 Field.YEAR.value,
@@ -210,7 +212,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
         )
 
     elif sort_by == RecordOrderBy.LCS_LOWEST:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.LCS.value,
                 Field.YEAR.value,
@@ -220,7 +222,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
         )
 
     elif sort_by == RecordOrderBy.AUTH_A_TO_Z:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.AUTH_NORM.value,
                 Field.GCS.value,
@@ -230,7 +232,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
         )
 
     elif sort_by == RecordOrderBy.AUTH_Z_TO_A:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.AUTH_NORM.value,
                 Field.GCS.value,
@@ -239,7 +241,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
             ascending=[False, False, False],
         )
     elif sort_by == RecordOrderBy.SRC_A_TO_Z:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.SRC_NORM.value,
                 Field.GCS.value,
@@ -249,7 +251,7 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
         )
 
     elif sort_by == RecordOrderBy.SRC_Z_TO_A:
-        dataframe = dataframe.sort_values(
+        df = df.sort_values(
             [
                 Field.SRC_NORM.value,
                 Field.GCS.value,
@@ -260,18 +262,18 @@ def _sort_dataframe_by(params: Params, dataframe: pd.DataFrame) -> pd.DataFrame:
     else:
         raise ValueError(f"Unsupported sort option: {sort_by}")
 
-    columns = sorted(dataframe.columns)
-    dataframe = dataframe[columns]
+    columns = sorted(df.columns)
+    df = df.loc[:, columns]
 
-    return dataframe
+    return df
 
 
 def load_filtered_main_csv_zip(params: Params) -> pd.DataFrame:
 
-    dataframe = load_main_csv_zip(root_directory=params.root_directory, usecols=None)
-    dataframe = _filter_dataframe_by_year(params, dataframe)
-    dataframe = _filter_dataframe_by_citations(params, dataframe)
-    dataframe = _filter_dataframe_by_match(params, dataframe)
-    dataframe = _sort_dataframe_by(params, dataframe)
+    df = load_main_csv_zip(root_directory=params.root_directory, usecols=None)
+    df = _filter_dataframe_by_year(params, df)
+    df = _filter_dataframe_by_citations(params, df)
+    df = _filter_dataframe_by_match(params, df)
+    df = _sort_dataframe_by(params, df)
 
-    return dataframe
+    return df

@@ -17,7 +17,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")

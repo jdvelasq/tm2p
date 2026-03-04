@@ -1,5 +1,5 @@
 """
-Terms by Cluster Data Frame
+ItemsByClusterDataFrame
 ===============================================================================
 
 
@@ -16,6 +16,9 @@ Smoke tests:
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
@@ -46,10 +49,53 @@ Smoke tests:
     <BLANKLINE>
     [12 rows x 3 columns]
 
+
+    >>> df = (
+    ...     ItemsByClusterDataFrame()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .having_items_in_top(20)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(False)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_association_index(AssociationIndex.NONE)
+    ...     .using_clustering_algorithm_or_dict("louvain")
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> df  # doctest: +NORMALIZE_WHITESPACE
+                              0                        1                   2
+    0                   fintech     financial technology             banking
+    1       financial inclusion       financial literacy          innovation
+    2             green finance          economic growth  financial services
+    3                blockchain  sustainable development          technology
+    4                     china
+    5   artificial intelligence
+    6              crowdfunding
+    7                   regtech
+    8            sustainability
+    9           digital finance
+    10                 covid-19
+    11                    banks
+
+
 """
 
-from tm2p._intern import ParamsMixin
-from tm2p._intern.nx import cluster_nx_graph, extract_communities_to_frame
+from tm2p._intern import ParamsMixin, remove_counters
+from tm2p._intern.nx import cluster_nx_graph, extract_communities
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
 
@@ -61,6 +107,14 @@ class ItemsByClusterDataFrame(
     def run(self):
         """:meta private:"""
 
+        use_counters = self.params.counters
+        self.params.counters = True
         nx_graph = create_nx_graph(self.params)
         nx_graph = cluster_nx_graph(self.params, nx_graph)
-        return extract_communities_to_frame(self.params, nx_graph)
+        communities = extract_communities(nx_graph)
+        if use_counters is False:
+            self.params.counters = False
+            for col in communities.columns:
+                communities[col] = communities[col].apply(remove_counters)
+        self.params.counters = use_counters
+        return communities

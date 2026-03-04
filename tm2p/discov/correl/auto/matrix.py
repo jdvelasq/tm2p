@@ -20,7 +20,7 @@ Smoke Test:
     ...     .with_correlation_method(Correlation.PEARSON)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -59,7 +59,7 @@ Smoke Test:
     ...     .with_correlation_method(Correlation.COSINE)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -97,7 +97,7 @@ Smoke Test:
     ...     .with_correlation_method(Correlation.MAXPROPORTIONAL)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")

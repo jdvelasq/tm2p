@@ -34,8 +34,8 @@ def records_to_dicts(dataframe):
         Field.SRC_ISO4_NORM.value: "SO",
         Field.YEAR.value: "PY",
         Field.ABSTR_UPPER.value: "AB",
-        Field.AUTHKW_RAW.value: "DE",
-        Field.IDXKW_RAW.value: "ID",
+        Field.AUTHKW_NORM.value: "DE",
+        Field.IDXKW_NORM.value: "ID",
     }
 
     candiate_columns = names_mapping.keys()

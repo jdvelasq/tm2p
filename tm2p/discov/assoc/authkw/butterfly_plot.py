@@ -24,7 +24,7 @@ Smoke tests:
     ...     .having_other_terms_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # CHART PARAMS:
     ...     .using_title_text("Butterfly Plot")

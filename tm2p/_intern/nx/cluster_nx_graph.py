@@ -4,8 +4,6 @@ Creates a co-occurrence networkx graph from a co-occurrence matrix.
 
 """
 
-import sys
-
 from cdlib import algorithms  # type: ignore
 
 
@@ -46,7 +44,7 @@ def cluster_nx_graph(
             key=lambda x: int(x.split(" ")[-1].split(":")[0]),
             reverse=False,
         )
-        for node in sorted_value[:8]:
+        for node in sorted_value[: params.node_n_labels]:
             nx_graph.nodes[node]["top_n"] = True
 
     return nx_graph
@@ -65,6 +63,7 @@ def _apply_cdlib_algorithm(
         "walktrap": algorithms.walktrap,
     }[algorithm]
 
+    communities = []
     if algorithm == "label_propagation":
         communities = cdlib_algorithm(nx_graph).communities
     elif algorithm == "leiden":

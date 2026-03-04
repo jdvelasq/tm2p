@@ -17,7 +17,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(True)
+    ...     .using_counters(True)
     ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
@@ -49,7 +49,6 @@ Smoke tests:
 
 
 
-
     >>> from tm2p.synthes.netw.co_occur import NetworkMetrics
     >>> (
     ...     NetworkMetrics()
@@ -63,7 +62,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # COUNTERS:
-    ...     .using_item_counters(False)
+    ...     .using_counters(False)
     ...     #
     ...     # NETWORK:
     ...     .using_association_index(AssociationIndex.NONE)
@@ -76,11 +75,27 @@ Smoke tests:
     ...     #
     ...     .run()
     ... ).head(15)
+                             DEGREE  BETWEENNESS  CLOSENESS  PAGERANK
+    fintech                      19     0.268421   1.000000  0.268300
+    financial inclusion          13     0.075828   0.760000  0.068416
+    financial technology         11     0.050195   0.703704  0.048962
+    banking                      10     0.043275   0.678571  0.050895
+    green finance                 9     0.042788   0.655172  0.046914
+    blockchain                    9     0.023782   0.655172  0.050393
+    technology                    8     0.019688   0.633333  0.037425
+    innovation                    7     0.018519   0.612903  0.046957
+    artificial intelligence       7     0.011404   0.612903  0.039000
+    financial services            7     0.009942   0.612903  0.034420
+    regtech                       7     0.012671   0.612903  0.036532
+    sustainable development       7     0.015984   0.612903  0.031204
+    digital finance               6     0.007505   0.593750  0.030185
+    covid-19                      6     0.010721   0.593750  0.025856
+    financial literacy            6     0.006725   0.593750  0.027827
 
 
 """
 
-from tm2p._intern import ParamsMixin
+from tm2p._intern import ParamsMixin, remove_counters
 from tm2p._intern.nx import compute_network_metrics
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
@@ -93,5 +108,15 @@ class NetworkMetrics(
     def run(self):
         """:meta private:"""
 
+        use_counters = self.params.counters
+        self.params.counters = True
         nx_graph = create_nx_graph(self.params)
-        return compute_network_metrics(params=self.params, nx_graph=nx_graph)
+        df = compute_network_metrics(nx_graph=nx_graph)
+
+        if use_counters is False:
+            self.params.counters = False
+            names = df.index.tolist()
+            names = [remove_counters(name) for name in names]
+            df.index = names
+
+        return df
