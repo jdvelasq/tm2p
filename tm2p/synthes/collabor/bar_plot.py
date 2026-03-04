@@ -1,15 +1,21 @@
 """
-Bar Plot
+BarPlot
 ===============================================================================
+
+.. raw:: html
+
+    <iframe src="../_generated/px.synthes.collabor.bar_plot.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
     >>> from tm2p import Field, ItemOrderBy
-    >>> from tm2p.analyze.metrics.collaboration import BarPlot
+    >>> from tm2p.synthes.collabor import BarPlot
     >>> fig = (
     ...     BarPlot()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(Field.COUNTRY)
+    ...     .with_source_field(Field.CTRY_ISO3)
     ...     .having_items_in_top(10)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
@@ -19,7 +25,7 @@ Smoke tests:
     ...     # PLOT:
     ...     .using_title_text("Collaboration Plot")
     ...     .using_xaxes_title_text("Countries")
-    ...     .using_yaxes_title_text("OCC")
+    ...     .using_yaxes_title_text("Occurrences")
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -28,14 +34,11 @@ Smoke tests:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
+    ... )
     >>> type(fig).__name__
     'Figure'
-    >>> fig.write_html("docsrc/_generated/px.database.metrics.collaboration.bar_plot.html")
+    >>> fig.write_html("docsrc/_generated/px.synthes.collabor.bar_plot.html")
 
-.. raw:: html
-
-    <iframe src="../_generated/px.database.metrics.collaboration.bar_plot.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
 
 
 
@@ -44,8 +47,12 @@ Smoke tests:
 
 import plotly.express as px  # type: ignore
 
+from tm2p import Indicator
 from tm2p._intern import ParamsMixin
-from tm2p.synthes.collabor.data_frame import DataFrame
+from tm2p.synthes.collabor.metrics import Metrics
+
+SP = Indicator.SP.value
+MP = Indicator.MP.value
 
 
 class BarPlot(
@@ -54,11 +61,11 @@ class BarPlot(
     """:meta private:"""
 
     def get_collaboration_metrics(self):
-        return DataFrame().update(**self.params.__dict__).run()
+        return Metrics().update(**self.params.__dict__).run()
 
     def build_collaboration_bar_plot(self, metrics):
 
-        field = self.params.source_field
+        field = self.params.source_field.value
         title_text = self.params.title_text
         xaxes_title_text = self.params.xaxes_title_text
         yaxes_title_text = self.params.yaxes_title_text
@@ -69,8 +76,8 @@ class BarPlot(
         metrics = metrics.melt(
             id_vars=field,
             value_vars=[
-                "single_publication",
-                "multiple_publication",
+                SP,
+                MP,
             ],
         )
         metrics = metrics.rename(
@@ -79,10 +86,6 @@ class BarPlot(
                 "value": "Num Documents",
             }
         )
-        metrics.publication = metrics.publication.map(
-            lambda x: x.replace("_", " ").title()
-        )
-        metrics[field] = metrics[field].map(lambda x: x.title())
 
         fig = px.bar(
             metrics,
@@ -93,8 +96,8 @@ class BarPlot(
             hover_data=["Num Documents"],
             orientation="h",
             color_discrete_map={
-                "Single Publication": "#7793a5",
-                "Multiple Publication": "#465c6b",
+                SP: "#7793a5",
+                MP: "#465c6b",
             },
         )
         fig.update_layout(

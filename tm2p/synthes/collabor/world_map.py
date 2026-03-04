@@ -2,11 +2,15 @@
 World Map
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.synthes.collabor.world_map.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
+
 
 Smoke tests:
-    >>> from tm2p.analyze.metrics.collaboration import WorldMap
-
-    >>> # Creates, configure, and plots a world map.
+>>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.synthes.collabor import WorldMap
     >>> plotter = (
     ...     WorldMap()
     ...     #
@@ -17,12 +21,8 @@ Smoke tests:
     ...     .where_records_match(None)
     ... )
     >>> plot = plotter.run()
-    >>> plot.write_html("docsrc/_generated/px.database.metrics.collaboration.world_map.html")
+    >>> plot.write_html("docsrc/_generated/px.synthes.collabor.world_map.html")
 
-.. raw:: html
-
-    <iframe src="../_generated/px.database.metrics.collaboration.world_map.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
 
 
 
@@ -32,7 +32,7 @@ import plotly.express as px  # type: ignore
 
 from tm2p import Field, ItemOrderBy
 from tm2p._intern import ParamsMixin
-from tm2p.discov.co_occur_matrix.matrix import Matrix as CoOccurrenceDataFrame
+from tm2p.discov.co_occur_matrix.matrix_list import MatrixList as CoOccurrenceDataFrame
 
 
 class WorldMap(

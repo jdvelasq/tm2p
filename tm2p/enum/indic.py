@@ -42,3 +42,8 @@ class Indicator(Enum):
     BETWEENNESS = "BETWEENNESS"
     CLOSENESS = "CLOSENESS"
     PAGERANK = "PAGERANK"
+
+    # Collaboration:
+    MP_RATIO = "MP_RATIO"
+    SP = "SP"
+    MP = "MP"
