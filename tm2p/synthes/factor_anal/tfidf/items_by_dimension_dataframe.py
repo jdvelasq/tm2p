@@ -1,58 +1,68 @@
 """
-Terms by Dimension Frane
+ItemsByDimensionDataFrame
 ===============================================================================
 
-## >>> from sklearn.decomposition import PCA
-## >>> pca = PCA(
-## ...     n_components=5,
-## ...     whiten=False,
-## ...     svd_solver="auto",
-## ...     tol=0.0,
-## ...     iterated_power="auto",
-## ...     n_oversamples=10,
-## ...     power_iteration_normalizer="auto",
-## ...     random_state=0,
-## ... )
-## >>> from tm2p.packages.factor_analysis.tfidf import terms_by_dimension_frame
-## >>> (
-## ...     TermsByDimensionDataFrame()
-## ...     #
-## ...     # FIELD:
-## ...     .with_field("descriptors")
-## ...     .having_items_in_top(50)
-## ...     .having_items_ordered_by("OCC")
-## ...     .having_item_occurrences_between(None, None)
-## ...     .having_item_citations_between(None, None)
-## ...     .having_items_in(None)
-## ...     #
-## ...     # DECOMPOSITION:
-## ...     .using_decomposition_estimator(pca)
-## ...     #
-## ...     # TFIDF:
-## ...     .using_binary_item_frequencies(False)
-## ...     .using_row_normalization(None)
-## ...     .using_idf_reweighting(False)
-## ...     .using_idf_weights_smoothing(False)
-## ...     .using_sublinear_tf_scaling(False)
-## ...     #
-## ...     # DATABASE:
-## ...     .where_root_directory("tests/fintech/")
-## ...     .where_database("main")
-## ...     .where_record_years_range(None, None)
-## ...     .where_record_citations_range(None, None)
-## ...     .where_records_match(None)
-## ...     #
-## ...     .run()
-## ...     ).build()
-## ... ).head()
-
+Smoke test:
+    >>> from sklearn.decomposition import PCA
+    >>> pca = PCA(
+    ...     n_components=5,
+    ...     whiten=False,
+    ...     svd_solver="auto",
+    ...     tol=0.0,
+    ...     iterated_power="auto",
+    ...     n_oversamples=10,
+    ...     power_iteration_normalizer="auto",
+    ...     random_state=0,
+    ... )
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.synthes.factor_anal.tfidf import ItemsByDimensionDataFrame
+    >>> (
+    ...     ItemsByDimensionDataFrame()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.CONCEPT_NORM)
+    ...     .having_items_in_top(50)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # DECOMPOSITION:
+    ...     .using_decomposition_estimator(pca)
+    ...     #
+    ...     # TFIDF:
+    ...     .using_binary_item_frequencies(False)
+    ...     .using_tfidf_norm(None)
+    ...     .using_tfidf_smooth_idf(False)
+    ...     .using_tfidf_sublinear_tf(False)
+    ...     .using_tfidf_use_idf(False)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ...     ).build()
+    ... ).head()
 
 
 """
 
 import pandas as pd  # type: ignore
 
+from tm2p._intern import ParamsMixin
 from tm2p.discov.tfidf.matrix import Matrix as TfIdf
+
+
+class ItemsByDimensionDataFrame(
+    ParamsMixin,
+):
+    """:meta private:"""
+
+    def run(self):
+        pass
 
 
 def terms_by_dimension_frame(

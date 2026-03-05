@@ -1,5 +1,5 @@
 """
-Treemap
+ClusterToItemsMapping
 ===============================================================================
 
 Smoke test:
@@ -25,9 +25,9 @@ Smoke test:
     ...     random_state=0,
     ... )
     >>> from tm2p import Field, ItemOrderBy
-    >>> from tm2p.synthes.factor_anal.tfidf import Treemap
-    >>> plot = (
-    ...     Treemap()
+    >>> from tm2p.synthes.factor_anal.tfidf import ClusterToItemsMapping
+    >>> mapping = (
+    ...     ClusterToItemsMapping()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.CONCEPT_NORM)
@@ -58,37 +58,20 @@ Smoke test:
     ...     #
     ...     .run()
     ... )
-    >>> plot.write_html("docsrc/_generated/px.packages.factor_analysis/tfidf/treemap.html")
-
-.. raw:: html
-
-    <iframe src="../_generated/px.packages.factor_analysis/tfidf/treemap.html"
-    height="800px" width="100%" frameBorder="0"></iframe>
+    >>> from pprint import pprint
+    >>> pprint(mapping)
 
 
 
 """
-
-import plotly.express as px  # type: ignore
-import plotly.graph_objs as go  # type: ignore
 
 from tm2p._intern import ParamsMixin
 from tm2p.synthes.factor_anal.tfidf.items_to_cluster_mapping import (
     terms_to_cluster_mapping,
 )
 
-CLUSTER_COLORS = (
-    px.colors.qualitative.Dark24
-    + px.colors.qualitative.Light24
-    + px.colors.qualitative.Pastel1
-    + px.colors.qualitative.Pastel2
-    + px.colors.qualitative.Set1
-    + px.colors.qualitative.Set2
-    + px.colors.qualitative.Set3
-)
 
-
-class Treemap(
+class ClusterToItemsMapping(
     ParamsMixin,
 ):
     """:meta private:"""
@@ -97,7 +80,7 @@ class Treemap(
         pass
 
 
-def treemap(
+def cluster_to_terms_mapping(
     #
     # PARAMS:
     field,
@@ -133,7 +116,7 @@ def treemap(
 ):
     """:meta private:"""
 
-    c2t_mapping = terms_to_cluster_mapping(
+    t2c_mapping = terms_to_cluster_mapping(
         #
         # FUNCTION PARAMS:
         field=field,
@@ -168,72 +151,13 @@ def treemap(
         **filters,
     )
 
-    node_occ = []
-    node_color = []
-    node_text = []
-    parents = []
+    mapping = {}
+    for term, cluster in t2c_mapping.items():
+        if cluster not in mapping:
+            mapping[cluster] = []
+        mapping[cluster].append(term)
 
-    name2color = {
-        term: CLUSTER_COLORS[cluster] for term, cluster in c2t_mapping.items()
-    }
+    return mapping
 
-    clusters = list(set(c2t_mapping.values()))
-    cluster_occ = {key: 0 for key in clusters}
 
-    for term, cluster in c2t_mapping.items():
-        #
-        # Extracs occurrences from node names. Example: 'regtech 10:100' -> 10
-        occ = term.split(" ")[-1]
-        occ = occ.split(":")[0]
-        occ = float(occ)
-        node_occ.append(occ)
-        cluster_occ[cluster] += occ
-
-        #
-        # Uses the same color of clusters
-        node_color.append(name2color[term])
-
-        #
-        # Sets text to node names without metrics
-        node_name = term
-        node_name = node_name.split(" ")[:-1]
-        node_name = " ".join(node_name)
-
-        node_text.append(node_name)
-        parents.append(cluster)
-
-    node_occ = [cluster_occ[key] * 0 for key in clusters] + node_occ
-    node_color = ["lightgrey"] * len(clusters) + node_color
-    node_text = clusters + node_text
-    parents = [""] * len(clusters) + parents
-
-    fig = go.Figure()
-    fig.add_trace(
-        go.Treemap(
-            labels=node_text,
-            parents=parents,
-            values=node_occ,
-            textinfo="label+value+percent entry",
-            opacity=0.9,
-        )
-    )
-    fig.update_traces(marker={"cornerradius": 5})
-    fig.update_layout(
-        showlegend=False,
-        margin={"t": 30, "l": 0, "r": 0, "b": 0},
-    )
-
-    #
-    # Change the colors of the treemap white
-    fig.update_traces(
-        #    marker={"line": {"color": "darkslategray", "width": 1}},
-        marker_colors=node_color,
-    )
-
-    #
-    # Change the font size of the labels
-    fig.update_traces(textfont_size=12)
-
-    return fig
-
-    return fig
+#

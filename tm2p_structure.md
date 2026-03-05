@@ -1,7 +1,3 @@
-![logo](https://raw.githubusercontent.com/jdvelasq/techminer2/main/assets/logo.jpg)
-
-A Python Library for Tech-Mining, Bibliometrics and Science Mapping.
-
 # A Python Library for Tech-Mining, Bibliometrics and Science Mapping.
 
 ## General Structure
@@ -435,11 +431,6 @@ Structure:
 
 
 Uses GenAI to draft sections of the manuscript based on the dataset. Recently, VantagePointAI has been released, the tm2+ uses a similary approach.
-
-
-
-
-
 
 
 

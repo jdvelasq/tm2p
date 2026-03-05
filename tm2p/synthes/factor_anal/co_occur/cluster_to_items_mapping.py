@@ -1,5 +1,5 @@
 """
-CosineSimilarities
+ClusterToItemsMapping
 ===============================================================================
 
 Smoke test:
@@ -14,10 +14,20 @@ Smoke test:
     ...     power_iteration_normalizer="auto",
     ...     random_state=0,
     ... )
+    >>> from sklearn.cluster import KMeans
+    >>> kmeans = KMeans(
+    ...     n_clusters=6,
+    ...     init="k-means++",
+    ...     n_init=10,
+    ...     max_iter=300,
+    ...     tol=0.0001,
+    ...     algorithm="elkan",
+    ...     random_state=0,
+    ... )
     >>> from tm2p import Field, ItemOrderBy
-    >>> from tm2p.synthes.factor_anal.co_occur import CosineSimilarities
-    >>> (
-    ...     CosineSimilarities()
+    >>> from tm2p.synthes.factor_anal.co_occur import ClusterToItemsMapping
+    >>> mapping = (
+    ...     ClusterToItemsMapping()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.CONCEPT_NORM)
@@ -30,6 +40,9 @@ Smoke test:
     ...     # DECOMPOSITION:
     ...     .using_decomposition_estimator(pca)
     ...     #
+    ...     # CLUSTERING:
+    ...     .using_clustering_estimator_or_dict(kmeans)
+    ...     #
     ...     # ASSOCIATION INDEX:
     ...     .using_association_index(None)
     ...     #
@@ -40,25 +53,21 @@ Smoke test:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head()
-
+    ... )
+    >>> from pprint import pprint
+    >>> pprint(mapping)
 
 
 
 """
 
-import pandas as pd  # type: ignore
-from sklearn.metrics.pairwise import (
-    cosine_similarity as sklearn_cosine_similarity,  # type: ignore
-)
-
 from tm2p._intern import ParamsMixin
-from tm2p.synthes.factor_anal.co_occur.items_by_dimension_data_frame import (
-    terms_by_dimension_frame,
+from tm2p.synthes.factor_anal.co_occur.items_to_cluster_mapping import (
+    terms_to_cluster_mapping,
 )
 
 
-class CosineSimilarities(
+class ClusterToItemsMapping(
     ParamsMixin,
 ):
     """:meta private:"""
@@ -67,7 +76,7 @@ class CosineSimilarities(
         pass
 
 
-def cosine_similarities(
+def cluster_to_terms_mapping(
     #
     # PARAMS:
     field,
@@ -82,6 +91,9 @@ def cosine_similarities(
     # DECOMPOSITION:
     decomposition_estimator=None,
     #
+    # CLUSTERING:
+    clustering_estimator_or_dict=None,
+    #
     # DATABASE PARAMS:
     root_dir="./",
     database="main",
@@ -91,7 +103,7 @@ def cosine_similarities(
 ):
     """:meta private:"""
 
-    embedding = terms_by_dimension_frame(
+    t2c_mapping = terms_to_cluster_mapping(
         #
         # FUNCTION PARAMS:
         field=field,
@@ -106,6 +118,9 @@ def cosine_similarities(
         # DECOMPOSITION:
         decomposition_estimator=decomposition_estimator,
         #
+        # CLUSTERING:
+        clustering_estimator_or_dict=clustering_estimator_or_dict,
+        #
         # DATABASE PARAMS:
         root_dir=root_dir,
         database=database,
@@ -114,29 +129,12 @@ def cosine_similarities(
         **filters,
     )
 
-    similarity = sklearn_cosine_similarity(embedding)
+    mapping = {}
+    for term, cluster in t2c_mapping.items():
+        if cluster not in mapping:
+            mapping[cluster] = []
+        mapping[cluster].append(term)
 
-    term_similarities = []
-    for i in range(similarity.shape[0]):
-        values_to_sort = []
-        for j in range(similarity.shape[1]):
-            if i != j and similarity[i, j] > 0:
-                values_to_sort.append(
-                    (
-                        embedding.index[j],
-                        similarity[i, j],
-                    )
-                )
-        sorted_values = sorted(values_to_sort, key=lambda x: x[1], reverse=True)
-        sorted_values = [f"{x[0]} ({x[1]:>0.3f})" for x in sorted_values]
-        sorted_values = "; ".join(sorted_values)
-        term_similarities.append(sorted_values)
+    return mapping
 
-    term_similarities = pd.DataFrame(
-        {"cosine_similariries": term_similarities},
-        index=embedding.index,
-    )
-
-    return term_similarities
-
-    return term_similarities
+    return mapping

@@ -183,7 +183,7 @@ class Matrix(
         if norm is not None or use_idf or smooth_idf or sublinear_tf:
 
             transformer = TfidfTransformer(
-                norm=norm,
+                norm=norm,  # type: ignore
                 use_idf=use_idf,
                 smooth_idf=smooth_idf,
                 sublinear_tf=sublinear_tf,

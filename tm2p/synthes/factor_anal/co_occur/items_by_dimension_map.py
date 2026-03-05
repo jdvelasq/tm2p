@@ -1,5 +1,5 @@
 """
-CosineSimilarities
+ItemsByDimensionMap
 ===============================================================================
 
 Smoke test:
@@ -15,9 +15,9 @@ Smoke test:
     ...     random_state=0,
     ... )
     >>> from tm2p import Field, ItemOrderBy
-    >>> from tm2p.synthes.factor_anal.co_occur import CosineSimilarities
-    >>> (
-    ...     CosineSimilarities()
+    >>> from tm2p.synthes.factor_anal.co_occur import ItemsByDimensionMap
+    >>> plot = (
+    ...     ItemsByDimensionMap()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.CONCEPT_NORM)
@@ -33,6 +33,17 @@ Smoke test:
     ...     # ASSOCIATION INDEX:
     ...     .using_association_index(None)
     ...     #
+    ...     # MAP:
+    ...     .using_plot_dimensions(0, 1)
+    ...     .using_node_colors(["#465c6b"])
+    ...     .using_node_size(10)
+    ...     .using_textfont_size(8)
+    ...     .using_textfont_color("#465c6b")
+    ...     #
+    ...     .using_xaxes_range(None, None)
+    ...     .using_yaxes_range(None, None)
+    ...     .using_axes_visible(False)
+    ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
     ...     .where_record_years_range(None, None)
@@ -40,25 +51,24 @@ Smoke test:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head()
+    ... )
+    >>> plot.write_html("docsrc/__static/factor_analysis/co_occurrence/terms_by_dimension_map.html")
 
+.. raw:: html
 
-
+    <iframe src="../../_static/factor_analysis/co_occurrence/terms_by_dimension_map.html"
+    height="600px" width="100%" frameBorder="0"></iframe>
 
 """
 
-import pandas as pd  # type: ignore
-from sklearn.metrics.pairwise import (
-    cosine_similarity as sklearn_cosine_similarity,  # type: ignore
-)
-
 from tm2p._intern import ParamsMixin
+from tm2p.synthes.factor_anal._intern.manifold_2d_map import manifold_2d_map
 from tm2p.synthes.factor_anal.co_occur.items_by_dimension_data_frame import (
     terms_by_dimension_frame,
 )
 
 
-class CosineSimilarities(
+class ItemsByDimensionMap(
     ParamsMixin,
 ):
     """:meta private:"""
@@ -67,7 +77,7 @@ class CosineSimilarities(
         pass
 
 
-def cosine_similarities(
+def terms_by_dimension_map(
     #
     # PARAMS:
     field,
@@ -81,6 +91,16 @@ def cosine_similarities(
     #
     # DECOMPOSITION:
     decomposition_estimator=None,
+    #
+    # MAP PARAMS:
+    dim_x=0,
+    dim_y=1,
+    node_color="#465c6b",
+    node_size=10,
+    textfont_size=8,
+    textfont_color="#465c6b",
+    xaxes_range=None,
+    yaxes_range=None,
     #
     # DATABASE PARAMS:
     root_dir="./",
@@ -114,29 +134,16 @@ def cosine_similarities(
         **filters,
     )
 
-    similarity = sklearn_cosine_similarity(embedding)
-
-    term_similarities = []
-    for i in range(similarity.shape[0]):
-        values_to_sort = []
-        for j in range(similarity.shape[1]):
-            if i != j and similarity[i, j] > 0:
-                values_to_sort.append(
-                    (
-                        embedding.index[j],
-                        similarity[i, j],
-                    )
-                )
-        sorted_values = sorted(values_to_sort, key=lambda x: x[1], reverse=True)
-        sorted_values = [f"{x[0]} ({x[1]:>0.3f})" for x in sorted_values]
-        sorted_values = "; ".join(sorted_values)
-        term_similarities.append(sorted_values)
-
-    term_similarities = pd.DataFrame(
-        {"cosine_similariries": term_similarities},
-        index=embedding.index,
+    return manifold_2d_map(
+        node_x=embedding[dim_x],
+        node_y=embedding[dim_y],
+        node_text=embedding.index.to_list(),
+        node_color=node_color,
+        node_size=node_size,
+        title_x=dim_x,
+        title_y=dim_y,
+        textfont_size=textfont_size,
+        textfont_color=textfont_color,
+        xaxes_range=xaxes_range,
+        yaxes_range=yaxes_range,
     )
-
-    return term_similarities
-
-    return term_similarities

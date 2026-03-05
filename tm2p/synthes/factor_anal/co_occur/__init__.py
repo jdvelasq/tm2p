@@ -1,10 +1,23 @@
-from .cluster_centers_data_frame import cluster_centers_frame
-from .cluster_to_terms_mapping import cluster_to_terms_mapping
-from .cosine_similarities import cosine_similarities
-from .factor_map import factor_map
-from .manifold_terms_by_dimension_map import manifold_terms_by_dimension_map
-from .terms_by_cluster_data_frame import terms_by_cluster_frame
-from .terms_by_dimension_data_frame import terms_by_dimension_frame
-from .terms_by_dimension_map import terms_by_dimension_map
-from .terms_to_cluster_mapping import terms_to_cluster_mapping
-from .treemap import treemap
+from .cluster_centers_dataframe import ClusterCentersDataFrame
+from .cluster_to_items_mapping import ClusterToItemsMapping
+from .cosine_similarities import CosineSimilarities
+from .factor_map import FactorMap
+from .items_by_cluster_data_frame import ItemsByClusterDataFrame
+from .items_by_dimension_data_frame import ItemsByDimensionDataFrame
+from .items_by_dimension_map import ItemsByDimensionMap
+from .items_to_cluster_mapping import ItemsToClusterMapping
+from .manifold_items_by_dimension_map import ManifoldItemsByDimensionMap
+from .treemap import Treemap
+
+__all__ = [
+    ClusterCentersDataFrame,
+    ClusterToItemsMapping,
+    CosineSimilarities,
+    FactorMap,
+    ItemsByClusterDataFrame,
+    ItemsByDimensionDataFrame,
+    ItemsByDimensionMap,
+    ItemsToClusterMapping,
+    ManifoldItemsByDimensionMap,
+    Treemap,
+]

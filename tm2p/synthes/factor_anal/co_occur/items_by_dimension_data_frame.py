@@ -1,45 +1,46 @@
 """
-Terms by Dimension Frame
+ItemsByDimensionDataFrame
 ===============================================================================
 
-## >>> from sklearn.decomposition import PCA
-## >>> pca = PCA(
-## ...     n_components=5,
-## ...     whiten=False,
-## ...     svd_solver="auto",
-## ...     tol=0.0,
-## ...     iterated_power="auto",
-## ...     n_oversamples=10,
-## ...     power_iteration_normalizer="auto",
-## ...     random_state=0,
-## ... )
-## >>> from tm2p.packages.factor_analysis.co_occurrence import terms_by_dimension_frame
-## >>> (
-## ...     TermsByDimensionDataFrame()
-## ...     #
-## ...     # FIELD:
-## ...     .with_field("descriptors")
-## ...     .having_items_in_top(50)
-## ...     .having_items_ordered_by("OCC")
-## ...     .having_item_occurrences_between(None, None)
-## ...     .having_item_citations_between(None, None)
-## ...     .having_items_in(None)
-## ...     #
-## ...     # DECOMPOSITION:
-## ...     .using_decomposition_estimator(pca)
-## ...     #
-## ...     # ASSOCIATION INDEX:
-## ...     .using_association_index(None)
-## ...     #
-## ...     # DATABASE:
-## ...     .where_root_directory("tests/fintech/")
-## ...     .where_database("main")
-## ...     .where_record_years_range(None, None)
-## ...     .where_record_citations_range(None, None)
-## ...     .where_records_match(None)
-## ...     #
-## ...     .run()
-## ... ).head()
+Smoke test:
+    >>> from sklearn.decomposition import PCA
+    >>> pca = PCA(
+    ...     n_components=5,
+    ...     whiten=False,
+    ...     svd_solver="auto",
+    ...     tol=0.0,
+    ...     iterated_power="auto",
+    ...     n_oversamples=10,
+    ...     power_iteration_normalizer="auto",
+    ...     random_state=0,
+    ... )
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.synthes.factor_anal.co_occur import ItemsByDimensionDataFrame
+    >>> (
+    ...     ItemsByDimensionDataFrame()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.CONCEPT_NORM)
+    ...     .having_items_in_top(50)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # DECOMPOSITION:
+    ...     .using_decomposition_estimator(pca)
+    ...     #
+    ...     # ASSOCIATION INDEX:
+    ...     .using_association_index(None)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... ).head()
 
 
 
@@ -47,7 +48,17 @@ Terms by Dimension Frame
 
 import pandas as pd  # type: ignore
 
+from tm2p._intern import ParamsMixin
 from tm2p.synthes.netw.co_occur._intern.comput_assoc_index import comput_assoc_index
+
+
+class ItemsByDimensionDataFrame(
+    ParamsMixin,
+):
+    """:meta private:"""
+
+    def run(self):
+        pass
 
 
 def terms_by_dimension_frame(

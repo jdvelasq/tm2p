@@ -1,73 +1,84 @@
 """
-Cluster Centers Frame
+ClusterCentersDataFrame
 ===============================================================================
 
-## >>> from sklearn.decomposition import PCA
-## >>> pca = PCA(
-## ...     n_components=5,
-## ...     whiten=False,
-## ...     svd_solver="auto",
-## ...     tol=0.0,
-## ...     iterated_power="auto",
-## ...     n_oversamples=10,
-## ...     power_iteration_normalizer="auto",
-## ...     random_state=0,
-## ... )
-## >>> from sklearn.cluster import KMeans
-## >>> kmeans = KMeans(
-## ...     n_clusters=6,
-## ...     init="k-means++",
-## ...     n_init=10,
-## ...     max_iter=300,
-## ...     tol=0.0001,
-## ...     algorithm="elkan",
-## ...     random_state=0,
-## ... )
-## >>> from tm2p.packages.factor_analysis.tfidf import cluster_centers_frame
-## >>> (
-## ...     ClusterCentersDataFrame()
-## ...     #
-## ...     # FIELD:
-## ...     .with_field("descriptors")
-## ...     .having_items_in_top(50)
-## ...     .having_items_ordered_by("OCC")
-## ...     .having_item_occurrences_between(None, None)
-## ...     .having_item_citations_between(None, None)
-## ...     .having_items_in(None)
-## ...     #
-## ...     # DECOMPOSITION:
-## ...     .using_decomposition_estimator(pca)
-## ...     #
-## ...     # CLUSTERING:
-## ...     .using_clustering_estimator_or_dict(kmeans)
-## ...     #
-## ...     # TFIDF:
-## ...     .using_binary_item_frequencies(False)
-## ...     .using_row_normalization(None)
-## ...     .using_idf_reweighting(False)
-## ...     .using_idf_weights_smoothing(False)
-## ...     .using_sublinear_tf_scaling(False)
-## ...     #
-## ...     # DATABASE:
-## ...     .where_root_directory("tests/fintech/")
-## ...     .where_database("main")
-## ...     .where_record_years_range(None, None)
-## ...     .where_record_citations_range(None, None)
-## ...     .where_records_match(None)
-## ...     #
-## ...     .run()
-## ... )
+Smoke test:
+    >>> from sklearn.decomposition import PCA
+    >>> pca = PCA(
+    ...     n_components=5,
+    ...     whiten=False,
+    ...     svd_solver="auto",
+    ...     tol=0.0,
+    ...     iterated_power="auto",
+    ...     n_oversamples=10,
+    ...     power_iteration_normalizer="auto",
+    ...     random_state=0,
+    ... )
+    >>> from sklearn.cluster import KMeans
+    >>> kmeans = KMeans(
+    ...     n_clusters=6,
+    ...     init="k-means++",
+    ...     n_init=10,
+    ...     max_iter=300,
+    ...     tol=0.0001,
+    ...     algorithm="elkan",
+    ...     random_state=0,
+    ... )
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.synthes.factor_anal.tfidf import ClusterCentersDataFrame
+    >>> (
+    ...     ClusterCentersDataFrame()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.CONCEPT_NORM)
+    ...     .having_items_in_top(50)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # DECOMPOSITION:
+    ...     .using_decomposition_estimator(pca)
+    ...     #
+    ...     # CLUSTERING:
+    ...     .using_clustering_estimator_or_dict(kmeans)
+    ...     #
+    ...     # TFIDF:
+    ...     .using_binary_item_frequencies(False)
+    ...     .using_tfidf_norm(None)
+    ...     .using_tfidf_smooth_idf(False)
+    ...     .using_tfidf_sublinear_tf(False)
+    ...     .using_tfidf_use_idf(False)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
 
 
 
 """
 
-from tm2p.synthes.factor_anal.tfidf.terms_by_dimension_dataframe import (
+from tm2p._intern import ParamsMixin
+from tm2p.synthes.factor_anal.tfidf.items_by_dimension_dataframe import (
     terms_by_dimension_frame,
 )
-from tm2p.synthes.factor_anal.tfidf.terms_to_cluster_mapping import (
+from tm2p.synthes.factor_anal.tfidf.items_to_cluster_mapping import (
     terms_to_cluster_mapping,
 )
+
+
+class ClusterCentersDataFrame(
+    ParamsMixin,
+):
+    """:meta private:"""
+
+    def run(self):
+        pass
 
 
 def cluster_centers_frame(

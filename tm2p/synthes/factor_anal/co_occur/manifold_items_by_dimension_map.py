@@ -1,5 +1,5 @@
 """
-CosineSimilarities
+ManifoldItemsByDimensionMap
 ===============================================================================
 
 Smoke test:
@@ -14,10 +14,27 @@ Smoke test:
     ...     power_iteration_normalizer="auto",
     ...     random_state=0,
     ... )
+    >>> from sklearn.manifold import TSNE
+    >>> tsne = TSNE(
+    ...     perplexity=10.0,
+    ...     early_exaggeration=12.0,
+    ...     learning_rate="auto",
+    ...     max_iter=1000,
+    ...     n_iter_without_progress=300,
+    ...     min_grad_norm=1e-07,
+    ...     metric="euclidean",
+    ...     metric_params=None,
+    ...     init="pca",
+    ...     verbose=0,
+    ...     random_state=0,
+    ...     method="barnes_hut",
+    ...     angle=0.5,
+    ...     n_jobs=None,
+    ... )
     >>> from tm2p import Field, ItemOrderBy
-    >>> from tm2p.synthes.factor_anal.co_occur import CosineSimilarities
-    >>> (
-    ...     CosineSimilarities()
+    >>> from tm2p.synthes.factor_anal.co_occur import ManifoldItemsByDimensionMap
+    >>> plot = (
+    ...     ManifoldItemsByDimensionMap()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.CONCEPT_NORM)
@@ -30,8 +47,21 @@ Smoke test:
     ...     # DECOMPOSITION:
     ...     .using_decomposition_estimator(pca)
     ...     #
+    ...     # MANIFOLD:
+    ...     .using_manifold_estimator(tsne)
+    ...     #
     ...     # ASSOCIATION INDEX:
     ...     .using_association_index(None)
+    ...     #
+    ...     # MAP:
+    ...     .using_node_colors(["#465c6b"])
+    ...     .using_node_size(10)
+    ...     .using_textfont_size(8)
+    ...     .using_textfont_color("#465c6b")
+    ...     #
+    ...     .using_xaxes_range(None, None)
+    ...     .using_yaxes_range(None, None)
+    ...     .using_axes_visible(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
@@ -40,25 +70,25 @@ Smoke test:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head()
+    ... )
+    >>> plot.write_html("docsrc/_generated/px.packages.factor_analysis/co_occurrence/manifold_terms_by_dimension_map.html")
 
+.. raw:: html
 
+    <iframe src="../_generated/px.packages.factor_analysis/co_occurrence/manifold_terms_by_dimension_map.html"
+    height="800px" width="100%" frameBorder="0"></iframe>
 
 
 """
 
-import pandas as pd  # type: ignore
-from sklearn.metrics.pairwise import (
-    cosine_similarity as sklearn_cosine_similarity,  # type: ignore
-)
-
 from tm2p._intern import ParamsMixin
+from tm2p.synthes.factor_anal._intern.manifold_2d_map import manifold_2d_map
 from tm2p.synthes.factor_anal.co_occur.items_by_dimension_data_frame import (
     terms_by_dimension_frame,
 )
 
 
-class CosineSimilarities(
+class ManifoldItemsByDimensionMap(
     ParamsMixin,
 ):
     """:meta private:"""
@@ -67,7 +97,7 @@ class CosineSimilarities(
         pass
 
 
-def cosine_similarities(
+def manifold_terms_by_dimension_map(
     #
     # PARAMS:
     field,
@@ -81,6 +111,17 @@ def cosine_similarities(
     #
     # DECOMPOSITION:
     decomposition_estimator=None,
+    #
+    # MANIFOLD PARAMS:
+    manifold_estimator=None,
+    #
+    # MAP PARAMS:
+    node_color="#465c6b",
+    node_size=10,
+    textfont_size=8,
+    textfont_color="#465c6b",
+    xaxes_range=None,
+    yaxes_range=None,
     #
     # DATABASE PARAMS:
     root_dir="./",
@@ -114,29 +155,21 @@ def cosine_similarities(
         **filters,
     )
 
-    similarity = sklearn_cosine_similarity(embedding)
+    manifold = manifold_estimator.fit_transform(embedding)
 
-    term_similarities = []
-    for i in range(similarity.shape[0]):
-        values_to_sort = []
-        for j in range(similarity.shape[1]):
-            if i != j and similarity[i, j] > 0:
-                values_to_sort.append(
-                    (
-                        embedding.index[j],
-                        similarity[i, j],
-                    )
-                )
-        sorted_values = sorted(values_to_sort, key=lambda x: x[1], reverse=True)
-        sorted_values = [f"{x[0]} ({x[1]:>0.3f})" for x in sorted_values]
-        sorted_values = "; ".join(sorted_values)
-        term_similarities.append(sorted_values)
-
-    term_similarities = pd.DataFrame(
-        {"cosine_similariries": term_similarities},
-        index=embedding.index,
+    return manifold_2d_map(
+        node_x=manifold[:, 0],
+        node_y=manifold[:, 1],
+        node_text=embedding.index.to_list(),
+        node_color=node_color,
+        node_size=node_size,
+        title_x="Dim 0",
+        title_y="Dim 1",
+        textfont_size=textfont_size,
+        textfont_color=textfont_color,
+        xaxes_range=xaxes_range,
+        yaxes_range=yaxes_range,
     )
 
-    return term_similarities
 
-    return term_similarities
+#

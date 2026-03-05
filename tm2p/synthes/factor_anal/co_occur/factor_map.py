@@ -1,78 +1,79 @@
 """
-Factor Map
+FactorMap
 ===============================================================================
 
-## >>> from sklearn.decomposition import PCA
-## >>> pca = PCA(
-## ...     n_components=5,
-## ...     whiten=False,
-## ...     svd_solver="auto",
-## ...     tol=0.0,
-## ...     iterated_power="auto",
-## ...     n_oversamples=10,
-## ...     power_iteration_normalizer="auto",
-## ...     random_state=0,
-## ... )
-## >>> from sklearn.cluster import KMeans
-## >>> kmeans = KMeans(
-## ...     n_clusters=6,
-## ...     init="k-means++",
-## ...     n_init=10,
-## ...     max_iter=300,
-## ...     tol=0.0001,
-## ...     algorithm="elkan",
-## ...     random_state=0,
-## ... )
-## >>> from tm2p.packages.factor_analysis.co_occurrence import factor_map
-## >>> plot = (
-## ...     FactorMap()
-## ...     #
-## ...     # FIELD:
-## ...     .with_field("descriptors")
-## ...     .having_items_in_top(50)
-## ...     .having_items_ordered_by("OCC")
-## ...     .having_item_occurrences_between(None, None)
-## ...     .having_item_citations_between(None, None)
-## ...     .having_items_in(None)
-## ...     #
-## ...     # DECOMPOSITION:
-## ...     .using_decomposition_estimator(pca)
-## ...     #
-## ...     # CLUSTERING:
-## ...     .using_clustering_estimator_or_dict(kmeans)
-## ...     #
-## ...     # ASSOCIATION INDEX:
-## ...     .using_association_index(None)
-## ...     #
-## ...     # NETWORK:
-## ...     .using_spring_layout_k(None)
-## ...     .using_spring_layout_iterations(30)
-## ...     .using_spring_layout_seed(0)
-## ...     #
-## ...     .using_node_colors(["#7793a5"])
-## ...     .using_node_size_range(30, 70)
-## ...     .using_textfont_size_range(10, 20)
-## ...     .using_textfont_opacity_range(0.35, 1.00)
-## ...     #
-## ...     .using_edge_colors(["#7793a5", "#7793a5", "#7793a5", "#7793a5"])
-## ...     .using_edge_similarity_threshold(0)
-## ...     .using_edge_top_n(None)
-## ...     .using_edge_widths([2, 2, 4, 6])
-## ...     #
-## ...     .using_xaxes_range(None, None)
-## ...     .using_yaxes_range(None, None)
-## ...     .using_axes_visible(False)
-## ...     #
-## ...     # DATABASE:
-## ...     .where_root_directory("tests/fintech/")
-## ...     .where_database("main")
-## ...     .where_record_years_range(None, None)
-## ...     .where_record_citations_range(None, None)
-## ...     .where_records_match(None)
-## ...     #
-## ...     .run()
-## ... )
-## >>> plot.write_html("docsrc/_generated/px.packages.factor_analysis/co_occurrence/factor_map_plot.html")
+Smoke test:
+    >>> from sklearn.decomposition import PCA
+    >>> pca = PCA(
+    ...     n_components=5,
+    ...     whiten=False,
+    ...     svd_solver="auto",
+    ...     tol=0.0,
+    ...     iterated_power="auto",
+    ...     n_oversamples=10,
+    ...     power_iteration_normalizer="auto",
+    ...     random_state=0,
+    ... )
+    >>> from sklearn.cluster import KMeans
+    >>> kmeans = KMeans(
+    ...     n_clusters=6,
+    ...     init="k-means++",
+    ...     n_init=10,
+    ...     max_iter=300,
+    ...     tol=0.0001,
+    ...     algorithm="elkan",
+    ...     random_state=0,
+    ... )
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.synthes.factor_anal.co_occur import FactorMap
+    >>> plot = (
+    ...     FactorMap()
+    ...     #
+    ...     # FIELD:
+    ...     .with_source_field(Field.CONCEPT_NORM)
+    ...     .having_items_in_top(50)
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
+    ...     .having_item_occurrences_between(None, None)
+    ...     .having_item_citations_between(None, None)
+    ...     .having_items_in(None)
+    ...     #
+    ...     # DECOMPOSITION:
+    ...     .using_decomposition_estimator(pca)
+    ...     #
+    ...     # CLUSTERING:
+    ...     .using_clustering_estimator_or_dict(kmeans)
+    ...     #
+    ...     # ASSOCIATION INDEX:
+    ...     .using_association_index(None)
+    ...     #
+    ...     # NETWORK:
+    ...     .using_spring_layout_k(None)
+    ...     .using_spring_layout_iterations(30)
+    ...     .using_spring_layout_seed(0)
+    ...     #
+    ...     .using_node_colors(["#7793a5"])
+    ...     .using_node_size_range(30, 70)
+    ...     .using_textfont_size_range(10, 20)
+    ...     .using_textfont_opacity_range(0.35, 1.00)
+    ...     #
+    ...     .using_edge_colors(["#7793a5", "#7793a5", "#7793a5", "#7793a5"])
+    ...     .using_edge_similarity_threshold(0)
+    ...     .using_edge_top_n(None)
+    ...     .using_edge_widths([2, 2, 4, 6])
+    ...     #
+    ...     .using_xaxes_range(None, None)
+    ...     .using_yaxes_range(None, None)
+    ...     .using_axes_visible(False)
+    ...     #
+    ...     # DATABASE:
+    ...     .where_root_directory("tests/fintech/")
+    ...     .where_record_years_range(None, None)
+    ...     .where_record_citations_range(None, None)
+    ...     .where_records_match(None)
+    ...     #
+    ...     .run()
+    ... )
+    >>> plot.write_html("docsrc/_generated/px.packages.factor_analysis/co_occurrence/factor_map_plot.html")
 
 .. raw:: html
 
@@ -86,13 +87,24 @@ Factor Map
 import pandas as pd  # type: ignore
 from sklearn.metrics.pairwise import cosine_similarity  # type: ignore
 
+from tm2p._intern import ParamsMixin
+
 # from tm2p.discov.correl._intern.plot_correl_map import plot_correl_map
-from tm2p.synthes.factor_anal.co_occur.cluster_centers_data_frame import (
+from tm2p.synthes.factor_anal.co_occur.cluster_centers_dataframe import (
     cluster_centers_frame,
 )
-from tm2p.synthes.factor_anal.co_occur.cluster_to_terms_mapping import (
+from tm2p.synthes.factor_anal.co_occur.cluster_to_items_mapping import (
     cluster_to_terms_mapping,
 )
+
+
+class FactorMap(
+    ParamsMixin,
+):
+    """:meta private:"""
+
+    def run(self):
+        pass
 
 
 def factor_map(

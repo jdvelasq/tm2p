@@ -177,6 +177,163 @@ tm2p/
 |   |   +-- MergeKeys
 |   |-- ref/
 |   |   +-- CreateThesaurus
+|   |-- thesaurus_old/
+|   |   |-- acronyms/
+|   |   |   |-- general/
+|   |   |   |   |-- InitializeThesaurus
+|   |   |   |   +-- PrintHeader
+|   |   |   +-- register/
+|   |   |       +-- RegisterPhrases
+|   |   |-- countries/
+|   |   |   |-- general/
+|   |   |   |   |-- ApplyThesaurus
+|   |   |   |   |-- ExplodeKeys
+|   |   |   |   |-- InitializeThesaurus
+|   |   |   |   |-- IntegrityCheck
+|   |   |   |   |-- PrintHeader
+|   |   |   |   +-- ReduceKeys
+|   |   |   +-- sort/
+|   |   |       |-- SortByAlphabet
+|   |   |       |-- SortByEndsWithMatch
+|   |   |       |-- SortByExactMatch
+|   |   |       |-- SortByFuzzyMatch
+|   |   |       |-- SortByKeyLength
+|   |   |       |-- SortByMatch
+|   |   |       |-- SortByStartsWithMatch
+|   |   |       |-- SortByWordLength
+|   |   |       +-- SortByWordMatch
+|   |   |-- descriptors/
+|   |   |   |-- clean/
+|   |   |   |   |-- AreSynonymous
+|   |   |   |   |-- CombineKeys
+|   |   |   |   |-- DefineTerm
+|   |   |   |   |-- IsStopword
+|   |   |   |   |-- MergeSynonymous
+|   |   |   |   +-- PopulateStopwords
+|   |   |   |-- general/
+|   |   |   |   |-- ApplyThesaurus
+|   |   |   |   |-- ClumpKeys
+|   |   |   |   |-- CutoffFuzzyMerging
+|   |   |   |   |-- GetContexts
+|   |   |   |   |-- GetValues
+|   |   |   |   |-- InitializeThesaurus
+|   |   |   |   |-- IntegrityCheck
+|   |   |   |   |-- MergeKeys
+|   |   |   |   |-- NormalizeKeys
+|   |   |   |   |-- ReduceKeys
+|   |   |   |   +-- SpellCheck
+|   |   |   |-- register/
+|   |   |   |   |-- RegisterInitialWord
+|   |   |   |   |-- RegisterKeyword
+|   |   |   |   +-- RegisterLastWord
+|   |   |   |-- remove/
+|   |   |   |   |-- RemoveDeterminers
+|   |   |   |   |-- RemoveInitialWords
+|   |   |   |   |-- RemoveLastWords
+|   |   |   |   |-- RemoveParentheses
+|   |   |   |   +-- RemoveStopwords
+|   |   |   |-- replace/
+|   |   |   |   |-- ReplaceAcronyms
+|   |   |   |   |-- ReplaceHyphenatedWords
+|   |   |   |   |-- ReplaceInitialWord
+|   |   |   |   |-- ReplaceLastWord
+|   |   |   |   +-- ReplaceWord
+|   |   |   |-- sort/
+|   |   |   |   |-- SortByAlphabet
+|   |   |   |   |-- SortByEndsWithMatch
+|   |   |   |   |-- SortByExactMatch
+|   |   |   |   |-- SortByFuzzyMatch
+|   |   |   |   |-- SortByInitialWords
+|   |   |   |   |-- SortByKeyLength
+|   |   |   |   |-- SortByLastWords
+|   |   |   |   |-- SortByMatch
+|   |   |   |   |-- SortByOccurrences
+|   |   |   |   |-- SortByStartsWithMatch
+|   |   |   |   |-- SortByStopwords
+|   |   |   |   |-- SortByWordLength
+|   |   |   |   +-- SortByWordMatch
+|   |   |   +-- translate/
+|   |   |       |-- AmericanToBritishSpelling
+|   |   |       +-- BritishToAmericanSpelling
+|   |   |-- organizations/
+|   |   |   |-- general/
+|   |   |   |   |-- ApplyThesaurus
+|   |   |   |   |-- ExplodeKeys
+|   |   |   |   |-- InitializeThesaurus
+|   |   |   |   |-- IntegrityCheck
+|   |   |   |   +-- ReduceKeys
+|   |   |   +-- sort/
+|   |   |       |-- SortByAlphabet
+|   |   |       |-- SortByEndsWithMatch
+|   |   |       |-- SortByExactMatch
+|   |   |       |-- SortByFuzzyMatch
+|   |   |       |-- SortByKeyLength
+|   |   |       |-- SortByMatch
+|   |   |       |-- SortByStartsWithMatch
+|   |   |       |-- SortByWordLength
+|   |   |       +-- SortByWordMatch
+|   |   |-- references/
+|   |   |   |-- general/
+|   |   |   |   |-- ApplyThesaurus
+|   |   |   |   |-- InitializeThesaurus
+|   |   |   |   +-- IntegrityCheck
+|   |   |   +-- sort/
+|   |   |       |-- SortByAlphabet
+|   |   |       |-- SortByFuzzyMatch
+|   |   |       +-- SortByMatch
+|   |   |-- system/
+|   |   |   |-- ApplyThesaurus
+|   |   |   +-- descriptors/
+|   |   |       +-- sort/
+|   |   |           |-- SortByAlphabet
+|   |   |           |-- SortByEndsWithMatch
+|   |   |           |-- SortByExactMatch
+|   |   |           |-- SortByFuzzyMatch
+|   |   |           |-- SortByInitialWords
+|   |   |           |-- SortByKeyLength
+|   |   |           |-- SortByLastWords
+|   |   |           |-- SortByMatch
+|   |   |           |-- SortByStartsWithMatch
+|   |   |           |-- SortByWordLength
+|   |   |           +-- SortByWordMatch
+|   |   +-- user/
+|   |       |-- general/
+|   |       |   |-- ApplyThesaurus
+|   |       |   |-- ClumpKeys
+|   |       |   |-- CombineKeys
+|   |       |   |-- CutoffFuzzyMerging
+|   |       |   |-- ExplodeKeys
+|   |       |   |-- GetValues
+|   |       |   |-- InitializeThesaurus
+|   |       |   |-- IntegrityCheck
+|   |       |   |-- MergeKeys
+|   |       |   |-- PrintHeader
+|   |       |   |-- ReduceKeys
+|   |       |   +-- SpellCheck
+|   |       |-- replace/
+|   |       |   |-- ReplaceInitialWord
+|   |       |   |-- ReplaceLastWord
+|   |       |   +-- ReplaceWord
+|   |       |-- sort/
+|   |       |   |-- SortByAlphabet
+|   |       |   |-- SortByEndsWithMatch
+|   |       |   |-- SortByExactMatch
+|   |       |   |-- SortByFuzzyMatch
+|   |       |   |-- SortByInitialWords
+|   |       |   |-- SortByKeyLength
+|   |       |   |-- SortByLastWords
+|   |       |   |-- SortByMatch
+|   |       |   |-- SortByOccurrences
+|   |       |   |-- SortByStartsWithMatch
+|   |       |   |-- SortByStopwords
+|   |       |   |-- SortByWordLength
+|   |       |   +-- SortByWordMatch
+|   |       +-- translate/
+|   |           |-- AmericanToBritishSpelling
+|   |           +-- BritishToAmericanSpelling
+|   +-- usr/
+|       |-- CreateThesaurus
+|       +-- MergeKeys
 |-- rep/
 |   |-- manuscr/
 |   |   |-- Abstract
@@ -202,27 +359,27 @@ tm2p/
     |   +-- plot_emergence
     |-- factor_anal/
     |   |-- co_occur/
-    |   |   |-- cluster_centers_data_frame
-    |   |   |-- cluster_to_terms_mapping
-    |   |   |-- cosine_similarities
-    |   |   |-- factor_map
-    |   |   |-- manifold_terms_by_dimension_map
-    |   |   |-- terms_by_cluster_data_frame
-    |   |   |-- terms_by_dimension_data_frame
-    |   |   |-- terms_by_dimension_map
-    |   |   |-- terms_to_cluster_mapping
-    |   |   +-- treemap
+    |   |   |-- ClusterCentersDataFrame
+    |   |   |-- ClusterToItemsMapping
+    |   |   |-- CosineSimilarities
+    |   |   |-- FactorMap
+    |   |   |-- ItemsByClusterDataFrame
+    |   |   |-- ItemsByDimensionDataFrame
+    |   |   |-- ItemsByDimensionMap
+    |   |   |-- ItemsToClusterMapping
+    |   |   |-- ManifoldItemsByDimensionMap
+    |   |   +-- ClusterCentersDataFrame
     |   +-- tfidf/
-    |       |-- cluster_centers_dataframe
-    |       |-- cluster_to_terms_mapping
-    |       |-- cosine_similarities
-    |       |-- factor_map
-    |       |-- manifold_terms_by_dimension_map
-    |       |-- terms_by_cluster_dataframe
-    |       |-- terms_by_dimension_dataframe
-    |       |-- terms_by_dimension_map
-    |       |-- terms_to_cluster_mapping
-    |       +-- treemap
+    |       |-- ClusterCentersDataFrame
+    |       |-- ClusterToItemsMapping
+    |       |-- CosineSimilarities
+    |       |-- FactorMap
+    |       |-- ItemsByClusterDataFrame
+    |       |-- ItemsByDimensionDataFrame
+    |       |-- ItemsByDimensionMap
+    |       |-- ItemsToClusterMapping
+    |       |-- ManifoldItemsByDimensionMap
+    |       +-- Treemap
     |-- main_path/
     |   |-- MainPathDocuments
     |   |-- NetworkEdgesDataFrame
@@ -262,8 +419,8 @@ tm2p/
     |       |-- NodeDegreeDataFrame
     |       +-- NodeDegreePlot
     +-- topic_model/
-        |-- ClusterToTermsMapping
-        |-- ComponentsByTermDataFrame
+        |-- ClusterToItemsMapping
+        |-- ComponentsByItemDataFrame
         |-- DocumentsByThemeDataFrame
-        |-- TermsByClusterDataFrame
+        |-- ItemsByClusterDataFrame
         +-- ThemeToDocumentsMapping
