@@ -2,21 +2,27 @@
 Network Plot
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.synthes.main_path.network_plot.html"
+    height="800px" width="100%" frameBorder="0"></iframe>
+
+
 Smoke tests:
-    >>> from tm2p.packages.networks.main_path import NetworkPlot
-    >>> plot = (
+    >>> from tm2p.synthes.main_path import NetworkPlot
+    >>> fig = (
     ...     NetworkPlot()
     ...     #
     ...     # UNIT OF ANALYSIS:
     ...     .having_items_in_top(None)
-    ...     .using_citation_threshold(0)
+    ...     .having_citation_threshold(0)
     ...     #
     ...     # NETWORK:
     ...     .using_spring_layout_k(None)
     ...     .using_spring_layout_iterations(30)
     ...     .using_spring_layout_seed(0)
     ...     #
-    ...     .using_edge_colors(["#7793a5"])
+    ...     .using_edge_colors(("#7793a5",))
     ...     .using_edge_width_range(0.8, 3.0)
     ...     .using_node_colors(("#7793a5",))
     ...     .using_node_size_range(30, 70)
@@ -28,8 +34,7 @@ Smoke tests:
     ...     .using_axes_visible(False)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
+    ...     .where_root_directory("tests/regtech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
@@ -37,12 +42,8 @@ Smoke tests:
     ...     .run()
     ... )
 
-    >>> plot.write_html("docsrc/_generated/px.packages.networks.main_path.network_plot.html")
+    >>> fig.write_html("docsrc/_generated/px.synthes.main_path.network_plot.html")
 
-.. raw:: html
-
-    <iframe src="../_generated/px.packages.networks.main_path.network_plot.html"
-    height="800px" width="100%" frameBorder="0"></iframe>
 
 
 """
@@ -61,7 +62,7 @@ from tm2p._intern.nx import (
     compute_spring_layout_positions,
     plot_nx_graph,
 )
-from tm2p.synthes.main_path.network_edges_data_frame import NetworkEdgesDataFrame
+from tm2p.synthes.main_path.network_edges_dataframe import NetworkEdgesDataFrame
 
 
 class NetworkPlot(
@@ -84,7 +85,7 @@ class NetworkPlot(
         # Adds the links to the network:
         for _, row in data_frame.iterrows():
             nx_graph.add_weighted_edges_from(
-                ebunch_to_add=[(row.citing_article, row.cited_article, row.points)],
+                ebunch_to_add=[(row.CITING_DOC, row.CITED_DOC, row.POINTS)],
                 dash="solid",
             )
 
@@ -114,5 +115,6 @@ class NetworkPlot(
 
         for node in nx_graph.nodes():
             nx_graph.nodes[node]["text"] = node
+            nx_graph.nodes[node]["labeled"] = True
 
         return plot_nx_graph(self.params, nx_graph)

@@ -7,36 +7,39 @@ tm2p/
 |   |-- scatter_plot
 |   +-- super_profile
 |-- anal/
-|   |-- bibliom/
+|   |-- bradford/
+|   |   |-- Distribution
+|   |   |-- DistributionPlot
+|   |   +-- ZoneTable
+|   |-- lotka/
+|   |   |-- Distribution
+|   |   +-- DistributionPlot
+|   |-- metrics/
 |   |   |-- BarPlot
 |   |   |-- ClevelandDotPlot
 |   |   |-- ColumnPlot
 |   |   |-- LinePlot
+|   |   |-- Metrics
 |   |   |-- PiePlot
 |   |   |-- RankingPlot
 |   |   |-- WordCloud
 |   |   +-- WorldMap
-|   |-- bradford/
-|   |   |-- DataFrame
-|   |   |-- LinePlot
-|   |   +-- ZonesDataFrame
-|   |-- items_by_year/
-|   |   |-- GanttPlot
-|   |   +-- ItemsByYear
-|   |-- lotka/
-|   |   |-- DataFrame
-|   |   +-- LinePlot
 |   |-- rpys/
 |   |   |-- RPYSDataFrame
 |   |   +-- RPYSPlot
-|   +-- topic_trends/
-|       |-- bibliometrix/
-|       |   |-- TopicDynamics
-|       |   +-- TopicDynamicsPlot
-|       |-- bursts/
-|       +-- scientopy/
-|           |-- TopicDynamics
-|           +-- TopicDynamicsPlot
+|   |-- topic_trends/
+|   |   |-- bibliometrix/
+|   |   |   |-- TopicDynamics
+|   |   |   +-- TopicDynamicsPlot
+|   |   |-- bursts/
+|   |   +-- scientopy/
+|   |       |-- TopicDynamics
+|   |       +-- TopicDynamicsPlot
+|   |-- trends/
+|   |   |-- GanttPlot
+|   |   +-- Trends
+|   +-- zipf/
+|       +-- distribution
 |-- discov/
 |   |-- assoc/
 |   |   |-- authkw/
@@ -46,38 +49,34 @@ tm2p/
 |   |   |   +-- MatrixPlot
 |   |   +-- lemma_associations
 |   |-- co_occur_matrix/
-|   |   |-- BubbleChart
+|   |   |-- BubblePlot
 |   |   |-- Heatmap
 |   |   |-- Matrix
 |   |   |-- MatrixList
 |   |   +-- MatrixPlot
 |   |-- concord/
-|   |   |-- ConcordanceDocuments
-|   |   |-- ConcordanceRaw
-|   |   |-- ConcordanceRecords
-|   |   |-- ConcordanceSentences
-|   |   |-- ConcordanceTokenized
-|   |   |-- ConcordanceUppercase
-|   |   +-- ConcordanceUser
+|   |   |-- KWICConcordance
+|   |   |-- RecordTermReport
+|   |   |-- RecordTermSearch
+|   |   +-- SentenceConcordance
 |   |-- correl/
 |   |   |-- auto/
-|   |   |   |-- MatrixDataFrame
-|   |   |   |-- NetworkMapPlot
-|   |   |   +-- plot_correl_map
+|   |   |   |-- Matrix
+|   |   |   +-- NetworkMapPlot
 |   |   +-- cross/
-|   |       |-- MatrixDataFrame
+|   |       |-- Matrix
 |   |       +-- NetworkMapPlot
+|   |-- cross_occur_matrix/
+|   |   |-- BubblePlot
+|   |   |-- Heatmap
+|   |   |-- Matrix
+|   |   |-- MatrixList
+|   |   +-- MatrixPlot
 |   |-- doc_clust/
 |   |   |-- ClustersToTermsMapping
 |   |   |-- TermOccurrenceByCluster
 |   |   |-- TermsByClusterDataFrame
 |   |   +-- TermsByClusterSummary
-|   |-- occur_matrix/
-|   |   |-- BubbleChart
-|   |   |-- Heatmap
-|   |   |-- Matrix
-|   |   |-- MatrixList
-|   |   +-- MatrixPlot
 |   |-- overview/
 |   |   |-- annu_sci_prod/
 |   |   |   +-- RankingChart
@@ -90,20 +89,22 @@ tm2p/
 |   |   |   |-- life_cycle_chart
 |   |   |   +-- summary
 |   |   |-- Stats
-|   |   +-- OpenAccess
+|   |   |-- OpenAccess
+|   |   +-- SankeyPlot
 |   |-- rec/
 |   +-- tfidf/
-|       |-- auth/
-|       |-- authkw/
-|       |-- concept/
-|       |-- ctry/
-|       |-- idxkw/
-|       |-- kw/
-|       +-- org/
+|       +-- Matrix
 |-- enum/
-|   |-- Corpus
-|   |-- ItemsOrderBy
-|   |-- RecordsOrderBy
+|   |-- AssociationIndex
+|   |-- CitationUnit
+|   |-- CoCitationUnit
+|   |-- Common
+|   |-- Correlation
+|   |-- CouplingUnit
+|   |-- Field
+|   |-- Indicator
+|   |-- ItemOrderBy
+|   |-- RecordOrderBy
 |   +-- ThesaurusField
 |-- ingest/
 |   |-- data_sourc/
@@ -176,163 +177,6 @@ tm2p/
 |   |   +-- MergeKeys
 |   |-- ref/
 |   |   +-- CreateThesaurus
-|   |-- thesaurus_old/
-|   |   |-- acronyms/
-|   |   |   |-- general/
-|   |   |   |   |-- InitializeThesaurus
-|   |   |   |   +-- PrintHeader
-|   |   |   +-- register/
-|   |   |       +-- RegisterPhrases
-|   |   |-- countries/
-|   |   |   |-- general/
-|   |   |   |   |-- ApplyThesaurus
-|   |   |   |   |-- ExplodeKeys
-|   |   |   |   |-- InitializeThesaurus
-|   |   |   |   |-- IntegrityCheck
-|   |   |   |   |-- PrintHeader
-|   |   |   |   +-- ReduceKeys
-|   |   |   +-- sort/
-|   |   |       |-- SortByAlphabet
-|   |   |       |-- SortByEndsWithMatch
-|   |   |       |-- SortByExactMatch
-|   |   |       |-- SortByFuzzyMatch
-|   |   |       |-- SortByKeyLength
-|   |   |       |-- SortByMatch
-|   |   |       |-- SortByStartsWithMatch
-|   |   |       |-- SortByWordLength
-|   |   |       +-- SortByWordMatch
-|   |   |-- descriptors/
-|   |   |   |-- clean/
-|   |   |   |   |-- AreSynonymous
-|   |   |   |   |-- CombineKeys
-|   |   |   |   |-- DefineTerm
-|   |   |   |   |-- IsStopword
-|   |   |   |   |-- MergeSynonymous
-|   |   |   |   +-- PopulateStopwords
-|   |   |   |-- general/
-|   |   |   |   |-- ApplyThesaurus
-|   |   |   |   |-- ClumpKeys
-|   |   |   |   |-- CutoffFuzzyMerging
-|   |   |   |   |-- GetContexts
-|   |   |   |   |-- GetValues
-|   |   |   |   |-- InitializeThesaurus
-|   |   |   |   |-- IntegrityCheck
-|   |   |   |   |-- MergeKeys
-|   |   |   |   |-- NormalizeKeys
-|   |   |   |   |-- ReduceKeys
-|   |   |   |   +-- SpellCheck
-|   |   |   |-- register/
-|   |   |   |   |-- RegisterInitialWord
-|   |   |   |   |-- RegisterKeyword
-|   |   |   |   +-- RegisterLastWord
-|   |   |   |-- remove/
-|   |   |   |   |-- RemoveDeterminers
-|   |   |   |   |-- RemoveInitialWords
-|   |   |   |   |-- RemoveLastWords
-|   |   |   |   |-- RemoveParentheses
-|   |   |   |   +-- RemoveStopwords
-|   |   |   |-- replace/
-|   |   |   |   |-- ReplaceAcronyms
-|   |   |   |   |-- ReplaceHyphenatedWords
-|   |   |   |   |-- ReplaceInitialWord
-|   |   |   |   |-- ReplaceLastWord
-|   |   |   |   +-- ReplaceWord
-|   |   |   |-- sort/
-|   |   |   |   |-- SortByAlphabet
-|   |   |   |   |-- SortByEndsWithMatch
-|   |   |   |   |-- SortByExactMatch
-|   |   |   |   |-- SortByFuzzyMatch
-|   |   |   |   |-- SortByInitialWords
-|   |   |   |   |-- SortByKeyLength
-|   |   |   |   |-- SortByLastWords
-|   |   |   |   |-- SortByMatch
-|   |   |   |   |-- SortByOccurrences
-|   |   |   |   |-- SortByStartsWithMatch
-|   |   |   |   |-- SortByStopwords
-|   |   |   |   |-- SortByWordLength
-|   |   |   |   +-- SortByWordMatch
-|   |   |   +-- translate/
-|   |   |       |-- AmericanToBritishSpelling
-|   |   |       +-- BritishToAmericanSpelling
-|   |   |-- organizations/
-|   |   |   |-- general/
-|   |   |   |   |-- ApplyThesaurus
-|   |   |   |   |-- ExplodeKeys
-|   |   |   |   |-- InitializeThesaurus
-|   |   |   |   |-- IntegrityCheck
-|   |   |   |   +-- ReduceKeys
-|   |   |   +-- sort/
-|   |   |       |-- SortByAlphabet
-|   |   |       |-- SortByEndsWithMatch
-|   |   |       |-- SortByExactMatch
-|   |   |       |-- SortByFuzzyMatch
-|   |   |       |-- SortByKeyLength
-|   |   |       |-- SortByMatch
-|   |   |       |-- SortByStartsWithMatch
-|   |   |       |-- SortByWordLength
-|   |   |       +-- SortByWordMatch
-|   |   |-- references/
-|   |   |   |-- general/
-|   |   |   |   |-- ApplyThesaurus
-|   |   |   |   |-- InitializeThesaurus
-|   |   |   |   +-- IntegrityCheck
-|   |   |   +-- sort/
-|   |   |       |-- SortByAlphabet
-|   |   |       |-- SortByFuzzyMatch
-|   |   |       +-- SortByMatch
-|   |   |-- system/
-|   |   |   |-- ApplyThesaurus
-|   |   |   +-- descriptors/
-|   |   |       +-- sort/
-|   |   |           |-- SortByAlphabet
-|   |   |           |-- SortByEndsWithMatch
-|   |   |           |-- SortByExactMatch
-|   |   |           |-- SortByFuzzyMatch
-|   |   |           |-- SortByInitialWords
-|   |   |           |-- SortByKeyLength
-|   |   |           |-- SortByLastWords
-|   |   |           |-- SortByMatch
-|   |   |           |-- SortByStartsWithMatch
-|   |   |           |-- SortByWordLength
-|   |   |           +-- SortByWordMatch
-|   |   +-- user/
-|   |       |-- general/
-|   |       |   |-- ApplyThesaurus
-|   |       |   |-- ClumpKeys
-|   |       |   |-- CombineKeys
-|   |       |   |-- CutoffFuzzyMerging
-|   |       |   |-- ExplodeKeys
-|   |       |   |-- GetValues
-|   |       |   |-- InitializeThesaurus
-|   |       |   |-- IntegrityCheck
-|   |       |   |-- MergeKeys
-|   |       |   |-- PrintHeader
-|   |       |   |-- ReduceKeys
-|   |       |   +-- SpellCheck
-|   |       |-- replace/
-|   |       |   |-- ReplaceInitialWord
-|   |       |   |-- ReplaceLastWord
-|   |       |   +-- ReplaceWord
-|   |       |-- sort/
-|   |       |   |-- SortByAlphabet
-|   |       |   |-- SortByEndsWithMatch
-|   |       |   |-- SortByExactMatch
-|   |       |   |-- SortByFuzzyMatch
-|   |       |   |-- SortByInitialWords
-|   |       |   |-- SortByKeyLength
-|   |       |   |-- SortByLastWords
-|   |       |   |-- SortByMatch
-|   |       |   |-- SortByOccurrences
-|   |       |   |-- SortByStartsWithMatch
-|   |       |   |-- SortByStopwords
-|   |       |   |-- SortByWordLength
-|   |       |   +-- SortByWordMatch
-|   |       +-- translate/
-|   |           |-- AmericanToBritishSpelling
-|   |           +-- BritishToAmericanSpelling
-|   +-- usr/
-|       |-- CreateThesaurus
-|       +-- MergeKeys
 |-- rep/
 |   |-- manuscr/
 |   |   |-- Abstract
@@ -348,240 +192,78 @@ tm2p/
 |   |   +-- Zotero
 |   +-- zotero/
 |       +-- ExportRecordNoToZotero
-|-- SankeyPlot
 +-- synthes/
     |-- collabor/
     |   |-- BarPlot
-    |   |-- DataFrame
+    |   |-- Metrics
     |   +-- WorldMap
-    |-- concept_struct/
-    |   |-- co_occur/
-    |   |   |-- authkw/
-    |   |   |   |-- ClustersToTermsMapping
-    |   |   |   |-- ConceptGridPlot
-    |   |   |   |-- DocumentsByClusterMapping
-    |   |   |   |-- NetworkMetrics
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   |-- TermsByClusterDataFrame
-    |   |   |   |-- TermsByClusterSummary
-    |   |   |   |-- TermsToClustersMapping
-    |   |   |   +-- Treemap
-    |   |   |-- concept/
-    |   |   |   |-- ClustersToTermsMapping
-    |   |   |   |-- ConceptGridPlot
-    |   |   |   |-- DocumentsByClusterMapping
-    |   |   |   |-- NetworkMetrics
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   |-- TermsByClusterDataFrame
-    |   |   |   |-- TermsByClusterSummary
-    |   |   |   |-- TermsToClustersMapping
-    |   |   |   +-- Treemap
-    |   |   |-- idxkw/
-    |   |   |   |-- ClustersToTermsMapping
-    |   |   |   |-- ConceptGridPlot
-    |   |   |   |-- DocumentsByClusterMapping
-    |   |   |   |-- NetworkMetrics
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   |-- TermsByClusterDataFrame
-    |   |   |   |-- TermsByClusterSummary
-    |   |   |   |-- TermsToClustersMapping
-    |   |   |   +-- Treemap
-    |   |   |-- kw/
-    |   |   |   |-- ClustersToTermsMapping
-    |   |   |   |-- ConceptGridPlot
-    |   |   |   |-- DocumentsByClusterMapping
-    |   |   |   |-- NetworkMetrics
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   |-- TermsByClusterDataFrame
-    |   |   |   |-- TermsByClusterSummary
-    |   |   |   |-- TermsToClustersMapping
-    |   |   |   +-- Treemap
-    |   |   +-- usr/
-    |   |       |-- ClustersToTermsMapping
-    |   |       |-- ConceptGridPlot
-    |   |       |-- DocumentsByClusterMapping
-    |   |       |-- NetworkMetrics
-    |   |       |-- NetworkPlot
-    |   |       |-- NodeDegreeDataFrame
-    |   |       |-- NodeDegreePlot
-    |   |       |-- NodeDensityPlot
-    |   |       |-- TermsByClusterDataFrame
-    |   |       |-- TermsByClusterSummary
-    |   |       |-- TermsToClustersMapping
-    |   |       +-- Treemap
-    |   |-- factor_anal/
-    |   |   |-- co_occur/
-    |   |   |   |-- cluster_centers_data_frame
-    |   |   |   |-- cluster_to_terms_mapping
-    |   |   |   |-- cosine_similarities
-    |   |   |   |-- factor_map
-    |   |   |   |-- manifold_terms_by_dimension_map
-    |   |   |   |-- terms_by_cluster_data_frame
-    |   |   |   |-- terms_by_dimension_data_frame
-    |   |   |   |-- terms_by_dimension_map
-    |   |   |   |-- terms_to_cluster_mapping
-    |   |   |   +-- treemap
-    |   |   +-- tfidf/
-    |   |       |-- cluster_centers_dataframe
-    |   |       |-- cluster_to_terms_mapping
-    |   |       |-- cosine_similarities
-    |   |       |-- factor_map
-    |   |       |-- manifold_terms_by_dimension_map
-    |   |       |-- terms_by_cluster_dataframe
-    |   |       |-- terms_by_dimension_dataframe
-    |   |       |-- terms_by_dimension_map
-    |   |       |-- terms_to_cluster_mapping
-    |   |       +-- treemap
-    |   +-- topic_model/
-    |       +-- usr/
-    |           |-- ClusterToTermsMapping
-    |           |-- ComponentsByTermDataFrame
-    |           |-- DocumentsByThemeDataFrame
-    |           |-- TermsByClusterDataFrame
-    |           +-- ThemeToDocumentsMapping
-    |-- coupl_netw/
-    |   |-- auth/
-    |   |   |-- NetworkMetrics
-    |   |   |-- NetworkPlot
-    |   |   |-- NodeDegreeDataFrame
-    |   |   |-- NodeDegreePlot
-    |   |   |-- NodeDensityPlot
-    |   |   +-- TermsByClusterDataFrame
-    |   |-- ctry/
-    |   |   |-- NetworkMetrics
-    |   |   |-- NetworkPlot
-    |   |   |-- NodeDegreeDataFrame
-    |   |   |-- NodeDegreePlot
-    |   |   |-- NodeDensityPlot
-    |   |   +-- TermsByClusterDataFrame
-    |   |-- doc/
-    |   |   |-- NetworkMetrics
-    |   |   |-- NetworkPlot
-    |   |   |-- NodeDegreeDataFrame
-    |   |   |-- NodeDegreePlot
-    |   |   |-- NodeDensityPlot
-    |   |   +-- TermsByClusterDataFrame
-    |   |-- org/
-    |   |   |-- NetworkMetrics
-    |   |   |-- NetworkPlot
-    |   |   |-- NodeDegreeDataFrame
-    |   |   |-- NodeDegreePlot
-    |   |   |-- NodeDensityPlot
-    |   |   +-- TermsByClusterDataFrame
-    |   +-- src/
-    |       |-- NetworkMetrics
-    |       |-- NetworkPlot
-    |       |-- NodeDegreeDataFrame
-    |       |-- NodeDegreePlot
-    |       |-- NodeDensityPlot
-    |       +-- TermsByClusterDataFrame
     |-- emerg/
-    |   |-- DataFrame
+    |   |-- Metrics
     |   +-- plot_emergence
-    |-- intellect_struct/
-    |   |-- cit_netw/
-    |   |   |-- auth/
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   +-- TermsByClusterDataFrame
-    |   |   |-- ctry/
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   +-- TermsByClusterDataFrame
-    |   |   |-- doc/
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   +-- TermsByClusterDataFrame
-    |   |   |-- org/
-    |   |   |   |-- NetworkPlot
-    |   |   |   |-- NodeDegreeDataFrame
-    |   |   |   |-- NodeDegreePlot
-    |   |   |   |-- NodeDensityPlot
-    |   |   |   +-- TermsByClusterDataFrame
-    |   |   +-- src/
-    |   |       |-- NetworkPlot
-    |   |       |-- NodeDegreeDataFrame
-    |   |       |-- NodeDegreePlot
-    |   |       |-- NodeDensityPlot
-    |   |       +-- TermsByClusterDataFrame
-    |   +-- co_cit_netw/
-    |       |-- cit_auth/
-    |       |   |-- NetworkMetrics
-    |       |   |-- NetworkPlot
-    |       |   |-- NodeDegreeDataFrame
-    |       |   |-- NodeDegreePlot
-    |       |   |-- NodeDensityPlot
-    |       |   +-- TermsByClusterDataFrame
-    |       |-- cit_ref/
-    |       |   |-- NetworkMetrics
-    |       |   |-- NetworkPlot
-    |       |   |-- NodeDegreeDataFrame
-    |       |   |-- NodeDegreePlot
-    |       |   |-- NodeDensityPlot
-    |       |   +-- TermsByClusterDataFrame
-    |       +-- cit_src/
-    |           |-- NetworkMetrics
-    |           |-- NetworkPlot
-    |           |-- NodeDegreeDataFrame
-    |           |-- NodeDegreePlot
-    |           |-- NodeDensityPlot
-    |           +-- TermsByClusterDataFrame
+    |-- factor_anal/
+    |   |-- co_occur/
+    |   |   |-- cluster_centers_data_frame
+    |   |   |-- cluster_to_terms_mapping
+    |   |   |-- cosine_similarities
+    |   |   |-- factor_map
+    |   |   |-- manifold_terms_by_dimension_map
+    |   |   |-- terms_by_cluster_data_frame
+    |   |   |-- terms_by_dimension_data_frame
+    |   |   |-- terms_by_dimension_map
+    |   |   |-- terms_to_cluster_mapping
+    |   |   +-- treemap
+    |   +-- tfidf/
+    |       |-- cluster_centers_dataframe
+    |       |-- cluster_to_terms_mapping
+    |       |-- cosine_similarities
+    |       |-- factor_map
+    |       |-- manifold_terms_by_dimension_map
+    |       |-- terms_by_cluster_dataframe
+    |       |-- terms_by_dimension_dataframe
+    |       |-- terms_by_dimension_map
+    |       |-- terms_to_cluster_mapping
+    |       +-- treemap
     |-- main_path/
     |   |-- MainPathDocuments
     |   |-- NetworkEdgesDataFrame
     |   +-- NetworkPlot
     |-- netw/
-    |   +-- co_occur/
-    +-- soc_struct/
-        +-- co_authorsh/
-            |-- auth/
-            |   |-- ClustersToTermsMapping
-            |   |-- NetworkMetrics
-            |   |-- NetworkPlot
-            |   |-- NodeDegreeDataFrame
-            |   |-- NodeDegreePlot
-            |   |-- NodeDensityPlot
-            |   |-- TermsByClusterDataFrame
-            |   |-- TermsByClusterSummary
-            |   |-- TermsToClustersMapping
-            |   +-- Treemap
-            |-- ctry/
-            |   |-- ClustersToTermsMapping
-            |   |-- NetworkMetrics
-            |   |-- NetworkPlot
-            |   |-- NodeDegreeDataFrame
-            |   |-- NodeDegreePlot
-            |   |-- NodeDensityPlot
-            |   |-- TermsByClusterDataFrame
-            |   |-- TermsByClusterSummary
-            |   |-- TermsToClustersMapping
-            |   +-- Treemap
-            +-- org/
-                |-- ClustersToTermsMapping
-                |-- NetworkMetrics
-                |-- NetworkPlot
-                |-- NodeDegreeDataFrame
-                |-- NodeDegreePlot
-                |-- NodeDensityPlot
-                |-- TermsByClusterDataFrame
-                |-- TermsByClusterSummary
-                |-- TermsToClustersMapping
-                +-- Treemap
+    |   |-- cit/
+    |   |   |-- ItemsByClusterDataFrame
+    |   |   |-- KernelDensityPlot
+    |   |   |-- NetworkPlot
+    |   |   |-- NodeDegreeDataFrame
+    |   |   +-- NodeDegreePlot
+    |   |-- co_cit/
+    |   |   |-- ItemsByClusterDataFrame
+    |   |   |-- KernelDensityPlot
+    |   |   |-- NetworkMetrics
+    |   |   |-- NetworkPlot
+    |   |   |-- NodeDegreeDataFrame
+    |   |   +-- NodeDegreePlot
+    |   |-- co_occur/
+    |   |   |-- ClustersToItemsMapping
+    |   |   |-- ConceptGridPlot
+    |   |   |-- DocumentsByClusterMapping
+    |   |   |-- ItemsByClusterDataFrame
+    |   |   |-- ItemsByClusterSummary
+    |   |   |-- ItemsToClustersMapping
+    |   |   |-- KernelDensityPlot
+    |   |   |-- NetworkMetrics
+    |   |   |-- NetworkPlot
+    |   |   |-- NodeDegreeDataFrame
+    |   |   |-- NodeDegreePlot
+    |   |   +-- Treemap
+    |   +-- coupl/
+    |       |-- ItemsByClusterDataFrame
+    |       |-- KernelDensityPlot
+    |       |-- NetworkMetrics
+    |       |-- NetworkPlot
+    |       |-- NodeDegreeDataFrame
+    |       +-- NodeDegreePlot
+    +-- topic_model/
+        |-- ClusterToTermsMapping
+        |-- ComponentsByTermDataFrame
+        |-- DocumentsByThemeDataFrame
+        |-- TermsByClusterDataFrame
+        +-- ThemeToDocumentsMapping

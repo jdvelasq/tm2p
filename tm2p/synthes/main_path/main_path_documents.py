@@ -3,69 +3,57 @@ Main Path Documents
 ===============================================================================
 
 Smoke tests:
-    >>> # where_records_ordered_by:
-    >>> #     date_newest, date_oldest, global_cited_by_highest,
-    >>> #     global_cited_by_lowest, local_cited_by_highest,
-    >>> #     local_cited_by_lowest, first_author_a_to_z,
-    >>> #     first_author_z_to_a, source_title_a_to_z,
-    >>> #     source_title_z_to_a
-    >>> from tm2p.packages.networks.main_path import MainPathDocuments
-    >>> documents = (
+    >>> from tm2p import RecordOrderBy
+    >>> from tm2p.synthes.main_path import MainPathDocuments
+    >>> df = (
     ...     MainPathDocuments()
     ...     #
-    ...     # UNIT OF ANALYSIS:
+    ...     # ANALYSIS UNIT:
     ...     .having_items_in_top(None)
-    ...     .using_citation_threshold(0)
+    ...     .having_citation_threshold(0)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
+    ...     .where_root_directory("tests/regtech/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
-    ...     .where_records_ordered_by("data_newest")
+    ...     .where_records_ordered_by(RecordOrderBy.YEAR_NEWEST)
     ...     #
     ...     .run()
     ... )
-
-
-    >>> len(documents) # doctest: +SKIP
+    >>> len(df)
     5
-    >>> print(documents[0]) # doctest: +SKIP
-    UT 11
-    AR Gomber P., 2017, J BUS ECON, V87, P537
-    TI Digital Finance and FinTech: current research and future research directions
-    AU Gomber P.; Koch J.-A.; Siering M.
-    TC 489
-    SO Journal of Business Economics
-    PY 2017
-    AB since DECADES , THE_FINANCIAL_INDUSTRY has experienced
-       A_CONTINUOUS_EVOLUTION in SERVICE_DELIVERY due_to DIGITALIZATION .
-       THIS_EVOLUTION is characterized by EXPANDED_CONNECTIVITY and ENHANCED_SPEED
-       of INFORMATION_PROCESSING both at THE_CUSTOMER_INTERFACE and in
-       BACK_OFFICE_PROCESSES . recently , there has been A_SHIFT in THE_FOCUS of
-       DIGITALIZATION from improving THE_DELIVERY of TRADITIONAL_TASKS to
-       introducing FUNDAMENTALLY_NEW_BUSINESS_OPPORTUNITIES and MODELS for
-       FINANCIAL_SERVICE_COMPANIES . DIGITAL_FINANCE_ENCOMPASSES A_MAGNITUDE of
-       NEW_FINANCIAL_PRODUCTS , FINANCIAL_BUSINESSES , FINANCE_RELATED_SOFTWARE ,
-       and NOVEL_FORMS of customer COMMUNICATION_AND_INTERACTION delivered by
-       FINTECH_COMPANIES and INNOVATIVE_FINANCIAL_SERVICE_PROVIDERS . against
-       THIS_BACKDROP , THE_RESEARCH on FINANCE_AND_INFORMATION_SYSTEMS has started
-       to analyze THESE_CHANGES and THE_IMPACT of DIGITAL_PROGRESS on
-       THE_FINANCIAL_SECTOR . therefore , this article reviews the
-       CURRENT_STATE_OF_RESEARCH in DIGITAL_FINANCE that DEALS with
-       THESE_NOVEL_AND_INNOVATIVE_BUSINESS_FUNCTIONS . moreover , it gives
-       AN_OUTLOOK on POTENTIAL_FUTURE_RESEARCH_DIRECTIONS . as A_CONCEPTUAL_BASIS
-       for reviewing THIS_FIELD , THE_DIGITAL_FINANCE_CUBE , which embraces
-       THREE_KEY_DIMENSIONS of DIGITAL_FINANCE and FINTECH , i.e.  , the
-       RESPECTIVE_BUSINESS_FUNCTIONS , THE_TECHNOLOGIES and TECHNOLOGICAL_CONCEPTS
-       applied as_well_as THE_INSTITUTIONS concerned , is introduced . this
-       CONCEPTUALIZATION_SUPPORTS_RESEARCHERS and PRACTITIONERS when orientating in
-       THE_FIELD of DIGITAL_FINANCE , allows for THE_ARRANGEMENT of
-       ACADEMIC_RESEARCH relatively to each other , and enables for THE_REVELATION
-       of THE_GAPS in RESEARCH . 2017 , springer verlag berlin heidelberg .
-    DE DIGITAL_FINANCE; E_FINANCE; FINTECH; FUTURE_RESEARCH_OPPORTUNITIES;
-       LITERATURE_REVIEW; STATE_OF_THE_ART
+    >>> print(df[0])
+    UT 97
+    AR Zabat, 2024, WSEAS TRANS BUS ECON, V21, P1200
+    TI The Impact of RegTech on Compliance Costs and Risk Management from the
+       Perspective of Saudi Banks' Employees
+    AU Zabat L.; Sadaoui N.; Benlaria H.; Ahmed S.A.K.; Hussien B.S.A.; Abdulrahman
+       B.M.A.
+    TC 2
+    SO WSEAS TRANS BUS ECON
+    PY 2024
+    AB through this_research , we will be analyzing THE_EFFECT of REGTECH on
+       COMPLIANCE_COSTS and RISK_MANAGEMENT in THE_BANKING_SECTOR , mainly with the
+       eye of PEOPLE in administrative roles in saudi BANKS , a_total_of 232. a
+       NEW_TECHNOLOGICAL trend is reshaping THE_FINANCIAL_INDUSTRY , REGTECH ,
+       marked by various advanced technological PROCESSES and AUTOMATION .
+       THE_MAIN_FINDINGS show that REGTECH significantly reduces COMPLIANCE_COSTS ,
+       confirming its COST_SAVING_POTENTIAL . therefore , employee PERCEPTIONS are
+       critical to integrating and adopting REGTECH within BUSINESS_OPERATIONS . in
+       addition , REGTECH improves RISK_MANAGEMENT_SYSTEMS with more accessible
+       PROCEDURES and better INTERNAL_CONTROLS . this proves REGTECH ' s ABILITY to
+       improve the BANKING_PROCESSES and strengthen the RISK_MANAGEMENT_SYSTEM .
+       proportional to the organizational SUPPORT , tool INVESTMENTS , and tool
+       diversity INTERACTIONS are moderated , and operational EFFICIENCY is
+       enhanced . this_research contributes significantly to the more profound
+       KNOWLEDGE of the implication of REGTECH in the saudi BANKING sector , which
+       facilitates TRANSFORMATION through renewed PRACTICES in THE_INDUSTRY
+       alongside its EFFICIENCY . 2024 , world scientific and engineering academy
+       and society . all rights reserved .
+    DE banking sector; compliance costs; employee perspectives; financial
+       institutions; internal controls; operational efficiency; regtech; risk
+       management; saudi arabia; technology adoption
     <BLANKLINE>
 
 
@@ -74,9 +62,10 @@ Smoke tests:
 
 """
 
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p.ingest.rec import RecordViewer
-from tm2p.synthes.main_path._intern.compute_main_path import internal__compute_main_path
+from tm2p.synthes.main_path._intern.compute_main_path import compute_main_path
 
 
 class MainPathDocuments(
@@ -89,7 +78,7 @@ class MainPathDocuments(
 
         #
         # Creates a table with citing and cited articles
-        articles_in_main_path, _ = internal__compute_main_path(params=self.params)
+        articles_in_main_path, _ = compute_main_path(params=self.params)
 
         #
         # remove counters
@@ -99,7 +88,7 @@ class MainPathDocuments(
 
         #
         # build the filter
-        records_match = {"record_id": articles_in_main_path}
+        records_match = {Field.RID: articles_in_main_path}
 
         documents = (
             RecordViewer()
