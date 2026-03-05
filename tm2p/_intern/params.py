@@ -11,6 +11,7 @@ from tm2p.enum import (
     CitationUnit,
     CoCitationUnit,
     Correlation,
+    CouplingUnit,
     Field,
     ItemOrderBy,
     RecordOrderBy,
@@ -72,6 +73,11 @@ class Params:
     # Co-citation network:
     #
     co_citation_unit: CoCitationUnit = CoCitationUnit.CITED_AUTH
+
+    #
+    # Coupling network:
+    #
+    coupling_unit: CouplingUnit = CouplingUnit.AUTH
 
     #
     # A

@@ -38,6 +38,7 @@ from tm2p.enum import (
     AssociationIndex,
     CitationUnit,
     Correlation,
+    CouplingUnit,
     Field,
     ItemOrderBy,
     RecordOrderBy,
@@ -951,6 +952,12 @@ class ParamsMixin:
                 "co_citation_unit must be an instance of CoCitationUnit enum"
             )
         self.params.co_citation_unit = co_citation_unit
+        return self
+
+    def with_coupling_unit(self, coupling_unit: CouplingUnit) -> Self:
+        if not isinstance(coupling_unit, CouplingUnit):
+            raise TypeError("coupling_unit must be an instance of CouplingUnit enum")
+        self.params.coupling_unit = coupling_unit
         return self
 
     def with_column(self, column: str) -> Self:
