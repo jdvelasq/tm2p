@@ -82,12 +82,12 @@ class DocumentsByThemeDataFrame(
 
         tf_matrix = TfIdf().update(**self.params.__dict__).run()
 
-        self.params.decomposition_algorithm.fit(tf_matrix)
+        self.params.decomposition_algorithm.fit(tf_matrix)  # type: ignore
 
         frame = pd.DataFrame(
-            self.params.decomposition_algorithm.transform(tf_matrix),
+            self.params.decomposition_algorithm.transform(tf_matrix),  # type: ignore
             index=tf_matrix.index,
-            columns=range(self.params.decomposition_algorithm.n_components),
+            columns=range(self.params.decomposition_algorithm.n_components),  # type: ignore
         )
         frame.columns.name = "cluster"
         frame.index.name = "article"
