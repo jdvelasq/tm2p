@@ -83,7 +83,7 @@ CLUSTER_COLORS = (
 )
 
 
-class ClusterCentersDataFrame(
+class Treemap(
     ParamsMixin,
 ):
     """:meta private:"""

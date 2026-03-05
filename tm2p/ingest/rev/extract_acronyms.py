@@ -82,7 +82,7 @@ class ExtractAcronyms(
             ]
             keywords = keywords[~keywords.str.startswith("(")]  # type: ignore
 
-            if not keywords.empty:
+            if not keywords.empty:  # type: ignore
 
                 for _, text in keywords.items():  # type: ignore
 

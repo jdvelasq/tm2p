@@ -9,7 +9,7 @@ Smoke test - fintech - successful import:
     ...     Scopus()
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
-    ... )  # doctest: +SKIP
+    ... )
     >>> result.success  # doctest: +SKIP
     True
 
@@ -31,7 +31,7 @@ Smoke test - regtech - successful import:
     ...     Scopus()
     ...     .where_root_directory("tests/regtech/")
     ...     .run()
-    ... )  # doctest: +SKIP
+    ... )
     >>> result.success  # doctest: +SKIP
     True
 

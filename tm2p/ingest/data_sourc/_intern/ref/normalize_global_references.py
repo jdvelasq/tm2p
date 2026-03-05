@@ -106,7 +106,7 @@ def _create_references_thesaurus_file(root_directory: str) -> None:
     groupby_df["ref"] = groupby_df["ref"].apply(sorted)
     groupby_df = groupby_df.sort_values(by=["rec_id"], ascending=True)
 
-    filepath = Path(root_directory) / "refine" / "thesaurus" / "references.the.txt"
+    filepath = Path(root_directory) / "refine" / "thesaurus" / "gcr.the.txt"
 
     with open(filepath, "w", encoding="utf-8") as file:
         for _, row in groupby_df.iterrows():

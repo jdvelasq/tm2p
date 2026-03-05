@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import pandas as pd
+import pandas as pd  # type: ignore
 
 from tm2p.ingest.data_sourc._intern.scaffold.get_subdirectories import (
     get_subdirectories,
@@ -35,7 +35,7 @@ def _compress_file(csv_file: Path) -> bool:
 
 def compress_raw_files(root_directory: str) -> int:
 
-    raw_dir = Path(root_directory) / "ingest" / "raw"
+    raw_dir = Path(root_directory) / "ingest" / "raw" / "scopus"
 
     if not raw_dir.exists():
         return 0

@@ -20,7 +20,7 @@ def create_concept_thesaurus(root_directory: str) -> int:
     counting_df = counting_df.reset_index()
     counting_df = counting_df.sort_values(by=["item", "count"], ascending=[True, True])
 
-    filepath = Path(root_directory) / "refine" / "thesaurus" / "concepts.the.txt"
+    filepath = Path(root_directory) / "refine" / "thesaurus" / "concept.the.txt"
 
     with open(filepath, "w", encoding="utf-8") as file:
         for _, row in counting_df.iterrows():

@@ -1,11 +1,11 @@
 from pathlib import Path
 
-import pandas as pd
+import pandas as pd  # type: ignore
 
 
 def create_database_files(root_directory: str) -> dict[str, int]:
 
-    raw_directory = Path(root_directory) / "ingest" / "raw"
+    raw_directory = Path(root_directory) / "ingest" / "raw" / "scopus"
     processed_directory = Path(root_directory) / "ingest" / "processed"
 
     if not raw_directory.exists():

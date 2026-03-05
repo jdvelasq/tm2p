@@ -34,7 +34,7 @@ def _process_file(csv_file: Path) -> int:
 def remove_non_english_abstracts(root_directory: str) -> int:
     """:meta private:"""
 
-    raw_dir = Path(root_directory) / "ingest" / "raw" / "main"
+    raw_dir = Path(root_directory) / "ingest" / "raw" / "scopus" / "main"
 
     if not raw_dir.exists():
         return 0
