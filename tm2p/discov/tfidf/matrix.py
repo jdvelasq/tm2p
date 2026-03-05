@@ -202,7 +202,7 @@ class Matrix(
         return self.sort_columns(data_frame)
 
     def _remove_counters_from_axes(self, data_frame):
-        if self.params.item_counters is False:
+        if self.params.counters is False:
             data_frame.columns = [" ".join(x.split()[:-1]) for x in data_frame.columns]
         return data_frame
 

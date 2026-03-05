@@ -16,46 +16,49 @@ Smoke tests:
     ...     max_doc_update_iter=100,
     ...     random_state=0,
     ... )
-    >>> from tm2p.packages.topic_modeling.user import DocumentsByThemeDataFrame
+    >>> from tm2p import ItemOrderBy, Field
+    >>> from tm2p.synthes.topic_model import DocumentsByThemeDataFrame
     >>> df =(
     ...     DocumentsByThemeDataFrame()
     ...     #
     ...     # FIELD:
-    ...     .with_field("raw_descriptors")
+    ...     .with_source_field(Field.CONCEPT_NORM)
     ...     .having_items_in_top(50)
-    ...     .having_items_ordered_by("OCC")
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
     ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(True)
+    ...     #
     ...     # DECOMPOSITION:
     ...     .using_decomposition_algorithm(lda)
-    ...     .using_top_terms_by_theme(5)
+    ...     .using_top_items_by_theme(5)
     ...     #
     ...     # TFIDF:
     ...     .using_binary_item_frequencies(False)
-    ...     .using_row_normalization(None)
-    ...     .using_idf_reweighting(False)
-    ...     .using_idf_weights_smoothing(False)
-    ...     .using_sublinear_tf_scaling(False)
+    ...     .using_tfidf_norm(None)
+    ...     .using_tfidf_smooth_idf(False)
+    ...     .using_tfidf_sublinear_tf(False)
+    ...     .using_tfidf_use_idf(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
     ...     #
     ...     .run()
     ... )
-    >>> df.head() # doctest: +SKIP
+    >>> df.head()
     cluster                                                    0  ...         9
     article                                                       ...
-    Alt R., 2018, ELECTRON MARK, V28, P235              0.033338  ...  0.699979
-    Anagnostopoulos I., 2018, J ECON BUS, V100, P7      0.947050  ...  0.005883
-    Anshari M., 2019, ENERGY PROCEDIA, V156, P234       0.016672  ...  0.016670
-    Arner D.W., 2017, NORTHWEST J INTL LAW BUS, V37...  0.006668  ...  0.006668
-    Belanche D., 2019, IND MANAGE DATA SYS, V119, P...  0.899982  ...  0.011113
+    Agarwal, 2020, ASIAPACIFIC J FINANC STUD, V49, ...  0.014288  ...  0.014287
+    Ajouz, 2023, CUAD ECON, V46, P189                   0.016671  ...  0.016675
+    Al-Sartawi, 2024, J FINANC REPORT ACCOUNT           0.014290  ...  0.014288
+    Alam, 2019, FINTECH ISLAM FINANC DIGIT DEV DISR...  0.020003  ...  0.020002
+    Aldboush, 2023, INT J FINANC STUD, V11              0.020002  ...  0.020002
     <BLANKLINE>
     [5 rows x 10 columns]
 

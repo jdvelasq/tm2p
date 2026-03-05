@@ -16,46 +16,49 @@ Smoke tests:
     ...     max_doc_update_iter=100,
     ...     random_state=0,
     ... )
-    >>> from tm2p.packages.topic_modeling.user import TermsByClusterDataFrame
+    >>> from tm2p import ItemOrderBy, Field
+    >>> from tm2p.synthes.topic_model import ItemsByClusterDataFrame
     >>> df = (
-    ...     TermsByClusterDataFrame()
+    ...     ItemsByClusterDataFrame()
     ...     #
     ...     # FIELD:
-    ...     .with_field("raw_descriptors")
+    ...     .with_source_field(Field.CONCEPT_NORM)
     ...     .having_items_in_top(50)
-    ...     .having_items_ordered_by("OCC")
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
     ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(True)
+    ...     #
     ...     # DECOMPOSITION:
     ...     .using_decomposition_algorithm(lda)
-    ...     .using_top_terms_by_theme(5)
+    ...     .using_top_items_by_theme(5)
     ...     #
     ...     # TFIDF:
     ...     .using_binary_item_frequencies(False)
-    ...     .using_row_normalization(None)
-    ...     .using_idf_reweighting(False)
-    ...     .using_idf_weights_smoothing(False)
-    ...     .using_sublinear_tf_scaling(False)
+    ...     .using_tfidf_norm(None)
+    ...     .using_tfidf_smooth_idf(False)
+    ...     .using_tfidf_sublinear_tf(False)
+    ...     .using_tfidf_use_idf(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
     ...     #
     ...     .run()
     ... )
-    >>> df.head() # doctest: +SKIP
-    cluster                             0  ...                               9
-    term                                   ...
-    0                     FINTECH 38:6131  ...                 FINTECH 38:6131
-    1        FINANCIAL_TECHNOLOGY 11:1519  ...  THE_FINANCIAL_INDUSTRY 09:2006
-    2                  TECHNOLOGY 10:1220  ...                A_SURVEY 03:0484
-    3                       BANKS 08:1049  ...           PRACTITIONERS 05:0992
-    4                  REGULATORS 08:0974  ...               THE_FIELD 05:0834
+    >>> df.head()
+    cluster                               0  ...                                  9
+    term                                     ...
+    0                     fintech 155:33245  ...                  fintech 155:33245
+    1                       china 033:06419  ...      financial inclusion 022:04623
+    2             the development 026:05689  ...                  finance 050:10972
+    3        financial technology 051:09258  ...  sustainable development 018:02898
+    4                    evidence 018:03900  ...               innovation 033:07734
     <BLANKLINE>
     [5 rows x 10 columns]
 
@@ -65,10 +68,10 @@ Smoke tests:
 import pandas as pd  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p.synthes.topic_model.cluster_to_terms_mapping import ClusterToTermsMapping
+from tm2p.synthes.topic_model.cluster_to_items_mapping import ClusterToItemsMapping
 
 
-class TermsByClusterDataFrame(
+class ItemsByClusterDataFrame(
     ParamsMixin,
 ):
     """:meta private:"""
@@ -76,7 +79,7 @@ class TermsByClusterDataFrame(
     def run(self):
         """:meta private:"""
 
-        mapping = ClusterToTermsMapping().update(**self.params.__dict__).run()
+        mapping = ClusterToItemsMapping().update(**self.params.__dict__).run()
 
         frame = pd.DataFrame.from_dict(mapping, orient="index").T
         frame = frame.fillna("")

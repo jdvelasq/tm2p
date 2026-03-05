@@ -17,33 +17,35 @@ Smoke tests:
     ...     max_doc_update_iter=100,
     ...     random_state=0,
     ... )
-    >>> from tm2p.packages.topic_modeling.user import ThemeToDocumentsMapping
+    >>> from tm2p import ItemOrderBy, Field
+    >>> from tm2p.synthes.topic_model import ThemeToDocumentsMapping
     >>> mapping = (
     ...     ThemeToDocumentsMapping()
     ...     #
     ...     # FIELD:
-    ...     .with_field("raw_descriptors")
+    ...     .with_source_field(Field.CONCEPT_NORM)
     ...     .having_items_in_top(50)
-    ...     .having_items_ordered_by("OCC")
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
     ...     #
+    ...     # COUNTERS:
+    ...     .using_counters(True)
+    ...     #
     ...     # DECOMPOSITION:
     ...     .using_decomposition_algorithm(lda)
-    ...     .using_top_terms_by_theme(5)
+    ...     .using_top_items_by_theme(5)
     ...     #
     ...     # TFIDF:
     ...     .using_binary_item_frequencies(False)
-    ...     .using_row_normalization(None)
-    ...     .using_idf_reweighting(False)
-    ...     .using_idf_weights_smoothing(False)
-    ...     .using_sublinear_tf_scaling(False)
-    ...     #
+    ...     .using_tfidf_norm(None)
+    ...     .using_tfidf_smooth_idf(False)
+    ...     .using_tfidf_sublinear_tf(False)
+    ...     .using_tfidf_use_idf(False)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
-    ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
@@ -51,24 +53,20 @@ Smoke tests:
     ...     .run()
     ... )
     >>> import pprint
-    >>> pprint.pprint(mapping)  # doctest: +SKIP
-    {0: ['Anagnostopoulos I., 2018, J ECON BUS, V100, P7',
-         'Belanche D., 2019, IND MANAGE DATA SYS, V119, P1411',
-         'Dorfleitner G., 2017, FINTECH IN GER, P1',
-         'Du W.D., 2019, J STRATEGIC INFORM SYST, V28, P50',
-         'Jagtiani J., 2018, J ECON BUS, V100, P43',
-         'Lee I., 2018, BUS HORIZ, V61, P35',
-         'Leong C., 2017, INT J INF MANAGE, V37, P92',
-         'Magnuson W., 2018, VANDERBILT LAW REV, V71, P1167'],
-     1: ['Brummer C., 2019, GEORGET LAW J, V107, P235',
-         'Das S.R., 2019, FINANC MANAGE, V48, P981',
-         'Gozman D., 2018, J MANAGE INF SYST, V35, P145',
+    >>> pprint.pprint(mapping)  # doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+    {0: ['Allen, 2022, J INT MONEY FINANC, V124',
+         'Anagnostopoulos, 2018, J ECON BUS, V100, P7',
+         'Barberis, 2016, ECON WIND, P69',
+         'Bernards, 2019, REV INT POLIT ECON, V26, P815',
+         'C., 2022, J INNOV KNOWL, V7',
+         'Chen, 2016, CHINA ECON J, V9, P225',
+         'Cheng, 2020, PAC BASIN FINANC J, V63',
+         'Cheng, 2023, INT REV FINANC ANAL, V87',
     ...
-
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.synthes.topic_model.documents_by_theme_data_frame import (
+from tm2p.synthes.topic_model.documents_by_theme_dataframe import (
     DocumentsByThemeDataFrame,
 )
 
