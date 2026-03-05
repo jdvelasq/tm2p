@@ -1,37 +1,37 @@
 import networkx as nx  # type: ignore
 import numpy as np
 
+from tm2p import Field, Indicator
 from tm2p._intern.data_access import load_filtered_main_csv_zip
+from tm2p.enum import CoCitationUnit
 
-
-# -------------------------------------------------------------------------
-def _step_01_load_records(params):
-    return load_filtered_main_csv_zip(params=params)
+GCR = Field.GCR_NORM.value
+OCC = Indicator.OCC.value
 
 
 # -------------------------------------------------------------------------
 def _step_02_compute_co_occurrences_between_references(params, records):
 
-    matrix_list = records[["global_references"]].dropna().copy()
-    matrix_list = matrix_list.rename(columns={"global_references": "column"})
-    matrix_list = matrix_list.assign(row=records[["global_references"]])
+    matrix_list = records[[GCR]].dropna().copy()
+    matrix_list = matrix_list.rename(columns={GCR: "column"})
+    matrix_list = matrix_list.assign(row=records[[GCR]])
 
     for name in ["column", "row"]:
         matrix_list[name] = matrix_list[name].str.split(";")
         matrix_list = matrix_list.explode(name)
         matrix_list[name] = matrix_list[name].str.strip()
 
-    if params.unit_of_analysis == "cited_authors":
+    if params.co_citation_unit == CoCitationUnit.CITED_AUTH:
         matrix_list["row"] = matrix_list["row"].str.split(", ").map(lambda x: x[0])
         matrix_list["column"] = (
             matrix_list["column"].str.split(", ").map(lambda x: x[0])
         )
-    elif params.unit_of_analysis == "cited_sources":
+    elif params.co_citation_unit == CoCitationUnit.CITED_SRC:
         matrix_list["row"] = matrix_list["row"].str.split(", ").map(lambda x: x[2])
         matrix_list["column"] = (
             matrix_list["column"].str.split(", ").map(lambda x: x[2])
         )
-    elif params.unit_of_analysis == "cited_references":
+    elif params.co_citation_unit == CoCitationUnit.CITED_REF:
         matrix_list["row"] = (
             matrix_list["row"].str.split(", ").map(lambda x: x[:3]).str.join(", ")
         )
@@ -39,7 +39,7 @@ def _step_02_compute_co_occurrences_between_references(params, records):
             matrix_list["column"].str.split(", ").map(lambda x: x[:3]).str.join(", ")
         )
     else:
-        raise ValueError("Bad unit_of_analysis")
+        raise ValueError("Bad analysis unit")
 
     matrix_list = matrix_list.loc[
         matrix_list.apply(lambda x: x.row != x.column, axis=1), :
@@ -59,28 +59,28 @@ def _step_02_compute_co_occurrences_between_references(params, records):
 # -------------------------------------------------------------------------
 def _step_03_compute_terms(params, records):
 
-    if params.terms_in is not None:
-        return params.terms_in
+    if params.items_in is not None:
+        return params.items_in
 
     #
     # Creates a list with global references
-    global_references = records["global_references"].dropna().copy()
+    global_references = records[GCR].dropna().copy()
     global_references = global_references.str.split(";")
     global_references = global_references.explode()
     global_references = global_references.str.strip()
 
     #
     # Transforms each reference into the element of interest
-    if params.unit_of_analysis == "cited_authors":
+    if params.co_citation_unit == CoCitationUnit.CITED_AUTH:
         global_references = global_references.str.split(", ").map(lambda x: x[0])
-    elif params.unit_of_analysis == "cited_sources":
+    elif params.co_citation_unit == CoCitationUnit.CITED_SRC:
         global_references = global_references.str.split(", ").map(lambda x: x[2])
-    elif params.unit_of_analysis == "cited_references":
+    elif params.co_citation_unit == CoCitationUnit.CITED_REF:
         global_references = (
             global_references.str.split(", ").map(lambda x: x[:3]).str.join(", ")
         )
     else:
-        raise ValueError("Bad unit_of_analysis")
+        raise ValueError("Bad analysis unit")
 
     #
     # Counts the number of appareances of each element of interest
@@ -153,7 +153,7 @@ def _step_06_create_a_nx_graph(matrix_list):
 # -------------------------------------------------------------------------
 def _step_07_set_text_property_of_nodes(nx_graph, params):
 
-    if params.unit_of_analysis == "cited_references":
+    if params.co_citation_unit == CoCitationUnit.CITED_REF:
         for node in nx_graph.nodes():
             nx_graph.nodes[node]["text"] = ", ".join(node.split(", ")[:2])
 
@@ -165,9 +165,9 @@ def _step_07_set_text_property_of_nodes(nx_graph, params):
 
 
 # -------------------------------------------------------------------------
-def internal__create_nx_graph(params):
+def create_nx_graph(params):
 
-    records = _step_01_load_records(params)
+    records = load_filtered_main_csv_zip(params=params)
     matrix_list = _step_02_compute_co_occurrences_between_references(params, records)
     valid_terms = _step_03_compute_terms(params, records)
     matrix_list = _step_04_filter_matrix_list(matrix_list, valid_terms)

@@ -1,6 +1,6 @@
 import sys
 
-from tm2p.synthes.emerg import DataFrame
+from tm2p.synthes.emerg import Metrics
 from tm2p.synthes.netw.co_occur import ClustersToItemsMapping
 
 
@@ -9,7 +9,7 @@ class RecursiveClusteringMixin:
     def internal__computer_recursive_clusters(self):
 
         metrics = (
-            DataFrame()
+            Metrics()
             .update(**self.params.__dict__)
             .with_source_field("descriptors")
             .run()

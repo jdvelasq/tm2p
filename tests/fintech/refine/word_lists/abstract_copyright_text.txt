@@ -88,7 +88,7 @@ ostering THE_GROWTH of NATIONAL_INDUSTRY within_and_outside_of CHINA . 2015 else
 SS , and PUBLIC_ENGAGEMENT in AGRICULTURE . 2019 the_authors . published by elsevier ltd .
 OF_LABOR between AI and HUMANS for THE_FORESEEABLE_FUTURE . 2021 john wiley and sons ltd .
 CS , REGULATION_TECHNOLOGY and THE_SMART_DATA_UTILIZATION . 2022 john wiley and sons ltd .
-ss strategy and the environment published by erp environment and john wiley and sons ltd .
+SS_STRATEGY and THE_ENVIRONMENT published by erp environment and john wiley and sons ltd .
 TY . 2021 the_authors . information systems journal published by john wiley and sons ltd .
 to CONSUMERS , to CURRENT_BANKING_SYSTEM and to THE_WHOLE_SOCIETY in general . 2016 ieee .
 EALITY in_order_to survive . 2018 , macmillan publishers ltd . , part of springer nature .

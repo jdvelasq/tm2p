@@ -76,7 +76,7 @@ SCOPUS_TO_TM2 = {
     #
     # R
     #
-    "References": Field.REF_RAW.value,
+    "References": Field.GCR_RAW.value,
     #
     # S
     #

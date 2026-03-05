@@ -39,8 +39,8 @@ class Field(Enum):
     # Counters
     # ==========================================================================
     N_AUTH = "N_AUTH"
-    N_REF_GBL = "N_REF_GBL"  # number of global references
-    N_REF_LCL = "N_REF_LCL"  # number of local references
+    N_GCR = "N_GCR"  # number of global references
+    N_LCR = "N_LCR"  # number of local references
 
     # ==========================================================================
     # Authors ID
@@ -198,9 +198,10 @@ class Field(Enum):
     # ==========================================================================
     # References
     # ==========================================================================
-    REF_RAW = "REF_RAW"
-    REF_NORM = "REF_NORM"
-    REF_RID = "REF_RID"
+    GCR_RAW = "GCR_RAW"
+    GCR_NORM = "GCR_NORM"
+    GCR_RID = "GCR_RID"
+    LCR_NORM = "LCR_NORM"
 
     # ==========================================================================
     # Volume, issues, pages

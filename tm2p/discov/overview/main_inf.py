@@ -223,7 +223,7 @@ class MainInformation(
 
         # ---------------------------------------------------------------------
         def average_references_per_document():
-            num_references = dataframe[Field.REF_RAW.value].copy()
+            num_references = dataframe[Field.GCR_RAW.value].copy()
             num_references = num_references.dropna()
             num_references = num_references.str.split(";")
             num_references = num_references.map(len)
@@ -290,7 +290,7 @@ class MainInformation(
 
         # ---------------------------------------------------------------------
         def total_cited_references():
-            records = dataframe[Field.REF_RAW.value].copy()
+            records = dataframe[Field.GCR_RAW.value].copy()
             records = records.dropna()
             records = records.str.split(";")
             records = records.explode()

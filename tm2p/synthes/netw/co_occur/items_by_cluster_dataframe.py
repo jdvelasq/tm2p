@@ -116,5 +116,4 @@ class ItemsByClusterDataFrame(
             self.params.counters = False
             for col in communities.columns:
                 communities[col] = communities[col].apply(remove_counters)
-        self.params.counters = use_counters
         return communities

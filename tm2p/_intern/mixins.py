@@ -34,7 +34,15 @@ from tm2p._intern.valid import (
     check_required_str_tuple,
     check_tuple_of_ordered_four_floats,
 )
-from tm2p.enum import AssociationIndex, Correlation, Field, ItemOrderBy, RecordOrderBy
+from tm2p.enum import (
+    AssociationIndex,
+    CitationUnit,
+    Correlation,
+    Field,
+    ItemOrderBy,
+    RecordOrderBy,
+)
+from tm2p.enum.co_cit_unit import CoCitationUnit
 
 from .params import Params
 
@@ -358,8 +366,8 @@ class ParamsMixin:
         self.params.clustering_algorithm_or_dict = clustering_algorithm_or_dict
         return self
 
-    def using_citation_threshold(self, citation_threshold: int) -> Self:
-        citation_threshold = check_required_positive_int(
+    def having_citation_threshold(self, citation_threshold: int) -> Self:
+        citation_threshold = check_required_non_negative_int(
             value=citation_threshold,
             param_name="citation_threshold",
         )
@@ -390,7 +398,7 @@ class ParamsMixin:
         self.params.similarity_cutoff = similarity_cutoff
         return self
 
-    def using_occurrence_threshold(self, occurrence_threshold: int) -> Self:
+    def having_occurrence_threshold(self, occurrence_threshold: int) -> Self:
         occurrence_threshold = check_required_positive_int(
             value=occurrence_threshold,
             param_name="occurrence_threshold",
@@ -488,7 +496,7 @@ class ParamsMixin:
         self.params.cumulative_sum = cumulative_sum
         return self
 
-    def using_edge_colors(self, edge_colors: Optional[list[Any]]) -> Self:
+    def using_edge_colors(self, edge_colors: list[Any]) -> Self:
         edge_colors = check_required_color_list(
             value=edge_colors,
             param_name="edge_colors",
@@ -930,6 +938,20 @@ class ParamsMixin:
     # ==========================================================================
     # WITH_* → Configuration (WHAT to analyze?)
     # ==========================================================================
+
+    def with_citation_unit(self, citation_unit: CitationUnit) -> Self:
+        if not isinstance(citation_unit, CitationUnit):
+            raise TypeError("citation_unit must be an instance of CitationUnit enum")
+        self.params.citation_unit = citation_unit
+        return self
+
+    def with_co_citation_unit(self, co_citation_unit: CoCitationUnit) -> Self:
+        if not isinstance(co_citation_unit, CoCitationUnit):
+            raise TypeError(
+                "co_citation_unit must be an instance of CoCitationUnit enum"
+            )
+        self.params.co_citation_unit = co_citation_unit
+        return self
 
     def with_column(self, column: str) -> Self:
         column = check_required_str(

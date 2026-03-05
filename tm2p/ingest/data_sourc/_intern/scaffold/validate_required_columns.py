@@ -16,7 +16,7 @@ MAIN_COLUMNS = frozenset(
         Field.IDXKW_RAW.value,
         Field.PG_FIRST.value,
         Field.YEAR.value,
-        Field.REF_RAW.value,
+        Field.GCR_RAW.value,
         Field.SRC_ISO4_RAW.value,
         Field.SRC_RAW.value,
         Field.TITLE_RAW.value,

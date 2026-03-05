@@ -12,8 +12,9 @@ def build_reference_steps(params: Params) -> list[Step]:
     from .assign_recid import assign_recid
     from .assign_recno import assign_recno
     from .calculate_numref_global import calculate_numref_global
-    from .compute_citcount_local import compute_citcount_local
-    from .normalize_references import normalize_references
+    from .compute_lcs import compute_lcs
+    from .normalize_global_references import normalize_global_references
+    from .normalize_local_references import normalize_local_references
 
     common_kwargs = {"root_directory": params.root_directory}
 
@@ -37,20 +38,26 @@ def build_reference_steps(params: Params) -> list[Step]:
             count_message="{count} records calculated",
         ),
         Step(
-            name=f"Calculating '{Field.N_REF_GBL.value}'",
+            name=f"Calculating '{Field.N_GCR.value}'",
             function=calculate_numref_global,
             kwargs=common_kwargs,
             count_message="{count} reference counts calculated",
         ),
         Step(
-            name=f"Normalizing '{Field.REF_RAW.value}'",
-            function=normalize_references,
+            name=f"Normalizing '{Field.GCR_RAW.value}'",
+            function=normalize_global_references,
+            kwargs=common_kwargs,
+            count_message="{count} references normalized",
+        ),
+        Step(
+            name=f"Normalizing '{Field.LCR_NORM.value}'",
+            function=normalize_local_references,
             kwargs=common_kwargs,
             count_message="{count} references normalized",
         ),
         Step(
             name=f"Compute '{Field.LCS.value}'",
-            function=compute_citcount_local,
+            function=compute_lcs,
             kwargs=common_kwargs,
             count_message="{count} records processed",
         ),

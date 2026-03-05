@@ -47,10 +47,10 @@ class CreateThesaurus(
 
         dataframe = load_main_csv_zip(
             root_directory=self.params.root_directory,
-            usecols=[Field.REF_RID.value],
+            usecols=[Field.GCR_RID.value],
         )
         dataframe = dataframe.dropna()
-        series = dataframe[Field.REF_RID.value]
+        series = dataframe[Field.GCR_RID.value]
         series = series.str.split("; ")
         series = series.explode()
         series = series.str.strip()
@@ -86,7 +86,7 @@ class CreateThesaurus(
         return ThesaurusCreationResult(
             colored_output=self.params.colored_output,
             file_path=str(filepath),
-            source_field=Field.REF_RID.value,
+            source_field=Field.GCR_RID.value,
             msg="Thesaurus initialized successfully.",
             success=True,
             status=f"{len(mapping.keys())} references added to the thesaurus.",

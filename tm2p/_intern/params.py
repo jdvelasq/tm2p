@@ -6,7 +6,15 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import pandas as pd  # type: ignore
 from sklearn.base import BaseEstimator  # type: ignore
 
-from tm2p.enum import AssociationIndex, Correlation, Field, ItemOrderBy, RecordOrderBy
+from tm2p.enum import (
+    AssociationIndex,
+    CitationUnit,
+    CoCitationUnit,
+    Correlation,
+    Field,
+    ItemOrderBy,
+    RecordOrderBy,
+)
 
 
 @dataclass
@@ -56,6 +64,14 @@ class Params:
     index_top_n: Optional[int] = None
 
     #
+    # Citation network:
+    #
+    citation_unit: CitationUnit = CitationUnit.AUTH
+
+    #
+    # Co-citation network:
+    #
+    co_citation_unit: CoCitationUnit = CoCitationUnit.CITED_AUTH
 
     #
     # A

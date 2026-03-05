@@ -24,8 +24,6 @@ def cluster_nx_graph(
         # analysis are conducted, for example, factor analysis.
 
         for node, group in algorithm_or_dict.items():
-            if node not in nx_graph.nodes:
-                node = node.split(":")[0] + ":" + node.split(":")[1][1:]
             nx_graph.nodes[node]["group"] = group
 
     for node in nx_graph.nodes:
@@ -45,7 +43,7 @@ def cluster_nx_graph(
             reverse=False,
         )
         for node in sorted_value[: params.node_n_labels]:
-            nx_graph.nodes[node]["top_n"] = True
+            nx_graph.nodes[node]["labeled"] = True
 
     return nx_graph
 

@@ -1,5 +1,7 @@
 from .enum import (
     AssociationIndex,
+    CitationUnit,
+    CoCitationUnit,
     Correlation,
     Field,
     Indicator,
@@ -9,11 +11,13 @@ from .enum import (
 )
 
 __all__ = [
+    "AssociationIndex",
+    "CitationUnit",
+    "CoCitationUnit",
     "Correlation",
     "Field",
     "Indicator",
     "ItemOrderBy",
-    "AssociationIndex",
     "RecordOrderBy",
     "ThesaurusField",
 ]
