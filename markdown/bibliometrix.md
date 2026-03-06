@@ -335,7 +335,7 @@ Bibliometrix present a line plot with the cummulative occurrences by most freque
 * The years in the rows
 * The number of documents per source per year
 
-tm2+, for any of the available fields, uses the class Trends to generate a pandas dataframe with the occurrences per year per item. item corresponds to the values in any analyzed field.
+tm2+, for any of the available fields, uses the class Trends to generate a pandas dataframe with the occurrences per year per item. item corresponds to the values in any analyzed field. tm2+ also include the class CumulativeTrends and the corresponding plot.
 
 
 ### ANALYSIS / Authors / Author profile

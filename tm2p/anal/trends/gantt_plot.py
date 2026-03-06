@@ -4,13 +4,13 @@ Gantt Plot
 
 .. raw:: html
 
-    <iframe src="../_generated/px.anal.items_by_year.gantt_plot.html"
+    <iframe src="../_generated/px.anal.trends.gantt_plot.html"
     height="600px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
     >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p.anal.trends import GanttPlot
-    >>> plotter = (
+    >>> fig = (
     ...     GanttPlot()
     ...     #
     ...     # FIELD:
@@ -26,9 +26,10 @@ Smoke tests:
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
+    ...     #
+    ...     .run()
     ... )
-    >>> plot = plotter.run()
-    >>> plot.write_html("docsrc/_generated/px.anal.items_by_year.gantt_plot.html")
+    >>> fig.write_html("docsrc/_generated/px.anal.trends.gantt_plot.html")
 
 """
 
