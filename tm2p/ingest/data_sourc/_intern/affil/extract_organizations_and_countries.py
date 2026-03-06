@@ -170,13 +170,13 @@ def _create_thesaurus_files(
 
         grouped_df = df.groupby("key", as_index=False)["value"].apply(list)  # type: ignore
 
-        for folder in [
-            "ingest/processed/",
-            "refine/thesaurus/",
-        ]:
-            filepath = Path(root_directory) / folder / filename
+        filepath1 = Path(root_directory) / "ingest" / "processed/" / ("_" + filename)
+        filepath2 = Path(root_directory) / "refine" / "thesaurus" / filename
+
+        for filepath in [filepath1, filepath2]:
 
             with open(filepath, "w", encoding="utf-8") as file:
+
                 for _, row in grouped_df.iterrows():
                     key = row["key"]
                     file.write(f"{key}\n")
