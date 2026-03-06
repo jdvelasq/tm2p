@@ -43,11 +43,9 @@ import numpy as np
 
 from tm2p import ItemOrderBy
 from tm2p._intern import ParamsMixin
+from tm2p.anal.annual_metrics.metrics import Metrics as TrendMetricsDataFrame
 from tm2p.anal.trends import Trends
 from tm2p.discov.overview import MainInformation as GeneralMetricsDataFrame
-from tm2p.discov.overview.aver_cit_per_year.dataframe import (
-    DataFrame as TrendMetricsDataFrame,
-)
 
 
 class Metrics(

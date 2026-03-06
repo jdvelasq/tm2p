@@ -1028,6 +1028,10 @@ class ParamsMixin:
         self.update(**params.__dict__)
         return self
 
+    def with_plotting_column(self, plotting_column: Any) -> Self:
+        self.params.plotting_column = plotting_column
+        return self
+
     def with_query_expression(self, query_expression: str) -> Self:
         query_expression = check_required_str(
             value=query_expression,

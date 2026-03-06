@@ -80,6 +80,11 @@ class Params:
     coupling_unit: CouplingUnit = CouplingUnit.AUTH
 
     #
+    # Plotting:
+    #
+    plotting_column = None
+
+    #
     # A
     #
     association_index: AssociationIndex = AssociationIndex.NONE
