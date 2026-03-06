@@ -25,6 +25,12 @@ GING_AREA of FINTECH . ( jel g00 , g21 , g23 , g28 , l51 , o31 ) . the author ( 
 uch of THE_NEGATIVE_VALUE_EFFECT . ( jel g14 , g20 , g29 , g39 ) . the author ( s ) 2019 .
 we_provide OBJECTIVE_UNDERSTANDING of FINTECH , how it is reflected in THE_POPULAR_MEDIA .
 ANKING , CASH , CREDIT , and DEBIT_CARDS in DIFFERENT_COUNTRIES and REGIONS of THE_WORLD .
+influencing CONSUMER_ADOPTION . 2020 by the author . licensee mdpi , BASEL , SWITZERLAND .
+NCEPTS and THEIR_DEVELOPMENT . 2020 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+OSE_SOLUTIONS are still rare . 2020 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+VICES to UNBANKED_POPULATION . 2021 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+ctive_of CONSUMER_PROTECTION . 2021 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
+NCE in THEIR_BUSINESS_MODELS . 2021 by the_authors . licensee mdpi , BASEL , SWITZERLAND .
 integrating TRUST and AUTOMATION in FINANCE .
 ict THEIR_FUTURE_BEHAVIOR . copyright 2020 bussmann , GIUDICI , MARINELLI and PAPENBROCK .
 , under exclusive license to springer nature switzerland ag 2023 and 2020 UNITED_NATIONS .
@@ -77,12 +83,6 @@ LABORATION . 2017 , university of finance and management in warsaw . all rights 
 or TODAY_SAVVY_INVESTOR . 2017 by irene aldridge and steve krawciw . all rights reserved .
 E_ANALYSIS and RESEARCH . 2020 , srac romanian society for quality . all rights reserved .
  ) , under exclusive license to springer nature switzerland ag 2019 . all right reserved .
-influencing CONSUMER_ADOPTION . 2020 by the author . licensee mdpi , basel , switzerland .
-NCEPTS and THEIR_DEVELOPMENT . 2020 by the_authors . licensee mdpi , basel , switzerland .
-OSE_SOLUTIONS are still rare . 2020 by the_authors . licensee mdpi , basel , switzerland .
-VICES to UNBANKED_POPULATION . 2021 by the_authors . licensee mdpi , basel , switzerland .
-ctive_of CONSUMER_PROTECTION . 2021 by the_authors . licensee mdpi , basel , switzerland .
-NCE in THEIR_BUSINESS_MODELS . 2021 by the_authors . licensee mdpi , basel , switzerland .
 h CHALLENGERS , or be forced into FLIGHT by THE_BIGTECH . 2018 john wiley and sons , ltd .
 INDUSTRY , CONCLUSIONS , REFERENCES . 2017 by world scientific publishing co . pte . ltd .
 ostering THE_GROWTH of NATIONAL_INDUSTRY within_and_outside_of CHINA . 2015 elsevier ltd .
