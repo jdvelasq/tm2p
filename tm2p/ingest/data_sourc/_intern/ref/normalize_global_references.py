@@ -57,6 +57,11 @@ def _merge_csv_zip_files(root_directory: str) -> pd.DataFrame:
     main_df = main_df[SELECTED_FIELDS].dropna()
 
     ref_df = load_references_csv_zip(root_directory=root_directory)
+
+    if ref_df.empty:
+        main_df = main_df.sort_values(by=[Field.RID.value])  # type: ignore
+        return main_df  # type: ignore
+
     ref_df = ref_df[SELECTED_FIELDS].dropna()
 
     merged_df = pd.concat([main_df, ref_df], axis=0)
