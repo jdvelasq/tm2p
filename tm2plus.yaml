@@ -1,0 +1,717 @@
+# tm2+ feature implementation status
+# ────────────────────────────────────────────────────────────────────────────────────────
+# All features set to false (baseline: nothing implemented yet).
+# Update each entry to true as the feature is completed.
+# ────────────────────────────────────────────────────────────────────────────────────────
+
+features:
+
+  # ══ Data Import & Sources ════════════════════════════════════════════════════════════
+
+  # ─── WoS Import ───────────────────────────────────────────────────────────────────────
+  # Import records exported from Web of Science in tab-delimited (.txt) or BibTeX format.
+  # Supports full-record exports including author keywords, index keywords, references,
+  # abstracts, subject categories, and times-cited counts. Implemented by: VOSviewer,
+  # CiteSpace, Bibliometrix, SciMAT, CoPalRed, HistCite, ScientoPy.
+  import_wos                    : false
+
+  # ─── Scopus Import ────────────────────────────────────────────────────────────────────
+  # Import records exported from Scopus in CSV (Excel-compatible) format. Supports
+  # document metadata, author affiliations, keywords, abstract, and cited-by count.
+  # Bibliometrix additionally accepts Scopus BibTeX export. CITAN reads Scopus CSV exports
+  # directly into its local bibliometric storage. Implemented by: VOSviewer, CiteSpace,
+  # Bibliometrix, SciMAT, CoPalRed, ScientoPy, CITAN.
+  import_scopus                 : false
+
+  # ─── OpenAlex Import / API ────────────────────────────────────────────────────────────
+  # Import bibliographic records from the OpenAlex open scholarly graph, either by reading
+  # a downloaded file or by querying the live REST API with filters. Provides access to
+  # hundreds of millions of works with open metadata including concepts, institutions, and
+  # citation counts. Implemented by: Bibliometrix (file + API).
+  import_openalex               : false
+
+  # ─── PubMed Import / API ──────────────────────────────────────────────────────────────
+  # Import records from PubMed / MEDLINE in .txt (PubMed tagged format) or via the Entrez
+  # API. Provides access to biomedical literature with MeSH terms, abstracts, and citation
+  # data. Bibliometrix also supports PubMed API; VOSviewer and CiteSpace accept PubMed
+  # exports. Implemented by: VOSviewer, CiteSpace, Bibliometrix.
+  import_pubmed                 : false
+
+  # ─── Dimensions Import ────────────────────────────────────────────────────────────────
+  # Import records exported from the Dimensions database in CSV or Export-for-
+  # bibliometric-mapping format. Dimensions covers a broader literature than WoS/Scopus
+  # including book chapters, preprints, and datasets. Provides citation counts, Altmetric
+  # scores, and funding information. Implemented by: VOSviewer, Bibliometrix.
+  import_dimensions             : false
+
+  # ─── Lens.org Import ──────────────────────────────────────────────────────────────────
+  # Import records exported from Lens.org in CSV or JSON format. Lens.org is a free open
+  # scholarly database integrating PubMed, Crossref, and patent literature. Provides DOIs,
+  # abstracts, and citation data. Implemented by: Bibliometrix.
+  import_lens                   : false
+
+  # ─── Cochrane Import ──────────────────────────────────────────────────────────────────
+  # Import records from the Cochrane Library in .txt export format. Cochrane specialises
+  # in systematic reviews and clinical trials. Provides structured abstracts, MeSH terms,
+  # and review metadata. Implemented by: Bibliometrix.
+  import_cochrane               : false
+
+  # ─── Merge Collections ────────────────────────────────────────────────────────────────
+  # Merge bibliographic collections downloaded from different databases (e.g. WoS + Scopus
+  # + Dimensions) into a single unified dataset. VOSviewer accepts multiple database files
+  # simultaneously in the Create Map wizard. Bibliometrix merges collections in R/Excel
+  # format. ScientoPy merges WoS and Scopus exports. Implemented by: VOSviewer,
+  # Bibliometrix, ScientoPy.
+  merge_collections             : false
+
+  # ══ Data Cleaning & Normalization ════════════════════════════════════════════════════
+
+  # ─── Reference Matching / Deduplication ───────────────────────────────────────────────
+  # Identify and merge variant forms of the same cited reference within the corpus
+  # reference lists using fuzzy string similarity (Jaro-Winkler, Optimal String Alignment,
+  # Longest Common Subsequence). Bibliometrix applies configurable similarity thresholds
+  # (0.70-0.96) and supports manual merging. The result is a global cited-reference
+  # thesaurus that standardises the references field across all records. Implemented by:
+  # Bibliometrix.
+  reference_matching            : false
+
+  # ─── Thesaurus / Term Normalization ───────────────────────────────────────────────────
+  # Apply a user-editable thesaurus file to replace variant forms of keywords, author
+  # names, organisation names, country names, cited references, or terms with a single
+  # canonical form before analysis. VOSviewer supports thesaurus files (label/replace-by
+  # columns) for both bibliographic data and text data, including term ignoring. CoPalRed
+  # implements thesaurus-based normalisation as a core preprocessing step. Implemented by:
+  # VOSviewer, CoPalRed.
+  thesaurus                     : false
+
+  # ─── Duplicate Record Removal ─────────────────────────────────────────────────────────
+  # Automatically detect and remove duplicate document records across the imported
+  # dataset. Matching uses a combination of DOI equality and normalised title + first-
+  # author last-name similarity (case-folded, accent-stripped, punctuation-removed). When
+  # duplicates are found, times-cited counts are averaged across the merged records.
+  # CoPalRed relies on thesaurus-based normalisation and does not perform automatic
+  # duplicate detection by DOI/title matching. CITAN provides fuzzy duplicate-title
+  # detection with configurable aggressiveness and a GUI dialog for manual confirmation
+  # and removal. Implemented by: VOSviewer, CiteSpace, Bibliometrix, SciMAT, ScientoPy,
+  # CITAN.
+  deduplication                 : false
+
+  # ─── Author Name Normalization ────────────────────────────────────────────────────────
+  # Normalise author name representations to ensure cross-database and cross-record author
+  # identity consistency. Normalisation steps include: accent removal, separator
+  # standardisation (comma, semicolon, pipe), dot stripping from initials, and case
+  # folding. Without this step the same author may appear under multiple distinct name
+  # strings, inflating author counts and distorting co-authorship networks. CITAN provides
+  # a fuzzy duplicate-author detection function with a GUI dialog for selecting and merging
+  # author groups. Implemented by: Bibliometrix, ScientoPy, CITAN.
+  author_normalization          : false
+
+  # ─── Country Name Normalization ───────────────────────────────────────────────────────
+  # Standardise country name variants to a single canonical form using a replacement
+  # table. Common examples: 'USA' and 'U.S.A.' become 'United States', 'Peoples R China'
+  # becomes 'China', 'England' becomes 'United Kingdom'. Without normalisation a single
+  # country may appear as multiple distinct values, fragmenting country-level analysis and
+  # maps. ScientoPy ships a built-in replacement table; Bibliometrix applies similar
+  # normalisation in its preprocessing pipeline. Implemented by: CiteSpace, Bibliometrix,
+  # ScientoPy.
+  country_normalization         : false
+
+  # ─── Institution Extraction from Affiliations ─────────────────────────────────────────
+  # Extract institution (affiliation) names from the raw author-affiliation field of
+  # imported records and associate them with each document. WoS records store affiliations
+  # in the structured C1 field; Scopus uses a separate affiliation column. Extracted
+  # institution strings are then normalised and used as the source for institution-level
+  # metrics, collaboration networks, and production-over-time analyses. Implemented by:
+  # CiteSpace, Bibliometrix, ScientoPy (WoS-sourced records).
+  institution_extract           : false
+
+  # ══ Filtering & Record Selection ═════════════════════════════════════════════════════
+
+  # ─── Filter by Document Type ──────────────────────────────────────────────────────────
+  # Filter the active corpus to retain only records of specified document types. Typical
+  # types: Article, Review, Conference Paper, Book Chapter, Editorial, Letter. ScientoPy
+  # by default keeps Article, Review, Conference Paper, Proceedings, and Article in Press,
+  # discarding the rest. Biblioshiny exposes this as a multi-select control. Applied
+  # before all downstream analyses. Implemented by: CiteSpace, Bibliometrix, SciMAT,
+  # CoPalRed, ScientoPy.
+  filter_doctype                : false
+
+  # ─── Filter by Year Range ─────────────────────────────────────────────────────────────
+  # Restrict the active corpus to records published within a specified year range
+  # (startYear to endYear). ScientoPy exposes --startYear and --endYear CLI parameters.
+  # Biblioshiny provides a slider. SciMAT, CiteSpace, and CoPalRed all support year-range
+  # filtering. All subsequent analyses operate only on the filtered subset. Implemented
+  # by: CiteSpace, Bibliometrix, SciMAT, CoPalRed, ScientoPy.
+  filter_year                   : false
+
+  # ─── Filter by Citation Range ─────────────────────────────────────────────────────────
+  # Filter records by a minimum or maximum global citation count range. Allows the user to
+  # focus analysis on highly cited papers (e.g. top-100 most cited) or to exclude uncited
+  # records from network and trend analyses. Bibliometrix exposes this as a numeric range
+  # control in Biblioshiny and via its R API. Implemented by: Bibliometrix.
+  filter_citations              : false
+
+  # ─── Filter by Field Value ────────────────────────────────────────────────────────────
+  # Filter records by matching arbitrary field values: journal list, subject category,
+  # specific keywords, country, language, or any other metadata field. Biblioshiny
+  # provides a multi-select control per field. ScientoPy uses the --criterion parameter to
+  # select the analysis field and filters by the given topic list. Bibliometrix also
+  # supports compound field filtering via its R API. Implemented by: CiteSpace,
+  # Bibliometrix, SciMAT, CoPalRed, ScientoPy.
+  filter_field                  : false
+
+  # ─── Filter by Bradford Zone ──────────────────────────────────────────────────────────
+  # Filter records to retain only those published in sources belonging to a specific
+  # Bradford Law zone (core zone 1, zone 2, or periphery zone 3). Bradford's Law
+  # partitions journals by their cumulative contribution to a research field: zone 1
+  # contains the small core of highly productive journals. Filtering to zone 1 gives a
+  # focused high-quality corpus. Implemented by: Bibliometrix.
+  filter_bradford               : false
+
+  # ─── Filter by Language ───────────────────────────────────────────────────────────────
+  # Filter the corpus to retain only records written in one or more selected languages
+  # (e.g. English only, or English and Spanish). Language information is taken from the
+  # language field of the imported records (WoS LA field, Scopus Language column). Applied
+  # as a preprocessing step before all analyses. Implemented by: Bibliometrix.
+  filter_language               : false
+
+  # ─── Filter by Region / Country ───────────────────────────────────────────────────────
+  # Filter the corpus to retain only records whose corresponding or first author is
+  # affiliated with institutions in selected regions or countries. Biblioshiny exposes
+  # region and country as separate multi-select filter controls. Requires prior country
+  # normalisation to be effective. Implemented by: Bibliometrix.
+  filter_region                 : false
+
+  # ─── Filter by Subject Category ───────────────────────────────────────────────────────
+  # Filter records by WoS subject category or Scopus ASJC subject area code. Allows the
+  # user to restrict a multi-disciplinary export to a single discipline (e.g. Computer
+  # Science or Engineering). ScientoPy supports subject as a --criterion value (WoS SC
+  # field). Bibliometrix and SciMAT expose it as a multi-select control in their GUIs.
+  # Implemented by: CiteSpace, Bibliometrix, SciMAT, ScientoPy.
+  filter_subject                : false
+
+  # ══ Descriptive Overview ═════════════════════════════════════════════════════════════
+
+  # ─── Preprocessing Summary Report ─────────────────────────────────────────────────────
+  # Produce a preprocessing summary graph and table after data loading and cleaning.
+  # Reports: total records loaded per database, records omitted by document-type filter,
+  # duplicate records removed, and final record count used for analysis. ScientoPy
+  # generates this automatically at the end of its preprocessing step. Bibliometrix
+  # provides equivalent counts within the main information table. Implemented by:
+  # Bibliometrix, ScientoPy.
+  preprocessing_report          : false
+
+  # ─── Main Information Summary ─────────────────────────────────────────────────────────
+  # Produce a comprehensive summary statistics table for the entire corpus. Fields:
+  # timespan, number of sources, documents, annual growth rate, document average age,
+  # average citations per document, average references per document, number of authors,
+  # collaboration index (average authors per multi-authored document), number of author
+  # keywords and index keywords, number of countries, affiliations, and document type
+  # breakdown. Bibliometrix additionally reports NLP-derived phrase counts when noun-
+  # phrase extraction is active. Implemented by: CiteSpace, Bibliometrix, SciMAT,
+  # HistCite.
+  main_info                     : false
+
+  # ─── Annual Scientific Production ─────────────────────────────────────────────────────
+  # Plot and table of the number of documents and average citations per year over the
+  # corpus timespan. Visualises the growth trajectory of a research field. Bibliometrix
+  # and SciMAT produce bar/line plots with dual axes (documents left, citations right).
+  # ScientoPy produces a time-line graph per criterion value. HistCite plots yearly
+  # document and citation counts as bar charts. Implemented by: CiteSpace, Bibliometrix,
+  # SciMAT, HistCite, ScientoPy.
+  annual_production             : false
+
+  # ─── Life Cycle / Logistic Growth Model ───────────────────────────────────────────────
+  # Fit a logistic growth (S-curve) model to the annual publication count time series to
+  # characterise the development stage of a research field. The model estimates the
+  # inflection point, the saturation level, and the current phase: emergence (early
+  # exponential), rapid growth (pre-inflection), maturity (post-inflection), or decline
+  # (saturation). Output includes the fitted curve overlaid on the observed data and a
+  # phase classification label. Grounded in the theory of scientific paradigms and
+  # innovation diffusion. Implemented by: Bibliometrix.
+  life_cycle                    : false
+
+  # ─── Sankey / Three-field Plot ────────────────────────────────────────────────────────
+  # Visualise relationships among multiple bibliographic dimensions simultaneously using a
+  # Sankey (alluvial) diagram. Bibliometrix calls this the three-field plot, connecting
+  # three user-selected fields (e.g. authors, keywords, journals) as parallel columns with
+  # flow ribbons proportional to co-occurrence counts. tm2+ generalises this to any number
+  # of fields. Useful for detecting structural patterns between authors, topics, and
+  # publication venues. Implemented by: Bibliometrix.
+  sankey                        : false
+
+  # ══ Source / Journal Analysis ════════════════════════════════════════════════════════
+
+  # ─── Source Metrics (Most Relevant Sources) ───────────────────────────────────────────
+  # Rank journals and other publication sources by bibliometric indicators computed from
+  # the corpus. Indicators include: number of documents (OCC), total global citations
+  # (GCS), total local citations (LCS), h-index, g-index, m-index, GCS per document, LCS
+  # per document, year of first and last publication, and active years. Output is a
+  # sortable table and a horizontal bar chart of the top-N sources. Implemented by:
+  # Bibliometrix, SciMAT, HistCite.
+  source_metrics                : false
+
+  # ─── Bradford's Law ───────────────────────────────────────────────────────────────────
+  # Apply Bradford's Law of Scattering to partition the journal list into three zones of
+  # decreasing productivity. Zone 1 (core): the small set of journals contributing one-
+  # third of all documents; zones 2 and 3 contain progressively more journals for each
+  # subsequent third. Output is a plot of cumulative document frequency vs journal rank on
+  # a log scale with zone boundaries marked, plus a table with columns: Source, Rank,
+  # Freq, cumFreq, Zone. Implemented by: Bibliometrix.
+  bradford_law                  : false
+
+  # ─── Source Production Over Time ──────────────────────────────────────────────────────
+  # Line plot and table showing the yearly or cumulative number of documents published in
+  # each of the top-N most productive sources over the corpus timespan. The table has
+  # sources as columns and years as rows. Useful for tracking the rise and fall of
+  # specific journals in a field. Bibliometrix produces this as a dedicated source-over-
+  # time plot. ScientoPy can generate an equivalent time-series plot using sourceTitle as
+  # the analysis criterion. Note: the AGR, ADY, and PDLY metrics that ScientoPy computes
+  # alongside any criterion are separate features (see agr_metric, ady_metric, pdly_metric)
+  # and are not part of the production-over-time plot itself. Implemented by: Bibliometrix,
+  # ScientoPy.
+  source_over_time              : false
+
+  # ─── Most Local Cited Sources ─────────────────────────────────────────────────────────
+  # Rank publication sources (journals, conference series) by how frequently they appear
+  # in the reference lists of the corpus documents (local citation score, LCS). Reveals
+  # the intellectual foundation sources of a research field: the journals whose papers are
+  # most read and cited by the community under study, independently of their global
+  # citation impact. Output is a bar chart and table sorted by local citation count.
+  # Implemented by: Bibliometrix.
+  local_cited_sources           : false
+
+  # ══ Author Analysis ══════════════════════════════════════════════════════════════════
+
+  # ─── Author Metrics (h, g, m-index) ───────────────────────────────────────────────────
+  # Compute bibliometric impact indicators for each author in the corpus. Indicators:
+  # h-index (number h such that h papers have at least h citations each), g-index (largest
+  # g such that the top-g papers together have at least g^2 citations), m-index (h-index
+  # divided by years of active publication), total GCS, total LCS, OCC (document count),
+  # year of first and last publication. Output is a sortable table and a bar chart of
+  # top-N authors by selected indicator. CITAN additionally computes extended indices
+  # including the rp-index, lp-index, w-index, productivity, max citations, and sum of
+  # citations for ranked author assessment. Implemented by: Bibliometrix, SciMAT, HistCite,
+  # CITAN.
+  author_metrics                : false
+
+  # ─── Author Profile (OpenAlex) ────────────────────────────────────────────────────────
+  # Retrieve and display a global author profile by querying the OpenAlex API for each
+  # author in the corpus. The global profile includes career-level metrics (total
+  # publications, total citations, h-index across all works, not only the local corpus),
+  # institutional affiliation history, and concept tags. Bibliometrix combines the global
+  # OpenAlex profile with a local profile computed from the loaded dataset. Implemented
+  # by: Bibliometrix.
+  author_profile                : false
+
+  # ─── Author Production Over Time ──────────────────────────────────────────────────────
+  # Line plot and table showing the yearly or cumulative number of documents published by
+  # each of the top-N most productive authors over the corpus timespan. The table has
+  # authors as columns and years as rows, with document counts as values. Bibliometrix
+  # produces this as a dedicated author-over-time plot. ScientoPy can generate an
+  # equivalent time-series plot using author as the analysis criterion. Note: the AGR,
+  # ADY, and PDLY metrics that ScientoPy computes alongside any criterion are separate
+  # features (see agr_metric, ady_metric, pdly_metric) and are not part of the
+  # production-over-time plot itself. Implemented by: Bibliometrix, ScientoPy.
+  author_over_time              : false
+
+  # ─── Lotka's Law ──────────────────────────────────────────────────────────────────────
+  # Fit Lotka's inverse-square law to the empirical author productivity distribution and
+  # test goodness-of-fit. Lotka's Law states that the number of authors publishing n
+  # papers is proportional to 1/n^2. Output table contains: documents written, observed
+  # number of authors, observed proportion, and theoretical proportion under Lotka's Law.
+  # A Kolmogorov-Smirnov test statistic and p-value assess the fit quality. Implemented
+  # by: Bibliometrix.
+  lotka_law                     : false
+
+  # ══ Country & Affiliation Analysis ═══════════════════════════════════════════════════
+
+  # ─── Country Scientific Production ────────────────────────────────────────────────────
+  # World choropleth map and bar chart showing the total number of documents attributed to
+  # each country over the entire corpus timespan. Country assignment uses the affiliation
+  # field of all authors (not only the first author). The map uses colour intensity
+  # proportional to document count. Bibliometrix produces the choropleth map. CiteSpace
+  # produces a similar geospatial overlay. Note: ScientoPy's time_line with country as
+  # criterion produces a production-over-time plot (see country_over_time), not a static
+  # total-count map. Implemented by: CiteSpace, Bibliometrix.
+  country_production            : false
+
+  # ─── Corresponding Author Country (SCP/MCP) ───────────────────────────────────────────
+  # For each country, classify its documents as single-country publications (SCP: all
+  # authors from the same country) or multi-country publications (MCP: authors from two or
+  # more countries). Output table per country: total Articles, Articles %, SCP count, MCP
+  # count, MCP %. A high MCP ratio indicates a country that collaborates heavily with
+  # international partners. Analysis uses the corresponding-author country field.
+  # Implemented by: Bibliometrix.
+  country_mcp                   : false
+
+  # ─── Country Production Over Time ─────────────────────────────────────────────────────
+  # Line plot showing the cumulative or yearly document counts for the top-N most
+  # productive countries over the corpus timespan. Each country is a separate line. The
+  # table has countries as columns and years as rows. Bibliometrix produces this as a
+  # dedicated country-over-time plot. ScientoPy can generate an equivalent time-series
+  # plot using country as the analysis criterion. Note: the AGR, ADY, and PDLY metrics
+  # that ScientoPy computes alongside any criterion are separate features (see agr_metric,
+  # ady_metric, pdly_metric) and are not part of the production-over-time plot itself.
+  # Implemented by: Bibliometrix, ScientoPy.
+  country_over_time             : false
+
+  # ─── Affiliation / Institution Metrics ────────────────────────────────────────────────
+  # Rank institutions (universities, research centres, companies) by bibliometric
+  # indicators computed from the corpus. Indicators: document count (OCC), global citation
+  # score (GCS), local citation score (LCS), h-index, g-index. Output is a sortable table
+  # and a bar chart of top-N institutions. Note: ScientoPy can rank institutions by
+  # document count using institution as a criterion, but does not compute citation-based
+  # indicators (GCS, LCS, g-index) at institution level; that full metrics table is
+  # specific to Bibliometrix and CiteSpace. Implemented by: CiteSpace, Bibliometrix.
+  affiliation_metrics           : false
+
+  # ─── Affiliation Production Over Time ─────────────────────────────────────────────────
+  # Line plot and table showing the cumulative or yearly number of documents per
+  # institution over the corpus timespan. The table has institutions as columns and years
+  # as rows. Useful for tracking the rise of specific research groups or centres as
+  # contributors to a field. Bibliometrix supports affiliation-over-time analysis via its
+  # R API. Implemented by: Bibliometrix.
+  affiliation_over_time         : false
+
+  # ─── Most Cited Countries ─────────────────────────────────────────────────────────────
+  # Bar plot and table ranking countries by total global citations received by their
+  # documents in the corpus. Distinct from country production (which counts documents):
+  # this metric reveals which countries produce the most impactful work as measured by
+  # citation count. Computed using the country affiliation of all authors on each record.
+  # Implemented by: Bibliometrix.
+  most_cited_countries          : false
+
+  # ══ Keyword & Word Analysis ══════════════════════════════════════════════════════════
+
+  # ─── Keyword Frequency & Ranking ──────────────────────────────────────────────────────
+  # Rank terms by occurrence count and citation impact across one or more controlled
+  # vocabularies. Bibliometrix supports: Author Keywords (DE field), Index Keywords (ID),
+  # combined Keywords, Title words, Abstract words, and WoS Subject Categories. Metrics
+  # per term: OCC, GCS, LCS, h-index, g-index, GCS/doc, LCS/doc, year of first and last
+  # occurrence. VOSviewer displays keywords only within co-occurrence networks, not as
+  # standalone ranked frequency tables. Implemented by: CiteSpace, Bibliometrix, SciMAT,
+  # CoPalRed, ScientoPy.
+  keyword_frequency             : false
+
+  # ─── Word Cloud ───────────────────────────────────────────────────────────────────────
+  # Generate a word cloud image in which the display size of each term is proportional to
+  # its occurrence frequency or citation count in the corpus. Bibliometrix and ScientoPy
+  # both expose word cloud as a dedicated graph type. Can be applied to any text field:
+  # author keywords, index keywords, titles, or abstracts. Implemented by: Bibliometrix,
+  # ScientoPy.
+  wordcloud                     : false
+
+  # ─── Treemap of Words / Keywords ──────────────────────────────────────────────────────
+  # Display keyword or term proportions as a treemap chart in which each rectangle's area
+  # is proportional to its occurrence frequency. Provides a compact overview of the
+  # dominant topics in a corpus. Bibliometrix supports treemap visualisation of keyword
+  # and field frequencies. Implemented by: Bibliometrix.
+  treemap_words                 : false
+
+  # ─── Word / Keyword Frequency Over Time ───────────────────────────────────────────────
+  # Line plot and table of cumulative or yearly occurrence counts per keyword over the
+  # corpus timespan. Each keyword is a separate line. Reveals when specific topics
+  # emerged, peaked, or declined in the literature. Bibliometrix, CiteSpace, and SciMAT
+  # produce this as a keyword frequency time series. ScientoPy can generate an equivalent
+  # time-series plot using any keyword criterion. Note: the AGR and PDLY metrics that
+  # ScientoPy computes alongside any criterion are separate features (see agr_metric,
+  # pdly_metric) and are not part of the frequency-over-time plot itself. Implemented by:
+  # CiteSpace, Bibliometrix, SciMAT, ScientoPy.
+  word_over_time                : false
+
+  # ─── Trend Topics ─────────────────────────────────────────────────────────────────────
+  # Identify trending and emerging keywords by computing growth statistics over a recent
+  # time window. Bibliometrix uses average growth rate (AGR) and the documents count in
+  # the last three years. CiteSpace uses burst-detection (Kleinberg's algorithm) to find
+  # keywords whose frequency increases sharply. SciMAT analyses keyword clusters by
+  # period. ScientoPy computes AGR and PDLY per topic and ranks them to identify the
+  # fastest-growing terms. Output: bar chart and table of top trending topics. Implemented
+  # by: CiteSpace, Bibliometrix, SciMAT, ScientoPy.
+  trend_topics                  : false
+
+  # ─── NLP Noun-Phrase Extraction ───────────────────────────────────────────────────────
+  # Extract multi-word noun phrases (NPs) from title and abstract text using NLP libraries
+  # (spaCy and/or TextBlob), and add them as additional concept fields alongside
+  # controlled-vocabulary keywords. NPs capture emerging terminology not yet indexed as
+  # author or index keywords. tm2+ is the only tool in this benchmark that implements this
+  # feature natively, producing NP-based frequency tables, word clouds, and co-occurrence
+  # networks using the same analysis classes as standard keyword fields. Implemented by:
+  # (none of the compared tools; unique tm2+ feature).
+  noun_phrases                  : false
+
+  # ─── Average Growth Rate (AGR) ────────────────────────────────────────────────────────
+  # Compute the Average Growth Rate (AGR) for each topic (keyword, author, country, or any
+  # other criterion value) over a user-configurable recent time window (default: last 2
+  # years). AGR = mean of year-over-year increases in document count over the window. A
+  # positive AGR indicates a growing topic; negative AGR indicates decline. Used by
+  # ScientoPy as the primary indicator for ranking trending topics and as the x-axis of
+  # the evolution plot. Implemented by: ScientoPy.
+  agr_metric                    : false
+
+  # ─── Average Documents per Year (ADY) ─────────────────────────────────────────────────
+  # Compute the Average Documents per Year (ADY) for each topic over a user-configurable
+  # recent time window. ADY = sum of documents in the window divided by number of years in
+  # the window. An absolute volume indicator: topics with high ADY are currently
+  # productive regardless of their growth rate. Used by ScientoPy alongside AGR and PDLY
+  # to give a three-dimensional picture of topic activity. Implemented by: ScientoPy.
+  ady_metric                    : false
+
+  # ─── Percentage of Documents in Last Years (PDLY) ─────────────────────────────────────
+  # Compute the Percentage of Documents in Last Years (PDLY) for each topic over a user-
+  # configurable recent time window. PDLY = ADY divided by total documents for that topic,
+  # times 100. A relative growth indicator showing what fraction of a topic's lifetime
+  # publications has appeared in the most recent period. High PDLY combined with high AGR
+  # identifies topics experiencing rapid recent growth. Used by ScientoPy as the y-axis of
+  # the evolution plot. Implemented by: ScientoPy.
+  pdly_metric                   : false
+
+  # ─── Wildcard Topic Search (*) ────────────────────────────────────────────────────────
+  # Use an asterisk (*) wildcard character in topic search strings to match all values
+  # sharing a common prefix or suffix across any analysis criterion. Examples: 'smart*'
+  # matches 'smart city', 'smart home', 'smart grid', 'smart manufacturing'; '*learning'
+  # matches 'machine learning', 'deep learning', 'reinforcement learning'. All matching
+  # values are grouped under the wildcard pattern for frequency and trend analysis.
+  # Implemented by: ScientoPy.
+  wildcard_search               : false
+
+  # ─── Evolution Plot (Accumulative + AGR vs PDLY) ──────────────────────────────────────
+  # Two-panel evolution plot produced by ScientoPy. Left panel: accumulative document
+  # count per topic on a log-scale y-axis vs year, one line per topic, revealing long-term
+  # growth trajectories. Right panel: AGR (x-axis) vs PDLY (y-axis) parametric scatter,
+  # one point per topic, with quadrant lines at the median AGR and PDLY values dividing
+  # topics into four growth regimes (high absolute + high relative; high + low; low +
+  # high; low + low). Enables both historical and recent-growth comparison in one figure.
+  # Implemented by: ScientoPy.
+  evolution_plot                : false
+
+  # ══ Document & Citation Analysis ═════════════════════════════════════════════════════
+
+  # ─── Most Global / Local Cited Documents ──────────────────────────────────────────────
+  # Rank documents in the corpus by global citation count (GCS: total citations received
+  # worldwide according to the source database) and by local citation count (LCS:
+  # citations received from within the loaded corpus). Output is a bar chart and a table
+  # with columns: Document (author, year, title snippet), GCS, LCS, GCS/year. The most
+  # globally and most locally cited documents are often different, revealing both the
+  # field's landmark papers and its internal reference structure. Implemented by:
+  # CiteSpace, Bibliometrix, HistCite.
+  cited_docs                    : false
+
+  # ─── Most Local Cited References ──────────────────────────────────────────────────────
+  # Rank individual cited references (strings in the reference lists of corpus documents)
+  # by the frequency with which they are cited within the corpus (local citation score).
+  # Unlike cited_docs, this operates on the raw reference strings and therefore captures
+  # foundational works that may not themselves be records in the corpus. Output is a table
+  # with columns: Reference string, Local citation count. Implemented by: CiteSpace,
+  # Bibliometrix, HistCite.
+  cited_references              : false
+
+  # ─── RPYS (Reference Publication Year Spectroscopy) ───────────────────────────────────
+  # Reference Publication Year Spectroscopy (RPYS): plot the distribution of the
+  # publication years of all cited references in the corpus. Peaks in this distribution
+  # identify years in which foundational works appeared. A five-year median deviation
+  # curve highlights statistically significant peaks. Developed by Marx et al. (2014).
+  # Output is a line plot of citation age frequency vs year plus a table of peak years
+  # with the most-cited references from each peak. Implemented by: Bibliometrix.
+  rpys                          : false
+
+  # ─── H-index per Topic / Criterion ────────────────────────────────────────────────────
+  # Compute the h-index for any topic or criterion value (not only for individual
+  # authors). For a given keyword, country, journal, or institution, the h-index is the
+  # largest h such that h documents associated with that value have each been cited at
+  # least h times. Allows direct comparison of citation impact across topics and fields.
+  # Bibliometrix computes this for any bibliographic field; ScientoPy reports h-index per
+  # topic in its main frequency tables. Implemented by: Bibliometrix, SciMAT, HistCite,
+  # ScientoPy.
+  hindex_topic                  : false
+
+  # ══ Network Analysis ═════════════════════════════════════════════════════════════════
+
+  # ─── Co-authorship Network ────────────────────────────────────────────────────────────
+  # Construct and visualise a co-authorship network in which nodes are authors and edges
+  # connect pairs of authors who have co-authored at least one document in the corpus.
+  # Edge weight = number of co-authored documents. Node size = document count or citation
+  # count. Communities are detected by modularity clustering. Output includes: network
+  # visualisation, density map, degree-distribution table, and cluster membership lists.
+  # Implemented by: VOSviewer, CiteSpace, Bibliometrix, Gephi, SciMAT, CoPalRed.
+  coauthorship_net              : false
+
+  # ─── Institution / Country Collaboration Network ──────────────────────────────────────
+  # Construct and visualise an institution-level or country-level collaboration network in
+  # which nodes are organisations or countries and edges represent co-authorship links.
+  # Edge weight = number of jointly authored documents. Reveals international and inter-
+  # institutional collaboration patterns. Output includes: network visualisation,
+  # community detection results, and a collaboration table. Implemented by: VOSviewer,
+  # CiteSpace, Bibliometrix, Gephi.
+  collaboration_net             : false
+
+  # ─── Country Collaboration World Map ──────────────────────────────────────────────────
+  # Display country-to-country collaboration links as arcs on a world map, with arc
+  # thickness proportional to the number of jointly authored documents. Provides an
+  # immediate geographic overview of international collaboration patterns. Distinct from
+  # country_production (which shows document counts per country) and from
+  # collaboration_net (which shows the abstract network graph). Implemented by:
+  # Bibliometrix.
+  country_worldmap              : false
+
+  # ─── Co-citation Network ──────────────────────────────────────────────────────────────
+  # Construct and visualise a co-citation network in which nodes are cited references (or
+  # documents, or sources) and edges connect pairs cited together in the same documents.
+  # Clusters in the co-citation network represent schools of thought or sub-fields.
+  # Output: network visualisation, density map, cluster table, degree plot. CiteSpace and
+  # VOSviewer are the most commonly used tools for co-citation analysis. Implemented by:
+  # VOSviewer, CiteSpace, Bibliometrix, SciMAT, CoPalRed.
+  cocitation_net                : false
+
+  # ─── Keyword Co-occurrence Network ────────────────────────────────────────────────────
+  # Construct and visualise a keyword co-occurrence network in which nodes are keywords
+  # (author keywords, index keywords, or both) and edges connect pairs appearing together
+  # in the same documents. Edge weight = number of co-occurrences. Community detection
+  # reveals thematic clusters. Output: network visualisation, diachronic animation,
+  # density map, node table, degree plot. Bibliometrix additionally supports co-occurrence
+  # for title words and abstract words. Implemented by: VOSviewer, CiteSpace,
+  # Bibliometrix, SciMAT, CoPalRed.
+  cooccurrence_net              : false
+
+  # ─── Bibliographic Coupling Network ───────────────────────────────────────────────────
+  # Construct and visualise a bibliographic coupling network in which nodes can be
+  # documents, authors, or sources, and edges connect pairs sharing at least one common
+  # reference. Edge weight = number of shared references. Bibliographic coupling clusters
+  # represent current research fronts. Bibliometrix supports coupling at document, author,
+  # and source levels with choice of coupling field (references, keywords, titles,
+  # abstracts). Output: network visualisation, centrality-impact diagram, cluster table.
+  # Implemented by: VOSviewer, Bibliometrix, SciMAT.
+  coupling_net                  : false
+
+  # ─── Diachronic / Animated Network ────────────────────────────────────────────────────
+  # Produce an animated (diachronic) version of a network showing how nodes and edges
+  # appear and evolve over successive time windows. Each frame corresponds to a time slice
+  # (e.g. a 3-year window). CiteSpace is the canonical tool for diachronic network
+  # analysis with its timeline view and burst-detection overlay. Bibliometrix implements
+  # animated co-occurrence networks as part of its synthesis module. Implemented by:
+  # CiteSpace, Bibliometrix.
+  diachronic_net                : false
+
+  # ─── Network Density Map ──────────────────────────────────────────────────────────────
+  # Overlay a kernel-density heat map on a network layout to show where nodes cluster most
+  # densely in the 2-D projection space. High-density regions indicate major research
+  # themes or author communities. VOSviewer is well known for its density visualisation
+  # mode, applicable to any network type (co-authorship, co-occurrence, co-citation).
+  # Bibliometrix provides an equivalent density map option. Implemented by: VOSviewer,
+  # Bibliometrix.
+  network_density               : false
+
+  # ══ Thematic & Cluster Analysis ══════════════════════════════════════════════════════
+
+  # ─── Thematic Map (Strategic Diagram) ─────────────────────────────────────────────────
+  # Produce a strategic diagram (thematic map) that plots keyword clusters in a density-
+  # centrality space. The x-axis is centrality (strength of external links to other
+  # clusters) and the y-axis is density (strength of internal links within the cluster).
+  # The four quadrants classify themes as: motor themes (high centrality, high density),
+  # niche themes (low centrality, high density), basic/transversal themes (high
+  # centrality, low density), and emerging/declining themes (low centrality, low density).
+  # Output: strategic diagram, network of clusters, cluster assignment table, and
+  # documents per cluster. Implemented by: Bibliometrix, SciMAT.
+  thematic_map                  : false
+
+  # ─── Thematic Evolution ───────────────────────────────────────────────────────────────
+  # Track how research themes change across consecutive time periods by mapping cluster
+  # overlap between successive windows and drawing evolution arrows. A theme may split,
+  # merge, grow, or disappear over time. Bibliometrix implements thematic evolution as a
+  # Sankey-style flow diagram connecting the thematic maps of adjacent periods. SciMAT
+  # also implements longitudinal theme tracking across configurable time periods.
+  # Implemented by: Bibliometrix, SciMAT.
+  thematic_evolution            : false
+
+  # ─── Factorial Analysis (CA / MCA / MDS) ──────────────────────────────────────────────
+  # Apply factorial dimensionality-reduction methods to the term-document or term-term
+  # matrix to produce low-dimensional maps for visual interpretation. Bibliometrix
+  # implements: Correspondence Analysis (CA), Multiple Correspondence Analysis (MCA), and
+  # Multidimensional Scaling (MDS). These produce: word maps (terms in 2-D space), topic
+  # dendrograms (hierarchical clustering), words-by-cluster tables, and documents-by-
+  # cluster tables. SciMAT uses similar factorial methods in its science mapping pipeline.
+  # Implemented by: Bibliometrix, SciMAT.
+  factorial                     : false
+
+  # ══ Reporting & Reproducibility ══════════════════════════════════════════════════════
+
+  # ─── Scriptable / Reproducible Workflow ───────────────────────────────────────────────
+  # Expose all analysis functions through a scriptable API enabling fully reproducible and
+  # documented workflows. Bibliometrix provides a complete R package API and an RMarkdown
+  # report generator. ScientoPy is entirely CLI-driven: every analysis is a Python command
+  # with explicit parameters that can be saved in a shell script. CITAN provides a fully
+  # scriptable R API for all import, cleaning, and analysis operations. Implemented by:
+  # Bibliometrix, ScientoPy, CITAN.
+  scripted_workflow             : false
+
+  # ─── Graphical User Interface ─────────────────────────────────────────────────────────
+  # Provide a graphical user interface allowing non-programmer users to drive the entire
+  # analysis workflow without writing code. Bibliometrix: Biblioshiny (R Shiny web app).
+  # VOSviewer: standalone Java desktop application. CiteSpace: Java desktop application.
+  # Gephi: standalone desktop application. SciMAT: Java desktop. CoPalRed: desktop
+  # application. HistCite: Windows desktop application. ScientoPy: ScientoPyUI front-end.
+  # Implemented by: VOSviewer, CiteSpace, Bibliometrix, Gephi, SciMAT, CoPalRed, HistCite,
+  # ScientoPy.
+  gui                           : false
+
+  # ─── Export Plots (multiple formats) ──────────────────────────────────────────────────
+  # Export generated figures in raster or vector formats for use in publications and
+  # presentations. Supported formats vary by tool: VOSviewer exports PNG and SVG;
+  # CiteSpace exports PNG and PDF; Bibliometrix (via R/ggplot2) exports PNG, SVG, PDF,
+  # EPS, and interactive HTML via plotly; Gephi exports PNG, SVG, PDF; SciMAT exports PNG;
+  # ScientoPy exports EPS, SVG, and PNG. Implemented by: VOSviewer, CiteSpace,
+  # Bibliometrix, Gephi, SciMAT, CoPalRed, ScientoPy.
+  export_plots                  : false
+
+  # ─── Tabular Export (TSV / CSV) ───────────────────────────────────────────────────────
+  # Export analysis results as structured tabular files (TSV, CSV, or Excel) for further
+  # processing in spreadsheet tools, statistical software, or custom scripts. ScientoPy
+  # exports per-topic tables including OCC per year, AGR, ADY, PDLY, and h-index as .tsv
+  # files. Bibliometrix exports results as CSV from Biblioshiny and as R data frames
+  # writable with write.csv(). Most tools (VOSviewer, CiteSpace, Gephi, SciMAT, CoPalRed,
+  # HistCite) also export network edge/node tables as CSV or text. Implemented by:
+  # VOSviewer, CiteSpace, Bibliometrix, Gephi, SciMAT, CoPalRed, HistCite, ScientoPy.
+  export_tabular                : false
+
+  # ─── Chained / Filtered Sub-analysis ──────────────────────────────────────────────────
+  # Use the filtered output document set from a previous query as the input corpus for a
+  # new analysis, enabling iterative drill-down without manual file editing. Example:
+  # first query retrieves all papers matching 'machine learning'; a second query uses that
+  # subset to find the top keywords within Canadian papers only. ScientoPy implements this
+  # via the --previous_results CLI flag, which reads the extended.tsv produced by the
+  # prior run as the new input dataset. Enables complex multi-step analytical pipelines.
+  # Implemented by: ScientoPy.
+  previous_results              : false
+
+  # ══ Bibliometric Storage & Data Management ═══════════════════════════════════════════
+
+  # ─── Local Bibliometric Storage (Relational DB) ───────────────────────────────────────
+  # Persist imported bibliographic data in a local relational database (SQLite) rather
+  # than holding records only in memory or flat files. The database schema stores sources,
+  # documents, authors, languages, countries, and subject categories as normalised linked
+  # tables. This enables incremental imports across sessions (update of citation counts on
+  # re-import), cross-session querying, and the management of multiple analyses within a
+  # single database file without duplication. CITAN implements this as its core data model
+  # via an SQLite-backed local bibliometric storage (LBS). Implemented by: CITAN.
+  local_biblio_storage          : false
+
+  # ─── Multi-Survey / Corpus Grouping ───────────────────────────────────────────────────
+  # Organise imported documents into named, potentially overlapping groups (surveys)
+  # within a single database, allowing multiple bibliometric analyses to share the same
+  # underlying document pool without duplication. A document may belong to several surveys
+  # simultaneously. Analyses can be scoped to any survey by name. CITAN implements survey
+  # grouping as a first-class feature of its local bibliometric storage, enabling a single
+  # LBS file to serve multiple concurrent research questions. Implemented by: CITAN.
+  survey_grouping               : false
+
+  # ══ Document & Citation Analysis (continued) ═════════════════════════════════════════
+
+  # ─── Statistical Hypothesis Testing on Citation Data ──────────────────────────────────
+  # Apply inferential statistical tests to citation count distributions to support
+  # evidence-based conclusions. Typical use: test whether review articles receive
+  # significantly more citations than regular articles using a non-parametric test (e.g.
+  # Wilcoxon rank-sum) appropriate for skewed citation distributions. Output includes the
+  # test statistic, p-value, and interpretation. CITAN integrates directly with R's
+  # statistical testing functions, enabling citation distributions extracted from the LBS
+  # to be passed to any R test. Implemented by: CITAN.
+  statistical_testing           : false
