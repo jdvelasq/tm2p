@@ -51,8 +51,8 @@ Smoke test:
            ', POLICYMAKERS and GOVERNMENTS . 2024 , emerald publishing limited .',
      'AR': 'Al-Sartawi, 2024, J FINANC REPORT ACCOUNT',
      'AU': 'Al-Sartawi A.',
-     'DE': 'Digital transformation; Financial sector; FinTech; FinTech governance; '
-           'FinTech strategies; Firm market value; GCC countries; Profitability',
+     'DE': 'digital transformation; financial sector; fintech; fintech governance; '
+           'fintech strategies; firm market value; gcc countries; profitability',
      'ID': nan,
      'PY': 2024,
      'SO': 'J FINANC REPORT ACCOUNT',

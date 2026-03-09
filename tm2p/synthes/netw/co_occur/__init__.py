@@ -1,21 +1,21 @@
 """Co-occurrence network analysis."""
 
-from .clusters_to_items_mapping import ClustersToItemsMapping
+from .cluster_to_items import ClusterToItems
 from .concept_grid_plot import ConceptGridPlot
 from .documents_by_cluster_mapping import DocumentsByClusterMapping
-from .items_by_cluster_dataframe import ItemsByClusterDataFrame
-from .items_by_cluster_summary import ItemsByClusterSummary
-from .items_to_clusters_mapping import ItemsToClustersMapping
+from .item_to_cluster import ItemToCluster
+from .items_by_cluster import ItemsByCluster
 from .kernel_density_plot import KernelDensityPlot
 from .network_metrics import NetworkMetrics
 from .network_plot import NetworkPlot
 from .node_degree_dataframe import NodeDegreeDataFrame
 from .node_degree_plot import NodeDegreePlot
+from .summary import Summary
 from .treemap import Treemap
 
 __all__ = [
-    "ClustersToItemsMapping",
-    "ClustersToItemsMapping",
+    "ClusterToItems",
+    "ClusterToItems",
     "ConceptGridPlot",
     "DocumentsByClusterMapping",
     "NetworkMetrics",
@@ -23,8 +23,8 @@ __all__ = [
     "NodeDegreeDataFrame",
     "NodeDegreePlot",
     "KernelDensityPlot",
-    "ItemsByClusterDataFrame",
-    "ItemsByClusterSummary",
-    "ItemsToClustersMapping",
+    "ItemsByCluster",
+    "Summary",
+    "ItemToCluster",
     "Treemap",
 ]

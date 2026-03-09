@@ -50,8 +50,8 @@ class DistributionPlot(
         fig = go.Figure()
         fig.add_trace(
             go.Scatter(
-                x=data_frame["Documents Written"],
-                y=data_frame["Proportion of Authors"],
+                x=data_frame["DOC_WRITTEN"],
+                y=data_frame["AUTH_PROP"],
                 fill="tozeroy",
                 name="Real",
                 opacity=0.5,
@@ -60,8 +60,8 @@ class DistributionPlot(
         )
         fig.add_trace(
             go.Scatter(
-                x=data_frame["Documents Written"],
-                y=data_frame["Prop Theoretical Authors"],
+                x=data_frame["DOC_WRITTEN"],
+                y=data_frame["PROP_AUTH_THEO"],
                 fill="tozeroy",
                 name="Theoretical",
                 opacity=0.5,
@@ -85,14 +85,14 @@ class DistributionPlot(
             linewidth=2,
             gridcolor="lightgray",
             griddash="dot",
-            title="Documents Written",
+            title="DOC_WRITTEN",
         )
         fig.update_yaxes(
             linecolor="gray",
             linewidth=2,
             gridcolor="lightgray",
             griddash="dot",
-            title="Proportion of Authors",
+            title="AUTH_PROP",
         )
 
         return fig

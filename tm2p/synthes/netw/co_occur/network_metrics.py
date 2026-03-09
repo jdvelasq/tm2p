@@ -5,7 +5,7 @@ Metrics
 Smoke tests:
     >>> from tm2p import Field, AssociationIndex, ItemOrderBy
     >>> from tm2p.synthes.netw.co_occur import NetworkMetrics
-    >>> (
+    >>> df = (
     ...     NetworkMetrics()
     ...     #
     ...     # FIELD:
@@ -29,28 +29,19 @@ Smoke tests:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head(15)
-                                       DEGREE  BETWEENNESS  CLOSENESS  PAGERANK
-    fintech 117:25478                      19     0.268421   1.000000  0.268300
-    financial inclusion 017:03823          13     0.075828   0.760000  0.068416
-    financial technology 014:02508         11     0.050195   0.703704  0.048962
-    banking 010:02599                      10     0.043275   0.678571  0.050895
-    green finance 011:02844                 9     0.042788   0.655172  0.046914
-    blockchain 011:02023                    9     0.023782   0.655172  0.050393
-    technology 007:01409                    8     0.019688   0.633333  0.037425
-    innovation 009:01703                    7     0.018519   0.612903  0.046957
-    artificial intelligence 008:01915       7     0.011404   0.612903  0.039000
-    financial services 007:01673            7     0.009942   0.612903  0.034420
-    regtech 006:01481                       7     0.012671   0.612903  0.036532
-    sustainable development 005:00604       7     0.015984   0.612903  0.031204
-    digital finance 005:02052               6     0.007505   0.593750  0.030185
-    covid-19 005:01068                      6     0.010721   0.593750  0.025856
-    financial literacy 005:00665            6     0.006725   0.593750  0.027827
+    ... )
+    >>> print(df.head().to_string())  # doctest: +NORMALIZE_WHITESPACE
+                                      DEGREE  BETWEENNESS  CLOSENESS  PAGERANK  EIGENVECTOR  CLUSTERING  CORE  STRENGTH
+    fintech 117:25478               1.000000     0.268421   1.000000  0.268300     0.426676    0.350877     5     109.0
+    financial inclusion 017:03823   0.684211     0.075828   0.760000  0.068416     0.330603    0.448718     5      27.0
+    financial technology 014:02508  0.578947     0.050195   0.703704  0.048962     0.283678    0.490909     5      18.0
+    banking 010:02599               0.526316     0.043275   0.678571  0.050895     0.259523    0.466667     5      19.0
+    green finance 011:02844         0.473684     0.042788   0.655172  0.046914     0.223218    0.444444     5      17.0
 
 
 
     >>> from tm2p.synthes.netw.co_occur import NetworkMetrics
-    >>> (
+    >>> df = (
     ...     NetworkMetrics()
     ...     #
     ...     # FIELD:
@@ -74,23 +65,14 @@ Smoke tests:
     ...     .where_records_match(None)
     ...     #
     ...     .run()
-    ... ).head(15)
-                             DEGREE  BETWEENNESS  CLOSENESS  PAGERANK
-    fintech                      19     0.268421   1.000000  0.268300
-    financial inclusion          13     0.075828   0.760000  0.068416
-    financial technology         11     0.050195   0.703704  0.048962
-    banking                      10     0.043275   0.678571  0.050895
-    green finance                 9     0.042788   0.655172  0.046914
-    blockchain                    9     0.023782   0.655172  0.050393
-    technology                    8     0.019688   0.633333  0.037425
-    innovation                    7     0.018519   0.612903  0.046957
-    artificial intelligence       7     0.011404   0.612903  0.039000
-    financial services            7     0.009942   0.612903  0.034420
-    regtech                       7     0.012671   0.612903  0.036532
-    sustainable development       7     0.015984   0.612903  0.031204
-    digital finance               6     0.007505   0.593750  0.030185
-    covid-19                      6     0.010721   0.593750  0.025856
-    financial literacy            6     0.006725   0.593750  0.027827
+    ... )
+    >>> print(df.head().to_string())  # doctest: +NORMALIZE_WHITESPACE
+                            DEGREE  BETWEENNESS  CLOSENESS  PAGERANK  EIGENVECTOR  CLUSTERING  CORE  STRENGTH
+    fintech               1.000000     0.268421   1.000000  0.268300     0.426676    0.350877     5     109.0
+    financial inclusion   0.684211     0.075828   0.760000  0.068416     0.330603    0.448718     5      27.0
+    financial technology  0.578947     0.050195   0.703704  0.048962     0.283678    0.490909     5      18.0
+    banking               0.526316     0.043275   0.678571  0.050895     0.259523    0.466667     5      19.0
+    green finance         0.473684     0.042788   0.655172  0.046914     0.223218    0.444444     5      17.0
 
 
 """

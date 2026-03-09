@@ -79,6 +79,15 @@ Smoke tests:
     ...     .run()
     ... )
     >>> df.head()
+                                                        fintech  ...  financial services
+    RID                                                          ...
+    Agarwal, 2020, ASIAPACIFIC J FINANC STUD, V49, ...        1  ...                   0
+    Ajouz, 2023, CUAD ECON, V46, P189                         1  ...                   0
+    Al-Sartawi, 2024, J FINANC REPORT ACCOUNT                 1  ...                   0
+    Aldboush, 2023, INT J FINANC STUD, V11                    1  ...                   0
+    Allen, 2021, REV CORP FINANC, V1, P259                    1  ...                   0
+    <BLANKLINE>
+    [5 rows x 10 columns]
 
 
 """

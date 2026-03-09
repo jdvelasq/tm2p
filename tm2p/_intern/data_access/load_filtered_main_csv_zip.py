@@ -17,7 +17,7 @@ Smoke test:
     'DataFrame'
     >>> assert len(df) > 0
     >>> assert "YEAR" in df.columns
-    >>> df
+    >>> df  # doctest: +NORMALIZE_WHITESPACE
                                                 AUTH_RAW  ...                 USR1
     0  Wang, C.; Wang, L.; Zhao, S.; Yang, C.; Albita...  ...      BUS STRATEG ENV
     1  Hasan, F.; Al-Okaily, M.; Choudhury, T.; Kayan...  ...  ELECTRON COMMER RES
@@ -25,7 +25,7 @@ Smoke test:
     3  Ratna, S.; Saide, S.; Putri, A.M.; Indrajit, R...  ...        EUROMED J BUS
     4                         Gao, D.; Tan, L.; Duan, K.  ...         EUR J FINANC
     <BLANKLINE>
-    [5 rows x 83 columns]
+    [5 rows x 84 columns]
 
 
     >>> df = (
@@ -43,7 +43,15 @@ Smoke test:
     'DataFrame'
     >>> assert len(df) > 0
     >>> assert "YEAR" in df.columns
-    >>> df
+    >>> df  # doctest: +NORMALIZE_WHITESPACE
+                                                AUTH_RAW  ...                 USR1
+    0  Wang, C.; Wang, L.; Zhao, S.; Yang, C.; Albita...  ...      BUS STRATEG ENV
+    1  Hasan, F.; Al-Okaily, M.; Choudhury, T.; Kayan...  ...  ELECTRON COMMER RES
+    2          Roh, T.; Yang, Y.S.; Xiao, S.; Park, B.I.  ...  ELECTRON COMMER RES
+    3  Ratna, S.; Saide, S.; Putri, A.M.; Indrajit, R...  ...        EUROMED J BUS
+    4                         Gao, D.; Tan, L.; Duan, K.  ...         EUR J FINANC
+    <BLANKLINE>
+    [5 rows x 84 columns]
 
 
 """

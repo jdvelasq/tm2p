@@ -4,7 +4,7 @@ Network Plot
 
 
 Smoke tests:
-    >>> from tm2p.analyze.experimental.co_occurrence import NetworkPlot
+    >>> from tm2p.innov.co_occur import NetworkPlot
     >>> plot = (
     ...     NetworkPlot()
     ...     #

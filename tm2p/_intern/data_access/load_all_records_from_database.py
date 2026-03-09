@@ -1,8 +1,8 @@
 """
 
 Smoke tests:
-    >>> from tm2p._internals import Params
-    >>> from tm2p.database._intern.io import internal__load_all_records_from_database
+    >>> from tm2p._intern import Params
+    >>> from tm2p._intern.data_access import internal__load_all_records_from_database
     >>> df = internal__load_all_records_from_database(
     ...         Params(root_directory="examples/fintech/")
     ... ).head()

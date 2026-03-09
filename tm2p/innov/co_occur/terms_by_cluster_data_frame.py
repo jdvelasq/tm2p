@@ -55,7 +55,7 @@ Smoke tests:
 from tm2p._intern import ParamsMixin
 from tm2p.innov.co_occur.mixins import RecursiveClusteringMixin
 from tm2p.synthes.netw.co_occur import (
-    ItemsByClusterDataFrame as ClassicalTermsByClusterDataFrame,
+    ItemsByCluster as ClassicalTermsByClusterDataFrame,
 )
 
 

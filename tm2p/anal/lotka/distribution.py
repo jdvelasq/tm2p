@@ -16,14 +16,14 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-    >>> df
-       Documents Written  ...  Prop Theoretical Authors
-    0                  1  ...                     0.714
-    1                  2  ...                     0.178
-    2                  3  ...                     0.079
-    3                  5  ...                     0.029
-    <BLANKLINE>
-    [4 rows x 5 columns]
+    >>> print(df.to_string())  # doctest: +NORMALIZE_WHITESPACE
+       DOC_WRITTEN  N_AUTH  AUTH_PROP  N_AUTH_THEO  PROP_AUTH_THEO
+    0            1     425      0.897      425.000           0.714
+    1            2      41      0.086      106.250           0.178
+    2            3       7      0.015       47.222           0.079
+    3            5       1      0.002       17.000           0.029
+
+
 
 """
 
@@ -90,13 +90,23 @@ class Distribution(
             .round(3)
         )
 
-        self.indicators = indicators
+        indicators = indicators.rename(
+            columns={
+                "Documents Written": "DOC_WRITTEN",
+                "Num Authors": "N_AUTH",
+                "Proportion of Authors": "AUTH_PROP",
+                "Theoretical Num Authors": "N_AUTH_THEO",
+                "Prop Theoretical Authors": "PROP_AUTH_THEO",
+            }
+        )
+
+        return indicators
 
     # -------------------------------------------------------------------------
     def run(self):
         self.internal__compute_number_of_written_documents_per_number_of_authors()
-        self.internal__compute_the_theoretical_number_of_authors()
-        return self.indicators
+        metrics = self.internal__compute_the_theoretical_number_of_authors()
+        return metrics
 
 
 #

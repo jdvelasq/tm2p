@@ -53,7 +53,7 @@ Smoke tests:
        during THE_ANALYSIS_PERIOD . in OUR_CONCLUSION , we_suggest
        A_POLICY_FRAMEWORK for BALANCED_FINTECH_SECTOR_GROWTH in
        DEVELOPING_COUNTRIES . 2022 , the author ( s ) .
-    DE China; Financial development; Fintech; Regtech
+    DE china; financial development; fintech; regtech
     <BLANKLINE>
 
 

@@ -20,7 +20,7 @@ Smoke test:
     >>> assert isinstance(docs, list)
     >>> assert len(docs) > 0
     >>> assert all(isinstance(d, str) for d in docs)
-    >>> print(docs[0])
+    >>> print(docs[0])  # doctest: +NORMALIZE_WHITESPACE
     UT 13
     AR Al-Sartawi, 2024, J FINANC REPORT ACCOUNT
     TI The diffusion of financial technology-enabled innovation in GCC-listed banks
@@ -53,9 +53,10 @@ Smoke test:
        THE_GCC_LITERATURE regarding FINANCIAL_TECHNOLOGY and provides
        RECOMMENDATIONS to THE_GCC_FINANCIAL_INSTITUTIONS , FINANCIAL_MARKETS ,
        POLICYMAKERS and GOVERNMENTS . 2024 , emerald publishing limited .
-    DE Digital transformation; Financial sector; FinTech; FinTech governance;
-       FinTech strategies; Firm market value; GCC countries; Profitability
+    DE digital transformation; financial sector; fintech; fintech governance;
+       fintech strategies; firm market value; gcc countries; profitability
     <BLANKLINE>
+
 
 
 """

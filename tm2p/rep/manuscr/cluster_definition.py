@@ -58,7 +58,7 @@ from tm2p._intern import ParamsMixin
 from tm2p._intern.packag_data.templates.load_builtin_template import (
     load_builtin_template,
 )
-from tm2p.synthes.netw.co_occur import DocumentsByClusterMapping, ItemsByClusterSummary
+from tm2p.synthes.netw.co_occur import DocumentsByClusterMapping, Summary
 
 
 class ClusterDefinition(
@@ -75,7 +75,7 @@ class ClusterDefinition(
     # -------------------------------------------------------------------------
     def internal__generate_terms_by_cluster_mapping(self):
         data_frame = (
-            ItemsByClusterSummary()
+            Summary()
             .update(**self.params.__dict__)
             .with_source_field("descriptors")
             .run()

@@ -5,7 +5,7 @@ BarPlot
 .. raw:: html
 
     <iframe src="../_generated/px.anal.bibliom.bar_plot.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
+    height="450" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
     >>> from tm2p import Field, ItemOrderBy
@@ -14,7 +14,7 @@ Smoke tests:
     ...     BarPlot()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(Field.AUTHKW_NORM)
+    ...     .with_source_field(Field.SRC_ISO4_NORM)
     ...     #
     ...     # TERMS:
     ...     .having_items_in_top(10)
@@ -25,7 +25,7 @@ Smoke tests:
     ...     #
     ...     # PLOT:
     ...     .using_title_text("Bar Plot")
-    ...     .using_xaxes_title_text("Author Keywords")
+    ...     .using_xaxes_title_text("Occurrences")
     ...     .using_yaxes_title_text("OCC")
     ...     #
     ...     # DATABASE:

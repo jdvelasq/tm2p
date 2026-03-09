@@ -9,7 +9,7 @@ Smoke tests:
     ...     TopicDynamics()
     ...     #
     ...     # FIELD:
-    ...     .with_source_field(Field.AUTHKW_RAW)
+    ...     .with_source_field(Field.AUTHKW_NORM)
     ...     .having_items_in_top(20)
     ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
@@ -27,16 +27,14 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-    >>> df.head()
-                          RANK_OCC  ...  average_docs_per_year
-    AUTHKW_RAW                      ...
-    Fintech                      1  ...                    8.5
-    FinTech                      2  ...                    7.0
-    Financial technology         3  ...                    NaN
-    Green finance                4  ...                    NaN
-    Blockchain                   5  ...                    1.5
-    <BLANKLINE>
-    [5 rows x 22 columns]
+    >>> print(df.head().to_string())  # doctest: +NORMALIZE_WHITESPACE
+                          RANK_OCC  RANK_GCS  RANK_LCS  OCC    GCS  LCS  YEAR_FIRST  YEAR_LAST  AGE  GCS_PER_YEAR  LCS_PER_YEAR  GCS_PER_DOC  LCS_PER_DOC  H_INDEX  G_INDEX  M_INDEX                        COUNTERS  BEFORE  BETWEEN  GROWTH_PERCENTAGE  AVERAGE_GROWTH_RATE  AVERAGE_DOCS_PER_YEAR
+    AUTHKW_NORM
+    fintech                      1         1         1  117  25478    0        2016       2024    9   2830.888889           0.0   217.760684          0.0       97       17    10.78               fintech 117:25478      83       34              29.06                  2.0                   17.0
+    financial inclusion          2         2         2   17   3823    0        2016       2024    9    424.777778           0.0   224.882353          0.0       17       11     1.89   financial inclusion 017:03823      12        5              29.41                 -1.0                    2.5
+    financial technology         3         5         5   14   2508    0        2016       2024    9    278.666667           0.0   179.142857          0.0       13       10     1.44  financial technology 014:02508      11        3              21.43                  1.0                    1.5
+    green finance                4         3         3   11   2844    0        2021       2024    4    711.000000           0.0   258.545455          0.0       11       10     2.75         green finance 011:02844       6        5              45.45                 -1.5                    2.5
+    blockchain                   5         7         7   11   2023    0        2016       2024    9    224.777778           0.0   183.909091          0.0       11        8     1.22            blockchain 011:02023       8        3              27.27                  1.0                    1.5
 
 
 
@@ -256,6 +254,16 @@ class TopicDynamics(
             performance_metrics_data_frame,
             terms_by_year,
             last_period_years,
+        )
+
+        performance_metrics_data_frame = performance_metrics_data_frame.rename(
+            columns={
+                "before": "BEFORE",
+                "between": "BETWEEN",
+                "growth_percentage": "GROWTH_PERCENTAGE",
+                "average_growth_rate": "AVERAGE_GROWTH_RATE",
+                "average_docs_per_year": "AVERAGE_DOCS_PER_YEAR",
+            }
         )
 
         return performance_metrics_data_frame

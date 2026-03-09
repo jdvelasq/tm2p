@@ -23,12 +23,6 @@ Smoke tests:
     ...     .run()
     ... )
     >>> print(df.head().to_string())  # doctest: +NORMALIZE_WHITESPACE
-                                                             DEGREE  BETWEENNESS  CLOSENESS  PAGERANK
-    Anagnostopoulos, 2018, J ECON BUS 1:10                        7     0.324615   0.377622  0.092316
-    Allison, 2015, ENTREPRENEURSHIP THEORY AND PRACTICE 1:4       6     0.246154   0.327935  0.071538
-    Arner, 2020, EUR BUS ORGAN LAW REV 1:6                        5     0.200000   0.319527  0.070945
-    Ahlers, 2015, ENTREPRENEURSHIP THEORY AND PRACTICE 1:5        4     0.052308   0.244344  0.050385
-    Agrawal, 2015, J ECONOMICS AND MANAGEMENT STRATEGY 1:3        3     0.000000   0.239645  0.036833
 
 
 

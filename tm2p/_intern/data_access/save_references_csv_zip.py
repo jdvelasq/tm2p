@@ -1,7 +1,7 @@
 """
 Smoke test:
-    >>> from tm2p.database._intern.io import internal__write_records_to_database
-    >>> internal__write_records_to_database(params, records) # doctest: +SKIP
+    >>> from tm2p._intern.data_access import save_references_csv_zip
+    >>> save_references_csv_zip(params, records) # doctest: +SKIP
 
 
 """

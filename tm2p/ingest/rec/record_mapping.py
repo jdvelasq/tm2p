@@ -13,7 +13,7 @@ Smoke Test:
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
-    ...     .where_records_ordered_by(RecordOrderBy.GCS_BY_HIGHEST)
+    ...     .where_records_ordered_by(RecordOrderBy.GCS_HIGHEST)
     ...     .run()
     ... )
 
@@ -45,16 +45,17 @@ Smoke Test:
      'AR': 'Gomber, 2018, J MANAG INF SYST, V35, P220',
      'AU': 'Gomber P.; Kauffman R.J.; Parker C.; Weber B.W.',
      'DE': nan,
-     'ID': 'Blockchain; Commerce; Risk management; Business models; Customer '
-           'experience; Financial service; Financial services industries; New '
-           'technologies; Operations management; Stakeholder values; Technology '
-           'innovation; Finance',
+     'ID': 'blockchain; commerce; risk management; business models; customer '
+           'experience; financial service; financial services industries; new '
+           'technologies; operations management; stakeholder values; technology '
+           'innovation; finance',
      'PY': 2018,
      'SO': 'J MANAG INF SYST',
      'TC': 1427,
      'TI': 'On the Fintech Revolution: Interpreting the Forces of Innovation, '
            'Disruption, and Transformation in Financial Services',
      'UT': 133}
+
 
 
 """

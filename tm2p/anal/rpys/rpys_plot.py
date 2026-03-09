@@ -1,6 +1,15 @@
 """
-RPYS (Reference Publication Year Spectroscopy) Plot
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.rpys.rpys_plot.html"
+    height="800px" width="100%" frameBorder="0"></iframe>
+
 ===============================================================================
+
+.. raw:: html
+
+    <iframe src="../_generated/px.anal.rpys.rpys_plot.html"
+    height="800px" width="100%" frameBorder="0"></iframe>
 
 
 Smoke tests:
@@ -12,20 +21,16 @@ Smoke tests:
     ...     .where_root_directory("tests/fintech/")
     ...     .run()
     ... )
-    >>> plot.write_html("docsrc/_generated/px.packages.rpys.rpys_plot.html")
+    >>> plot.write_html("docsrc/_generated/px.anal.rpys.rpys_plot.html")
 
-.. raw:: html
-
-    <iframe src="../_generated/px.packages.rpys.rpys_plot.html"
-    height="800px" width="100%" frameBorder="0"></iframe>
 
 
 """
 
-import plotly.graph_objects as go
+import plotly.graph_objects as go  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p.anal.rpys.rpys_frame import RPYSDataFrame
+from tm2p.anal.rpys.metrics import Metrics
 
 
 class RPYSPlot(
@@ -36,15 +41,15 @@ class RPYSPlot(
     def run(self):
         """:meta private:"""
 
-        data_frame = RPYSDataFrame().update(**self.params.__dict__).run()
+        data_frame = Metrics().update(**self.params.__dict__).run()
 
         fig = go.Figure()
         fig.add_trace(
             go.Scatter(
                 x=data_frame.index,
-                y=data_frame["Num References"],
+                y=data_frame["N_GCR"],
                 fill="tozeroy",
-                name="Num References",
+                name="N_GCR",
                 opacity=0.3,
                 marker_color="lightgrey",  # darkslategray
             )
@@ -52,7 +57,7 @@ class RPYSPlot(
         fig.add_trace(
             go.Scatter(
                 x=data_frame.index,
-                y=data_frame["Median"],
+                y=data_frame["MEDIAN"],
                 fill="tozeroy",
                 name="Median",
                 opacity=0.8,

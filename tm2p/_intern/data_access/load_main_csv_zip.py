@@ -1,12 +1,16 @@
 """
 Smoke test:
-    >>> from tm2p._intern.data_access import load_main_data
-    >>> df = load_main_data(root_directory="examples/fintech-with-references/")
+    >>> from tm2p._intern.data_access import load_main_csv_zip
+    >>> df = load_main_csv_zip(root_directory="tests/fintech/")
+    >>> type(df).__name__
+    'DataFrame'
 
-    >>> df = load_main_data(
-    ...     root_directory="examples/fintech-with-references/",
-    ...     usecols=["record_id", "raw_document_title"],
+    >>> df = load_main_csv_zip(
+    ...     root_directory="tests/fintech/",
+    ...     usecols=["RID", "TITLE_RAW"],
     ... )
+    >>> type(df).__name__
+    'DataFrame'
 
 
 
@@ -14,7 +18,7 @@ Smoke test:
 
 from typing import Optional
 
-import pandas as pd
+import pandas as pd  # type: ignore
 
 from .get_main_csv_zip_path import get_main_csv_zip_path
 

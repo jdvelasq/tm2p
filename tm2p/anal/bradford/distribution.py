@@ -4,7 +4,7 @@ Distribution
 
 Smoke tests:
     >>> from tm2p.anal.bradford import Distribution
-    >>> (
+    >>> df = (
     ...     Distribution()
     ...     #
     ...     # DATABASE:
@@ -15,16 +15,16 @@ Smoke tests:
     ...     #
     ...     .run()
     ... )
-       Num Sources        %  ...  Tot Documents Bradford's Group
-    0            1   0.83 %  ...         3.89 %                1
-    1            1   0.83 %  ...         7.22 %                1
-    2            2   1.65 %  ...        12.78 %                1
-    3            3   2.48 %  ...        19.44 %                1
-    4            3   2.48 %  ...        24.44 %                1
-    5           25  20.66 %  ...        52.22 %                2
-    6           86  71.07 %  ...        100.0 %                3
-    <BLANKLINE>
-    [7 rows x 9 columns]
+    >>> print(df.to_string())  # doctest: +NORMALIZE_WHITESPACE
+       N_SRC PERCENTAGE  ACUM_NUM_SOURCES PERCENTAGE_ACUM  DOCS_PUBLISHED  TOT_DOCS_PUBLISHED  N_DOCS TOT_DOCS  ZONE
+    0      1     0.83 %                 1          0.83 %               7                   7       7   3.89 %     1
+    1      1     0.83 %                 2          1.65 %               6                   6      13   7.22 %     1
+    2      2     1.65 %                 4          3.31 %               5                  10      23  12.78 %     1
+    3      3     2.48 %                 7          5.79 %               4                  12      35  19.44 %     1
+    4      3     2.48 %                10          8.26 %               3                   9      44  24.44 %     1
+    5     25    20.66 %                35         28.93 %               2                  50      94  52.22 %     2
+    6     86    71.07 %               121         100.0 %               1                  86     180  100.0 %     3
+
 
 """
 
@@ -43,15 +43,11 @@ class Distribution(
     """:meta private:"""
 
     # -------------------------------------------------------------------------
-    def step_1_load_filtered_records(self):
-        self.records = load_filtered_main_csv_zip(params=self.params)
+    def _compute_num_docs_published_by_source(self, df):
 
-    # -------------------------------------------------------------------------
-    def step_2_compute_num_docs_published_by_source(self):
+        df["num_documents"] = 1
 
-        self.records["num_documents"] = 1
-
-        sources = self.records.groupby(SRC_ISO4_NORM, as_index=True).agg(
+        sources = df.groupby(SRC_ISO4_NORM, as_index=True).agg(
             {
                 "num_documents": "sum",
             }
@@ -69,12 +65,12 @@ class Distribution(
 
         sources = sources.sort_values(["Documents published"], ascending=False)
 
-        self.sources = sources
+        return sources
 
     # -------------------------------------------------------------------------
-    def step_3_compute_bradford_zone_groups(self):
+    def _compute_bradford_zone_groups(self, df, sources):
 
-        sources = self.sources.copy()
+        sources = sources.copy()
 
         sources.loc[:, "Acum Num Sources"] = sources["Num Sources"].cumsum()
         sources["% Acum"] = [
@@ -90,7 +86,7 @@ class Distribution(
             lambda w: str(round(w / sources["Num Documents"].max() * 100, 2)) + " %"
         )
 
-        bradford1 = int(len(self.records) / 3)
+        bradford1 = int(len(df) / 3)
         bradford2 = 2 * bradford1
 
         sources["Bradford's Group"] = sources["Num Documents"].map(
@@ -113,17 +109,31 @@ class Distribution(
 
         sources = sources.reset_index(drop=True)
 
-        self.sources = sources
+        sources = sources.rename(
+            columns={
+                "Num Sources": "N_SRC",
+                "%": "PERCENTAGE",
+                "Acum Num Sources": "ACUM_NUM_SOURCES",
+                "% Acum": "PERCENTAGE_ACUM",
+                "Documents published": "DOCS_PUBLISHED",
+                "Tot Documents published": "TOT_DOCS_PUBLISHED",
+                "Num Documents": "N_DOCS",
+                "Tot Documents": "TOT_DOCS",
+                "Bradford's Group": "ZONE",
+            }
+        )
+
+        return sources
 
     # -------------------------------------------------------------------------
     def run(self):
         """:meta private:"""
 
-        self.step_1_load_filtered_records()
-        self.step_2_compute_num_docs_published_by_source()
-        self.step_3_compute_bradford_zone_groups()
+        df = load_filtered_main_csv_zip(params=self.params)
+        sources = self._compute_num_docs_published_by_source(df)
+        sources = self._compute_bradford_zone_groups(df, sources)
 
-        return self.sources
+        return sources
 
 
 #

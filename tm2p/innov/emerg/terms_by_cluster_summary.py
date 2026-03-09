@@ -41,9 +41,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 from tm2p.innov.emerg.mixins import RecursiveClusteringMixin
-from tm2p.synthes.netw.co_occur import (
-    ItemsByClusterSummary as ClassicalTermsByClusterSummary,
-)
+from tm2p.synthes.netw.co_occur import Summary as ClassicalTermsByClusterSummary
 
 
 class TermsByClusterSummary(

@@ -5,5 +5,5 @@ Rpys
     :maxdepth: 1
     :hidden:
 
-    anal.rpys.rpys_frame
+    anal.rpys.metrics
     anal.rpys.rpys_plot

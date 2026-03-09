@@ -1,14 +1,17 @@
 """
 Smoke test:
 
-    >>> from tm2p._intern.data_access import load_references_data
-    >>> df = load_references_data(root_directory="examples/fintech-with-references/")
+    >>> from tm2p._intern.data_access import load_references_csv_zip
+    >>> df = load_references_csv_zip(root_directory="tests/fintech/")
+    >>> type(df).__name__
+    'DataFrame'
 
-    >>> df = load_references_data(
-    ...     root_directory="examples/fintech-with-references/",
-    ...     usecols=["record_id", "raw_document_title"],
+    >>> df = load_references_csv_zip(
+    ...     root_directory="tests/fintech/",
+    ...     usecols=["RID", "TITLE_RAW"],
     ... )
-
+    >>> type(df).__name__
+    'DataFrame'
 
 
 """

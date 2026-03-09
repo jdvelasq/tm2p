@@ -74,7 +74,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin
 from tm2p.ingest.rec import RecordViewer
-from tm2p.synthes.netw.co_occur.clusters_to_items_mapping import ClustersToItemsMapping
+from tm2p.synthes.netw.co_occur.cluster_to_items import ClusterToItems
 
 
 class DocumentsByClusterMapping(
@@ -86,7 +86,7 @@ class DocumentsByClusterMapping(
         """:meta private:"""
 
         c2t_mapping = (
-            ClustersToItemsMapping()
+            ClusterToItems()
             .update(**self.params.__dict__)
             .using_counters(False)
             .using_node_n_labels(self.params.top_n or 1000)
