@@ -7,8 +7,12 @@ def word_cloud(params, dataframe):
     width = params.plot_width
     height = params.plot_height
 
-    x_mask, y_mask = np.ogrid[:300, :300]
-    mask = (x_mask - 150) ** 2 + (y_mask - 150) ** 2 > 130**2
+    mask_size = min(width, height)
+    center = mask_size // 2
+    radius = int(center * 0.87)  # 87% of center to leave margin
+
+    x_mask, y_mask = np.ogrid[:mask_size, :mask_size]
+    mask = (x_mask - center) ** 2 + (y_mask - center) ** 2 > radius**2
     mask = 255 * mask.astype(int)
 
     wordcloud = WordCloudExternal(

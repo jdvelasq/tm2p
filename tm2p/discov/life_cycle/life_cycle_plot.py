@@ -202,8 +202,8 @@ class LifeCyclePlot(
             paper_bgcolor="white",
             bargap=0.15,
             hovermode="x unified",
-            width=900,
-            height=500,
+            # width=900,
+            # height=500,
             margin=dict(t=80, b=60, l=70, r=40),
             title=dict(x=0.5, xanchor="center", font=dict(size=18)),
         )

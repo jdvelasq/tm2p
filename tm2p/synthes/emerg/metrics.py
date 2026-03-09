@@ -45,7 +45,7 @@ from tm2p import ItemOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p.anal.annual_metrics.metrics import Metrics as TrendMetricsDataFrame
 from tm2p.anal.trends import Trends
-from tm2p.discov.overview import MainInformation as GeneralMetricsDataFrame
+from tm2p.discov.main_inf import Metrics as GeneralMetricsDataFrame
 
 
 class Metrics(

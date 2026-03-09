@@ -20,8 +20,8 @@ Smoke test:
     >>> len(df) > 0
     True
     >>> df  # doctest: +NORMALIZE_WHITESPACE
-                                                                   Value
-    Category       Item
+                                                                   VALUE
+    CATEGORY       ITEM
     MODEL OVERIEW  Saturation (K)                                    384
                    Peak year (t0)                                   2023
                    Peak annual (pubs/yr)                            46.5
@@ -318,11 +318,11 @@ class Metrics(
 
         df = pd.DataFrame(
             {
-                "Category": stats.category,
-                "Item": stats.item,
-                "Value": stats.value,
+                "CATEGORY": stats.category,
+                "ITEM": stats.item,
+                "VALUE": stats.value,
             }
         )
-        df = df.set_index(["Category", "Item"])
+        df = df.set_index(["CATEGORY", "ITEM"])
 
         return df

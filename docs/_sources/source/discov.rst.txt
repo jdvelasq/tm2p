@@ -12,5 +12,6 @@ Discov
     discov.cross_occur_matrix
     discov.doc_clust
     discov.life_cycle
-    discov.overview
+    discov.main_inf
+    discov.sankey
     discov.tfidf

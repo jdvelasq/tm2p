@@ -41,6 +41,11 @@ class Params:
     cross_field: Field
 
     #
+    # Sankey plot:
+    #
+    sankey_top_n: Tuple[int, ...]
+
+    #
     # Ingestion and basic operations:
     #
     item_citations_range: Tuple[Optional[int], Optional[int]] = (None, None)

@@ -28,6 +28,7 @@ from tm2p._intern.valid import (
     check_required_positive_float,
     check_required_positive_float_range,
     check_required_positive_int,
+    check_required_positive_int_tuple,
     check_required_positive_number_range,
     check_required_str,
     check_required_str_or_str_tuple,
@@ -317,6 +318,16 @@ class ParamsMixin:
             param_name="replacement",
         )
         self.params.replacement = replacement
+        return self
+
+    def having_sankey_items_in_top_n(
+        self, sankey_items_in_top_n: Tuple[int, ...]
+    ) -> Self:
+        sankey_items_in_top_n = check_required_positive_int_tuple(
+            tuple_values=sankey_items_in_top_n,
+            param_name="sankey_items_in_top_n",
+        )
+        self.params.sankey_top_n = sankey_items_in_top_n
         return self
 
     def having_text_matching(self, pattern: Union[str, tuple[str, ...]]) -> Self:

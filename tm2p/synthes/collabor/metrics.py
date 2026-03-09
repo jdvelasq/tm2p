@@ -1,5 +1,5 @@
 """
-Data Frame
+Metrics
 ===============================================================================
 
 Smoke tests:
@@ -27,11 +27,11 @@ Smoke tests:
     >>> df.head()  # doctest: +NORMALIZE_WHITESPACE
                OCC   GCS  LCS  SP  MP  MP_RATIO
     CTRY_ISO3
-    CHN         45  9715   41  22  23      0.51
-    GBR         33  6802   10  12  21      0.64
-    USA         31  9562    8  13  18      0.58
-    AUS         14  3468    2   4  10      0.71
-    DEU         13  5295    2   5   8      0.62
+    CHN         45  9715    0  22  23      0.51
+    GBR         33  6802    0  12  21      0.64
+    USA         31  9562    0  13  18      0.58
+    AUS         14  3468    0   4  10      0.71
+    DEU         13  5295    0   5   8      0.62
 
 """
 

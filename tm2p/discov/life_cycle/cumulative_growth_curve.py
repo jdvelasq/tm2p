@@ -165,8 +165,8 @@ class CumulativeGrowthCurve(
             plot_bgcolor="white",
             paper_bgcolor="white",
             hovermode="x unified",
-            width=900,
-            height=500,
+            # width=900,
+            # height=500,
             margin=dict(t=80, b=60, l=70, r=80),
             title=dict(x=0.5, xanchor="center", font=dict(size=18)),
         )

@@ -1,11 +1,11 @@
 """
-World Map
+WorldMap
 ===============================================================================
 
 .. raw:: html
 
     <iframe src="../_generated/px.anal.bibliom.world_map.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
+    height="450px" width="100%" frameBorder="0"></iframe>
 
 
 Smoke tests:
@@ -13,9 +13,6 @@ Smoke tests:
     >>> from tm2p.anal.metrics import WorldMap
     >>> plot = (
     ...     WorldMap()
-    ...     #
-    ...     # FIELD:
-    ...     .with_source_field(Field.CTRY)
     ...     #
     ...     # TERMS:
     ...     .having_items_ordered_by(ItemOrderBy.OCC)
@@ -42,6 +39,7 @@ Smoke tests:
 
 """
 
+from tm2p import Field
 from tm2p._intern import ParamsMixin
 from tm2p._intern.plot.world_map import world_map
 
@@ -55,10 +53,9 @@ class WorldMap(
 
     def run(self):
 
-        df = Metrics().update(**self.params.__dict__).run()
-        fig = world_map(params=self.params, dataframe=df)
+        df = (
+            Metrics().update(**self.params.__dict__).with_source_field(Field.CTRY).run()
+        )
+        fig = world_map(params=self.params, df=df)
 
         return fig
-
-
-#

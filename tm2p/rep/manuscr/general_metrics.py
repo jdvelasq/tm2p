@@ -56,7 +56,7 @@ from tm2p._intern import ParamsMixin
 from tm2p._intern.packag_data.templates.load_builtin_template import (
     load_builtin_template,
 )
-from tm2p.discov.overview import MainInformation
+from tm2p.discov.main_inf import Metrics as MainInformation
 
 
 class GeneralMetrics(

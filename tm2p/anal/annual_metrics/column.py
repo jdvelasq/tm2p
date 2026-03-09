@@ -4,6 +4,7 @@ from tm2p import Field
 
 
 class Column(Enum):
+    """:meta private:"""
 
     CITAB_YEAR = "CITAB_YEAR"
     CUMUL_GCS = "CUMUL_GCS"

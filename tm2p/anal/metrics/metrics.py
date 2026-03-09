@@ -1,4 +1,8 @@
 """
+Metrics
+===============================================================================
+
+
 Smoke tests:
     >>> from tm2p import Field, ItemOrderBy
     >>> from tm2p import Field
@@ -27,21 +31,20 @@ Smoke tests:
     True
     >>> df.shape[1] > 1
     True
-    >>> df.head(10)
-                             RANK_OCC  ...                           COUNTERS
-    AUTHKW_NORM                        ...
-    fintech                         1  ...                  fintech 117:25478
-    financial inclusion             2  ...      financial inclusion 017:03823
-    financial technology            3  ...     financial technology 014:02508
-    green finance                   4  ...            green finance 011:02844
-    blockchain                      5  ...               blockchain 011:02023
-    banking                         6  ...                  banking 010:02599
-    china                           7  ...                    china 009:01947
-    innovation                      8  ...               innovation 009:01703
-    artificial intelligence         9  ...  artificial intelligence 008:01915
-    financial services             10  ...       financial services 007:01673
-    <BLANKLINE>
-    [10 rows x 17 columns]
+    >>> print(df.head(10).to_string())  # doctest: +NORMALIZE_WHITESPACE
+                             RANK_OCC  RANK_GCS  RANK_LCS  OCC    GCS  LCS  YEAR_FIRST  YEAR_LAST  AGE  GCS_PER_YEAR  LCS_PER_YEAR  GCS_PER_DOC  LCS_PER_DOC  H_INDEX  G_INDEX  M_INDEX                           COUNTERS
+    AUTHKW_NORM
+    fintech                         1         1         1  117  25478    0        2016       2024    9   2830.888889           0.0   217.760684          0.0       97       17    10.78                  fintech 117:25478
+    financial inclusion             2         2         2   17   3823    0        2016       2024    9    424.777778           0.0   224.882353          0.0       17       11     1.89      financial inclusion 017:03823
+    financial technology            3         5         5   14   2508    0        2016       2024    9    278.666667           0.0   179.142857          0.0       13       10     1.44     financial technology 014:02508
+    green finance                   4         3         3   11   2844    0        2021       2024    4    711.000000           0.0   258.545455          0.0       11       10     2.75            green finance 011:02844
+    blockchain                      5         7         7   11   2023    0        2016       2024    9    224.777778           0.0   183.909091          0.0       11        8     1.22               blockchain 011:02023
+    banking                         6         4         4   10   2599    0        2016       2024    9    288.777778           0.0   259.900000          0.0       10        8     1.11                  banking 010:02599
+    china                           7         8         8    9   1947    0        2016       2024    9    216.333333           0.0   216.333333          0.0        9        8     1.00                    china 009:01947
+    innovation                      8        10        10    9   1703    0        2016       2024    9    189.222222           0.0   189.222222          0.0        9        9     1.00               innovation 009:01703
+    artificial intelligence         9         9         9    8   1915    0        2019       2024    6    319.166667           0.0   239.375000          0.0        8        8     1.33  artificial intelligence 008:01915
+    financial services             10        11        11    7   1673    0        2016       2024    9    185.888889           0.0   239.000000          0.0        7        7     0.78       financial services 007:01673
+
     >>> from pprint import pprint
     >>> pprint(df.columns.tolist())
     ['RANK_OCC',

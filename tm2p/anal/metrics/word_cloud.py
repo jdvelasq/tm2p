@@ -1,12 +1,10 @@
 """
-Word Cloud
+WordCloud
 ===============================================================================
 
-.. raw:: html
-
-    <iframe src="../_generated/px.anal.bibliom.bar_plot.html"
-    height="600px" width="100%" frameBorder="0"></iframe>
-
+.. image:: ../_generated/px.anal.bibliom.word_cloud.png
+    :width: 800px
+    :align: center
 
 Smoke tests:
     >>> from tm2p import Field, ItemOrderBy
@@ -26,8 +24,8 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # PLOT:
-    ...     .using_plot_width(400)
-    ...     .using_plot_height(400)
+    ...     .using_plot_width(2400)
+    ...     .using_plot_height(2400)
     ...     #
     ...     # DATABASE:
     ...     .where_root_directory("tests/fintech/")
