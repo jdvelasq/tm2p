@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._tfidf.dataframe
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

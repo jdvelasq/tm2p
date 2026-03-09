@@ -1,9 +1,0 @@
- factor analysis
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._factor_analysis.co_occurrence
-    analyze._factor_analysis.tfidf

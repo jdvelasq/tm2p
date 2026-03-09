@@ -1,8 +1,0 @@
-Trending terms
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.trending_terms.usr

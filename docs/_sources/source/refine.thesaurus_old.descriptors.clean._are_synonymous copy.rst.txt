@@ -1,5 +1,0 @@
-.. automodule:: techminer2.refine.thesaurus_old.descriptors.clean._are_synonymous copy
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

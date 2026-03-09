@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._records._cluster_records
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

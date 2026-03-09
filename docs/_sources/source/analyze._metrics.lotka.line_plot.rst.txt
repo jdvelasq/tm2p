@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._metrics.lotka.line_plot
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

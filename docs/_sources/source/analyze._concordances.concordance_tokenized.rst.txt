@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._concordances.concordance_tokenized
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

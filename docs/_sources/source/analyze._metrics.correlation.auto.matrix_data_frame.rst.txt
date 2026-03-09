@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._metrics.correlation.auto.matrix_data_frame
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

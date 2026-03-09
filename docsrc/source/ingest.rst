@@ -5,8 +5,8 @@ Ingest
     :maxdepth: 1
     :hidden:
 
-    ingest.data_sources
-    ingest.extract
-    ingest.operations
-    ingest.records
-    ingest.review
+    ingest.data_sourc
+    ingest.extr
+    ingest.oper
+    ingest.rec
+    ingest.rev

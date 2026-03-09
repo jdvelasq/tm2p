@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._metrics.bradford.zones
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

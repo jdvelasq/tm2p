@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._metrics.associations.matrix_plot
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

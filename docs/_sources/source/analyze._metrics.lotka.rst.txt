@@ -1,9 +1,0 @@
-Lotka
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.lotka.dataframe
-    analyze._metrics.lotka.line_plot

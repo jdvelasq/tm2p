@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._networks.coupling.authors.node_density_plot
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

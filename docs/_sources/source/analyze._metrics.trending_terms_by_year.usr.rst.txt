@@ -1,9 +1,0 @@
-Usr
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.trending_terms_by_year.usr.bar_chart
-    analyze._metrics.trending_terms_by_year.usr.data_frame

@@ -1,4 +1,4 @@
-.. automodule:: techminer2.refine.thesaurus_old.descriptors.general.integrity_check
+.. automodule:: tm2p.refine.thesaurus_old.descriptors.general.integrity_check
      :members:
      :undoc-members:
      :show-inheritance:

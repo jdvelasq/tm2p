@@ -1,9 +1,0 @@
- experimental
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._experimental.co_occurrence
-    analyze._experimental.emergence

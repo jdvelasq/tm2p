@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._networks.co_authorship.countries.node_degree_plot
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

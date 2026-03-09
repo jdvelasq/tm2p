@@ -8,8 +8,8 @@ Techminer 2+
 
     source/ingest
     source/refine
-    source/discover
-    source/analyze
-    source/innovate
-    source/synthesize
-    source/report
+    source/discov
+    source/anal
+    source/innov
+    source/synthes
+    source/rep

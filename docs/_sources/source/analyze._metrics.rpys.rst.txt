@@ -1,9 +1,0 @@
-Rpys
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.rpys.rpys_frame
-    analyze._metrics.rpys.rpys_plot

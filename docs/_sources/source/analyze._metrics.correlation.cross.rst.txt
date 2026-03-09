@@ -1,9 +1,0 @@
-Cross
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.correlation.cross.matrix_data_frame
-    analyze._metrics.correlation.cross.network_map_plot

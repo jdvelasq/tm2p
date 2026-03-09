@@ -1,9 +1,0 @@
- records
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._records._cluster_records
-    analyze._records._thematic_document_classification

@@ -1,9 +1,0 @@
-Auto
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.correlation.auto.matrix_data_frame
-    analyze._metrics.correlation.auto.network_map_plot

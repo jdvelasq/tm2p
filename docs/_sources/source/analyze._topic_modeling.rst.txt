@@ -1,8 +1,0 @@
- topic modeling
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._topic_modeling.user

@@ -1,5 +1,0 @@
-.. automodule:: techminer2.ingest.records._find_similar_records
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

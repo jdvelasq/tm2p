@@ -1,9 +1,0 @@
-Correlation
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    analyze._metrics.correlation.auto
-    analyze._metrics.correlation.cross

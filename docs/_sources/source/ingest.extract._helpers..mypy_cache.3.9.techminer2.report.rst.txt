@@ -1,9 +1,0 @@
-Report
-################################################################################
-
-.. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    ingest.extract._helpers..mypy_cache.3.9.techminer2.report.__init__.data.json
-    ingest.extract._helpers..mypy_cache.3.9.techminer2.report.__init__.meta.json

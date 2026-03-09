@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._records._thematic_document_classification
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

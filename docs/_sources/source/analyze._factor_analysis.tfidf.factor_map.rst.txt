@@ -1,5 +1,0 @@
-.. automodule:: techminer2.analyze._factor_analysis.tfidf.factor_map
-     :members:
-     :undoc-members:
-     :show-inheritance:
-

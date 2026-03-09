@@ -21,11 +21,11 @@ def read_package_directories():
     directories = [
         f"{PACKAGE_ROOT}/ingest",
         f"{PACKAGE_ROOT}/refine",
-        f"{PACKAGE_ROOT}/discover",
-        f"{PACKAGE_ROOT}/analyze",
-        f"{PACKAGE_ROOT}/innovate",
-        f"{PACKAGE_ROOT}/synthesize",
-        f"{PACKAGE_ROOT}/report",
+        f"{PACKAGE_ROOT}/discov",
+        f"{PACKAGE_ROOT}/anal",
+        f"{PACKAGE_ROOT}/innov",
+        f"{PACKAGE_ROOT}/synthes",
+        f"{PACKAGE_ROOT}/rep",
     ]
     files = []
     for directory in directories:

@@ -1,5 +1,0 @@
-.. automodule:: techminer2.ingest.records._tfidf_find_similar_phrases
-     :members:
-     :undoc-members:
-     :show-inheritance:
-
