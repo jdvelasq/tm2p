@@ -37,14 +37,13 @@ import sys
 import pandas as pd
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_all_records_from_database, save_main_csv_zip
+from tm2p._intern.data_access import save_main_csv_zip
 
 
 #
 #
 class ApplyThesaurus(
     ParamsMixin,
-    ThesaurusMixin,
 ):
     """:meta private:"""
 
