@@ -23,7 +23,6 @@ from pyzotero import zotero
 from tqdm import tqdm  # type: ignore
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import load_all_records_from_database
 
 
 class ExportRecordNoToZotero(ParamsMixin):
