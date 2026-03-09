@@ -147,8 +147,9 @@ class Params:
     # K
     #
     kernel_bandwidth: float = 0.1
-    # keys: set[str] = set()
     keys_order_by: str = "alphabetical"
+    kleinberg_burst_rate: float = 2.0
+    kleinberg_burst_gamma: float = 1.0
 
     #
     # L

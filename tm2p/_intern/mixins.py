@@ -111,6 +111,14 @@ class ParamsMixin:
         self.params.case_sensitive = case_sensitive
         return self
 
+    def having_citation_threshold(self, citation_threshold: int) -> Self:
+        citation_threshold = check_required_non_negative_int(
+            value=citation_threshold,
+            param_name="citation_threshold",
+        )
+        self.params.citation_threshold = citation_threshold
+        return self
+
     def having_column_item_citations_between(
         self, start: Optional[int], end: Optional[int]
     ) -> Self:
@@ -367,14 +375,6 @@ class ParamsMixin:
         self.params.clustering_algorithm_or_dict = clustering_algorithm_or_dict
         return self
 
-    def having_citation_threshold(self, citation_threshold: int) -> Self:
-        citation_threshold = check_required_non_negative_int(
-            value=citation_threshold,
-            param_name="citation_threshold",
-        )
-        self.params.citation_threshold = citation_threshold
-        return self
-
     def using_colored_output(self, colored_output: bool) -> Self:
         colored_output = check_required_bool(
             value=colored_output,
@@ -570,6 +570,22 @@ class ParamsMixin:
             param_name="kernel_bandwidth",
         )
         self.params.kernel_bandwidth = kernel_bandwidth
+        return self
+
+    def using_kleinberg_burst_rate(self, kleinberg_burst_rate: float) -> Self:
+        kleinberg_burst_rate = check_required_positive_float(
+            value=kleinberg_burst_rate,
+            param_name="kleinberg_burst_rate",
+        )
+        self.params.kleinberg_burst_rate = kleinberg_burst_rate
+        return self
+
+    def using_kleinberg_burst_gamma(self, kleinberg_burst_gamma: float) -> Self:
+        kleinberg_burst_gamma = check_required_positive_float(
+            value=kleinberg_burst_gamma,
+            param_name="kleinberg_burst_gamma",
+        )
+        self.params.kleinberg_burst_gamma = kleinberg_burst_gamma
         return self
 
     def using_line_color(self, line_color: Union[str, float, Sequence[float]]) -> Self:
