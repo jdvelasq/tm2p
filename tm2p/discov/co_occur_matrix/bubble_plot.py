@@ -4,7 +4,7 @@ BubbleChart
 
 .. raw:: html
 
-    <iframe src="docs/_generated/px.discov.co_occur_matrix.bubble_plot.html"
+    <iframe src="_generated/px.discov.co_occur_matrix.bubble_plot.html"
     height="600px" width="100%" frameBorder="0"></iframe>
 
 Smoke tests:
@@ -38,7 +38,7 @@ Smoke tests:
     ... )
     >>> type(fig).__name__
     'Figure'
-    >>> fig.write_html("docsrc/_generated/px.discov.co_occur_matrix.bubble_chart.html")
+    >>> fig.write_html("docsrc/_generated/px.discov.co_occur_matrix.bubble_plot.html")
 
 
 """
