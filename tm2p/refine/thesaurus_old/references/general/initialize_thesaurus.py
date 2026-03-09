@@ -59,10 +59,7 @@ import pandas as pd  # type: ignore
 from tqdm import tqdm
 
 from tm2p._intern import ParamsMixin
-from tm2p._intern.data_access import (  # type: ignore
-    load_all_records_from_database,
-    load_filtered_main_csv_zip,
-)
+from tm2p._intern.data_access import load_filtered_main_csv_zip  # type: ignore
 from tm2p.refine.thesaurus_old._intern import ThesaurusMixin
 
 tqdm.pandas()
