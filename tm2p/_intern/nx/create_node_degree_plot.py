@@ -1,15 +1,15 @@
 import plotly.express as px  # type: ignore
 
-from tm2p.enum import Indicator
+from tm2p.enum.column import DEGREE, NAME, NODE
 
 
 def create_node_degree_plot(params, df):
 
     fig = px.line(
         df,
-        x=Indicator.NODE.value,
-        y=Indicator.DEGREE.value,
-        hover_data=Indicator.NAME.value,
+        x=NODE,
+        y=DEGREE,
+        hover_data=NAME,
         markers=True,
     )
     fig.update_traces(
@@ -44,9 +44,9 @@ def create_node_degree_plot(params, df):
 
     for _, row in df.iterrows():
         fig.add_annotation(
-            x=row[Indicator.NODE.value],
-            y=row[Indicator.DEGREE.value],
-            text=row[Indicator.NAME.value],
+            x=row[NODE],
+            y=row[DEGREE],
+            text=row[NAME],
             showarrow=False,
             textangle=-90,
             yanchor="bottom",

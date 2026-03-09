@@ -35,18 +35,10 @@ Smoke tests:
 
 """
 
-from tm2p import Field, Indicator
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p.anal.metrics.metrics import Metrics as PerformanceMetrics
-
-OCC = Indicator.OCC.value
-GCS = Indicator.GCS.value
-LCS = Indicator.LCS.value
-RID = Field.RID.value
-SP = Indicator.SP.value
-MP = Indicator.MP.value
-MP_RATIO = Indicator.MP_RATIO.value
+from tm2p.enum.column import GCS, LCS, MP, MP_RATIO, OCC, RID, SP
 
 
 class Metrics(

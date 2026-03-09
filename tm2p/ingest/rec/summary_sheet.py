@@ -108,13 +108,9 @@ Smoke tests:
 
 import pandas as pd  # type: ignore
 
-from tm2p import Indicator
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-
-COLUMN = Indicator.COLUMN.value
-NUM_REC = Indicator.NUM_REC.value
-COVERAGE = Indicator.COVERAGE.value
+from tm2p.enum.column import COLUMN, COVERAGE, NUM_REC
 
 
 class SummarySheet(

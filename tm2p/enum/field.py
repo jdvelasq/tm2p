@@ -1,7 +1,5 @@
 from enum import Enum
 
-from .common import Common
-
 
 class Field(Enum):
 
@@ -95,8 +93,8 @@ class Field(Enum):
     # ==========================================================================
     # Citation count
     # ==========================================================================
-    GCS = Common.GCS.value  # Global citation score
-    LCS = Common.LCS.value  # Local citation score
+    GCS = "GCS"  # Global citation score
+    LCS = "LCS"  # Local citation score
 
     # ==========================================================================
     # Publication type

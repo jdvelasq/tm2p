@@ -4,7 +4,7 @@ from tm2p._intern.nx import (
     collect_node_degrees,
     create_node_degree_dataframe,
 )
-from tm2p.enum import Indicator
+from tm2p.enum.column import NAME
 from tm2p.synthes.netw.coupl._intern.doc.create_nx_graph import (
     internal__create_nx_graph,
 )
@@ -26,7 +26,5 @@ class NodeDegreeDataFrame(
 
         if use_counters is False:
             self.params.counters = False
-            df[Indicator.NAME.value] = (
-                df[Indicator.NAME.value].str.split(" ").str[:-1].str.join(" ")
-            )
+            df[NAME] = df[NAME].str.split(" ").str[:-1].str.join(" ")
         return df

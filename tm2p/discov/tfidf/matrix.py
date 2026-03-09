@@ -86,17 +86,11 @@ Smoke tests:
 import pandas as pd  # type: ignore
 from sklearn.feature_extraction.text import TfidfTransformer  # type: ignore
 
-from tm2p import Field
 from tm2p._intern import ParamsMixin, SortAxesMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
 from tm2p._intern.get_zero_digits import get_zero_digits
 from tm2p.anal.metrics import Metrics
-from tm2p.enum import Indicator
-
-GLS = Indicator.GCS.value
-OCC = Indicator.OCC.value
-RID = Field.RID.value
-COUNTERS = Indicator.COUNTERS.value
+from tm2p.enum.column import COUNTERS, GCS, OCC, RID
 
 
 class Matrix(
@@ -112,7 +106,7 @@ class Matrix(
             [
                 field,
                 RID,
-                GLS,
+                GCS,
             ]
         ].copy()
         df = df.dropna()
@@ -125,14 +119,14 @@ class Matrix(
 
     def _get_items_mapping(self, df, field):
 
-        df = df[[field, GLS, OCC]].copy()
-        df = df.groupby(field).agg({OCC: "sum", GLS: "sum"})
+        df = df[[field, GCS, OCC]].copy()
+        df = df.groupby(field).agg({OCC: "sum", GCS: "sum"})
 
         occ_digits, gcs_digits = get_zero_digits(self.params.root_directory)
 
         df[COUNTERS] = df.index.astype(str)
         df[COUNTERS] += " " + df[OCC].map(lambda x: f"{x:0{occ_digits}d}")
-        df[COUNTERS] += ":" + df[GLS].map(lambda x: f"{x:0{gcs_digits}d}")
+        df[COUNTERS] += ":" + df[GCS].map(lambda x: f"{x:0{gcs_digits}d}")
 
         mapping = df[COUNTERS].to_dict()
 

@@ -32,11 +32,11 @@ Smoke tests:
 
 """
 
-from tm2p import Field, Indicator
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access.load_filtered_main_csv_zip import (
     load_filtered_main_csv_zip,
 )
+from tm2p.enum.column import COVERAGE, CUM_SUM_DOCS, CUM_SUM_ITEMS, OCC, RID
 
 
 class Coverage(
@@ -46,13 +46,7 @@ class Coverage(
 
     def run(self):
 
-        COVERAGE = Indicator.COVERAGE.value
-        CUM_SUM_DOCS = Indicator.CUM_SUM_DOCS.value
-        CUM_SUM_ITEMS = Indicator.CUM_SUM_ITEMS.value
-        OCC = Indicator.OCC.value
-
         FIELD = self.params.source_field.value
-        RID = Field.RID.value
 
         documents = load_filtered_main_csv_zip(params=self.params)
         documents = documents.reset_index()

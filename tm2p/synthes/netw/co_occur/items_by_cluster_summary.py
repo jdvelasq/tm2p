@@ -80,7 +80,7 @@ Smoke tests:
 
 from tm2p._intern import ParamsMixin, remove_counters
 from tm2p._intern.nx import cluster_nx_graph, summarize_communities
-from tm2p.enum import Indicator
+from tm2p.enum.column import ITEMS
 from tm2p.synthes.netw.co_occur._intern.create_nx_graph import create_nx_graph
 
 
@@ -99,7 +99,7 @@ class ItemsByClusterSummary(
         df = summarize_communities(self.params, nx_graph)
         if use_counters is False:
             self.params.counters = False
-            df[Indicator.ITEMS.value] = df[Indicator.ITEMS.value].apply(
+            df[ITEMS] = df[ITEMS].apply(
                 lambda x: "; ".join([remove_counters(item) for item in x.split("; ")])
             )
         self.params.counters = use_counters

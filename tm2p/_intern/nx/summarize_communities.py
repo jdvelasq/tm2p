@@ -3,7 +3,7 @@ import pandas as pd  # type: ignore
 from tm2p._intern.nx.create_clusters_to_terms_mapping import (
     create_clusters_to_terms_mapping,
 )
-from tm2p.enum import Indicator
+from tm2p.enum.column import CLUSTER, ITEMS, NUM_ITEMS, PERCENTAGE
 
 
 def summarize_communities(
@@ -25,14 +25,14 @@ def summarize_communities(
 
     summary = pd.DataFrame(
         {
-            Indicator.CLUSTER.value: list(communities_dict.keys()),
-            Indicator.NUM_ITEMS.value: communities_len.values(),
-            Indicator.PERCENTAGE.value: communities_perc.values(),
-            Indicator.ITEMS.value: communities_dict.values(),
+            CLUSTER: list(communities_dict.keys()),
+            NUM_ITEMS: communities_len.values(),
+            PERCENTAGE: communities_perc.values(),
+            ITEMS: communities_dict.values(),
         }
     )
 
-    summary = summary.sort_values(Indicator.CLUSTER.value, ascending=True)
+    summary = summary.sort_values(CLUSTER, ascending=True)
     summary = summary.reset_index(drop=True)
 
     return summary

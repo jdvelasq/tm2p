@@ -1,7 +1,7 @@
 import networkx as nx  # type: ignore
 import pandas as pd  # type: ignore
 
-from tm2p.enum import Indicator
+from tm2p.enum.column import BETWEENNESS, CLOSENESS, DEGREE, PAGERANK
 
 
 def compute_network_metrics(
@@ -39,10 +39,10 @@ def compute_network_metrics(
 
     data_frame = pd.DataFrame(
         {
-            Indicator.DEGREE.value: degree,
-            Indicator.BETWEENNESS.value: betweenness,
-            Indicator.CLOSENESS.value: closeness,
-            Indicator.PAGERANK.value: pagerank,
+            DEGREE: degree,
+            BETWEENNESS: betweenness,
+            CLOSENESS: closeness,
+            PAGERANK: pagerank,
             # "Centrality": callon_centrality,
             # "Density": callon_density,
             # "_occ_": occ,
@@ -54,7 +54,7 @@ def compute_network_metrics(
     )
 
     data_frame = data_frame.sort_values(
-        by=[Indicator.DEGREE.value, "_occ_gc_", "_name_"],
+        by=[DEGREE, "_occ_gc_", "_name_"],
         ascending=[False, False, True],
     )
     data_frame = data_frame.drop(columns=["_name_", "_occ_gc_"])

@@ -67,37 +67,31 @@ Smoke tests:
 
 import pandas as pd  # type: ignore
 
-from tm2p import Field, Indicator, ItemOrderBy
 from tm2p._intern import ParamsMixin
 from tm2p._intern.data_access import load_filtered_main_csv_zip
-
-G_INDEX = Indicator.G_INDEX.value
-H_INDEX = Indicator.H_INDEX.value
-M_INDEX = Indicator.M_INDEX.value
-
-GCS = Field.GCS.value
-LCS = Field.LCS.value
-YEAR = Field.YEAR.value
-
-GCS_PER_YEAR = GCS + "_PER_YEAR"
-LCS_PER_YEAR = LCS + "_PER_YEAR"
-GCS_PER_DOC = GCS + "_PER_DOC"
-LCS_PER_DOC = LCS + "_PER_DOC"
-
-OCC = ItemOrderBy.OCC.value
-
-YEAR_FIRST = Field.YEAR.value + "_FIRST"
-YEAR_LAST = Field.YEAR.value + "_LAST"
-AGE = "AGE"
-
-RANK_OCC = "RANK_OCC"
-RANK_GCS = "RANK_GCS"
-RANK_LCS = "RANK_LCS"
+from tm2p.enum.column import (
+    AGE,
+    COUNTERS,
+    G_INDEX,
+    GCS,
+    GCS_PER_DOC,
+    GCS_PER_YEAR,
+    H_INDEX,
+    LCS,
+    LCS_PER_DOC,
+    LCS_PER_YEAR,
+    M_INDEX,
+    OCC,
+    RANK_GCS,
+    RANK_LCS,
+    RANK_OCC,
+    YEAR,
+    YEAR_FIRST,
+    YEAR_LAST,
+)
 
 POS = "POS"
 POS2 = "POS2"
-
-COUNTERS = "COUNTERS"
 
 SELECTED_COLUMNS = {
     OCC: [

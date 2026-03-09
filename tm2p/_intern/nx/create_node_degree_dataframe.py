@@ -1,6 +1,6 @@
 import pandas as pd  # type: ignore
 
-from tm2p.enum import Indicator
+from tm2p.enum.column import COUNTERS, DEGREE, NAME, NODE
 
 
 def create_node_degree_dataframe(node_degrees):
@@ -9,21 +9,17 @@ def create_node_degree_dataframe(node_degrees):
     dataframe = pd.DataFrame(
         node_degrees,
         columns=[
-            Indicator.NAME.value,
-            Indicator.DEGREE.value,
+            NAME,
+            DEGREE,
         ],
     )
-    dataframe[Indicator.COUNTERS.value] = dataframe[Indicator.NAME.value].map(
-        lambda x: x.split(" ")[-1]
-    )
+    dataframe[COUNTERS] = dataframe[NAME].map(lambda x: x.split(" ")[-1])
     dataframe = dataframe.sort_values(
-        by=[Indicator.DEGREE.value, Indicator.COUNTERS.value, Indicator.NAME.value],
+        by=[DEGREE, COUNTERS, NAME],
         ascending=[False, False, True],
     )
     dataframe = dataframe.reset_index(drop=True)
-    dataframe[Indicator.NODE.value] = dataframe.index
-    dataframe = dataframe[
-        [Indicator.NODE.value, Indicator.NAME.value, Indicator.DEGREE.value]
-    ]
+    dataframe[NODE] = dataframe.index
+    dataframe = dataframe[[NODE, NAME, DEGREE]]
 
     return dataframe

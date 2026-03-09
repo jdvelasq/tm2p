@@ -47,12 +47,9 @@ Smoke tests:
 
 import plotly.express as px  # type: ignore
 
-from tm2p import Indicator
 from tm2p._intern import ParamsMixin
+from tm2p.enum.column import MP, SP
 from tm2p.synthes.collabor.metrics import Metrics
-
-SP = Indicator.SP.value
-MP = Indicator.MP.value
 
 
 class BarPlot(
