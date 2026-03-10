@@ -23,7 +23,7 @@ Smoke Test:
     ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     #
@@ -62,7 +62,7 @@ Smoke Test:
     ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     #
@@ -100,7 +100,7 @@ Smoke Test:
     ...     .using_counters(True)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     #

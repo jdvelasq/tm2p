@@ -21,7 +21,7 @@ Smoke tests:
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
     ...     .having_items_in(None)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()  # doctest: +SKIP
     >>> df # doctest: +SKIP
                            descriptor  is_domain_specific?  is_stopword?

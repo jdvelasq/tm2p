@@ -9,7 +9,7 @@ Smoke test:
     >>> coalesce_column(
     ...     source=Field.SRC_ISO4_RAW,
     ...     target=Field.USR0,
-    ...     root_directory="tests/fintech/",
+    ...     root_directory="tests/scopus/",
     ... )
     180
 
@@ -17,7 +17,7 @@ Smoke test:
     >>> (
     ...     Query()
     ...     .with_query_expression("SELECT USR0 FROM database LIMIT 5;")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...    .run()

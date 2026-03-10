@@ -17,7 +17,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.references import SortByAlphabet
     >>> (
     ...     SortByAlphabet()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 

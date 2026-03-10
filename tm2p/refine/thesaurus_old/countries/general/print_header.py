@@ -6,7 +6,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.countries import InitializeThesaurus
     >>> (
     ...     InitializeThesaurus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
 
@@ -14,7 +14,7 @@ Smoke tests:
     >>> (
     ...     PrintHeader()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
     Australia
       Centre for Law, Markets & Regulation, UNSW Australia, Australia; Charles ...

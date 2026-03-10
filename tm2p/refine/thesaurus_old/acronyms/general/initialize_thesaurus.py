@@ -8,14 +8,14 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.acronyms import InitializeThesaurus
     >>> (
     ...     InitializeThesaurus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 
     >>> from tm2p.refine.thesaurus_old.acronyms import PrintHeader
     >>> (
     ...     PrintHeader()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )

@@ -9,7 +9,7 @@ Smoke tests:
     ...     CreateThesaurus()
     ...     .using_colored_output(False)
     ...     .with_thesaurus_file("demo.the.txt")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     INFO: Thesaurus initialized successfully.
@@ -27,7 +27,7 @@ Smoke tests:
     ...     MergeKeys()
     ...     .having_preferred_key("Addis Ababa University [ETH]")
     ...     .having_variant_keys(("Agricultural Bank of China [CHN]",))
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )

@@ -7,7 +7,7 @@ Smoke test:
     >>> text = (
     ...     ExtractAbstractSuffixes()
     ...     .having_n_chars(90)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     >>> assert isinstance(text, list)

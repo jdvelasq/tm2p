@@ -1,12 +1,12 @@
 """
 Smoke test:
     >>> from tm2p._intern.data_access import load_main_csv_zip
-    >>> df = load_main_csv_zip(root_directory="tests/fintech/")
+    >>> df = load_main_csv_zip(root_directory="tests/scopus/")
     >>> type(df).__name__
     'DataFrame'
 
     >>> df = load_main_csv_zip(
-    ...     root_directory="tests/fintech/",
+    ...     root_directory="tests/scopus/",
     ...     usecols=["RID", "TITLE_RAW"],
     ... )
     >>> type(df).__name__

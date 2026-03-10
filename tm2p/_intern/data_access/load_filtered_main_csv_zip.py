@@ -9,7 +9,7 @@ Smoke test:
     ...             record_citations_range=(None, None),
     ...             records_order_by=None,
     ...             records_match=None,
-    ...             root_directory="tests/fintech/",
+    ...             root_directory="tests/scopus/",
     ...         )
     ...     ).head()
     ... )
@@ -35,7 +35,7 @@ Smoke test:
     ...             record_citations_range=(None, None),
     ...             records_order_by=None,
     ...             records_match=None,
-    ...             root_directory="tests/fintech/",
+    ...             root_directory="tests/scopus/",
     ...         )
     ...     ).head()
     ... )

@@ -9,7 +9,7 @@ Smoke tests:
     ...     InitializeThesaurus()
     ...     .with_thesaurus_file("demo.the.txt")
     ...     .with_field("raw_descriptors")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )
@@ -40,7 +40,7 @@ Smoke tests:
     >>> (
     ...     SortByKeyLength()
     ...     .with_thesaurus_file("demo.the.txt")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )

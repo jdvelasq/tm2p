@@ -20,7 +20,7 @@ Smoke tests:
     ...     SortByFuzzyMatch()
     ...     .having_text_matching("INFORM")
     ...     .using_match_threshold(50)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> sorter.run()
 

@@ -14,7 +14,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.descriptors import InitializeThesaurus
     >>> (
     ...     InitializeThesaurus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 

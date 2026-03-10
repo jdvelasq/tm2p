@@ -29,7 +29,7 @@ Smoke tests:
     ...     .using_yaxes_title_text(None)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
@@ -61,8 +61,8 @@ class TopicDynamicsPlot(
         data_frame = TopicDynamics().update(**self.params.__dict__).run()
 
         # extracts the name of column starting with 'between'
-        between = [_ for _ in data_frame.columns if _.startswith("between")][0]
-        before = [_ for _ in data_frame.columns if _.startswith("before")][0]
+        between = [_ for _ in data_frame.columns if _.startswith("BETWEEN")][0]
+        before = [_ for _ in data_frame.columns if _.startswith("BEFORE")][0]
 
         fig_data = data_frame[["OCC", before, between]].copy()
         fig_data[self.params.source_field] = fig_data.index

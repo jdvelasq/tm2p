@@ -18,7 +18,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.descriptors import AmericanToBritishSpelling
     >>> (
     ...     AmericanToBritishSpelling(tqdm_disable=True, )
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 

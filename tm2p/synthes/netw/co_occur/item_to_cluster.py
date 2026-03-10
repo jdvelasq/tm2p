@@ -25,7 +25,7 @@ Smoke tests:
     ...     .using_clustering_algorithm_or_dict("louvain")
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
@@ -74,7 +74,7 @@ Smoke tests:
     ...     .using_association_index(AssociationIndex.NONE)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)

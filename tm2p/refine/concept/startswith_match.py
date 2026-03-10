@@ -10,7 +10,7 @@ Smoke test:
     >>> (
     ...     CreateThesaurus()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     INFO: Thesaurus initialized successfully.
@@ -25,7 +25,7 @@ Smoke test:
     >>> (
     ...     PreProcessThesaurus()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     INFO: Fuzzy cutoff matching completed.
@@ -42,7 +42,7 @@ Smoke test:
     ...     .using_colored_output(False)
     ...     .using_similarity_cutoff(90)
     ...     .using_fuzzy_threshold(0)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     INFO: StartsWith matching completed.

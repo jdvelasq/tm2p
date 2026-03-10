@@ -7,7 +7,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.countries import InitializeThesaurus
     >>> (
     ...     InitializeThesaurus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
 
@@ -15,7 +15,7 @@ Smoke tests:
     >>> sorter = (
     ...     SortByWordMatch()
     ...     .having_text_matching("Germany")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 
@@ -23,7 +23,7 @@ Smoke tests:
     >>> (
     ...     PrintHeader()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
     Germany
       CESifo, Poschingerstr. 5, Munich, 81679, Germany; Chair of e-Finance, Goe...

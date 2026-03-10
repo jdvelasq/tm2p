@@ -13,7 +13,7 @@ Smoke tests:
     ...     .with_word_length(200)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     #
     ...     .run()
     ... )

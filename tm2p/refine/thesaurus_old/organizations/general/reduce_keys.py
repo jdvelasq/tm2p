@@ -19,7 +19,7 @@ Smoke tests:
     >>> # Creates and run the reducer
     >>> reducer = (
     ...     ReduceKeys()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> reducer.run()
 
@@ -27,7 +27,7 @@ Smoke tests:
     >>> (
     ...     PrintHeader()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
 """

@@ -6,7 +6,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.countries import InitializeThesaurus
     >>> (
     ...     InitializeThesaurus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
 
@@ -15,7 +15,7 @@ Smoke tests:
     ...     SortByFuzzyMatch()
     ...     .having_text_matching("china")
     ...     .using_match_threshold(90)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 
@@ -23,7 +23,7 @@ Smoke tests:
     >>> (
     ...     PrintHeader()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
     China
       Cheung Kong Graduate School of Business, and Institute of Internet Financ...

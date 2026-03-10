@@ -18,7 +18,7 @@ Smoke tests:
     >>> # Clump the thesaurus
     >>> (
     ...     ClumpKeys(tqdm_disable=True, )
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 

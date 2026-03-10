@@ -12,7 +12,7 @@ Smoke tests:
     ...     .with_source_field(Field.PUBTYPE_NORM)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     #
     ...     .run()
     ... )

@@ -9,7 +9,7 @@ Smoke test:
     ...     CountColumnItems()
     ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .with_target_field(Field.USR0)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     180
@@ -18,7 +18,7 @@ Smoke test:
     >>> (
     ...     Query()
     ...     .with_query_expression("SELECT AUTHKW_RAW, USR0 FROM database LIMIT 5;")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()

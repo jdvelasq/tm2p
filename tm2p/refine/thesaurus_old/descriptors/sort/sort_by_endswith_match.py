@@ -19,7 +19,7 @@ Smoke tests:
     >>> sorter = (
     ...     SortByEndsWithMatch()
     ...     .having_text_matching("BANKS")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> sorter.run()
 

@@ -8,7 +8,7 @@ Smoke tests:
     >>> (
     ...     CreateThesaurus()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     INFO: Thesaurus initialized successfully.
@@ -25,7 +25,7 @@ Smoke tests:
     ...     MergeKeys()
     ...     .having_preferred_key("fintech")
     ...     .having_variant_keys(("financial technology", "financial technologies"))
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )

@@ -9,7 +9,7 @@ Smoke test:
     ...     LTWAColumn()
     ...     .with_source_field(Field.SRC_RAW)
     ...     .with_target_field(Field.USR0)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     180
@@ -18,7 +18,7 @@ Smoke test:
     >>> (
     ...     Query()
     ...     .with_query_expression("SELECT USR0 FROM database LIMIT 10;")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()

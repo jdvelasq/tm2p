@@ -14,7 +14,7 @@ Smoke tests:
     ...     .with_word_length(300)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)

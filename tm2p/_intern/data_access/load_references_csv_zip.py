@@ -7,7 +7,7 @@ Smoke test:
     'DataFrame'
 
     >>> df = load_references_csv_zip(
-    ...     root_directory="tests/fintech/",
+    ...     root_directory="tests/scopus/",
     ...     usecols=["RID", "TITLE_RAW"],
     ... )
     >>> type(df).__name__

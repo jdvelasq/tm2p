@@ -24,7 +24,7 @@ Smoke tests:
     ...     .having_text_matching("Univ")
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> sorter.run()
 
@@ -32,7 +32,7 @@ Smoke tests:
     >>> (
     ...     PrintHeader()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
 

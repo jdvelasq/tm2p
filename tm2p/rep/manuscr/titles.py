@@ -12,7 +12,7 @@ Smoke tests:
     ...     .with_core_area("fintech")
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     #
     ...     .run()
     ... )

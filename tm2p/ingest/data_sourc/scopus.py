@@ -7,7 +7,7 @@ Smoke test - fintech - successful import:
     >>> from tm2p.ingest.data_sourc.scopus import Scopus
     >>> result = (
     ...     Scopus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )  # doctest: +SKIP
     >>> result.success  # doctest: +SKIP
@@ -21,7 +21,7 @@ Smoke test - fintech - result attributes:
 
 Smoke test - fintech - fluent interface:
     >>> scopus = Scopus()
-    >>> scopus_configured = scopus.where_root_directory("tests/fintech/")
+    >>> scopus_configured = scopus.where_root_directory("tests/scopus/")
     >>> scopus_configured is scopus
     True
 

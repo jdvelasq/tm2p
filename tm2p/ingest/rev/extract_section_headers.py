@@ -6,7 +6,7 @@ Smoke test:
     >>> from tm2p.ingest.rev import ExtractSectionHeaders
     >>> text = (
     ...     ExtractSectionHeaders()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     >>> assert isinstance(text, list)

@@ -18,7 +18,7 @@ Smoke tests:
     >>> # Configure and run the sorter
     >>> sorter = (
     ...     SortByKeyLength()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> sorter.run()
 

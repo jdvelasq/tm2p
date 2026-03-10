@@ -22,7 +22,7 @@ Smoke tests:
     >>> terms = (
     ...     GetValues()
     ...     .with_patterns(["FINTECH", "FINANCIAL_TECHNOLOGIES"])
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     >>> terms[:5]

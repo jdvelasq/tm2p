@@ -10,7 +10,7 @@ Smoke tests:
     ...     InitializeThesaurus(quit=True)
     ...     .with_thesaurus_file("demo.the.txt")
     ...     .with_field("raw_descriptors")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
     >>> from tm2p.refine.thesaurus_old.user import PrintHeader
@@ -18,7 +18,7 @@ Smoke tests:
     ...     PrintHeader()
     ...     .with_thesaurus_file("demo.the.txt")
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
 

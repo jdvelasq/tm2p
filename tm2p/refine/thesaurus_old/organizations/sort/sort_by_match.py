@@ -27,7 +27,7 @@ Smoke tests:
     ...     .having_regex_search(False)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> sorter.run()
 

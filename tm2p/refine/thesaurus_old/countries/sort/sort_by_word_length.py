@@ -7,13 +7,13 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.countries import InitializeThesaurus
     >>> (
     ...     InitializeThesaurus()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
 
     >>> from tm2p.refine.thesaurus_old.countries import SortByWordLength
     >>> (
     ...     SortByWordLength()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 
@@ -21,7 +21,7 @@ Smoke tests:
     >>> (
     ...     PrintHeader()
     ...     .using_colored_output(False)
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... ).run()
     Netherlands
       Erasmus University Rotterdam, Burgemeester Oudlaan, Rotterdam, 50, Nether...

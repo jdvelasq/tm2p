@@ -8,7 +8,7 @@ Smoke tests:
     ...     InitializeThesaurus()
     ...     .with_thesaurus_file("demo.the.txt")
     ...     .with_field("raw_descriptors")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )
@@ -41,7 +41,7 @@ Smoke tests:
     ...     .with_thesaurus_file("demo.the.txt")
     ...     .with_field("raw_descriptors")
     ...     .with_other_field("descriptors_cleaned")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .using_colored_output(False)
     ...     .run()
     ... )
@@ -65,7 +65,7 @@ Smoke tests:
     ...     .having_items_in(None)
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_database("main")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)

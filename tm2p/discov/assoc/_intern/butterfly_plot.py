@@ -2,23 +2,29 @@
 ButterflyPlot
 ===============================================================================
 
+.. raw:: html
+
+    <iframe src="../_generated/px.discov.assoc/butterfly_plot.html"
+    height="800px" width="100%" frameBorder="0"></iframe>
+
+
 Smoke tests:
-    >>> from tm2p import Field
-    >>> from tm2p.packages.associations import ButterflyPlot
+    >>> from tm2p import Field, ItemOrderBy
+    >>> from tm2p.discov.assoc import ButterflyPlot
     >>> plot = (
     ...     ButterflyPlot()
     ...     #
     ...     # FIELD:
     ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .having_items_in_top(10)
-    ...     .having_items_ordered_by("OCC")
+    ...     .having_items_ordered_by(ItemOrderBy.OCC)
     ...     .having_item_occurrences_between(None, None)
     ...     .having_item_citations_between(None, None)
-    ...     .having_items_in(["FINTECH", "INNOVATION", "FINANCIAL_SERVICES"])
+    ...     .having_items_in(["fintech", "innovation", "financial services"])
     ...     #
     ...     # ROWS:
     ...     .having_other_terms_in_top(10)
-    ...     .having_other_terms_ordered_by("OCC")
+    ...     .having_other_terms_ordered_by(ItemOrderBy.OCC)
     ...     .having_other_term_occurrences_between(None, None)
     ...     .having_other_term_citations_between(None, None)
     ...     .having_other_terms_in(None)
@@ -30,19 +36,15 @@ Smoke tests:
     ...     .using_title_text("Butterfly Plot")
     ...     #
     ...     # DATABASE:
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .where_records_match(None)
     ...     #
     ...     .run()
     ... )
-    >>> plot.write_html("docsrc/_generated/px.discov.associations.butterfly_plot.html")
+    >>> plot.write_html("docsrc/_generated/px.discov.assoc.butterfly_plot.html")
 
-.. raw:: html
-
-    <iframe src="../_generated/px.discov.associations/butterfly_plot.html"
-    height="800px" width="100%" frameBorder="0"></iframe>
 
 
 """

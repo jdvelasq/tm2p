@@ -11,7 +11,7 @@ Smoke tests:
     >>> from tm2p.refine.thesaurus_old.descriptors import ReduceKeys
     >>> (
     ...     ReduceKeys()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
 

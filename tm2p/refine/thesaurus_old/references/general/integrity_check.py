@@ -14,7 +14,7 @@ Smoke tests:
     >>> # Configure and run the integrity check
     >>> checker = (
     ...     IntegrityCheck()
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ... )
     >>> checker.run()
 

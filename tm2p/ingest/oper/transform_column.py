@@ -10,7 +10,7 @@ Smoke test:
     ...     .with_source_field(Field.AUTHKW_RAW)
     ...     .with_target_field(Field.USR0)
     ...     .with_transformation_function(lambda x: x.str.upper())
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .run()
     ... )
     154
@@ -19,7 +19,7 @@ Smoke test:
     >>> (
     ...     Query()
     ...     .with_query_expression("SELECT USR0 FROM database LIMIT 10;")
-    ...     .where_root_directory("tests/fintech/")
+    ...     .where_root_directory("tests/scopus/")
     ...     .where_record_years_range(None, None)
     ...     .where_record_citations_range(None, None)
     ...     .run()
