@@ -24,7 +24,7 @@ def view_dataframe():
             txt_file.write(df.to_string())
 
 
-# view_dataframe()
+view_dataframe()
 
 
 def view_column():
@@ -62,4 +62,4 @@ def view_column():
     #     txt_file.write(df.to_string())
 
 
-view_column()
+# view_column()
