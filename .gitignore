@@ -200,3 +200,4 @@ celerybeat.pid
 openalex.txt
 pubmed.txt
 scopus.txt
+wos.txt
