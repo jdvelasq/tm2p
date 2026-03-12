@@ -11,29 +11,18 @@ Thumbs.db
 # data for tests
 # ============================================================================
 
-tests/scopus/analyze/
-tests/scopus/ingest/processed/
-tests/scopus/refine/
-tests/scopus/report/
-tests/scopus//zotero.log
-
-tests/openalex/analyze/
-tests/openalex/ingest/processed/
-tests/openalex/refine/
-tests/openalex/report/
-tests/openalex//zotero.log
-
-tests/wos/analyze/
-tests/wos/ingest/processed/
-tests/wos/refine/
-tests/wos/report/
-tests/wos//zotero.log
-
 tests/fintech/analyze/
 tests/fintech/ingest/processed/
 tests/fintech/refine/
 tests/fintech/report/
 tests/fintech//zotero.log
+
+tests/regtech/analyze/
+tests/regtech/ingest/processed/
+tests/regtech/refine/
+tests/regtech/report/
+tests/regtech//zotero.log
+
 
 # ============================================================================
 # Project-Specific: Documentation
