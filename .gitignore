@@ -12,25 +12,25 @@ Thumbs.db
 # ============================================================================
 
 tests/openalex/analyze/
-tests/openalex/ingest/processed/
+tests/openalex/ingest/process/
 tests/openalex/refine/
 tests/openalex/report/
 tests/openalex//zotero.log
 
 tests/pubmed/analyze/
-tests/pubmed/ingest/processed/
+tests/pubmed/ingest/process/
 tests/pubmed/refine/
 tests/pubmed/report/
 tests/pubmed//zotero.log
 
 tests/scopus/analyze/
-tests/scopus/ingest/processed/
+tests/scopus/ingest/process/
 tests/scopus/refine/
 tests/scopus/report/
 tests/scopus//zotero.log
 
 tests/wos/analyze/
-tests/wos/ingest/processed/
+tests/wos/ingest/process/
 tests/wos/refine/
 tests/wos/report/
 tests/wos//zotero.log
