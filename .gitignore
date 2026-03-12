@@ -201,3 +201,4 @@ openalex.txt
 pubmed.txt
 scopus.txt
 wos.txt
+tm2p/ingest/datab/view_as_txt.py
