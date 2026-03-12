@@ -49,7 +49,7 @@ Smoke test:
 """
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.oper.upperc_keyterm import uppercase_keyterms
+from tm2p.ingest.datab._intern.oper.upperc_keyterm import uppercase_keyterms
 from tm2p.ingest.extr._helpers._protected_fields import PROTECTED_FIELDS
 
 

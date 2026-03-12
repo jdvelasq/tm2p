@@ -13,4 +13,4 @@ from pathlib import Path
 
 def get_main_csv_zip_path(root_directory: str) -> Path:
 
-    return Path(root_directory) / "ingest" / "processed" / "main.csv.zip"
+    return Path(root_directory) / "ingest" / "process" / "main.csv.zip"

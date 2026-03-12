@@ -214,7 +214,7 @@ class Metrics(
 
         # ---------------------------------------------------------------------
         def average_references_per_document():
-            num_references = dataframe[Field.GCR_RAW.value].copy()
+            num_references = dataframe[Field.GCR_FREE_TEXT.value].copy()
             num_references = num_references.dropna()
             num_references = num_references.str.split(";")
             num_references = num_references.map(len)
@@ -281,7 +281,7 @@ class Metrics(
 
         # ---------------------------------------------------------------------
         def total_cited_references():
-            records = dataframe[Field.GCR_RAW.value].copy()
+            records = dataframe[Field.GCR_FREE_TEXT.value].copy()
             records = records.dropna()
             records = records.str.split(";")
             records = records.explode()
@@ -301,10 +301,10 @@ class Metrics(
         #
         # =====================================================================
         def compute_document_type_stats(stats):
-            records = dataframe[[Field.PUBTYPE_NORM.value]].dropna()
+            records = dataframe[[Field.DOCTYPE_NORM.value]].dropna()
             document_types_count = (
-                records[[Field.PUBTYPE_NORM.value]]
-                .groupby(Field.PUBTYPE_NORM.value)
+                records[[Field.DOCTYPE_NORM.value]]
+                .groupby(Field.DOCTYPE_NORM.value)
                 .size()
             )
             for document_type, count in zip(

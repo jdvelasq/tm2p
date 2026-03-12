@@ -13,4 +13,4 @@ from pathlib import Path
 
 def get_references_csv_zip_path(root_directory: str) -> Path:
 
-    return Path(root_directory) / "ingest" / "processed" / "references.csv.zip"
+    return Path(root_directory) / "ingest" / "process" / "references.csv.zip"

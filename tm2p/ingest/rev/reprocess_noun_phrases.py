@@ -16,9 +16,9 @@ import sys
 from typing import Any
 
 from tm2p._intern import ParamsMixin
-from tm2p.ingest.data_sourc._intern.step import Step
+from tm2p.ingest.datab._intern.step import Step
 
-from ..data_sourc._intern.concept.build_steps import build_concept_steps
+from ..datab._intern.__concept.build_steps import build_concept_steps
 
 __reviewed__ = "2026-01-28"
 
