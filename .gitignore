@@ -197,3 +197,6 @@ celerybeat.pid
 # mkdocs
 /site
 
+openalex.txt
+pubmed.txt
+scopus.txt
