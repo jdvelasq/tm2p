@@ -23,7 +23,7 @@ ORG_FIRST = Field.ORG_FIRST.value
 ORG = Field.ORG_RAW.value
 
 
-def extract_organizations_and_countries(root_directory: str) -> int:
+def s09_extr_scopus_org(root_directory: str) -> int:
 
     dataframe = load_main_csv_zip(root_directory=root_directory)
     countries, organizations = _build_mappings(dataframe)
