@@ -177,7 +177,6 @@ class Field(Enum):
     ORG_ID = "ORG_ID"
     ORG_NORM = "ORG_NORM"
     ORG_RAW = "ORG_RAW"
-    # ORG_AFFIL = "ORG_AFFIL"
 
     ORG_FIRST = "ORG_FIRST"
 

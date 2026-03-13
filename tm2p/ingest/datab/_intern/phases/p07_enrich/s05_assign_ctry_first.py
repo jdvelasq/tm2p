@@ -34,8 +34,8 @@ def _fix_ctry(series):
 
     series = series.copy()
     series = series.str.split("; ")
-    series = series.apply(set)
-    series = series.apply(sorted)
+    series = series.map(set, na_action="ignore")
+    series = series.map(sorted, na_action="ignore")
     series = series.str.join("; ")
 
     return series

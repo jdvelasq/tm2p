@@ -52,9 +52,13 @@ WORDS:
 
 def s02_correct_hyphen_word(root_directory: str) -> int:
 
-    dataframe = load_main_csv_zip(root_directory)
+    df = load_main_csv_zip(root_directory)
+    if Field.IDXKW_RAW.value not in df.columns:
+        return 0
+    if Field.AUTHKW_RAW.value not in df.columns:
+        return 0
 
-    words = _extract_hyphenated_words(dataframe)
+    words = _extract_hyphenated_words(df)
     unknown_words = _extract_unknown_words(words, root_directory)
     new_valid_words, new_invalid_words = _classify_unknown_words(unknown_words)
 
@@ -66,17 +70,17 @@ def s02_correct_hyphen_word(root_directory: str) -> int:
 
     known_valid_words = _get_valid_words(root_directory)
     known_invalid_words = _get_invalid_words(root_directory)
-    dataframe = _replace(
-        dataframe,
+    df = _replace(
+        df,
         new_valid_words | known_valid_words,
         new_invalid_words | known_invalid_words,
     )
 
-    save_main_csv_zip(dataframe, root_directory)
+    save_main_csv_zip(df, root_directory)
 
     return max(
-        int(dataframe[Field.AUTHKW_TOK.value].notna().sum()),
-        int(dataframe[Field.IDXKW_TOK.value].notna().sum()),
+        int(df[Field.AUTHKW_TOK.value].notna().sum()),
+        int(df[Field.IDXKW_TOK.value].notna().sum()),
     )
 
 

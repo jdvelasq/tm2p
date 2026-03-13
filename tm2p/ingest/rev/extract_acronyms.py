@@ -62,19 +62,18 @@ class ExtractAcronyms(
     # -------------------------------------------------------------------------
     def extract_acronyms_from_keywords_with_parentheses(self):
 
-        dataframe = load_main_csv_zip(
+        df = load_main_csv_zip(
             root_directory=self.params.root_directory,
-            usecols=[
-                Field.AUTHKW_TOK.value,
-                Field.IDXKW_TOK.value,
-            ],
         )
 
         for col in [
             Field.AUTHKW_TOK.value,
             Field.IDXKW_TOK.value,
         ]:
-            keywords = dataframe[col].dropna().str.split("; ")
+            if col not in df.columns:
+                continue
+
+            keywords = df[col].dropna().str.split("; ")
             keywords = keywords.explode().str.strip()
             keywords = keywords[
                 keywords.str.contains("(", regex=False)
@@ -122,6 +121,9 @@ class ExtractAcronyms(
             Field.AUTHKW_TOK.value,
             Field.IDXKW_TOK.value,
         ]:
+            if col not in dataframe.columns:
+                continue
+
             keywords = dataframe[col].dropna().str.split("; ")
             keywords = keywords.explode().str.strip()
             keywords = keywords.str.replace(r"\([^)]*\)", "", regex=True).str.strip()

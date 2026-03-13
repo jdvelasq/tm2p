@@ -11,13 +11,14 @@ def s08_assign_ctry_iso3(root_directory: str) -> int:
 
         series = series.copy()
         series = series.str.split("; ")
-        series = series.apply(
+        series = series.map(
             lambda countries: [
                 country_to_iso3.get(country, "[n/a]") for country in countries
-            ]
+            ],
+            na_action="ignore",
         )
-        series = series.apply(set)
-        series = series.apply(sorted)
+        series = series.map(set, na_action="ignore")
+        series = series.map(sorted, na_action="ignore")
         series = series.str.join("; ")
 
         return series

@@ -54,34 +54,30 @@ def ltwa_column(
 
     load_data, save_data, get_path = get_file_operations(file)
 
-    dataframe = load_data(root_directory=root_directory, usecols=None)
+    df = load_data(root_directory=root_directory, usecols=None)
 
-    if source.value not in dataframe.columns:
+    if source.value not in df.columns:
         raise KeyError(
             f"Source column '{source.value}' not found in {get_path(root_directory).name}"
         )
 
-    dataframe[target.value] = dataframe[source.value].copy()
-    dataframe[target.value] = dataframe[target.value].apply(
+    df[target.value] = df[source.value].copy()
+    df[target.value] = df[target.value].apply(
         lambda x: f" {x} " if isinstance(x, str) else x
     )
-    dataframe[target.value] = dataframe[target.value].str.lower()
-    dataframe[target.value] = dataframe[target.value].str.replace(
-        "; ", " ; ", regex=False
-    )
+    df[target.value] = df[target.value].str.lower()
+    df[target.value] = df[target.value].str.replace("; ", " ; ", regex=False)
     for stopword in STOPWORDS:
-        dataframe[target.value] = dataframe[target.value].str.replace(
+        df[target.value] = df[target.value].str.replace(
             f" {stopword.lower()} ", " ", regex=False
         )
 
-    dataframe[target.value] = dataframe[target.value].str.split()
-    dataframe[target.value] = dataframe[target.value].apply(_apply_ltwa_to_words)
-    dataframe[target.value] = dataframe[target.value].str.join(" ")
-    dataframe[target.value] = dataframe[target.value].str.replace(
-        " ; ", "; ", regex=False
-    )
-    dataframe[target.value] = dataframe[target.value].str.upper()
+    df[target.value] = df[target.value].str.split()
+    df[target.value] = df[target.value].map(_apply_ltwa_to_words, na_action="ignore")
+    df[target.value] = df[target.value].str.join(" ")
+    df[target.value] = df[target.value].str.replace(" ; ", "; ", regex=False)
+    df[target.value] = df[target.value].str.upper()
 
-    save_data(df=dataframe, root_directory=root_directory)
+    save_data(df=df, root_directory=root_directory)
 
-    return len(dataframe)
+    return len(df)

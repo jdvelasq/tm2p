@@ -11,7 +11,7 @@ def s01_normal_openalex_auth_raw(root_directory: str) -> int:
 
         def _normalize_item(text):
             if text == "":
-                return pd.NA
+                return "[Anonymous]"
             text = text.replace(".", "")
             words = text.split()
             if len(words) == 1:
@@ -34,7 +34,7 @@ def s01_normal_openalex_auth_raw(root_directory: str) -> int:
 
     return transform_column(
         source=Field.AUTH_FULL_NAME,
-        target=Field.AUTH_RAW,
+        target=Field.AUTH_NORM,
         function=_normalize_row,
         root_directory=root_directory,
     )

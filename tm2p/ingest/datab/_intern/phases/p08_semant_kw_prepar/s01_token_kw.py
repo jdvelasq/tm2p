@@ -20,7 +20,13 @@ from .helpers import (
 )
 
 
-def s01_token_keywordtoken_keyword(root_directory: str) -> int:
+def s01_token_kw(root_directory: str) -> int:
+
+    df = load_main_csv_zip(root_directory)
+    if Field.IDXKW_RAW.value not in df.columns:
+        return 0
+    if Field.AUTHKW_RAW.value not in df.columns:
+        return 0
 
     copy_column(
         source=Field.IDXKW_RAW,
@@ -34,7 +40,6 @@ def s01_token_keywordtoken_keyword(root_directory: str) -> int:
         root_directory=root_directory,
     )
 
-    df = load_main_csv_zip(root_directory)
     df = normalize_empty_strings(df)
     df = add_padding(df)
     df = remove_accents(df)

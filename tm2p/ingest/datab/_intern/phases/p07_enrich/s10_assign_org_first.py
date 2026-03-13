@@ -5,15 +5,15 @@ from tm2p.ingest.oper.transform_column import transform_column
 def s10_assign_org_first(root_directory: str) -> int:
 
     transform_column(
-        source=Field.ORG,
+        source=Field.ORG_RAW,
         target=Field.ORG_FIRST,
         function=_extract_org_first,
         root_directory=root_directory,
     )
 
     result = transform_column(
-        source=Field.ORG,
-        target=Field.ORG,
+        source=Field.ORG_RAW,
+        target=Field.ORG_RAW,
         function=_fix_org,
         root_directory=root_directory,
     )
@@ -34,8 +34,8 @@ def _fix_org(series):
 
     series = series.copy()
     series = series.str.split("; ")
-    series = series.apply(set)
-    series = series.apply(sorted)
+    series = series.map(set, na_action="ignore")
+    series = series.map(sorted, na_action="ignore")
     series = series.str.join("; ")
 
     return series

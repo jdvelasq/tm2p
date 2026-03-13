@@ -13,7 +13,7 @@ def s01_normal_pubmed_auth_raw(root_directory: str) -> int:
 
     return transform_column(
         source=Field.AUTH_RAW,
-        target=Field.AUTH_RAW,
+        target=Field.AUTH_NORM,
         function=_normalize_row,
         root_directory=root_directory,
     )

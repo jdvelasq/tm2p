@@ -8,7 +8,7 @@ from ...step import Step
 
 def build_openalex_semant_keyword_prepar_steps(params: Params) -> list[Step]:
 
-    from .s01_token_kw import s01_token_keywordtoken_keyword
+    from .s01_token_kw import s01_token_kw
     from .s02_correct_hyphen_word import s02_correct_hyphen_word
     from .s03_normal_auth_idx_kw_tok import s03_normal_auth_idx_key_tok
     from .s04_compose_kw_tok import s04_compose_kw_tok
@@ -19,7 +19,7 @@ def build_openalex_semant_keyword_prepar_steps(params: Params) -> list[Step]:
     return [
         Step(
             name="Tokenizing keywords",
-            function=s01_token_keywordtoken_keyword,
+            function=s01_token_kw,
             kwargs=common_kwargs,
         ),
         Step(

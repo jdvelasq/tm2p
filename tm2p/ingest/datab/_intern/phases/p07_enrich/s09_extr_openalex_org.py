@@ -7,10 +7,10 @@ from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
 from tm2p.ingest.datab._intern.oper.ltwa_col import ltwa_column
 
-from ...__affil._internals import (
-    extract_country_name_from_string,
-    extract_org_name_from_string,
-)
+# from ...__affil._internals import (
+#     extract_country_name_from_string,
+#     extract_org_name_from_string,
+# )
 
 AFFIL_RAW = Field.AFFIL_RAW.value
 CTRY_AFFIL = Field.CTRY_AFFIL.value

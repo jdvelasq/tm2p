@@ -10,7 +10,7 @@ def build_openalex_struct_stand_steps(params: Params) -> list[Step]:
     from .s01_format_sep import s01_format_sep
     from .s02_renam_openalex_col import s02_renam_openalex_col
     from .s03_drop_empty_col import s03_drop_empty_col
-    from .s04_repair_gcs_value import s04_set_gcs_value
+    from .s04_repair_gcs_lcs_value import s04_repair_gcs_lcs_value
     from .s05_format_authkw_idxkw import s05_format_authkw_idxkw
     from .s06_format_src_raw import s06_format_src_raw
     from .s07_format_src_norm import s07_format_src_norm
@@ -40,7 +40,7 @@ def build_openalex_struct_stand_steps(params: Params) -> list[Step]:
         ),
         Step(
             name="Setting GCS value",
-            function=s04_set_gcs_value,
+            function=s04_repair_gcs_lcs_value,
             kwargs=common_kwargs,
         ),
         Step(

@@ -25,6 +25,8 @@ def _repair(row):
 
 def _repair_na_row(row):
     auth = row[Field.AUTH_NORM.value]
+    if pd.isna(auth):
+        return pd.NA
     auth = auth.split("; ")
     authid = [au.strip() + sequ_gener() for au in auth]
     return "; ".join(authid)
@@ -33,6 +35,9 @@ def _repair_na_row(row):
 def _repair_sequ(row):
 
     auth = row[Field.AUTH_NORM.value]
+    if pd.isna(auth):
+        return pd.NA
+
     auth = auth.split("; ")
     auth = [au.strip() for au in auth]
 
