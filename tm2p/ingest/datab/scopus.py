@@ -62,13 +62,13 @@ class Scopus(BaseIngest):
     def ingestion_pipeline(self) -> tuple[tuple[str, list[Step]], ...]:
 
         from ._intern.phases.p02_compress import build_scopus_compress_steps
-        from ._intern.phases.p03_pars import build_scopus_parsing_steps
-        from ._intern.phases.p04_struct_stand import build_scopus_struct_stand_steps
-        from ._intern.phases.p05_field_normal import build_scopus_field_normal_steps
+        from ._intern.phases.p03_pars import build_scopus_pars_steps
+        from ._intern.phases.p05_struct_stand import build_scopus_struct_stand_steps
+        from ._intern.phases.p06_field_normal import build_scopus_field_normal_steps
 
         return (
             (self._COMPRESS, build_scopus_compress_steps(self.params)),
-            (self._PARSING, build_scopus_parsing_steps(self.params)),
+            (self._PARSING, build_scopus_pars_steps(self.params)),
             (self._STRUCT_STAND, build_scopus_struct_stand_steps(self.params)),
             (self._FIELD_NORMAL, build_scopus_field_normal_steps(self.params)),
             #

@@ -7,7 +7,7 @@ from typing import Any
 from tm2p._intern import ParamsMixin
 
 from .._intern import Step
-from .._intern.scopus_result import ScopusResult
+from .ingest_result import IngestResult
 from .phases.p01_scaffold.create_project_structure import create_project_structure
 
 
@@ -70,7 +70,7 @@ class BaseIngest(
         if step.count_message:
             self._print_step_result(result, step.count_message)
 
-    def run(self) -> ScopusResult:
+    def run(self) -> IngestResult:
 
         start_time = time.monotonic()
         self._print_header()
@@ -88,7 +88,7 @@ class BaseIngest(
         elapsed = timedelta(seconds=end_time - start_time)
         status = f"Execution time : {self._format_elapsed_time(elapsed)}"
 
-        return ScopusResult(
+        return IngestResult(
             colored_output=self.params.colored_output,
             file_path=str(self.params.root_directory),
             msg="Data imported successfully.",

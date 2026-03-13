@@ -21,7 +21,7 @@ def view_dataframe():
         txt_filepath = Path(folder + ".txt")
         df = df.head(50)
         with open(txt_filepath, "w", encoding="utf-8") as txt_file:
-            txt_file.write(df.to_string())
+            txt_file.write(df.to_string(index=False))
 
 
 view_dataframe()

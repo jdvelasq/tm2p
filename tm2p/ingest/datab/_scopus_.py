@@ -48,16 +48,16 @@ from typing import Any
 from tm2p._intern import ParamsMixin
 
 from ._intern import Step
-from ._intern.__affil.build_steps import build_affiliation_steps
 from ._intern.__auth.build_steps import build_author_steps
 from ._intern.__concept.build_steps import build_concept_steps
 from ._intern.__doc.build_steps import build_document_steps
 from ._intern.__kw.build_steps import build_keyword_steps
 from ._intern.__prepare.build_steps import build_merging_steps
-from ._intern.__ref.build_steps import build_reference_steps
 from ._intern.__review.build_steps import build_review_steps
 from ._intern.__src.build_steps import build_source_title_steps
-from ._intern.scopus_result import ScopusResult
+from ._intern.ingest_result import IngestResult
+from ._intern.phases.p07_enrich._build_steps import build_affiliation_steps
+from ._intern.phases.p11_cited_ref.build_steps import build_reference_steps
 
 __reviewed__ = "2026-01-28"
 
@@ -142,7 +142,7 @@ class Scopus(ParamsMixin):
         if step.count_message:
             self._print_step_result(result, step.count_message)
 
-    def run(self) -> ScopusResult:
+    def run(self) -> IngestResult:
 
         start_time = time.monotonic()
         self._print_header()
@@ -156,7 +156,7 @@ class Scopus(ParamsMixin):
         elapsed = timedelta(seconds=end_time - start_time)
         status = f"Execution time : {self._format_elapsed_time(elapsed)}"
 
-        return ScopusResult(
+        return IngestResult(
             colored_output=self.params.colored_output,
             file_path=str(self.params.root_directory),
             msg="Data imported successfully.",

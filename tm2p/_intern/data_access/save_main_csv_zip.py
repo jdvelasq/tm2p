@@ -13,8 +13,9 @@ from tm2p._intern.data_access.get_main_csv_zip_path import get_main_csv_zip_path
 
 def save_main_csv_zip(df: pd.DataFrame, root_directory: str) -> None:
 
-    main_data_path = get_main_csv_zip_path(root_directory)
+    df = df.reindex(sorted(df.columns), axis=1)
 
+    main_data_path = get_main_csv_zip_path(root_directory)
     temp_file = main_data_path.with_suffix(".tmp")
     df.to_csv(
         temp_file,

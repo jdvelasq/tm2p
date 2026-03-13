@@ -58,13 +58,13 @@ class PubMed(BaseIngest):
     def ingestion_pipeline(self) -> tuple[tuple[str, list[Step]], ...]:
 
         from ._intern.phases.p02_compress import build_pubmed_compress_steps
-        from ._intern.phases.p03_pars import build_pubmed_parsing_steps
-        from ._intern.phases.p04_struct_stand import build_pubmed_struct_stand_steps
-        from ._intern.phases.p05_field_normal import build_pubmed_field_normal_steps
+        from ._intern.phases.p03_pars import build_pubmed_pars_steps
+        from ._intern.phases.p05_struct_stand import build_pubmed_struct_stand_steps
+        from ._intern.phases.p06_field_normal import build_pubmed_field_normal_steps
 
         return (
             (self._COMPRESS, build_pubmed_compress_steps(self.params)),
-            (self._PARSING, build_pubmed_parsing_steps(self.params)),
+            (self._PARSING, build_pubmed_pars_steps(self.params)),
             (self._STRUCT_STAND, build_pubmed_struct_stand_steps(self.params)),
             (self._FIELD_NORMAL, build_pubmed_field_normal_steps(self.params)),
             #
