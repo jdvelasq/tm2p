@@ -5,7 +5,7 @@ from tm2p.enum import Field
 from ...oper.transform_col import transform_column
 
 
-def normalize_auth_raw(root_directory: str) -> int:
+def s01_normal_openalex_auth_raw(root_directory: str) -> int:
 
     def _normalize_row(series):
 

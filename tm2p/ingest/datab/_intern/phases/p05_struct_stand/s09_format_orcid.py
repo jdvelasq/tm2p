@@ -8,6 +8,7 @@ def s09_format_orcid(root_directory: str) -> int:
     df[Field.ORCID.value] = df[Field.ORCID.value].str.replace(
         "https://orcid.org/", "", regex=False
     )
+    df = df.replace("ORCID: ", "ORCID:", regex=False)
     save_main_csv_zip(df, root_directory)
 
     return 1

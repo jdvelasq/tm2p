@@ -3,6 +3,8 @@ from pprint import pprint
 
 import pandas as pd  # type: ignore
 
+from tm2p import Field
+
 
 def view_dataframe():
 
@@ -20,6 +22,7 @@ def view_dataframe():
         #     df.pop("GCR_WOS_FORMAT")
         txt_filepath = Path(folder + ".txt")
         df = df.head(50)
+        df = df[[Field.AUTHID_RAW.value, Field.AUTH_RAW.value]]
         with open(txt_filepath, "w", encoding="utf-8") as txt_file:
             txt_file.write(df.to_string(index=False))
 

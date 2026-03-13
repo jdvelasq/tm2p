@@ -3,7 +3,7 @@ from tm2p.enum import Field
 from ...oper.transform_col import transform_column
 
 
-def repair_gcs(root_directory: str) -> int:
+def s04_repair_gcs(root_directory: str) -> int:
 
     return transform_column(
         source=Field.GCS,
