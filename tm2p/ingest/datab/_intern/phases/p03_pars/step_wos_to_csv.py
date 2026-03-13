@@ -97,7 +97,7 @@ def _record_to_mapping(records: list[str]) -> list[dict[str, str]]:
     for m in mappings:
         current_mapping = {}
         for key, value in m.items():
-            if key[:2] == "AB" or key[:2] == "TI":
+            if key[:2] in ("AB", "TI", "OI", "DE", "ID"):
                 current_mapping[key] = " ".join(value)
             else:
                 current_mapping[key] = "; ".join(value)

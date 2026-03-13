@@ -17,7 +17,7 @@ def build_scopus_struct_stand_steps(params: Params) -> list[Step]:
     from .s08_format_src_iso4 import s08_format_src_iso4
     from .s09_format_orcid import s09_format_orcid
     from .s10_format_doi import s10_format_doi
-    from .s11_format_doctype import s11_format_doctype
+    from .s11_format_doctype_pubtype import s11_format_doctype_pubtype
     from .s12_set_scopus_datab import s12_set_scopus_datab
 
     common_kwargs = {"root_directory": params.root_directory}
@@ -75,7 +75,7 @@ def build_scopus_struct_stand_steps(params: Params) -> list[Step]:
         ),
         Step(
             name="Formating DOCTYPE",
-            function=s11_format_doctype,
+            function=s11_format_doctype_pubtype,
             kwargs=common_kwargs,
         ),
         Step(

@@ -11,7 +11,7 @@ MAIN_COLUMNS = frozenset(
         Field.AUTH_RAW.value,
         Field.AUTHKW_RAW.value,
         Field.GCS.value,
-        Field.DOCTYPE_RAW.value,
+        Field.DOCTYPE.value,
         Field.DOI.value,
         Field.IDXKW_RAW.value,
         Field.PG_FIRST.value,

@@ -36,8 +36,8 @@ def s03_disambig_auth_norm(root_directory: str) -> int:
         )
 
     count = transform_column(
-        source=Field.AUTHID_NORM,
-        target=Field.AUTH_DISAMB,
+        source=Field.AUTHID_RAW,
+        target=Field.AUTH_NORM,
         function=_disambiguate,
         root_directory=root_directory,
     )
@@ -49,23 +49,30 @@ def _build_author_mapping(root_directory: str) -> dict[str, str]:
 
     df = load_main_csv_zip(
         root_directory,
-        usecols=[Field.AUTH_NORM.value, Field.AUTHID_NORM.value],
+        usecols=[Field.AUTH_NORM.value, Field.AUTHID_RAW.value],
     )
+    df = df.dropna()
 
     df[Field.AUTH_NORM.value] = df[Field.AUTH_NORM.value].str.split("; ")
-    df[Field.AUTHID_NORM.value] = df[Field.AUTHID_NORM.value].str.split("; ")
+    df[Field.AUTHID_RAW.value] = df[Field.AUTHID_RAW.value].str.split("; ")
+
+    for _, row in df.iterrows():
+        if len(row[Field.AUTH_NORM.value]) != len(row[Field.AUTHID_RAW.value]):
+            raise ValueError(
+                f"Mismatch in number of authors and author IDs for row {_}"
+            )
 
     df = df.explode(
         [
             Field.AUTH_NORM.value,
-            Field.AUTHID_NORM.value,
+            Field.AUTHID_RAW.value,
         ]
     )
 
     df[Field.AUTH_NORM.value] = df[Field.AUTH_NORM.value].str.strip()
-    df[Field.AUTHID_NORM.value] = df[Field.AUTHID_NORM.value].str.strip()
+    df[Field.AUTHID_RAW.value] = df[Field.AUTHID_RAW.value].str.strip()
 
-    df = df.drop_duplicates(subset=[Field.AUTHID_NORM.value])
+    df = df.drop_duplicates(subset=[Field.AUTHID_RAW.value])
 
     df = df.sort_values(Field.AUTH_NORM.value)
     df["counter"] = df.groupby(Field.AUTH_NORM.value).cumcount()
@@ -77,7 +84,7 @@ def _build_author_mapping(root_directory: str) -> dict[str, str]:
 
     return dict(
         zip(
-            df[Field.AUTHID_NORM.value],
+            df[Field.AUTHID_RAW.value],
             df[Field.AUTH_NORM.value],
         )
     )

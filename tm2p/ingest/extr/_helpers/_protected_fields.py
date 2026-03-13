@@ -16,7 +16,7 @@ PROTECTED_FIELDS = [
     Field.CODEN.value,
     Field.CORRESPOND_ADDR.value,
     Field.TITLE_RAW.value,
-    Field.DOCTYPE_RAW.value,
+    Field.DOCTYPE.value,
     Field.DOI.value,
     Field.EID.value,
     Field.IDXKW_RAW.value,

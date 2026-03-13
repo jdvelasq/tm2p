@@ -33,7 +33,7 @@ NAMES_TO_TM2 = {
     "primary_topic.display_name": Field.ASJC.value,
     "publication_date": Field.DATE.value,
     "publication_year": Field.YEAR.value,
-    "type": Field.DOCTYPE_RAW.value,
+    "type": Field.DOCTYPE.value,
 }
 
 

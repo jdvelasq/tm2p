@@ -142,9 +142,8 @@ class Field(Enum):
     # -------------------------------------------------------------------------
     # Document type
     # -------------------------------------------------------------------------
-    DOCTYPE_RAW = "DOCTYPE_RAW"
-    DOCTYPE_NORM = "DOCTYPE_NORM"
-    PUBTYPE_RAW = "PUBTYPE_RAW"  # WoS PT
+    DOCTYPE = "DOCTYPE"
+    PUBTYPE = "PUBTYPE"
     IS_RETRACTED = "IS_RETRACTED"
 
     # -------------------------------------------------------------------------

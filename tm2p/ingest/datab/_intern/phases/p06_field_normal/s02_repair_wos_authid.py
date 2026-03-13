@@ -16,10 +16,18 @@ def s02_repair_wos_authid(root_directory: str) -> int:
     )
 
     df = load_main_csv_zip(root_directory)
-    df[Field.AUTHID_NORM.value] = df.apply(_repair, axis=1)
+    df[Field.AUTHID_RAW.value] = df.apply(_repair, axis=1)
     save_main_csv_zip(df, root_directory)
 
-    return int(df[Field.AUTHID_NORM.value].notna().sum())
+    # for _, row in df.iterrows():
+    #     if len(row[Field.AUTH_NORM.value].split("; ")) != len(
+    #         row[Field.AUTHID_RAW.value].split("; ")
+    #     ):
+    #         raise ValueError(
+    #             f"Mismatch in number of authors and author IDs for row {_}"
+    #         )
+
+    return int(df[Field.AUTHID_RAW.value].notna().sum())
 
 
 def _repair(row):
@@ -31,27 +39,39 @@ def _repair(row):
 
 
 def _repair_na_row(row):
-    auth = row[Field.AUTH_NORM.value]
+    auth = row[Field.AUTH_FULL_NAME.value]
     auth = auth.split("; ")
     authid = [au.strip() + sequ_gener() for au in auth]
-    return "; ".join(authid)
+    authid = "; ".join(authid)
+
+    return authid
 
 
 def _repair_sequ(row):
 
-    auth = row[Field.AUTH_NORM.value]
+    auth = row[Field.AUTH_FULL_NAME.value]
     auth = auth.split("; ")
     auth = [au.strip() for au in auth]
 
     authid = row[Field.AUTHID_RAW.value]
+    authid = authid.lower()
     authid = authid.split("; ")
-    authid = [au.strip() for au in authid]
 
     result = []
-    for au, auid in zip(auth, authid):
-        if pd.isna(auid):
-            result.append(au.strip() + sequ_gener())
-        else:
-            result.append(auid.strip())
+    for au in auth:
+        au_short = au.split(" ")[0].lower()
+        found = False
+        for x in authid:
+            if au_short in x:
+                result.append(x.title())
+                found = True
+                continue
+        if found is False:
+            result.append(au + sequ_gener())
 
-    return "; ".join(result)
+    if len(result) != len(auth):
+        raise ValueError(f"Could not match all authors to their IDs for row {row.name}")
+
+    authid = "; ".join(result)
+
+    return authid

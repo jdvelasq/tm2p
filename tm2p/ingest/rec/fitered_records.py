@@ -37,7 +37,7 @@ from tm2p._intern.data_access import load_filtered_main_csv_zip
 AUTH_RAW = Field.AUTH_RAW.value
 GCS = Field.GCS.value
 LCS = Field.LCS.value
-PUBTYPE = Field.DOCTYPE_NORM.value
+PUBTYPE = Field.PUBTYPE.value
 RID = Field.RID.value
 TITLE_RAW = Field.TITLE_RAW.value
 YEAR = Field.YEAR.value

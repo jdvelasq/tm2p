@@ -42,7 +42,7 @@ NAMES_TO_TM2 = {
     "PL": Field.PUB_CTRY.value,  #          → Country of Publication
     "PMCID": Field.PMCID.value,  #          → PubMed Central ID
     "PMID": Field.PUBMED.value,  #          → PubMed ID
-    "PT": Field.PUBTYPE_RAW.value,  #       → Document Type
+    "PT": Field.PUBTYPE.value,  #       → Document Type
     "PUBM": Field.PUBLISHER.value,  #       → Publisher
     "RF": Field.N_GCR.value,  #             → Reference Count
     "RIN": Field.RIN.value,  #              → Retraction In

@@ -32,7 +32,7 @@ NAMES_TO_TM2 = {
     #
     # D
     #
-    "Document Type": Field.DOCTYPE_RAW.value,
+    "Document Type": Field.DOCTYPE.value,
     "DOI": Field.DOI.value,
     #
     # E
