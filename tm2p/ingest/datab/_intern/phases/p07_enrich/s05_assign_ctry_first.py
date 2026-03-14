@@ -18,6 +18,14 @@ def assign_ctry_first(root_directory: str) -> int:
         root_directory=root_directory,
     )
 
+    result = transform_column(
+        source=Field.CTRY_ISO2,
+        target=Field.CTRY_ISO2,
+        function=_fix_ctry,
+        root_directory=root_directory,
+        na_action="ignore",
+    )
+
     return result
 
 

@@ -26,10 +26,11 @@ def _create_ctry_col(root_directory: str) -> int:
             series = series.replace(pat, repl)
 
         ctry = series.str.split("; ")
-        ctry = ctry.apply(lambda x: [c.split(",")[-1] for c in x])
+        ctry = ctry.map(lambda x: [c.split(",")[-1] for c in x], na_action="ignore")
 
-        ctry = ctry.apply(
-            lambda x: ["[n/a]" if y not in country_names else y for y in x]
+        ctry = ctry.map(
+            lambda x: ["[UNKNOWN]" if y not in country_names else y for y in x],
+            na_action="ignore",
         )
 
         ctry = ctry.str.join("; ").str.strip().str.replace(".", "", regex=False)

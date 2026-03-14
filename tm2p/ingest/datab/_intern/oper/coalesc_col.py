@@ -36,26 +36,24 @@ Smoke test:
 from tm2p import Field
 
 from ._file_dispatch import get_file_operations
-from .data_file import DataFile
 
 
 def coalesce_column(
     source: Field,
     target: Field,
     root_directory: str,
-    file: DataFile = DataFile.MAIN,
+    na_action: str = "ignore",
 ) -> int:
 
     assert isinstance(source, Field)
     assert isinstance(target, Field)
     assert isinstance(root_directory, str)
-    assert isinstance(file, DataFile)
 
-    load_data, save_data, get_path = get_file_operations(file)
+    load_data, save_data, get_path = get_file_operations()
 
     dataframe = load_data(root_directory=root_directory, usecols=None)
 
-    if source.value not in dataframe.columns:
+    if source.value not in dataframe.columns and na_action != "ignore":
         raise KeyError(
             f"Source column '{source.value}' not found in {get_path(root_directory).name}"
         )

@@ -5,7 +5,7 @@ import pandas as pd  # type: ignore
 from tm2p import Field
 
 
-def assign_recno(root_directory):
+def s01_assign_recno(root_directory):
 
     database_file = Path(root_directory) / "ingest" / "process" / "main.csv.zip"
 

@@ -5,7 +5,7 @@ from tm2p._intern import Params
 from ...step import Step
 
 
-def build_wos_semant_keyword_prepar_steps(params: Params) -> list[Step]:
+def build_scopus_kw_prepar_steps(params: Params) -> list[Step]:
 
     from .s01_token_kw import s01_token_kw
 

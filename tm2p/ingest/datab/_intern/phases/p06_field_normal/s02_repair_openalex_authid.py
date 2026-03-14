@@ -9,10 +9,10 @@ from ._intern import sequ_gener
 def s02_repair_openalex_authid(root_directory: str) -> int:
 
     df = load_main_csv_zip(root_directory)
-    df[Field.AUTHID_NORM.value] = df.apply(_repair, axis=1)
+    df[Field.AUTHID_RAW.value] = df.apply(_repair, axis=1)
     save_main_csv_zip(df, root_directory)
 
-    return int(df[Field.AUTHID_NORM.value].notna().sum())
+    return int(df[Field.AUTHID_RAW.value].notna().sum())
 
 
 def _repair(row):
@@ -47,9 +47,13 @@ def _repair_sequ(row):
 
     result = []
     for au, auid in zip(auth, authid):
-        if pd.isna(auid):
+        if pd.isna(auid) or auid == "":
             result.append(au.strip() + sequ_gener())
         else:
             result.append(auid.strip())
+
+    if len(result) < len(auth):
+        n = len(auth) - len(result)
+        result += [sequ_gener() for _ in range(n)]
 
     return "; ".join(result)

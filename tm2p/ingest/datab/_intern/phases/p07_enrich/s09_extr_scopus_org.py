@@ -7,11 +7,6 @@ from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
 from tm2p.ingest.datab._intern.oper.ltwa_col import ltwa_column
 
-# from ...__affil._internals import (
-#     extract_country_name_from_string,
-#     extract_org_name_from_string,
-# )
-
 AFFIL_RAW = Field.AFFIL_RAW.value
 CTRY_AFFIL = Field.CTRY_AFFIL.value
 CTRY = Field.CTRY.value
@@ -114,14 +109,14 @@ def _create_country_columns(
     country_to_iso3 = load_builtin_mapping("country_to_alpha3.json")
 
     df[CTRY] = df[AFFIL_RAW].copy()
-    df[CTRY] = df[CTRY].fillna("[n/a]")
+    df[CTRY] = df[CTRY].fillna("[UNKNOWN]")
     df[CTRY] = df[CTRY].str.split("; ")
     df[CTRY] = df[CTRY].apply(
-        lambda affils: [country_mapping.get(affil, "[n/a]") for affil in affils],
+        lambda affils: [country_mapping.get(affil, "[UNKNOWN]") for affil in affils],
     )
     df[CTRY_ISO3] = df[CTRY].apply(
         lambda countries: [
-            country_to_iso3.get(country, "[n/a]") for country in countries
+            country_to_iso3.get(country, "[UNKNOWN]") for country in countries
         ]
     )
 
@@ -145,12 +140,14 @@ def _create_organization_column(
     df = df.copy()
 
     df[ORG] = df[AFFIL_RAW].copy()
-    df[ORG] = df[ORG].fillna("[n/a]")
+    df[ORG] = df[ORG].fillna("[UNKNOWN]")
     df[ORG] = df[ORG].str.split("; ")
     df[ORG] = df[ORG].apply(
-        lambda affils: [organization_mapping.get(affil, "[n/a]") for affil in affils]
+        lambda affils: [
+            organization_mapping.get(affil, "[UNKNOWN]") for affil in affils
+        ]
     )
-    df[ORG_FIRST] = df[ORG].map(lambda orgs: orgs[0] if orgs else "[n/a]")
+    df[ORG_FIRST] = df[ORG].map(lambda orgs: orgs[0] if orgs else "[UNKNOWN]")
     df[ORG] = df[ORG].str.join("; ")
 
     return df

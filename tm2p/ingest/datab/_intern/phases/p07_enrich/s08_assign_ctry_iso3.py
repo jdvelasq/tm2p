@@ -13,7 +13,7 @@ def s08_assign_ctry_iso3(root_directory: str) -> int:
         series = series.str.split("; ")
         series = series.map(
             lambda countries: [
-                country_to_iso3.get(country, "[n/a]") for country in countries
+                country_to_iso3.get(country, "[UNKNOWN]") for country in countries
             ],
             na_action="ignore",
         )

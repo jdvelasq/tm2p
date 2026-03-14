@@ -62,7 +62,7 @@ class CreateThesaurus(
         mapping: dict[str, list[str]] = {}
 
         for term in terms:
-            if term == ["[n/a]"]:
+            if term == ["[UNKNOWN]"]:
                 continue
             organization, affil = term
             if organization not in mapping:

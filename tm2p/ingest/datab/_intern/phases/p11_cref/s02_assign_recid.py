@@ -55,7 +55,7 @@ def _get_page_start(dataframe):
     )
 
 
-def assign_recid(root_directory: str) -> int:
+def s02_assign_recid(root_directory: str) -> int:
 
     #
     # Create a WoS style reference column.

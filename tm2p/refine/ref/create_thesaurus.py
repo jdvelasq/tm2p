@@ -61,10 +61,10 @@ class CreateThesaurus(
         mapping: dict[str, list[str]] = {}
 
         for term in terms:
-            if term == ["[n/a]"]:
+            if term == ["[UNKNOWN]"]:
                 continue
             rec_id, ref = term
-            if rec_id == "[n/a]":
+            if rec_id == "[UNKNOWN]":
                 continue
             if rec_id not in mapping:
                 mapping[rec_id] = []

@@ -1,7 +1,6 @@
 from .coalesc_col import coalesce_column
 from .copy_col import copy_column
 from .count_col_item import count_column_items
-from .data_file import DataFile
 from .extr_upperc import extract_uppercase
 from .ltwa_col import ltwa_column
 from .merge_col import merge_columns
@@ -15,7 +14,6 @@ __all__ = [
     "coalesce_column",
     "copy_column",
     "count_column_items",
-    "DataFile",
     "extract_uppercase",
     "ltwa_column",
     "merge_columns",

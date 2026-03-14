@@ -12,6 +12,6 @@ def extract_country_name_from_string(affiliation: str) -> str:
 
     country_names = load_builtin_word_list("country_names.txt")
     if country not in country_names:
-        country = "[n/a]"
+        country = "[UNKNOWN]"
 
     return country

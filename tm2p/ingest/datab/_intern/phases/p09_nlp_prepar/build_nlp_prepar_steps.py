@@ -6,7 +6,7 @@ from tm2p._intern import Params
 from ...step import Step
 
 
-def build_semant_nlp_prepar_steps(params: Params) -> list[Step]:
+def build_nlp_prepar_steps(params: Params) -> list[Step]:
 
     from .s01_tokenize_raw_abstract import s01_tokenize_raw_abstract
     from .s02_tokenize_raw_title import s02_tokenize_raw_title

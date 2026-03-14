@@ -13,7 +13,7 @@ def s06_assign_region(root_directory: str) -> int:
         series = series.str.split("; ")
         series = series.map(
             lambda countries: [
-                country_to_iso3.get(country, "[n/a]") for country in countries
+                country_to_iso3.get(country, "[UNKNOWN]") for country in countries
             ],
             na_action="ignore",
         )

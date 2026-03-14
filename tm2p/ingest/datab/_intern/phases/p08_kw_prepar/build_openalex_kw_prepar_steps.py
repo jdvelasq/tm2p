@@ -6,7 +6,7 @@ from tm2p._intern import Params
 from ...step import Step
 
 
-def build_openalex_semant_keyword_prepar_steps(params: Params) -> list[Step]:
+def build_openalex_kw_prepar_steps(params: Params) -> list[Step]:
 
     from .s01_token_kw import s01_token_kw
     from .s02_correct_hyphen_word import s02_correct_hyphen_word

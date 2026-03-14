@@ -8,7 +8,7 @@ GCR_NORM = Field.GCR_WOS_FORMAT.value
 LCR_NORM = Field.LCR_NORM.value
 
 
-def normalize_local_references(root_directory: str) -> int:
+def s04_normalize_local_references(root_directory: str) -> int:
 
     df = load_main_csv_zip(root_directory=root_directory)
     main_rid = df[RID].dropna().drop_duplicates().to_list()

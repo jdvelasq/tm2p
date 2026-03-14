@@ -31,7 +31,7 @@ SELECTED_FIELDS = [
 ]
 
 
-def normalize_global_references(root_directory: str) -> int:
+def s03_normalize_global_references(root_directory: str) -> int:
 
     mapping = _generate_gcr_thesaurus_file(root_directory=root_directory)
     result = _process_references(mapping=mapping, root_directory=root_directory)
@@ -312,10 +312,10 @@ def _process_references(
 #     dataframe = dataframe.explode(Field.GCR_RID.value)  # type: ignore
 #     dataframe[Field.GCR_RID.value] = dataframe[Field.GCR_RID.value].str.strip()
 #     dataframe["rec_id"] = dataframe[Field.GCR_RID.value].apply(
-#         lambda x: x.split(" @ ")[0].strip() if " @ " in x else "[n/a]"
+#         lambda x: x.split(" @ ")[0].strip() if " @ " in x else "[UNKNOWN]"
 #     )
 #     dataframe["ref"] = dataframe[Field.GCR_RID.value].apply(
-#         lambda x: x.split(" @ ")[1].strip() if " @ " in x else "[n/a]"
+#         lambda x: x.split(" @ ")[1].strip() if " @ " in x else "[UNKNOWN]"
 #     )
 
 #     # counting = dataframe["ref"].value_counts()
@@ -333,7 +333,7 @@ def _process_references(
 #     with open(filepath, "w", encoding="utf-8") as file:
 #         for _, row in groupby_df.iterrows():
 #             rec_id = row["rec_id"]
-#             if rec_id == "[n/a]":
+#             if rec_id == "[UNKNOWN]":
 #                 continue
 #             file.write(f"{rec_id}\n")
 #             for ref in row["ref"]:

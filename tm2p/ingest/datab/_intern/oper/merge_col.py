@@ -3,23 +3,26 @@ import pandas as pd  # type: ignore
 from tm2p import Field
 
 from ._file_dispatch import get_file_operations
-from .data_file import DataFile
 
 
 def merge_columns(
     sources: tuple[Field, ...],
     target: Field,
     root_directory: str,
-    file: DataFile = DataFile.MAIN,
+    na_action: str = "ignore",
 ) -> int:
 
-    load_data, save_data, _ = get_file_operations(file)
+    load_data, save_data, _ = get_file_operations()
 
     dataframe = load_data(root_directory=root_directory, usecols=None)
 
     existing_sources = [col for col in sources if col.value in dataframe.columns]
     if not existing_sources:
-        return 0
+        if na_action == "ignore":
+            return 0
+        raise KeyError(
+            f"None of the source columns {[col.value for col in sources]} found"
+        )
 
     all_items = None
     for source in existing_sources:

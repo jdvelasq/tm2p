@@ -209,7 +209,7 @@ def extract_org_name_from_string(affiliation: str) -> str:
     parts = [p for p in parts if p]
 
     if not parts:
-        return "[n/a]"
+        return "[UNKNOWN]"
 
     parts = _remove_duplicate_segments(parts)
 
@@ -234,4 +234,4 @@ def extract_org_name_from_string(affiliation: str) -> str:
     if len(parts) >= 1 and _is_organization(parts[0]):
         return parts[0]
 
-    return "[n/a]"
+    return "[UNKNOWN]"

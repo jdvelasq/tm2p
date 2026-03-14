@@ -16,10 +16,10 @@ def s02_repair_pubmed_authid(root_directory: str) -> int:
     )
 
     df = load_main_csv_zip(root_directory)
-    df[Field.AUTHID_NORM.value] = df.apply(_repair, axis=1)
+    df[Field.AUTHID_RAW.value] = df.apply(_repair, axis=1)
     save_main_csv_zip(df, root_directory)
 
-    return int(df[Field.AUTHID_NORM.value].notna().sum())
+    return int(df[Field.AUTHID_RAW.value].notna().sum())
 
 
 def _repair(row):

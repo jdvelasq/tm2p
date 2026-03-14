@@ -9,7 +9,6 @@ from tm2p._intern import stdout_to_stderr
 from tm2p._intern.packag_data.word_lists import load_builtin_word_list
 
 from ._file_dispatch import get_file_operations
-from .data_file import DataFile
 from .helpers import (
     extract_urls,
     join_consecutive_descriptors,
@@ -199,14 +198,16 @@ def uppercase_keyterms(
     source: Field,
     target: Field,
     root_directory: str,
-    file: DataFile = DataFile.MAIN,
+    na_action: str = "ignore",
 ) -> int:
 
-    load_data, save_data, get_path = get_file_operations(file)
+    load_data, save_data, get_path = get_file_operations()
 
     dataframe = load_data(root_directory=root_directory, usecols=None)
 
     if source.value not in dataframe.columns:
+        if na_action == "ignore":
+            return 0
         raise KeyError(
             f"Source column '{source.value}' not found in {get_path(root_directory).name}"
         )

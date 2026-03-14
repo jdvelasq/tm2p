@@ -10,8 +10,8 @@ def s04_extr_pubmed_ctry(root_directory: str) -> int:
         return series.str.split(";").str[0].str.strip()
 
     return transform_column(
-        source=Field.AUTH_NORM,
-        target=Field.AUTH_FIRST,
+        source=Field.AFFIL_RAW,
+        target=Field.CTRY,
         function=_extract,
         root_directory=root_directory,
     )
