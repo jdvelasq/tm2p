@@ -237,11 +237,23 @@ class ExtractAcronyms(
                 self.acronyms[acr_text] = {def_text}
 
     # -------------------------------------------------------------------------
+    def remove_invalid_acronyms(self):
+
+        valid_acronyms = {}
+        for acr_text, definitions in self.acronyms.items():
+            if not any(c.islower() for c in acr_text):
+                continue
+            valid_acronyms[acr_text] = definitions
+
+        self.acronyms = valid_acronyms
+
+    # -------------------------------------------------------------------------
     def run(self):
 
         self.extract_acronyms_from_keywords_with_parentheses()
         self.extract_acronyms_in_keywords()
         self.extract_acronyms_from_abstracts()
+        self.remove_invalid_acronyms()
         return self.acronyms
 
 
