@@ -18,15 +18,13 @@ def _repair_ctry_iso2(root_directory: str) -> None:
     def _repair(row):
         ctry_iso2 = row[Field.CTRY_ISO2.value]
         if pd.isna(ctry_iso2):
-            if pd.isna(row[Field.AUTH_FULL_NAME.value]):
-                return "[UNKNOWN]"
-            n_auth = row[Field.AUTH_FULL_NAME.value].count("; ") + 1
-            return "; ".join(["[UNKNOWN]"] * n_auth)
+            return "[UNKNOWN]"
         ctry_iso2 = ctry_iso2.split("; ")
         ctry_iso2 = [crty.strip() for crty in ctry_iso2]
         ctry_iso2 = [ctry if ctry != "" else "[UNKNOWN]" for ctry in ctry_iso2]
         if all(ctry == "[UNKNOWN]" for ctry in ctry_iso2):
             return "[UNKNOWN]"
+        ctry_iso2 = [ctry for ctry in ctry_iso2 if ctry != "[UNKNOWN]"]
         return "; ".join(ctry_iso2)
 
     df = load_main_csv_zip(root_directory=root_directory)

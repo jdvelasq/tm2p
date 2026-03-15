@@ -1,6 +1,5 @@
 import string
 import sys
-from pathlib import Path
 from typing import Optional
 
 import pandas as pd  # type: ignore
@@ -9,6 +8,30 @@ from textblob import TextBlob  # type: ignore
 
 from tm2p import Field
 from tm2p._intern import stdout_to_stderr
+from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
+
+
+def s03_extract_textblob_phrases(root_directory: str) -> int:
+
+    df = load_main_csv_zip(root_directory=root_directory)
+
+    with stdout_to_stderr():
+        progress_bar = True
+        pandarallel.initialize(progress_bar=progress_bar, verbose=0)
+        df[Field.NP_TEXTBLOB.value] = df.parallel_apply(  # type: ignore
+            _process_row,
+            axis=1,
+        )
+        sys.stderr.write("\n")
+
+    save_main_csv_zip(df=df, root_directory=root_directory)
+
+    phrases = df[Field.NP_TEXTBLOB.value].dropna()
+    phrases = phrases.str.split("; ").explode()
+    phrases = phrases.drop_duplicates()
+    n_phrases = len(phrases)
+
+    return n_phrases
 
 
 def _process_row(row: pd.Series) -> Optional[str]:
@@ -43,45 +66,6 @@ def _process_row(row: pd.Series) -> Optional[str]:
     ]
 
     phrases = list(dict.fromkeys(phrases))
-    result = "; ".join(phrases)
+    result = "; ".join(sorted(phrases))
 
     return result
-
-
-def s03_extract_textblob_phrases(root_directory: str) -> int:
-
-    database_file = Path(root_directory) / "ingest" / "process" / "main.csv.zip"
-
-    if not database_file.exists():
-        raise AssertionError(f"{database_file.name} not found")
-
-    dataframe = pd.read_csv(
-        database_file,
-        encoding="utf-8",
-        compression="zip",
-        low_memory=False,
-    )
-
-    with stdout_to_stderr():
-        progress_bar = True
-        pandarallel.initialize(progress_bar=progress_bar, verbose=0)
-        dataframe[Field.NP_TEXTBLOB.value] = dataframe.parallel_apply(  # type: ignore
-            _process_row,
-            axis=1,
-        )
-        sys.stderr.write("\n")
-
-    dataframe.to_csv(
-        database_file,
-        sep=",",
-        encoding="utf-8",
-        index=False,
-        compression="zip",
-    )
-
-    phrases = dataframe[Field.NP_TEXTBLOB.value].dropna()
-    phrases = phrases.str.split("; ").explode()
-    phrases = phrases.drop_duplicates()
-    n_phrases = len(phrases)
-
-    return n_phrases

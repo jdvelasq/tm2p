@@ -11,6 +11,7 @@ def build_review_steps(params: Params) -> list[Step]:
     from .s01_extract_abstract_suffixes import s01_extract_abstract_suffixes
     from .s02_extract_section_headers import s02_extract_section_headers
     from .s03_extract_acronyms import s03_extract_acronyms
+    from .s04_generate_review_table import s04_generate_review_table
 
     common_kwargs = {"root_directory": params.root_directory}
 
@@ -28,6 +29,11 @@ def build_review_steps(params: Params) -> list[Step]:
         Step(
             name="Extracting acronyms",
             function=s03_extract_acronyms,
+            kwargs=common_kwargs,
+        ),
+        Step(
+            name="Generating review table",
+            function=s04_generate_review_table,
             kwargs=common_kwargs,
         ),
     ]

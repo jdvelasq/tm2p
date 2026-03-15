@@ -76,7 +76,9 @@ def _get_source_title(dataframe):
 
 
 def _get_year(dataframe):
-    return ", " + dataframe[Field.YEAR.value].map(str)
+    return ", " + dataframe[Field.YEAR.value].map(str).str.replace(
+        ".0", "", regex=False
+    )
 
 
 def _get_volume(dataframe):
@@ -98,4 +100,4 @@ def _get_page_start(dataframe):
 def _get_doi(dataframe):
     if Field.DOI.value not in dataframe.columns:
         return ""
-    return dataframe[Field.DOI.value].map(str)
+    return dataframe[Field.DOI.value].map(str).str.replace("^nan$", "", regex=True)
