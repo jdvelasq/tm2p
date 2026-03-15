@@ -2,11 +2,13 @@ from tm2p import Field
 from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 
 
-def s05_compute_lcs(root_directory: str) -> int:
+def s03_comput_lcs(root_directory: str) -> int:
 
     df = load_main_csv_zip(root_directory=root_directory, usecols=None)
+    if Field.GCR_WOS_FORMAT.value not in df.columns:
+        return 0
 
-    rec_id = df[Field.RID.value].tolist()
+    rec_id = df[Field.REC_ID.value].tolist()
 
     df[Field.LCS.value] = df[Field.GCR_WOS_FORMAT.value]
     df[Field.LCS.value] = df[Field.LCS.value].fillna("")

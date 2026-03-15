@@ -9,6 +9,19 @@ from tm2p._intern.packag_data.word_lists import (
 )
 
 
+def s04_update_builtin_noun_phrases(root_directory: str) -> int:
+
+    df = _load_dataframe(root_directory)
+    builtin_noun_phrases = _load_builtin_noun_phrases()
+    user_noun_phrases = _extract_raw_noun_phrases(df)
+    keywords = _extract_frequent_raw_keywords(df)
+    keywords = keywords - user_noun_phrases
+    builtin_noun_phrases.update(keywords)
+    save_text_processing_terms("noun_phrases.txt", sorted(builtin_noun_phrases))
+
+    return len(keywords)
+
+
 def _load_dataframe(root_directory: str) -> pd.DataFrame:
 
     database_file = Path(root_directory) / "ingest" / "process" / "main.csv.zip"
@@ -76,16 +89,3 @@ def _extract_frequent_raw_keywords(dataframe: pd.DataFrame) -> set:
 def _load_builtin_noun_phrases() -> set:
     buildin_noun_phrases = load_builtin_word_list("noun_phrases.txt")
     return set(buildin_noun_phrases)
-
-
-def s03_update_builtin_noun_phrases(root_directory: str) -> int:
-
-    dataframe = _load_dataframe(root_directory)
-    builtin_noun_phrases = _load_builtin_noun_phrases()
-    user_noun_phrases = _extract_raw_noun_phrases(dataframe)
-    keywords = _extract_frequent_raw_keywords(dataframe)
-    keywords = keywords - user_noun_phrases
-    builtin_noun_phrases.update(keywords)
-    save_text_processing_terms("noun_phrases.txt", sorted(builtin_noun_phrases))
-
-    return len(keywords)

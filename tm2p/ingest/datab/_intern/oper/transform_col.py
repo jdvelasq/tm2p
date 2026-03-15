@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Optional
 
 from pandas import Series  # type: ignore
 
@@ -12,7 +12,7 @@ def transform_column(
     target: Field,
     function: Callable[[Series], Series],
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, get_path = get_file_operations()

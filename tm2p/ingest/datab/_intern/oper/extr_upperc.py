@@ -1,4 +1,6 @@
-import pandas as pd  # type: ignore
+from typing import Optional
+
+import pandas as pd
 
 from tm2p import Field
 from tm2p._intern.packag_data import load_builtin_word_list
@@ -23,7 +25,7 @@ def extract_uppercase(
     source: Field,
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, get_path = get_file_operations()

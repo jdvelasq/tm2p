@@ -9,6 +9,7 @@ def s10_assign_org_first(root_directory: str) -> int:
         target=Field.ORG_FIRST,
         function=_extract_org_first,
         root_directory=root_directory,
+        na_action="ignore",
     )
 
     result = transform_column(
@@ -16,6 +17,7 @@ def s10_assign_org_first(root_directory: str) -> int:
         target=Field.ORG_RAW,
         function=_fix_org,
         root_directory=root_directory,
+        na_action="ignore",
     )
 
     return result

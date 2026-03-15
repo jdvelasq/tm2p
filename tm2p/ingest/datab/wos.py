@@ -34,7 +34,9 @@ class WoS(BaseIngest):
     _08_SEMANT_KW_PREPAR = "Perparing KW"
     _09_SEMANT_NLP_PREPAR = "Preparing semanitc NLP"
     _10_CONCEPT = "Extracting concepts"
-    _12_REVIEW = "Reviewing"
+    _11_REC = "Assigning Rec No and Rec ID"
+    _12_CIT_REF = "Processing citation references"
+    _13_REVIEW = "Reviewing"
 
     # ------------------------------------------------------------------------
     # Execution
@@ -51,7 +53,9 @@ class WoS(BaseIngest):
         from ._intern.phases.p08_kw_prepar import build_wos_kw_prepar_steps
         from ._intern.phases.p09_nlp_prepar import build_nlp_prepar_steps
         from ._intern.phases.p10_concept import build_concept_steps
-        from ._intern.phases.p12_review import build_review_steps
+        from ._intern.phases.p11_rec import build_rec_steps
+        from ._intern.phases.p12_cit_ref import build_cit_ref_steps
+        from ._intern.phases.p13_review import build_review_steps
 
         return (
             (self._02_COMPRESS, build_wos_compress_steps(self.params)),
@@ -60,11 +64,10 @@ class WoS(BaseIngest):
             (self._05_STRUCT_STAND, build_wos_struct_stand_steps(self.params)),
             (self._06_FIELD_NORMAL, build_wos_field_normal_steps(self.params)),
             (self._07_ENRICH, build_wos_enrich_steps(self.params)),
-            (
-                self._08_SEMANT_KW_PREPAR,
-                build_wos_kw_prepar_steps(self.params),
-            ),
+            (self._08_SEMANT_KW_PREPAR, build_wos_kw_prepar_steps(self.params)),
             (self._09_SEMANT_NLP_PREPAR, build_nlp_prepar_steps(self.params)),
             (self._10_CONCEPT, build_concept_steps(self.params)),
-            (self._12_REVIEW, build_review_steps(self.params)),
+            (self._11_REC, build_rec_steps(self.params)),
+            (self._12_CIT_REF, build_cit_ref_steps(self.params)),
+            (self._13_REVIEW, build_review_steps(self.params)),
         )

@@ -63,7 +63,7 @@ class KWICConcordance(
 
         dataframe = dataframe.set_index(
             pd.Index(
-                dataframe[Field.RID.value] + " / " + dataframe[Field.TITLE_RAW.value]
+                dataframe[Field.REC_ID.value] + " / " + dataframe[Field.TITLE_RAW.value]
             )
         )
 

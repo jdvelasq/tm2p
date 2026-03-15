@@ -6,8 +6,8 @@ class Field(Enum):
     # -------------------------------------------------------------------------
     # Records
     # -------------------------------------------------------------------------
-    RNO = "RNO"  # Record number
-    RID = "RID"  # Record ID
+    REC_NO = "RNO"  # Record number
+    REC_ID = "RID"  # Record ID
     ART_NO = "ART_NO"  # Record  (Scopus)
     DATABASE = "DATABASE"  # Database (Scopus, WOS, OpenAlex, etc.)
 
@@ -299,6 +299,9 @@ class Field(Enum):
     # -------------------------------------------------------------------------
     CONCEPT_RAW = "CONCEPT_RAW"
     CONCEPT_NORM = "CONCEPT_NORM"
+    WORD_RAW = "WORD_RAW"
+    WORD_NORM = "WORD_NORM"
+    DESCRIPTOR_RAW = "DESCRIPTOR_RAW"
 
     # ======================================================================= #
     #                                                                         #

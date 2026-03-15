@@ -1,5 +1,6 @@
 import re
 import sys
+from typing import Optional
 
 import pandas as pd  # type: ignore
 from pandarallel import pandarallel  # type: ignore
@@ -198,7 +199,7 @@ def uppercase_keyterms(
     source: Field,
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, get_path = get_file_operations()

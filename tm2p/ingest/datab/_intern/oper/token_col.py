@@ -1,10 +1,11 @@
 # CODE_REVIEW: 2026-01-23
 
 import unicodedata
+from typing import Optional
 
 import contractions  # type: ignore
 import pandas as pd  # type: ignore
-from nltk.tokenize import word_tokenize  # type: ignore
+from nltk.tokenize import word_tokenize
 
 from tm2p import Field
 from tm2p._intern.packag_data import load_builtin_mapping
@@ -75,7 +76,7 @@ def tokenize_column(
     source: Field,
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, get_path = get_file_operations()

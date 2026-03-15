@@ -91,7 +91,7 @@ PERCENTAGE = "PERCENTAGE"
 RANK_OCC = "RANK_OCC"
 RANK_GCS = "RANK_GCS"
 RANK_LCS = "RANK_LCS"
-RID = Field.RID.value
+RID = Field.REC_ID.value
 
 
 #

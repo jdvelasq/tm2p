@@ -1,4 +1,6 @@
-import pandas as pd  # type: ignore
+from typing import Optional
+
+import pandas as pd
 
 from tm2p import Field
 
@@ -9,7 +11,7 @@ def merge_columns(
     sources: tuple[Field, ...],
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, _ = get_file_operations()

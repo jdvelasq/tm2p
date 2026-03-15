@@ -18,15 +18,6 @@ Smoke test - fintech - successful import:
 
 
 from ._intern import Step
-
-# from .._intern._affil.build_steps import build_affiliation_steps
-# from .._intern._auth.build_steps import build_author_steps
-# from .._intern._concept.build_steps import build_concept_steps
-# from .._intern._doc.build_steps import build_document_steps
-# from .._intern._kw.build_steps import build_keyword_steps
-# from .._intern._ref.build_steps import build_reference_steps
-# from .._intern._review.build_steps import build_review_steps
-# from .._intern._src.build_steps import build_source_title_steps
 from ._intern.base_ingest import BaseIngest
 
 __reviewed__ = "2026-01-28"
@@ -44,7 +35,9 @@ class PubMed(BaseIngest):
     _08_KW_PREPAR = "Perparing KW"
     _09_NLP_PREPAR = "Preparing semanitc NLP"
     _10_CONCEPT = "Extracting concepts"
-    _12_REVIEW = "Reviewing"
+    _11_REC = "Assigning Rec No and Rec ID"
+    _12_CIT_REF = "Processing citation references"
+    _13_REVIEW = "Reviewing"
 
     # ------------------------------------------------------------------------
     # Execution
@@ -61,7 +54,9 @@ class PubMed(BaseIngest):
         from ._intern.phases.p08_kw_prepar import build_pubmed_kw_prepar_steps
         from ._intern.phases.p09_nlp_prepar import build_nlp_prepar_steps
         from ._intern.phases.p10_concept import build_concept_steps
-        from ._intern.phases.p12_review import build_review_steps
+        from ._intern.phases.p11_rec import build_rec_steps
+        from ._intern.phases.p12_cit_ref import build_cit_ref_steps
+        from ._intern.phases.p13_review import build_review_steps
 
         return (
             (self._02_COMPRESS, build_pubmed_compress_steps(self.params)),
@@ -73,5 +68,7 @@ class PubMed(BaseIngest):
             (self._08_KW_PREPAR, build_pubmed_kw_prepar_steps(self.params)),
             (self._09_NLP_PREPAR, build_nlp_prepar_steps(self.params)),
             (self._10_CONCEPT, build_concept_steps(self.params)),
-            (self._12_REVIEW, build_review_steps(self.params)),
+            (self._11_REC, build_rec_steps(self.params)),
+            (self._12_CIT_REF, build_cit_ref_steps(self.params)),
+            (self._13_REVIEW, build_review_steps(self.params)),
         )

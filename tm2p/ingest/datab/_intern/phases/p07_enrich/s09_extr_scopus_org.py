@@ -7,6 +7,9 @@ from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
 from tm2p.ingest.datab._intern.oper.ltwa_col import ltwa_column
 
+from ._intern.extract_country_name import extract_country_name_from_string
+from ._intern.extract_org_name import extract_org_name_from_string
+
 AFFIL_RAW = Field.AFFIL_RAW.value
 CTRY_AFFIL = Field.CTRY_AFFIL.value
 CTRY = Field.CTRY.value
@@ -170,7 +173,7 @@ def _create_thesaurus_files(
 
         grouped_df = df.groupby("key", as_index=False)["value"].apply(list)  # type: ignore
 
-        filepath1 = Path(root_directory) / "ingest" / "processed/" / ("_" + filename)
+        filepath1 = Path(root_directory) / "ingest" / "process" / ("_" + filename)
         filepath2 = Path(root_directory) / "refine" / "thesaurus" / filename
 
         for filepath in [filepath1, filepath2]:

@@ -26,8 +26,8 @@ def _build_dicts(records):
 def records_to_dicts(dataframe):
 
     names_mapping = {
-        Field.RNO.value: "UT",
-        Field.RID.value: "AR",
+        Field.REC_NO.value: "UT",
+        Field.REC_ID.value: "AR",
         Field.TITLE_RAW.value: "TI",
         Field.AUTH_NORM.value: "AU",
         Field.GCS.value: "TC",

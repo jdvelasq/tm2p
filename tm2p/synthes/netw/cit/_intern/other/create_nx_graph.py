@@ -9,7 +9,7 @@ from tm2p.enum.column import CITED_UNIT, CITING_UNIT, OCC
 GCS = Field.GCS.value
 LCS = Field.LCS.value
 YEAR = Field.YEAR.value
-RID = Field.RID.value
+RID = Field.REC_ID.value
 LCR = Field.LCR_NORM.value
 
 

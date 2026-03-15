@@ -1,9 +1,10 @@
 import re
 import sys
 from functools import lru_cache
+from typing import Optional
 
 import pandas as pd  # type: ignore
-from pandarallel import pandarallel  # type: ignore
+from pandarallel import pandarallel
 
 from tm2p import Field
 from tm2p._intern import stdout_to_stderr
@@ -91,7 +92,7 @@ def uppercase_words(
     source: Field,
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, get_path = get_file_operations()

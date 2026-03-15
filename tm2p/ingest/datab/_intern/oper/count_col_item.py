@@ -32,6 +32,8 @@ Smoke test:
 
 """
 
+from typing import Optional
+
 from tm2p import Field
 
 from ._file_dispatch import get_file_operations
@@ -41,7 +43,7 @@ def count_column_items(
     source: Field,
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     assert isinstance(source, Field)

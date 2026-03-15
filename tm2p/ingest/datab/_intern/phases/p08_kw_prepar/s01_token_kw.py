@@ -40,6 +40,7 @@ def s01_token_kw(root_directory: str) -> int:
         root_directory=root_directory,
     )
 
+    df = load_main_csv_zip(root_directory)
     df = normalize_empty_strings(df)
     df = add_padding(df)
     df = remove_accents(df)

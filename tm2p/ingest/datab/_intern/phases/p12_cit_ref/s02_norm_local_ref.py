@@ -3,15 +3,18 @@ import pandas as pd  # type: ignore
 from tm2p import Field
 from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 
-RID = Field.RID.value
+REC_ID = Field.REC_ID.value
 GCR_NORM = Field.GCR_WOS_FORMAT.value
 LCR_NORM = Field.LCR_NORM.value
 
 
-def s04_normalize_local_references(root_directory: str) -> int:
+def s02_norm_local_ref(root_directory: str) -> int:
 
     df = load_main_csv_zip(root_directory=root_directory)
-    main_rid = df[RID].dropna().drop_duplicates().to_list()
+    main_rid = df[REC_ID].dropna().drop_duplicates().to_list()
+
+    if GCR_NORM not in df.columns:
+        return 0
 
     def extract(row):
         if pd.isna(row[GCR_NORM]):

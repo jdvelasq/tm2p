@@ -49,11 +49,15 @@ def _create_ctry_col(root_directory: str) -> int:
 def _create_ctry_thesaurus(root_directory: str) -> int:
 
     def _zip(row):
-        affil = row[Field.AFFIL_RAW].str.split("; ")
-        ctry = row[Field.CTRY].str.split("; ")
+
+        affil = row[Field.AFFIL_RAW.value]
+        ctry = row[Field.CTRY.value]
 
         if pd.isna(affil) or pd.isna(ctry):
             return pd.NA
+
+        affil = affil.split("; ")
+        ctry = ctry.split("; ")
 
         return list(zip(ctry, affil))
 
@@ -73,7 +77,7 @@ def _create_ctry_thesaurus(root_directory: str) -> int:
             "affil": ctry_affil.apply(lambda x: x[1]),
         }
     )
-    grouped = thdf.groupby("ctry", as_index=False).apply(list)
+    grouped = thdf.groupby("ctry", as_index=False).agg({"affil": list})
 
     filepath = Path(root_directory) / "refine" / "thesaurus" / "ctry.the.txt"
 

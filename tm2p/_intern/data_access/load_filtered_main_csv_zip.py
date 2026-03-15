@@ -130,17 +130,17 @@ def _filter_dataframe_by_match(params: Params, df: pd.DataFrame) -> pd.DataFrame
 
     for filter_name, filter_value in filters.items():
 
-        if filter_name.value == Field.RID.value:
+        if filter_name.value == Field.REC_ID.value:
 
             filtered_df = filtered_df.loc[
-                filtered_df[Field.RID.value].isin(filter_value), :
+                filtered_df[Field.REC_ID.value].isin(filter_value), :
             ]
 
         else:
 
             # Split the filter value into a list of strings
             filtered_df = filtered_df.loc[
-                :, [Field.RID.value, filter_name.value]
+                :, [Field.REC_ID.value, filter_name.value]
             ].copy()
             filtered_df.loc[:, filter_name.value] = filtered_df[
                 filter_name.value
@@ -160,7 +160,7 @@ def _filter_dataframe_by_match(params: Params, df: pd.DataFrame) -> pd.DataFrame
                 filtered_df[Field.RID.value].isin(filtered_df[Field.RID.value]), :
             ]
 
-    final_df = df.loc[df[Field.RID.value].isin(filtered_df[Field.RID.value]), :]
+    final_df = df.loc[df[Field.REC_ID.value].isin(filtered_df[Field.REC_ID.value]), :]
 
     return final_df
 

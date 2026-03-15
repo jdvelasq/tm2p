@@ -202,3 +202,7 @@ pubmed.txt
 scopus.txt
 wos.txt
 tm2p/ingest/datab/view_as_txt.py
+_openalex.txt
+_pubmed.txt
+_scopus.txt
+_wos.txt

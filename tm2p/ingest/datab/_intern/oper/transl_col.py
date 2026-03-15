@@ -1,3 +1,5 @@
+from typing import Optional
+
 from tm2p import Field
 from tm2p._intern.packag_data import load_builtin_mapping
 
@@ -8,7 +10,7 @@ def rename_column(
     source: Field,
     target: Field,
     root_directory: str,
-    na_action: str = "ignore",
+    na_action: Optional[str] = None,
 ) -> int:
 
     load_data, save_data, get_path = get_file_operations()

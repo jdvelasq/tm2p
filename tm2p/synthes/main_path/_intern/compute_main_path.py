@@ -14,7 +14,7 @@ from tm2p.enum import Field
 YEAR = Field.YEAR.value
 GCS = Field.GCS.value
 LCS = Field.LCS.value
-RID = Field.RID.value
+RID = Field.REC_ID.value
 LCR = Field.LCR_NORM.value
 
 

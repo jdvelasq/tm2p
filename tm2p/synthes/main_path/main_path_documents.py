@@ -88,7 +88,7 @@ class MainPathDocuments(
 
         #
         # build the filter
-        records_match = {Field.RID: articles_in_main_path}
+        records_match = {Field.REC_ID: articles_in_main_path}
 
         documents = (
             RecordViewer()

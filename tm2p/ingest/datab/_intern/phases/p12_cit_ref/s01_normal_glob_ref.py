@@ -17,7 +17,7 @@ AUTH_FIRST = Field.AUTH_FIRST.value
 AUTH_RAW = Field.AUTH_RAW.value
 GCR_NORM = Field.GCR_WOS_FORMAT.value
 GCR_RAW = Field.GCR_FREE_TEXT.value
-RID = Field.RID.value
+RID = Field.REC_ID.value
 SRC = Field.SRC_RAW.value
 TITLE = Field.TITLE_RAW.value
 YEAR = Field.YEAR.value
@@ -31,7 +31,12 @@ SELECTED_FIELDS = [
 ]
 
 
-def s03_normalize_global_references(root_directory: str) -> int:
+def s01_normal_glob_ref(root_directory: str) -> int:
+    return 0
+
+    df = load_main_csv_zip(root_directory=root_directory)
+    if Field.GCR_FREE_TEXT.value not in df.columns:
+        return 0
 
     mapping = _generate_gcr_thesaurus_file(root_directory=root_directory)
     result = _process_references(mapping=mapping, root_directory=root_directory)
@@ -59,14 +64,14 @@ def _merge_csv_zip_files(root_directory: str) -> pd.DataFrame:
     ref_df = load_references_csv_zip(root_directory=root_directory)
 
     if ref_df.empty:
-        main_df = main_df.sort_values(by=[Field.RID.value])  # type: ignore
+        main_df = main_df.sort_values(by=[Field.REC_ID.value])  # type: ignore
         return main_df  # type: ignore
 
     ref_df = ref_df[SELECTED_FIELDS].dropna()
 
     merged_df = pd.concat([main_df, ref_df], axis=0)
     merged_df = merged_df.drop_duplicates()
-    merged_df = merged_df.sort_values(by=[Field.RID.value])  # type: ignore
+    merged_df = merged_df.sort_values(by=[Field.REC_ID.value])  # type: ignore
 
     return merged_df
 

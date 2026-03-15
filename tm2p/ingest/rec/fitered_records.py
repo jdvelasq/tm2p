@@ -38,7 +38,7 @@ AUTH_RAW = Field.AUTH_RAW.value
 GCS = Field.GCS.value
 LCS = Field.LCS.value
 PUBTYPE = Field.PUBTYPE.value
-RID = Field.RID.value
+RID = Field.REC_ID.value
 TITLE_RAW = Field.TITLE_RAW.value
 YEAR = Field.YEAR.value
 

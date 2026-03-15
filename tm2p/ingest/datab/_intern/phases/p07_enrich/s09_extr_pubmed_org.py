@@ -7,6 +7,9 @@ from tm2p._intern.data_access import load_main_csv_zip, save_main_csv_zip
 from tm2p._intern.packag_data import load_builtin_mapping
 from tm2p.ingest.datab._intern.oper.ltwa_col import ltwa_column
 
+from ._intern.extract_country_name import extract_country_name_from_string
+from ._intern.extract_org_name import extract_org_name_from_string
+
 AFFIL_RAW = Field.AFFIL_RAW.value
 CTRY_AFFIL = Field.CTRY_AFFIL.value
 CTRY = Field.CTRY.value
@@ -20,11 +23,11 @@ ORG = Field.ORG_RAW.value
 
 def s09_extr_pubmed_org(root_directory: str) -> int:
 
-    dataframe = load_main_csv_zip(root_directory=root_directory)
-    countries, organizations = _build_mappings(dataframe)
-    dataframe = _create_country_columns(dataframe, countries)
-    dataframe = _create_organization_column(dataframe, organizations)
-    save_main_csv_zip(df=dataframe, root_directory=root_directory)
+    df = load_main_csv_zip(root_directory=root_directory)
+    countries, organizations = _build_mappings(df)
+    df = _create_country_columns(df, countries)
+    df = _create_organization_column(df, organizations)
+    save_main_csv_zip(df=df, root_directory=root_directory)
 
     _create_thesaurus_files(root_directory, countries, organizations)
 
@@ -40,7 +43,7 @@ def s09_extr_pubmed_org(root_directory: str) -> int:
         root_directory=root_directory,
     )
 
-    return int(dataframe[Field.AFFIL_RAW.value].notna().sum())
+    return int(df[Field.AFFIL_RAW.value].notna().sum())
 
 
 def _build_mappings(dataframe: pd.DataFrame) -> tuple[dict[str, str], dict[str, str]]:
@@ -170,7 +173,7 @@ def _create_thesaurus_files(
 
         grouped_df = df.groupby("key", as_index=False)["value"].apply(list)  # type: ignore
 
-        filepath1 = Path(root_directory) / "ingest" / "processed/" / ("_" + filename)
+        filepath1 = Path(root_directory) / "ingest" / "process/" / ("_" + filename)
         filepath2 = Path(root_directory) / "refine" / "thesaurus" / filename
 
         for filepath in [filepath1, filepath2]:

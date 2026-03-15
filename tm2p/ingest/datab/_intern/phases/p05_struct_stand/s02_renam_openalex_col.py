@@ -5,7 +5,7 @@ from tm2p.enum.field import Field
 from ._renam_col import renam_col
 
 NAMES_TO_TM2 = {
-    "id": Field.RID.value,
+    "id": Field.REC_ID.value,
     "abstract": Field.ABSTR_RAW.value,
     "authorships.author.display_name": Field.AUTH_FULL_NAME.value,
     "authorships.author.id": Field.AUTHID_RAW.value,

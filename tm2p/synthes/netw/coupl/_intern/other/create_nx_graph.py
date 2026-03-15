@@ -10,7 +10,7 @@ from tm2p.enum import CouplingUnit
 GCS = Field.GCS.value
 LCS = Field.LCS.value
 YEAR = Field.YEAR.value
-RID = Field.RID.value
+RID = Field.REC_ID.value
 LCR = Field.LCR_NORM.value
 GCR = Field.GCR_WOS_FORMAT.value
 
